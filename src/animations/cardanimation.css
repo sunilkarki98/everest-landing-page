@@ -1,0 +1,20 @@
+@keyframes walking {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-walking {
+  animation: walking 60s linear infinite;
+}
+
+.card-hover img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-hover:hover img {
+  transform: scale(1.1);
+}

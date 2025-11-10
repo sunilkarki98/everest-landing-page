@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Import Poppins from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Theme */
+@theme {
+  /* Primary color */
+  --color-primary: #0066a6;
+  --color-primary-light: color-mix(in srgb, #0066a6 80%, white);
+  --color-primary-dark: color-mix(in srgb, #0066a6 90%, black);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Secondary color */
+  --color-secondary: #0229bf;
+  --color-secondary-light: color-mix(in srgb, #0229bf 80%, white);
+  --color-secondary-dark: color-mix(in srgb, #0229bf 90%, black);
+
+  /* Default font */
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1536px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: #f9f9f9;
+  color: #436fe9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Left parallelogram shape */
+.clip-left {
+  clip-path: polygon(10% 0, 26% 0, 16% 100%, 0 100%);
+}
+
+/* Right parallelogram shape */
+.clip-right {
+  clip-path: polygon(72% 0, 100% 0%, 88% 100%, 60% 100%);
 }
