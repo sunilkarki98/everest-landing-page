@@ -8,27 +8,32 @@ const slides = [
   {
     id: 1,
     title: "STUDY | WORK | MIGRATE",
-    subtitle: "in Australia",
-    image: "/banners/dummybanners.png",
+    subtitle: "Australia",
+    image: "/banners/aus.jpg",
   },
   {
     id: 2,
     title: "STUDY | WORK | MIGRATE",
-    subtitle: "in Canada",
-    image: "/images/hero2.jpg",
+    subtitle: "Canada",
+    image: "/banners/canada.jpg",
   },
   {
     id: 3,
     title: "STUDY | WORK | MIGRATE",
-    subtitle: "in UK",
-    image: "/images/hero3.jpg",
+    subtitle: "UK",
+    image: "/banners/uk.jpg",
+  },
+  {
+    id: 4,
+    title: "STUDY | WORK | MIGRATE",
+    subtitle: "New Zealand",
+    image: "/banners/newzlnd.jpg",
   },
 ];
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
 
-  // Auto-slide every 5 sec
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
@@ -38,9 +43,7 @@ export default function HeroSlider() {
 
   const prevSlide = () =>
     setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-
-  const nextSlide = () =>
-    setCurrent((prev) => (prev + 1) % slides.length);
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
 
   return (
     <section className="relative w-full h-[60vh] overflow-hidden">
@@ -57,30 +60,66 @@ export default function HeroSlider() {
         />
       </AnimatePresence>
 
-      {/* Angled Overlays */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Left Parallelogram */}
-        <div className="absolute top-0 -left-4 h-full w-1/3 bg-white/10 clip-left"></div>
+      {/* Top-Right Floating Ring */}
+      <motion.div
+        className="absolute top-1 right-0 translate-x-1/2 -translate-y-1/2
+                   w-96 h-96 rounded-full
+                   bg-[conic-gradient(from_0deg,#a855f7,#8b5cf6,#6366f1,#3b82f6)]
+                   [mask:radial-gradient(circle_160px_at_center,transparent_85%,black_100%)]
+                   [-webkit-mask:radial-gradient(circle_160px_at_center,transparent_85%,black_100%)]
+                   opacity-40 pointer-events-none"
+        initial={{ x: 0, y: 0 }}
+        animate={{
+          x: [0, 5, 10, 7, 0, -7, -10, -5, 0], // random-ish horizontal float
+          y: [0, -5, -10, -7, 0, 7, 10, 5, 0], // random-ish vertical float
+        }}
+        transition={{
+          duration: 18, // slow, smooth
+          ease: "easeInOut",
+          repeat: Infinity,
+        }}
+      />
 
-        {/* Right Parallelogram */}
-        <div className="absolute top-0 right-0 h-full w-1/3 bg-purple-700/90 clip-right"></div>
-      </div>
+      {/* Bottom-Left Static Ring */}
+      <div
+        className="absolute bottom-1 left-1 -translate-x-1/2 translate-y-1/2
+                      w-56 h-56 rounded-full
+                      bg-[conic-gradient(from_0deg,#7F00FF,#8b5cf6,#6366f1,#3b82f6)]
+                      [mask:radial-gradient(circle_88px_at_center,transparent_99%,black_100%)]
+                      [-webkit-mask:radial-gradient(circle_88px_at_center,transparent_99%,black_100%)]
+                      opacity-80 pointer-events-none"
+      ></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-        <h1 className="text-white text-4xl md:text-6xl font-bold drop-shadow-lg">
-          {slides[current].title}
-        </h1>
-        <p className="mt-4 text-white text-lg md:text-xl drop-shadow">
-          {slides[current].subtitle}
-        </p>
+        <AnimatePresence mode="wait">
+          {slides.map((slide, index) =>
+            index === current ? (
+              <motion.div
+                key={slide.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1.05 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.8 }}
+                className="text-center"
+              >
+                <h1 className="text-white text-4xl md:text-6xl font-bold drop-shadow-lg">
+                  {slide.title}
+                </h1>
+                <p className="mt-4 text-white text-2xl md:text-3xl drop-shadow font-semibold">
+                  {slide.subtitle}
+                </p>
+              </motion.div>
+            ) : null
+          )}
+        </AnimatePresence>
 
-        {/* Buttons positioned lower */}
-        <div className="absolute bottom-10 flex space-x-6">
-          <button className="bg-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-purple-700 transition">
+        {/* Buttons */}
+        <div className="absolute bottom-30 flex space-x-6">
+          <button className="bg-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-purple-700 transition">
             Apply Now
           </button>
-          <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition">
+          <button className="bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition">
             Read More
           </button>
         </div>
@@ -89,13 +128,13 @@ export default function HeroSlider() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 bg-purple-600 text-white p-3 rounded-full hover:bg-purple-700 transition z-20"
+        className="absolute left-6 top-1/2 -translate-y-1/2 bg-primary text-white p-3 rounded-full hover:bg-purple-700 transition z-20"
       >
         <ChevronLeft size={24} />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 bg-purple-600 text-white p-3 rounded-full hover:bg-purple-700 transition z-20"
+        className="absolute right-6 top-1/2 -translate-y-1/2 bg-primary text-white p-3 rounded-full hover:bg-purple-700 transition z-20"
       >
         <ChevronRight size={24} />
       </button>
