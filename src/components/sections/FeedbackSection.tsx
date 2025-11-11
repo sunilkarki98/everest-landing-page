@@ -59,18 +59,18 @@ const FeedbackSection = () => {
               </p>
 
               {/* Footer */}
-              <div className="flex items-center justify-between border-t pt-4">
+              <div className="flex items-center justify-between border-t pt-6">
                 <div>
                   <p className="font-semibold text-gray-900">{item.name}</p>
                   <p className="text-xs text-gray-600">{item.course}</p>
                 </div>
-                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-blue-500">
+                <div className="w-16 h-16 scale-150  rounded-full overflow-hidden border-2 border-blue-500">
                   <Image
                     src={item.image}
                     alt={item.name}
                     width={48}
                     height={48}
-                    className="object-cover"
+                    className="object-cover w-full h-full scale-110"
                   />
                 </div>
               </div>

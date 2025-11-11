@@ -136,7 +136,7 @@ const EmployeeSection: React.FC = () => {
     <section className="py-16 bg-gray-50">
       {/* Heading */}
       <div className="text-center mb-12 px-4">
-        <p className="text-blue-400 font-medium">Our Team</p>
+        <p className="text-blue-400 font-semibold text-xl">Our Team</p>
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mt-2">
           Our Everest Education Dedicated Team Member
         </h2>

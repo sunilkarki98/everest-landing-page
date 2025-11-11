@@ -46,22 +46,27 @@ export default function Navbar({
     {
       key: "popular",
       label: "Popular Courses",
-      href: "/courses",
+      href: "#popular-courses",
       links: [
         {
-          label: "IELTS",
-          href: "/courses/ielts",
-          description: "International English Language Testing System",
+          label: "Business Studies",
+          href: "/courses/BusinessStudies",
         },
         {
-          label: "PTE",
-          href: "/courses/pte",
-          description: "Pearson Test of English",
+          label: "Health And Science",
+          href: "/courses/HealthAndScience",
         },
         {
-          label: "TOEFL",
-          href: "/courses/toefl",
-          description: "Test of English as a Foreign Language",
+          label: "Information Technologies",
+          href: "/courses/InformationTechnologies",
+        },
+        {
+          label: "Engineering",
+          href: "/courses/Engineering",
+        },
+        {
+          label: "Trade Courses",
+          href: "/courses/TradeCourses",
         },
       ],
     },
@@ -70,9 +75,9 @@ export default function Navbar({
       label: "Student Services",
       href: "/services/student",
       links: [
-        { label: "Counseling", href: "/services/counseling" },
-        { label: "Visa Assistance", href: "/services/visa" },
-        { label: "Career Guidance", href: "/services/career" },
+        { label: "Education Service", href: "/services/EducationalService" },
+        { label: "Educational Partners", href: "/services/EducationalPartners" },
+        { label: "ScholarShip", href: "/services/ScholarshipService" },
       ],
     },
     {
@@ -80,9 +85,17 @@ export default function Navbar({
       label: "Migration Services",
       href: "/services/migration",
       links: [
-        { label: "Australia", href: "/migration/australia" },
-        { label: "Canada", href: "/migration/canada" },
-        { label: "New Zealand", href: "/migration/new-zealand" },
+        { label: "Student Visa/SC 500", href: "/migration/StudentVisa" },
+        { label: "Visitor Visa/SC600", href: "/migration/VisitorVisa" },
+        { label: "TSS Visa/ SC 482", href: "/migration/TssVisa" },
+        { label: "Partner Visa", href: "/migration/PartnerVisa" },
+        { label: "Skilled Work Regional Visa/SC 491", href: "/migration/RegionalWorkVisa" },
+        { label: "Skilled Independent Visa", href: "/migration/IndependentVisa" },
+        { label: "PSW Temporary Resident Visa", href: "/migration/new-zealand" },
+        { label: "State Nomination Visa", href: "/migration/NominationVisa" },
+        { label: "407 Training Visa/SC 407", href: "/migration/TrainingVisa" },
+        { label: "Skill Assessment", href: "/migration/SKillAssessmentVisa" },
+        { label: "AAT-MRT", href: "/migration/ArtMrtVisa" },
       ],
     },
     {
@@ -90,9 +103,9 @@ export default function Navbar({
       label: "Other Services",
       href: "/services/other",
       links: [
-        { label: "Language Training", href: "/services/language" },
-        { label: "Document Translation", href: "/services/translation" },
-        { label: "Interview Preparation", href: "/services/interview" },
+        { label: "OSHC/OHVC", href: "/services/OshcOhvcServices" },
+        { label: "NAATI/PTE", href: "/services/NaatiPteService" },
+        { label: "Professional Year", href: "/services/ProfessionalYear" },
       ],
     },
   ];

@@ -45,7 +45,7 @@ export default function ImageCardCarousel() {
   );
 
   return (
-    <section className="w-full flex flex-col items-center gap-8 py-10 relative">
+    <section id="popular-courses" className="w-full flex flex-col items-center gap-8 py-10 relative">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 text-center">
         Featured Courses
       </h2>

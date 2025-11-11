@@ -37,4 +37,7 @@ body {
 .clip-left {
   clip-path: polygon(10% 0, 26% 0, 16% 100%, 0 100%);
 }
-/* Right parallelogram shape */
+
+html {
+  scroll-behavior: smooth;
+}
