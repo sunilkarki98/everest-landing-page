@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
 
 type MenuKey = "popular" | "student" | "migration" | "other";
 
@@ -21,7 +22,6 @@ interface NavbarProps {
   className?: string;
   logoSrc?: string;
   logoAlt?: string;
-  brandName?: string;
 }
 
 export default function Navbar({
@@ -49,7 +49,10 @@ export default function Navbar({
       links: [
         { label: "Business Studies", href: "/courses/BusinessStudies" },
         { label: "Health And Science", href: "/courses/HealthAndScience" },
-        { label: "Information Technologies", href: "/courses/InformationTechnologies" },
+        {
+          label: "Information Technologies",
+          href: "/courses/InformationTechnologies",
+        },
         { label: "Engineering", href: "/courses/Engineering" },
         { label: "Trade Courses", href: "/courses/TradeCourses" },
       ],
@@ -60,7 +63,10 @@ export default function Navbar({
       href: null,
       links: [
         { label: "Education Service", href: "/services/EducationalService" },
-        { label: "Educational Partners", href: "/services/EducationalPartners" },
+        {
+          label: "Educational Partners",
+          href: "/services/EducationalPartners",
+        },
         { label: "ScholarShip", href: "/services/ScholarshipService" },
       ],
     },
@@ -73,9 +79,18 @@ export default function Navbar({
         { label: "Visitor Visa/SC600", href: "/migration/VisitorVisa" },
         { label: "TSS Visa/SC 482", href: "/migration/TssVisa" },
         { label: "Partner Visa", href: "/migration/PartnerVisa" },
-        { label: "Skilled Work Regional Visa/SC 491", href: "/migration/RegionalWorkVisa" },
-        { label: "Skilled Independent Visa", href: "/migration/IndependentVisa" },
-        { label: "PSW Temporary Resident Visa", href: "/migration/new-zealand" },
+        {
+          label: "Skilled Work Regional Visa/SC 491",
+          href: "/migration/RegionalWorkVisa",
+        },
+        {
+          label: "Skilled Independent Visa",
+          href: "/migration/IndependentVisa",
+        },
+        {
+          label: "PSW Temporary Resident Visa",
+          href: "/migration/new-zealand",
+        },
         { label: "State Nomination Visa", href: "/migration/NominationVisa" },
         { label: "407 Training Visa/SC 407", href: "/migration/TrainingVisa" },
         { label: "Skill Assessment", href: "/migration/SKillAssessmentVisa" },
@@ -135,7 +150,10 @@ export default function Navbar({
   }, []);
 
   // --- Handlers ---
-  const toggleMobileMenu = useCallback(() => setMobileOpen((prev) => !prev), []);
+  const toggleMobileMenu = useCallback(
+    () => setMobileOpen((prev) => !prev),
+    []
+  );
 
   const toggleDropdown = useCallback((menu: MenuKey) => {
     setDropdownOpen((prev) => ({
@@ -172,14 +190,16 @@ export default function Navbar({
               href="/"
               className="flex items-center gap-1 font-bold text-xl transition-transform hover:scale-105"
             >
-              <img
+              <Image
                 src={logoSrc}
-                alt={logoAlt}
+                alt={logoAlt || "Company Logo"}
+                width={160} // better for h-20 (≈80px) visual ratio
+                height={80}
                 className="h-20 w-auto object-contain drop-shadow-sm"
-                width={50}
-                height={50}
-                loading="eager"
+                priority // replaces loading="eager"
+                quality={100} // ensures sharp rendering
               />
+
               <span></span>
             </Link>
           </div>
@@ -221,7 +241,7 @@ export default function Navbar({
                         href={menu.href}
                         className="block px-4 py-3 font-semibold text-blue-500 hover:bg-blue-50 border-b border-gray-100"
                       >
-                      {menu.label}
+                        {menu.label}
                       </Link>
                     ) : (
                       <span className="block px-4 py-3 font-semibold text-gray-400 border-b border-gray-100 cursor-not-allowed">
@@ -247,7 +267,10 @@ export default function Navbar({
               </div>
             ))}
 
-            <Link href="/contact" className="px-4 py-2 font-medium relative group">
+            <Link
+              href="/contact"
+              className="px-4 py-2 font-medium relative group"
+            >
               Contact
               <span className="absolute inset-x-0 -bottom-0.5 h-0.75 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
@@ -306,7 +329,7 @@ export default function Navbar({
                       onClick={closeMobileMenu}
                       className="block py-2 px-4 text-sm font-medium text-blue-500 rounded-md hover:bg-blue-50"
                     >
-                    {menu.label}
+                      {menu.label}
                     </Link>
                   ) : (
                     <span className="block py-2 px-4 text-sm text-gray-400 rounded-md cursor-not-allowed">
