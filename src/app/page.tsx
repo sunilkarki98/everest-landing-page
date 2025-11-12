@@ -8,6 +8,7 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import WelcomeSection from "@/components/sections/WelcomeSection";
 import FaqSection from "@/components/sections/FaqSection";
 import BranchesMapSection from "@/components/sections/BranchesMapSection";
+import AssociatedUniversities from "@/components/sections/AssociatedUniversities";
 
 export default function Page() {
   // In your layout or home page
@@ -22,7 +23,7 @@ export default function Page() {
       <BlogSection />
       <EmployeeSection />
       <FeedbackSection />
-      <BranchesMapSection />
+      <AssociatedUniversities />
       <FaqSection />
       <ContactUs />
     </>

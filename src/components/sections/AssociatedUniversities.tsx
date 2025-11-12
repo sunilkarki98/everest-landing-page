@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const universities = [
   { id: 1, name: "TAFE", image: "/partners/tafe.jpg" },
@@ -21,7 +22,6 @@ export default function AssociatedUniversities() {
   const prevSlide = () =>
     setIndex((prev) => (prev - 1 + universities.length) % universities.length);
 
-  // Precompute visible universities for performance
   const visibleUniversities = useMemo(() => {
     return Array.from({ length: visibleCount }, (_, i) => {
       const idx = (index + i) % universities.length;
@@ -66,10 +66,11 @@ export default function AssociatedUniversities() {
               >
                 <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-[3px] shadow-md hover:shadow-lg transition">
                   <div className="bg-white rounded-full w-full h-full flex items-center justify-center overflow-hidden">
-                    <img
+                    <Image
                       src={u.image}
                       alt={`${u.name} Logo`}
-                      loading="lazy"
+                      width={128}
+                      height={128}
                       className="object-cover w-[90%] h-[90%] rounded-full"
                     />
                   </div>
