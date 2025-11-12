@@ -1,3 +1,4 @@
+'use client';
 
 import Hero from "@/components/Hero";
 import BlogSection from "@/components/sections/BlogSection";
