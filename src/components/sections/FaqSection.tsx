@@ -49,7 +49,7 @@ export default function FaqSection() {
     <section className="bg-white max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
       {/* LEFT SIDE - FAQ */}
       <div>
-        <p className="text-sky-500 font-semibold mb-2">FAQs</p>
+        <p className="text-sky-500 text-xl font-medium mb-1">FAQs</p>
         <h2 className="text-4xl font-extrabold text-gray-900 mb-8 leading-snug">
           Get the Answers to <br /> Common Questions
         </h2>
