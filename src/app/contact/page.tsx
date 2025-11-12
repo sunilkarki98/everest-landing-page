@@ -1,3 +1,4 @@
+'use client';
 import Offices from "@/components/Offices";
 
 export default function Contact() {
@@ -7,7 +8,6 @@ export default function Contact() {
         <h1 className="text-4xl font-bold">Contact Us</h1>
         <p className="text-lg mt-2 opacity-90">We are here to assist you worldwide</p>
       </section>
-
       <Offices />
     </main>
   );
