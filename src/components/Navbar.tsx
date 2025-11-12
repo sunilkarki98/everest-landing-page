@@ -9,7 +9,7 @@ type MenuKey = "popular" | "student" | "migration" | "other";
 interface MenuItem {
   key: MenuKey;
   label: string;
-  href: string;
+  href: string | null;
   links: Array<{
     label: string;
     href: string;
@@ -28,7 +28,6 @@ export default function Navbar({
   className = "",
   logoSrc = "/images/logo.jpeg",
   logoAlt = "Everest Education",
-  brandName = "GRACE INTERNATIONAL",
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<Record<MenuKey, boolean>>({
@@ -46,34 +45,19 @@ export default function Navbar({
     {
       key: "popular",
       label: "Popular Courses",
-      href: "#popular-courses",
+      href: null,
       links: [
-        {
-          label: "Business Studies",
-          href: "/courses/BusinessStudies",
-        },
-        {
-          label: "Health And Science",
-          href: "/courses/HealthAndScience",
-        },
-        {
-          label: "Information Technologies",
-          href: "/courses/InformationTechnologies",
-        },
-        {
-          label: "Engineering",
-          href: "/courses/Engineering",
-        },
-        {
-          label: "Trade Courses",
-          href: "/courses/TradeCourses",
-        },
+        { label: "Business Studies", href: "/courses/BusinessStudies" },
+        { label: "Health And Science", href: "/courses/HealthAndScience" },
+        { label: "Information Technologies", href: "/courses/InformationTechnologies" },
+        { label: "Engineering", href: "/courses/Engineering" },
+        { label: "Trade Courses", href: "/courses/TradeCourses" },
       ],
     },
     {
       key: "student",
       label: "Student Services",
-      href: "/services/student",
+      href: null,
       links: [
         { label: "Education Service", href: "/services/EducationalService" },
         { label: "Educational Partners", href: "/services/EducationalPartners" },
@@ -83,11 +67,11 @@ export default function Navbar({
     {
       key: "migration",
       label: "Migration Services",
-      href: "/services/migration",
+      href: null,
       links: [
         { label: "Student Visa/SC 500", href: "/migration/StudentVisa" },
         { label: "Visitor Visa/SC600", href: "/migration/VisitorVisa" },
-        { label: "TSS Visa/ SC 482", href: "/migration/TssVisa" },
+        { label: "TSS Visa/SC 482", href: "/migration/TssVisa" },
         { label: "Partner Visa", href: "/migration/PartnerVisa" },
         { label: "Skilled Work Regional Visa/SC 491", href: "/migration/RegionalWorkVisa" },
         { label: "Skilled Independent Visa", href: "/migration/IndependentVisa" },
@@ -101,7 +85,7 @@ export default function Navbar({
     {
       key: "other",
       label: "Other Services",
-      href: "/services/other",
+      href: null,
       links: [
         { label: "OSHC/OHVC", href: "/services/OshcOhvcServices" },
         { label: "NAATI/PTE", href: "/services/NaatiPteService" },
@@ -110,6 +94,7 @@ export default function Navbar({
     },
   ];
 
+  // --- Effects ---
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
@@ -117,12 +102,14 @@ export default function Navbar({
         setActiveDropdown(null);
       }
     };
+
     if (mobileOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.body.style.overflow = "unset";
@@ -147,10 +134,8 @@ export default function Navbar({
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  const toggleMobileMenu = useCallback(
-    () => setMobileOpen((prev) => !prev),
-    []
-  );
+  // --- Handlers ---
+  const toggleMobileMenu = useCallback(() => setMobileOpen((prev) => !prev), []);
 
   const toggleDropdown = useCallback((menu: MenuKey) => {
     setDropdownOpen((prev) => ({
@@ -173,6 +158,7 @@ export default function Navbar({
 
   const closeMobileMenu = useCallback(() => setMobileOpen(false), []);
 
+  // --- JSX ---
   return (
     <nav
       ref={navRef}
@@ -194,8 +180,10 @@ export default function Navbar({
                 height={50}
                 loading="eager"
               />
+              <span></span>
             </Link>
           </div>
+
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center h-full space-x-1">
             <Link href="/" className="px-4 py-2 font-medium relative group">
@@ -217,23 +205,29 @@ export default function Navbar({
                   />
                   <span className="absolute inset-x-0 bottom-1 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
                 </button>
+
                 <div
-                  className={`absolute top-full left-0 bg-white text-primary shadow-xl rounded-lg mt-1 w-72 border border-gray-100 transition-all duration-200 origin-top
-                    ${
-                      activeDropdown === menu.key
-                        ? "opacity-100 scale-100 translate-y-0"
-                        : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                    }`}
+                  className={`absolute top-full left-0 bg-white text-primary shadow-xl rounded-lg mt-1 w-72 border border-gray-100 transition-all duration-200 origin-top ${
+                    activeDropdown === menu.key
+                      ? "opacity-100 scale-100 translate-y-0"
+                      : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                  }`}
                   onMouseEnter={() => handleMouseEnter(menu.key)}
                   onMouseLeave={handleMouseLeave}
                 >
                   <div className="py-2">
-                    <Link
-                      href={menu.href}
-                      className="block px-4 py-3 font-semibold text-blue-500 hover:bg-blue-50 border-b border-gray-100"
-                    >
-                      View All {menu.label}
-                    </Link>
+                    {menu.href ? (
+                      <Link
+                        href={menu.href}
+                        className="block px-4 py-3 font-semibold text-blue-500 hover:bg-blue-50 border-b border-gray-100"
+                      >
+                      {menu.label}
+                      </Link>
+                    ) : (
+                      <span className="block px-4 py-3 font-semibold text-gray-400 border-b border-gray-100 cursor-not-allowed">
+                        {menu.label}
+                      </span>
+                    )}
                     {menu.links.map((item) => (
                       <Link
                         key={item.href}
@@ -253,10 +247,7 @@ export default function Navbar({
               </div>
             ))}
 
-            <Link
-              href="/contact"
-              className="px-4 py-2 font-medium relative group"
-            >
+            <Link href="/contact" className="px-4 py-2 font-medium relative group">
               Contact
               <span className="absolute inset-x-0 -bottom-0.5 h-0.75 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
             </Link>
@@ -309,13 +300,19 @@ export default function Navbar({
                 }`}
               >
                 <div className="pl-4 py-2 space-y-1">
-                  <Link
-                    href={menu.href}
-                    onClick={closeMobileMenu}
-                    className="block py-2 px-4 text-sm font-medium text-blue-500 rounded-md hover:bg-blue-50"
-                  >
-                    View All {menu.label}
-                  </Link>
+                  {menu.href ? (
+                    <Link
+                      href={menu.href}
+                      onClick={closeMobileMenu}
+                      className="block py-2 px-4 text-sm font-medium text-blue-500 rounded-md hover:bg-blue-50"
+                    >
+                    {menu.label}
+                    </Link>
+                  ) : (
+                    <span className="block py-2 px-4 text-sm text-gray-400 rounded-md cursor-not-allowed">
+                      {menu.label}
+                    </span>
+                  )}
                   {menu.links.map((item) => (
                     <Link
                       key={item.href}

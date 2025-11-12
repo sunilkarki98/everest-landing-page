@@ -130,7 +130,7 @@ const FooterSection = () => {
       </div>
 
       <div className="border-t border-gray-700 mt-10 pt-4 text-center text-gray-400 text-sm">
-        Copyright © 2024. Grace International. All Rights Reserved.
+        Copyright © 2024. Everest Education Groups. All Rights Reserved.
       </div>
     </footer>
   );

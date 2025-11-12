@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header"; // Import Header
+import FooterSection from "@/components/sections/FooterSection";
 
 // Load Poppins font
 const poppins = Poppins({
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Header />
         {/* Page Content */}
         <main>{children}</main>
+        <FooterSection />
       </body>
     </html>
   );
