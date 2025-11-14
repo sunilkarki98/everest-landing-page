@@ -23,6 +23,7 @@ export default function Page() {
       <BlogSection />
       <EmployeeSection />
       <FeedbackSection />
+      <BranchesMapSection />
       <AssociatedUniversities />
       <FaqSection />
       <ContactUs />

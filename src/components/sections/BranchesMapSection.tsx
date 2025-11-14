@@ -1,16 +1,19 @@
 "use client";
 
-import { FC } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  ZoomControl,
-} from "react-leaflet";
+import { FC, Suspense } from "react";
+import dynamic from "next/dynamic";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+// 🧭 Custom marker icon
+const customIcon = new L.Icon({
+  iconUrl: "/logos/marker.png",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -35],
+});
+
+// 🗺️ Branch data
 interface Branch {
   id: number;
   name: string;
@@ -26,21 +29,26 @@ const branches: Branch[] = [
   { id: 5, name: "Grace Kenya - Nairobi", position: [-1.2864, 36.8172], country: "Kenya" },
 ];
 
-// 🧭 Transparent custom marker icon (clean logo)
-const customIcon = new L.Icon({
-  iconUrl: "/logos/marker.png", // must have transparent background
-  iconSize: [45, 45],           // adjust to your logo size
-  iconAnchor: [22.5, 45],       // center bottom anchor
-  popupAnchor: [0, -40],
-  className: "grace-marker-icon", // optional for extra control
-});
+// ⚡ Lazy load the Leaflet map (client-side only)
+const DynamicMap = dynamic<{ branches: Branch[]; customIcon: L.Icon }>(
+  () => import("../LeafletMap").then((mod) => mod.default),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex justify-center items-center h-[500px] bg-gray-100 rounded-2xl shadow-inner">
+        <p className="text-gray-500 animate-pulse">Loading map...</p>
+      </div>
+    ),
+  }
+);
 
 const BranchesMapSection: FC = () => {
   return (
     <section
       id="our-branches"
-      className="relative bg-gray-50 py-20 flex flex-col items-center scroll-mt-24"
+      className="relative bg-white py-20 flex flex-col items-center scroll-mt-24"
     >
+      {/* Heading */}
       <div className="max-w-3xl text-center mb-10">
         <p className="text-sky-500 font-semibold text-xl">Our Branches</p>
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mt-2">
@@ -48,36 +56,11 @@ const BranchesMapSection: FC = () => {
         </h2>
       </div>
 
-      <div className="w-[90%] md:w-[80%] lg:w-[70%] h-[500px] rounded-2xl overflow-hidden shadow-lg">
-        <MapContainer
-          center={[10, 80]}
-          zoom={3}
-          scrollWheelZoom={false}
-          zoomControl={false}
-          style={{ height: "100%", width: "100%" }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <ZoomControl position="topleft" />
-
-          {branches.map((branch) => (
-            <Marker
-              key={branch.id}
-              position={branch.position}
-              icon={customIcon}
-            >
-              <Popup>
-                <div className="text-sm">
-                  <strong>{branch.name}</strong>
-                  <br />
-                  {branch.country}
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-        </MapContainer>
+      {/* Map Container */}
+      <div className="relative w-[90%] md:w-[80%] lg:w-[70%] h-[500px] rounded-2xl overflow-hidden shadow-lg">
+        <Suspense fallback={<div className="h-full bg-gray-100 animate-pulse" />}>
+          <DynamicMap branches={branches} customIcon={customIcon} />
+        </Suspense>
       </div>
     </section>
   );

@@ -149,7 +149,7 @@ export default function Offices() {
                 </div>
               </div>
 
-              <button className="mt-auto w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-medium transition-colors duration-200">
+              <button className="mt-auto w-full bg-gradient-to-r from-violet-800 to-violet-400 text-white py-2.5 rounded-lg font-medium hover:from-violet-600 hover:to-blue-800 hover:-translate-y-1 transition-all ease-in-out duration-300">
                 Get Directions
               </button>
             </motion.div>
