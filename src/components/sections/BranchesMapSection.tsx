@@ -36,11 +36,11 @@ const BranchesMapSection: FC = () => {
       className="relative bg-white py-20 flex flex-col items-center scroll-mt-24"
     >
       {/* Heading */}
-      <SectionHeading 
-        eyebrow="Our Branches" 
-        title="Our Everest Education Branches" 
-        eyebrowColor="text-sky-500" 
-        titleColor="text-gray-800" 
+      <SectionHeading
+        eyebrow="Our Branches"
+        title="Our Everest Education Office"
+        eyebrowColor="text-sky-500"
+        titleColor="text-gray-800"
       />
 
       {/* Map Container */}

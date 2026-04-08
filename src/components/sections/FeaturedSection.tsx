@@ -70,7 +70,7 @@ export default function ImageCardCarousel() {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="flex justify-center gap-6 flex-wrap"
           >
-            {displayedItems.map((item) => (
+            {displayedItems.map((item, idx) => (
               <div
                 key={item.title}
                 className="group relative w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 sm:w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] flex-shrink-0"
@@ -81,6 +81,7 @@ export default function ImageCardCarousel() {
                     src={item.image}
                     alt={item.title}
                     fill
+                    priority={page === 0 && idx === 0}
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw,
                            (max-width: 1200px) 50vw,
