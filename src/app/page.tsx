@@ -1,4 +1,4 @@
-import Hero from "@/components/Hero";
+import HeroSection from "@/components/sections/HeroSection";
 import BlogSection from "@/components/sections/BlogSection";
 import ContactUs from "@/components/sections/ContactUs";
 import EmployeeSection from "@/components/sections/EmployeeSection";
@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <>
       {/* Hero Section */}
-      <Hero />
+      <HeroSection />
       <WelcomeSection />
       <ServicesSection />
       <FeaturedSection />

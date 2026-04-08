@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
-import Head from "next/head";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import Script from "next/script";
+import { SectionHeading } from "../ui/SectionHeading";
+import { fadeUpContainer, fadeUpCard, cardHoverTransition } from "../../lib/animations";
 
 type Blog = {
   id: number;
@@ -32,7 +35,7 @@ const blogs: Blog[] = [
     title: "Student Visa",
     dateISO: "2025-02-20",
     dateReadable: "Feb 20, 2025",
-    author: "Grace International",
+    author: "Everest Education",
     image: "/images/blog/convo.jpg",
     description: "The Subclass 500 visa lets you study full-time in Australia.",
     link: "/blog/student-visa",
@@ -42,7 +45,7 @@ const blogs: Blog[] = [
     title: "Temporary Skill Shortage Visa",
     dateISO: "2024-12-02",
     dateReadable: "Dec 02, 2024",
-    author: "Grace International",
+    author: "Everest Education",
     image: "/images/blog/hire.jpg",
     description:
       "Lets employers hire foreign workers to fill local skill shortages.",
@@ -60,7 +63,7 @@ const jsonLd = {
     item: {
       "@type": "BlogPosting",
       headline: b.title,
-      url: `https://yourdomain.com${b.link}`,
+      url: `https://everestgroupgroup.com${b.link}`,
       datePublished: b.dateISO,
       author: { "@type": "Organization", name: b.author },
       image: b.image,
@@ -69,36 +72,6 @@ const jsonLd = {
   })),
 };
 
-// Parent container with stagger
-const containerVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { staggerChildren: 0.35, delayChildren: 0.25 },
-  },
-};
-
-// Heading animation
-const headingVariants: Variants = {
-  hidden: { opacity: 0, y: -40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: "easeOut" },
-  },
-};
-
-// Card animation
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 80, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.9, ease: "easeOut" },
-  },
-};
 
 // Clamp description text
 const clampStyle: React.CSSProperties = {
@@ -111,39 +84,26 @@ const clampStyle: React.CSSProperties = {
 const BlogSection: React.FC = () => {
   return (
     <>
-      <Head>
-        <title>Our Blogs | Grace International</title>
-        <meta
-          name="description"
-          content="Latest news, visa updates, and study abroad information from Grace International."
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </Head>
+      {/* JSON-LD via Script component (App Router compatible) */}
+      <Script
+        id="blog-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <section aria-label="Blog Section" className="py-14 container mx-auto px-6">
         {/* Header */}
-        <motion.div
-          className="text-center mb-12"
-          variants={headingVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <p className="text-[#00AEEF] font-medium text-lg tracking-wide uppercase">
-            Our Blogs
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1D3A6D] mt-2">
-            Latest Articles & News
-          </h2>
-        </motion.div>
+        <SectionHeading 
+          eyebrow="Our Blogs" 
+          title="Latest Articles & News" 
+          eyebrowColor="text-[#00AEEF]" 
+          titleColor="text-[#1D3A6D]" 
+        />
 
         {/* Blog Grid */}
         <motion.div
           className="flex flex-wrap justify-center gap-8"
-          variants={containerVariants}
+          variants={fadeUpContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -153,11 +113,11 @@ const BlogSection: React.FC = () => {
               key={blog.id}
               className="bg-[#F9FAFB] rounded-xl shadow-md hover:shadow-xl transition-shadow 
                          flex-shrink-0 w-full sm:w-[24rem] lg:w-[28rem] flex flex-col h-full p-5"
-              variants={cardVariants}
+              variants={fadeUpCard}
               role="article"
               aria-labelledby={`blog-title-${blog.id}`}
               whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              transition={cardHoverTransition}
             >
               {/* Header */}
               <header className="mb-4 flex flex-col flex-1">
@@ -188,7 +148,6 @@ const BlogSection: React.FC = () => {
                   width={1200}
                   height={600}
                   className="w-full h-64 lg:h-80 object-cover transition-transform duration-700 ease-out hover:scale-110"
-                  unoptimized
                 />
               </div>
 
@@ -199,15 +158,15 @@ const BlogSection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Button */}
-              <a
+              {/* Button — uses Next.js Link for SPA navigation */}
+              <Link
                 href={blog.link}
                 className="relative inline-block w-1/2 bg-[#164386] text-white text-xl py-2.5 rounded-4xl font-medium text-center
                            transition-all duration-700 ease-out hover:bg-[#1272da] hover:scale-105"
                 aria-label={`Read more about ${blog.title}`}
               >
                 Explore more
-              </a>
+              </Link>
             </motion.article>
           ))}
         </motion.div>

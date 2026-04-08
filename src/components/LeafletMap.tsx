@@ -1,9 +1,10 @@
 "use client";
 
 import { FC } from "react";
+import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import "leaflet/dist/leaflet.css"; // ✅ Import here at top — only in client component
+import "leaflet/dist/leaflet.css";
 
 interface Branch {
   id: number;
@@ -21,7 +22,7 @@ const svgHtml = (color = "#1d4ed8") => `
 `;
 
 const customIcon = L.divIcon({
-  className: "grace-div-icon",
+  className: "everest-div-icon",
   html: svgHtml("#1d4ed8"),
   iconSize: [40, 52],
   iconAnchor: [20, 52],
@@ -50,9 +51,9 @@ const LeafletMap: FC<Props> = ({ branches }) => {
       />
 
       {branches.map((b) => (
-        <>
+        <React.Fragment key={b.id}>
           {/* Marker Pin */}
-          <Marker key={b.id} position={b.position} icon={customIcon}>
+          <Marker position={b.position} icon={customIcon}>
             <Popup>
               <strong>{b.name}</strong>
               <br />
@@ -63,7 +64,7 @@ const LeafletMap: FC<Props> = ({ branches }) => {
           {/* Always-visible branch name label */}
           <Marker
             key={`${b.id}-label`}
-            position={[b.position[0] + 1, b.position[1]]} // offset label slightly
+            position={[b.position[0] + 1, b.position[1]]}
             icon={L.divIcon({
               className: "branch-label",
               html: `<div style="
@@ -75,12 +76,11 @@ const LeafletMap: FC<Props> = ({ branches }) => {
                   border-radius: 6px;
                   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
                   white-space: nowrap;
-                ">
-              </div>`,
+                ">${b.name}</div>`,
             })}
             interactive={false}
           />
-        </>
+        </React.Fragment>
       ))}
     </MapContainer>
   );

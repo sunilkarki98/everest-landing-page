@@ -4,23 +4,33 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Info } from "lucide-react";
+import Link from "next/link";
+import { SectionHeading } from "../ui/SectionHeading";
 
 const items = [
   {
     image: "/images/business.jpg",
     title: "Business Studies",
     button: "Read More",
+    href: "/courses/BusinessStudies",
   },
-  { image: "/images/eng.jpg", title: "Engineering", button: "Read More" },
+  {
+    image: "/images/eng.jpg",
+    title: "Engineering",
+    button: "Read More",
+    href: "/courses/Engineering",
+  },
   {
     image: "/images/it.jpg",
     title: "Information Technology",
     button: "Read More",
+    href: "/courses/InformationTechnologies",
   },
   {
     image: "/images/health.jpg",
     title: "Health & Science",
     button: "Read More",
+    href: "/courses/HealthAndScience",
   },
 ];
 
@@ -45,10 +55,8 @@ export default function ImageCardCarousel() {
   );
 
   return (
-    <section id="popular-courses" className="w-full flex flex-col items-center gap-8 py-10 relative">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 text-center">
-        Featured Courses
-      </h2>
+    <section id="popular-courses" className="w-full flex flex-col items-center gap-8 py-10 pb-24 relative">
+      <SectionHeading title="Featured Courses" />
 
       <div className="flex justify-center gap-6 flex-wrap">
         <AnimatePresence mode="wait">
@@ -60,7 +68,7 @@ export default function ImageCardCarousel() {
               exit={{ opacity: 0, y: -80 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, ease: "easeOut" }}
-              className="group relative w-[90%] sm:w-[420px] md:w-[360px] lg:w-[420px] xl:w-[500px] flex-shrink-0"
+              className="group relative w-[90%] sm:w-[420px] md:w-[360px] lg:w-[420px] xl:w-[500px] flex-shrink-0 mb-16 sm:mb-0"
             >
               {/* Main Image */}
               <div className="relative h-[240px] md:h-[280px] lg:h-[320px] overflow-hidden rounded-lg">
@@ -102,10 +110,13 @@ export default function ImageCardCarousel() {
                   {item.title}
                 </h3>
 
-                {/* Button */}
-                <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 relative z-10">
+                {/* Button — now a functional link */}
+                <Link
+                  href={item.href}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 relative z-10"
+                >
                   {item.button}
-                </button>
+                </Link>
               </motion.div>
             </motion.div>
           ))}
@@ -113,11 +124,12 @@ export default function ImageCardCarousel() {
       </div>
 
       {/* Pagination Dots */}
-      <div className="flex gap-2 md:mt-12 py-2 mt-14">
+      <div className="flex gap-2 mt-4 sm:mt-12 py-2">
         {Array.from({ length: totalPages }).map((_, idx) => (
           <button
             key={idx}
             onClick={() => setPage(idx)}
+            aria-label={`Go to page ${idx + 1}`}
             className={`w-3 h-3 rounded-full transition-colors duration-300 ${
               page === idx ? "bg-blue-500" : "bg-gray-300"
             }`}

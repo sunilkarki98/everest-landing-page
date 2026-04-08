@@ -1,29 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { motion, Variants, easeOut } from "framer-motion";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { SectionHeading } from "../ui/SectionHeading";
+import { fadeUpFastContainer, fadeUpCard, cardHoverTransition } from "../../lib/animations";
 
 const services = [
-  { name: "Migration", imageSrc: "/images/passport.jpg", alt: "Hand holding a passport and boarding pass" },
-  { name: "Education", imageSrc: "/images/education.jpg", alt: "Graduation cap on a stack of books" },
-  { name: "Professional Year", imageSrc: "/images/pyr.jpg", alt: "People working on computers" },
-  { name: "NAATI | PTE", imageSrc: "/images/pte.jpg", alt: "Students looking at a laptop" },
+  { name: "Migration", imageSrc: "/images/passport.jpg", alt: "Hand holding a passport and boarding pass", href: "/migration/StudentVisa" },
+  { name: "Education", imageSrc: "/images/education.jpg", alt: "Graduation cap on a stack of books", href: "/services/EducationalService" },
+  { name: "Professional Year", imageSrc: "/images/pyr.jpg", alt: "People working on computers", href: "/services/ProfessionalYear" },
+  { name: "NAATI | PTE", imageSrc: "/images/pte.jpg", alt: "Students looking at a laptop", href: "/services/NaatiPteService" },
 ];
 
-// Parent container with stagger
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.25, delayChildren: 0.2 },
-  },
-};
-
-// Card animation
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: easeOut } },
-};
 
 export default function ServiceSection() {
   return (
@@ -36,27 +25,23 @@ export default function ServiceSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
+        variants={fadeUpFastContainer}
       >
         {/* Heading */}
-        <motion.h2
-          className="text-4xl font-extrabold text-center mb-12 text-white"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: easeOut }}
-        >
-          How We Can Help You
-        </motion.h2>
+        <SectionHeading 
+          title="How We Can Help You" 
+          titleColor="text-white"
+        />
 
-        {/* Cards */}
+        {/* Cards — responsive width */}
         <div className="flex flex-wrap lg:flex-nowrap justify-center gap-8">
           {services.map((service) => (
             <motion.div
               key={service.name}
-              className="group relative bg-white rounded-xl shadow-lg overflow-hidden w-80 cursor-pointer will-change-transform"
-              variants={cardVariants} // ✅ only variants, parent controls animation
+              className="group relative bg-white rounded-xl shadow-lg overflow-hidden w-full sm:w-80 cursor-pointer will-change-transform"
+              variants={fadeUpCard}
               whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              transition={cardHoverTransition}
             >
               {/* Image */}
               <div className="relative h-64 w-full overflow-hidden">
@@ -76,15 +61,18 @@ export default function ServiceSection() {
                 ></div>
               </div>
 
-              {/* Gradient Button */}
-              <button className="relative w-full px-4 py-4 text-xl font-semibold text-black/90 overflow-hidden">
+              {/* Gradient Button — now a link */}
+              <Link
+                href={service.href}
+                className="relative block w-full px-4 py-4 text-xl font-semibold text-black/90 overflow-hidden text-center"
+              >
                 {service.name}
                 <span
                   className="absolute bottom-0 left-0 w-0 h-full bg-gradient-to-r from-blue-400/40 to-violet-500/40 
                     transition-all duration-700 group-hover:w-full 
                     pointer-events-none"
                 ></span>
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>

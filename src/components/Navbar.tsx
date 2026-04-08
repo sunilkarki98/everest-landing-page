@@ -4,19 +4,9 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
+import { siteConfig, MenuItem, MenuKey } from "../config/site";
 
-type MenuKey = "popular" | "student" | "migration" | "other";
 
-interface MenuItem {
-  key: MenuKey;
-  label: string;
-  href: string | null;
-  links: Array<{
-    label: string;
-    href: string;
-    description?: string;
-  }>;
-}
 
 interface NavbarProps {
   className?: string;
@@ -26,7 +16,7 @@ interface NavbarProps {
 
 export default function Navbar({
   className = "",
-  logoSrc = "/images/logo.jpeg",
+  logoSrc = "/logos/logo.png",
   logoAlt = "Everest Education",
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -41,73 +31,7 @@ export default function Navbar({
   const navRef = useRef<HTMLElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const menus: MenuItem[] = [
-    {
-      key: "popular",
-      label: "Popular Courses",
-      href: null,
-      links: [
-        { label: "Business Studies", href: "/courses/BusinessStudies" },
-        { label: "Health And Science", href: "/courses/HealthAndScience" },
-        {
-          label: "Information Technologies",
-          href: "/courses/InformationTechnologies",
-        },
-        { label: "Engineering", href: "/courses/Engineering" },
-        { label: "Trade Courses", href: "/courses/TradeCourses" },
-      ],
-    },
-    {
-      key: "student",
-      label: "Student Services",
-      href: null,
-      links: [
-        { label: "Education Service", href: "/services/EducationalService" },
-        {
-          label: "Educational Partners",
-          href: "/services/EducationalPartners",
-        },
-        { label: "ScholarShip", href: "/services/ScholarshipService" },
-      ],
-    },
-    {
-      key: "migration",
-      label: "Migration Services",
-      href: null,
-      links: [
-        { label: "Student Visa/SC 500", href: "/migration/StudentVisa" },
-        { label: "Visitor Visa/SC600", href: "/migration/VisitorVisa" },
-        { label: "TSS Visa/SC 482", href: "/migration/TssVisa" },
-        { label: "Partner Visa", href: "/migration/PartnerVisa" },
-        {
-          label: "Skilled Work Regional Visa/SC 491",
-          href: "/migration/RegionalWorkVisa",
-        },
-        {
-          label: "Skilled Independent Visa",
-          href: "/migration/IndependentVisa",
-        },
-        {
-          label: "PSW Temporary Resident Visa",
-          href: "/migration/new-zealand",
-        },
-        { label: "State Nomination Visa", href: "/migration/NominationVisa" },
-        { label: "407 Training Visa/SC 407", href: "/migration/TrainingVisa" },
-        { label: "Skill Assessment", href: "/migration/SKillAssessmentVisa" },
-        { label: "AAT-MRT", href: "/migration/ArtMrtVisa" },
-      ],
-    },
-    {
-      key: "other",
-      label: "Other Services",
-      href: null,
-      links: [
-        { label: "OSHC/OHVC", href: "/services/OshcOhvcServices" },
-        { label: "NAATI/PTE", href: "/services/NaatiPteService" },
-        { label: "Professional Year", href: "/services/ProfessionalYear" },
-      ],
-    },
-  ];
+  const menus: MenuItem[] = siteConfig.nav;
 
   // --- Effects ---
   useEffect(() => {
@@ -196,8 +120,7 @@ export default function Navbar({
                 width={160} // better for h-20 (≈80px) visual ratio
                 height={80}
                 className="h-20 w-auto object-contain drop-shadow-sm"
-                priority // replaces loading="eager"
-                quality={100} // ensures sharp rendering
+                priority
               />
 
               <span></span>
@@ -289,7 +212,7 @@ export default function Navbar({
       <div
         className={`lg:hidden bg-white border-t border-gray-200 transition-all duration-300 ease-out ${
           mobileOpen
-            ? "max-h-screen opacity-100"
+            ? "max-h-[80vh] opacity-100 overflow-y-auto"
             : "max-h-0 opacity-0 pointer-events-none"
         } overflow-hidden`}
       >

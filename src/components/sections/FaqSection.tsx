@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeading } from "../ui/SectionHeading";
 
 interface FAQItem {
   id: number;
@@ -46,13 +47,17 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="bg-white max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
+    <section className="bg-white max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 items-center">
       {/* LEFT SIDE - FAQ */}
-      <div>
-        <p className="text-sky-500 text-xl font-medium mb-1">FAQs</p>
-        <h2 className="text-4xl font-extrabold text-gray-900 mb-8 leading-snug">
-          Get the Answers to <br /> Common Questions
-        </h2>
+      <div className="flex flex-col justify-center">
+        <SectionHeading 
+          eyebrow="FAQs" 
+          title={<>Get the Answers to <br /> Common Questions</>} 
+          align="left" 
+          eyebrowColor="text-sky-500" 
+          titleColor="text-gray-900" 
+          className="text-left !mb-8"
+        />
 
         <div className="space-y-4">
           {faqs.map((faq) => (
@@ -63,18 +68,21 @@ export default function FaqSection() {
               <button
                 onClick={() => toggle(faq.id)}
                 className="w-full text-left px-6 py-4 flex justify-between items-center font-semibold text-gray-900 hover:text-sky-600"
+                aria-expanded={openId === faq.id}
+                aria-controls={`faq-answer-${faq.id}`}
               >
                 {faq.question}
                 {openId === faq.id ? (
-                  <ChevronUp className="text-sky-500" />
+                  <ChevronUp className="text-sky-500 flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="text-gray-400" />
+                  <ChevronDown className="text-gray-400 flex-shrink-0" />
                 )}
               </button>
 
               <AnimatePresence>
                 {openId === faq.id && (
                   <motion.div
+                    id={`faq-answer-${faq.id}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -92,19 +100,18 @@ export default function FaqSection() {
 
       {/* RIGHT SIDE - IMAGE + BUTTON */}
       <div className="relative flex flex-col items-center justify-center">
-        <div className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-lg">
+        <div className="relative w-full h-[300px] sm:h-[420px] rounded-3xl overflow-hidden shadow-lg">
           <Image
-            src="/images/faq.jpg" // <-- place your image in /public/images/
+            src="/images/faq.jpg"
             alt="FAQ section team"
             fill
-            priority
             className="object-cover"
           />
         </div>
 
         <a
-          href="#"
-          className="absolute bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full flex items-center gap-2 shadow-lg transition-all"
+          href="#contact-us"
+          className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 shadow-lg transition-all text-sm sm:text-base"
         >
           Read More Q & A
           <ArrowRight size={18} />

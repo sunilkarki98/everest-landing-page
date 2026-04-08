@@ -4,6 +4,48 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
+// Counter component extracted outside of parent render to prevent re-creation
+interface CounterProps {
+  target: number;
+  suffix?: string;
+}
+
+const Counter: React.FC<CounterProps> = ({ target, suffix }) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const duration = 2000;
+    const increment = target / (duration / 16);
+
+    const counter = setInterval(() => {
+      start += increment;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(counter);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(counter);
+  }, [isInView, target]);
+
+  return (
+    <div
+      ref={ref}
+      className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-400 leading-none truncate"
+    >
+      {count.toLocaleString()}
+      {suffix && suffix}
+    </div>
+  );
+};
+
 export default function WelcomeSection() {
   const stats = [
     { number: 50, label: "STUDENTS", suffix: "K+" },
@@ -12,48 +54,6 @@ export default function WelcomeSection() {
     { number: 20, label: "MIGRATION AGENTS", suffix: "+" },
     { number: 42, label: "TOTAL BRANCHES" },
   ];
-
-  // Counter component with typed props
-  interface CounterProps {
-    target: number;
-    suffix?: string;
-  }
-
-  const Counter: React.FC<CounterProps> = ({ target, suffix }) => {
-    const ref = useRef<HTMLDivElement | null>(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-      if (!isInView) return;
-
-      let start = 0;
-      const duration = 2000;
-      const increment = target / (duration / 16);
-
-      const counter = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-          setCount(target);
-          clearInterval(counter);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-
-      return () => clearInterval(counter);
-    }, [isInView, target]);
-
-    return (
-      <div
-        ref={ref}
-        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-400 leading-none truncate"
-      >
-        {count.toLocaleString()}
-        {suffix && suffix}
-      </div>
-    );
-  };
 
   // Slide-in variants
   const leftVariants = {
@@ -83,12 +83,12 @@ export default function WelcomeSection() {
             Where we connect life & learning.
           </p>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+          {/* Stats — flex-wrap with centered last item */}
+          <div className="flex flex-wrap justify-center gap-6">
             {stats.map((item, i) => (
               <motion.div
                 key={i}
-                className="bg-white rounded-xl shadow-2xl flex flex-col items-center justify-center py-6 px-4 text-center"
+                className="bg-white rounded-xl shadow-2xl flex flex-col items-center justify-center py-6 px-4 text-center w-[calc(50%-12px)] sm:w-[calc(33.333%-16px)]"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

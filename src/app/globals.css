@@ -75,11 +75,11 @@ html {
 }
 
 /* Custom icon wrapper cleanup */
-.grace-div-icon {
+.everest-div-icon {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
-.grace-div-icon img {
+.everest-div-icon img {
   display: block;
 }

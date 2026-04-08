@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { SectionHeading } from "./ui/SectionHeading";
 
 type Office = {
   id: number;
@@ -25,39 +26,45 @@ const tabs = [
   "PHILIPPINES OFFICE",
 ];
 
+import { siteConfig } from "../config/site";
+
 const offices: Office[] = [
   {
     id: 1,
     country: "AUSTRALIA OFFICES",
     title: "Adelaide Office",
-    phone: "+61 (08) 7225 7892",
-    email: "adelaide@graceintlgroup.com",
+    phone: siteConfig.contact.phones.adelaide,
+    email: siteConfig.contact.emails.adelaide,
     address: "Suite 2, Level 1, 9A Hindley St, Adelaide SA 5000, Australia",
+    mapLink: "https://maps.google.com/?q=9A+Hindley+St+Adelaide+SA+5000",
   },
   {
     id: 2,
     country: "NEW ZEALAND OFFICE",
     title: "Auckland Office",
-    phone: "+64 95585152",
-    email: "director.nz@graceintlgroup.com",
+    phone: siteConfig.contact.phones.newZealand,
+    email: siteConfig.contact.emails.newZealand,
     address:
       "Suite 202, 87–93 Queen Street, Dingwall Building, Auckland, New Zealand",
+    mapLink: "https://maps.google.com/?q=87+Queen+Street+Auckland",
   },
   {
     id: 3,
     country: "SOUTH ASIA OFFICES",
     title: "Bagbazar Office",
-    phone: "+977 (01) 4256121 / 5356121",
-    email: "bagbazar@grace.edu.np",
+    phone: siteConfig.contact.phones.bagbazar,
+    email: siteConfig.contact.emails.bagbazar,
     address: "Bagbazar, Kathmandu (Opposite of Pipalbot), Nepal",
+    mapLink: "https://maps.google.com/?q=Bagbazar+Kathmandu+Nepal",
   },
   {
     id: 4,
     country: "SOUTH ASIA OFFICES",
     title: "Baglung Office",
-    phone: "+977 (068) 522667",
-    email: "baglung@grace.edu.np",
+    phone: siteConfig.contact.phones.baglung,
+    email: siteConfig.contact.emails.baglung,
     address: "Hanumandas Road, Next to Hotel Peace Palace, Baglung, Nepal",
+    mapLink: "https://maps.google.com/?q=Baglung+Nepal",
   },
 ];
 
@@ -74,18 +81,12 @@ export default function Offices() {
     activeTab === "ALL BRANCHES"
       ? offices
       : offices.filter((o) => normalize(o.country) === normalize(activeTab));
-      
+
   return (
     <section className="w-full py-12 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto">
       {/* Tabs */}
       <div className="mb-8">
-        {/* allow horizontal scroll only on small/medium; visible (no scroll) on lg+ */}
         <div className="overflow-x-auto lg:overflow-x-visible scrollbar-hide">
-          {/* 
-            min-w-max lets the inner row be as wide as content on small screens (so it scrolls).
-            On large screens we force a larger min-width so tabs fit in one line without wrapping/scroll.
-            Adjust lg:min-w-[1100px] up/down if you add/remove tabs.
-          */}
           <div className="flex justify-center items-center gap-3 min-w-max lg:min-w-[1100px] px-2">
             {tabs.map((tab) => (
               <button
@@ -105,9 +106,9 @@ export default function Offices() {
       </div>
 
       {/* Heading */}
-      <h2 className="text-center text-3xl font-bold text-gray-900 mb-10">
-        {activeTab === "ALL BRANCHES" ? "All Offices" : activeTab}
-      </h2>
+      <SectionHeading 
+        title={activeTab === "ALL BRANCHES" ? "All Offices" : activeTab} 
+      />
 
       {/* Cards */}
       <AnimatePresence mode="popLayout">
@@ -131,16 +132,16 @@ export default function Offices() {
                 </h3>
 
                 {/* Phone */}
-                <div className="flex items-center gap-2 mb-2 text-sm text-gray-800">
+                <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 mb-2 text-sm text-gray-800 hover:text-blue-600 transition-colors">
                   <Phone className="w-5 h-5 text-black flex-shrink-0" />
                   <span>{office.phone}</span>
-                </div>
+                </a>
 
                 {/* Email */}
-                <div className="flex items-center gap-2 mb-2 text-sm text-gray-800">
+                <a href={`mailto:${office.email}`} className="flex items-center gap-2 mb-2 text-sm text-gray-800 hover:text-blue-600 transition-colors">
                   <Mail className="w-5 h-5 text-black flex-shrink-0" />
                   <span>{office.email}</span>
-                </div>
+                </a>
 
                 {/* Address */}
                 <div className="flex items-start gap-2 text-sm text-gray-800 mb-4">
@@ -149,9 +150,15 @@ export default function Offices() {
                 </div>
               </div>
 
-              <button className="mt-auto w-full bg-gradient-to-r from-violet-800 to-violet-400 text-white py-2.5 rounded-lg font-medium hover:from-violet-600 hover:to-blue-800 hover:-translate-y-1 transition-all ease-in-out duration-300">
+              {/* Get Directions — now functional */}
+              <a
+                href={office.mapLink || `https://maps.google.com/?q=${encodeURIComponent(office.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto w-full bg-gradient-to-r from-violet-800 to-violet-400 text-white py-2.5 rounded-lg font-medium hover:from-violet-600 hover:to-blue-800 hover:-translate-y-1 transition-all ease-in-out duration-300 text-center block"
+              >
                 Get Directions
-              </button>
+              </a>
             </motion.div>
           ))}
         </motion.div>

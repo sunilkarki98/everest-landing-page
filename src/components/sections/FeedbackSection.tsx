@@ -3,47 +3,41 @@
 import React from "react";
 import { Quote } from "lucide-react";
 import Image from "next/image";
-import { Poppins } from "next/font/google";
-
-// ✅ Load Poppins font
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { SectionHeading } from "../ui/SectionHeading";
 
 const feedbacks = [
   {
     name: "Nisha Baniya",
     course: "MBA - CSU",
     feedback:
-      "I'm glad I chose Everest Education for my studies; they fully assisted and guided me through the entire process. I believe Grace is the best place for any student planning to study abroad. Their support, the administration, and the welcoming office environment are all truly impressive. Everything was completed right on time, without any deferrals.",
-    image: "/images/clients/client2.jpg", // replace with actual image path
+      "I'm glad I chose Everest Education for my studies; they fully assisted and guided me through the entire process. I believe Everest Education is the best place for any student planning to study abroad. Their support, the administration, and the welcoming office environment are all truly impressive. Everything was completed right on time, without any deferrals.",
+    image: "/images/clients/client2.jpg",
   },
   {
     name: "Sanjeet Parajuli",
     course: "Bachelor of Business - Torrens University",
     feedback:
-      "I feel fortunate to be related with the Everest Education and satisfied with their entire service. I am extremely grateful to the consultancy for their support in making my processing much more efficient than I expected. I vouch for the organization and encourage to visit Grace International if you are looking for best consultancy for abroad study.",
-    image: "/images/clients/client1.jpg", // replace with actual image path
+      "I feel fortunate to be related with Everest Education and satisfied with their entire service. I am extremely grateful to the consultancy for their support in making my processing much more efficient than I expected. I vouch for the organization and encourage to visit Everest Education if you are looking for best consultancy for abroad study.",
+    image: "/images/clients/client1.jpg",
   },
 ];
 
 const FeedbackSection = () => {
   return (
     <section
-      className={`${poppins.className} relative bg-gradient-to-b from-blue-950 to-blue-900 text-white py-16`}
+      className="relative bg-gradient-to-b from-blue-950 to-blue-900 text-white py-16"
     >
       <div className="relative lg:container mx-auto px-4 flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-10">
         {/* Heading Section */}
-        <div className="text-center lg:text-left mb-8 lg:mb-0">
-          <p className="text-cyan-400 text-center font-bold text-sm md:text-2xl tracking-wide">
-            Our Feedbacks
-          </p>
-          <h2 className="text-3xl text-center md:text-5xl font-bold mt-1 leading-tight">
-            Clients are
-            <br></br> 
-            Talking
-          </h2>
+        <div className="mb-8 lg:mb-0 w-full lg:w-1/3 flex flex-col justify-center">
+          <SectionHeading 
+            eyebrow="Our Feedbacks" 
+            title={<>Clients are<br />Talking</>} 
+            eyebrowColor="text-cyan-400" 
+            titleColor="text-white" 
+            align="left"
+            className="text-center lg:text-left"
+          />
         </div>
 
         {/* Feedback Cards */}
@@ -64,13 +58,13 @@ const FeedbackSection = () => {
                   <p className="font-semibold text-gray-900">{item.name}</p>
                   <p className="text-xs text-gray-600">{item.course}</p>
                 </div>
-                <div className="w-16 h-16 scale-150  rounded-full overflow-hidden border-2 border-blue-500">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-blue-500 flex-shrink-0">
                   <Image
                     src={item.image}
                     alt={item.name}
-                    width={48}
-                    height={48}
-                    className="object-cover w-full h-full scale-110"
+                    width={56}
+                    height={56}
+                    className="object-cover w-full h-full"
                   />
                 </div>
               </div>

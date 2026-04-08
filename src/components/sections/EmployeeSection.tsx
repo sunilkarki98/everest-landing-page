@@ -2,8 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaLinkedinIn, FaTwitter, FaFacebookF } from "react-icons/fa";
+import { SectionHeading } from "../ui/SectionHeading";
+import { fadeUpContainer, fadeUpCard } from "../../lib/animations";
 
 type EmployeeCardProps = {
   name: string;
@@ -22,12 +24,8 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="relative group bg-white rounded-xl shadow-lg overflow-hidden w-96" // fixed larger width
-      variants={{
-        hidden: { opacity: 0, y: 60 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      transition={{ duration: 1.2, ease: "easeInOut" }}
+      className="relative group bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-96"
+      variants={fadeUpCard}
     >
       {/* Image */}
       <div className="relative w-full h-85 overflow-hidden">
@@ -87,14 +85,7 @@ type Employee = {
   image: string;
 };
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.35, // slower stagger
-    },
-  },
-};
+
 
 const EmployeeSection: React.FC = () => {
   const team: Employee[] = [
@@ -103,7 +94,7 @@ const EmployeeSection: React.FC = () => {
       phone: "+977 9801234567",
       role: "Senior Consultant",
       description:
-        "John has 10+ years of experience in education consultancy and student migration services.",
+        "Laura has 10+ years of experience in education consultancy and student migration services.",
       image: "/images/employees/sika.jpg",
     },
     {
@@ -136,25 +127,28 @@ const EmployeeSection: React.FC = () => {
     <section className="py-16 bg-gray-50">
       {/* Heading */}
       <div className="text-center mb-12 px-4">
-        <p className="text-blue-400 font-semibold text-xl">Our Team</p>
-        <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mt-2">
-          Our Everest Education Dedicated Team Member
-        </h2>
+        <SectionHeading 
+          eyebrow="Our Team" 
+          title="Our Everest Education Dedicated Team Members" 
+          eyebrowColor="text-blue-400" 
+          titleColor="text-gray-800"
+          className="mb-4 lg:mb-4" // override the default mb-10 to leave space for the button
+        />
         <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-full transition">
           View All Team Members
         </button>
       </div>
 
-      {/* Employee Cards using flex-wrap for proper centering */}
+      {/* Employee Cards */}
       <motion.div
         className="max-w-6xl mx-auto px-4 flex flex-wrap justify-center gap-8"
-        variants={containerVariants}
+        variants={fadeUpContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {team.map((member, index) => (
-          <EmployeeCard key={index} {...member} />
+        {team.map((member) => (
+          <EmployeeCard key={member.name} {...member} />
         ))}
       </motion.div>
     </section>
