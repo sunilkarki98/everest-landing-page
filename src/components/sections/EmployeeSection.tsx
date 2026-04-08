@@ -24,55 +24,58 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="relative group bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-96"
+      className="relative group bg-white rounded-2xl shadow-xl overflow-hidden w-full flex flex-col h-full transform transition duration-500 hover:-translate-y-2 border border-gray-100"
       variants={fadeUpCard}
     >
-      {/* Image */}
-      <div className="relative w-full h-85 overflow-hidden">
+      {/* Image with square structural aspect ratio to reduce overall card height */}
+      <div className="relative w-full aspect-square overflow-hidden bg-gray-200">
         <Image
           src={image}
           alt={name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition duration-500 group-hover:blur-sm"
+          className="object-cover transition duration-700 group-hover:scale-105 group-hover:blur-[2px]"
         />
 
         {/* Social Icons on Hover */}
-        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition duration-500">
+        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20 z-20">
           <a
             href="#"
             aria-label={`${name} LinkedIn`}
-            className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
+            className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition transform hover:scale-110 shadow-lg"
           >
             <FaLinkedinIn />
           </a>
           <a
             href="#"
             aria-label={`${name} Twitter`}
-            className="p-3 rounded-full bg-blue-400 text-white hover:bg-blue-500 transition"
+            className="p-3 rounded-full bg-blue-400 text-white hover:bg-blue-500 transition transform hover:scale-110 shadow-lg"
           >
             <FaTwitter />
           </a>
           <a
             href="#"
             aria-label={`${name} Facebook`}
-            className="p-3 rounded-full bg-blue-800 text-white hover:bg-blue-900 transition"
+            className="p-3 rounded-full bg-blue-800 text-white hover:bg-blue-900 transition transform hover:scale-110 shadow-lg"
           >
             <FaFacebookF />
           </a>
         </div>
       </div>
 
-      {/* Text Info */}
-      <div className="relative z-10 p-5 transition-all duration-500 group-hover:text-white">
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-sm mt-1">{phone}</p>
-        <p className="text-sm font-medium mt-1">{role}</p>
-        <p className="text-sm mt-2">{description}</p>
+      {/* Text Info sliding box */}
+      <div className="relative flex-grow flex flex-col overflow-hidden">
+        {/* Blue Shade Background animates by transforming its Y axis perfectly to fill the container */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-blue-400 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
+        
+        {/* Content Box */}
+        <div className="relative z-10 p-6 flex flex-col flex-grow transition-colors duration-500 group-hover:text-white">
+          <h3 className="text-xl font-bold text-gray-900 group-hover:text-white transition-colors">{name}</h3>
+          <p className="text-sm font-semibold text-blue-600 mt-1 uppercase tracking-wider group-hover:text-blue-100 transition-colors">{role}</p>
+          <p className="text-sm mt-3 font-medium opacity-90">{phone}</p>
+          <p className="text-sm mt-2 opacity-80 leading-relaxed font-light">{description}</p>
+        </div>
       </div>
-
-      {/* Blue Shade Sliding Up */}
-      <div className="absolute bottom-0 left-0 w-full h-0 bg-gradient-to-t from-blue-500 to-blue-300 transition-all duration-500 group-hover:h-46"></div>
     </motion.div>
   );
 };
@@ -141,7 +144,7 @@ const EmployeeSection: React.FC = () => {
 
       {/* Employee Cards */}
       <motion.div
-        className="max-w-6xl mx-auto px-4 flex flex-wrap justify-center gap-8"
+        className="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         variants={fadeUpContainer}
         initial="hidden"
         whileInView="visible"

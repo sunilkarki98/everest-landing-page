@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header"; // Import Header
 import FooterSection from "@/components/sections/FooterSection";
 import WhatsAppWidget from "@/components/ui/WhatsAppWidget";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 // Load Poppins font
 const poppins = Poppins({
@@ -62,16 +63,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${poppins.variable} font-sans antialiased bg-white text-gray-900`}
       >
-        {/* Header on every page */}
-        <Header />
-        {/* Page Content */}
-        <main>{children}</main>
-        <FooterSection />
-        <WhatsAppWidget />
+        <SmoothScrollProvider>
+          {/* Header on every page */}
+          <Header />
+          {/* Page Content */}
+          <main>{children}</main>
+          <FooterSection />
+          <WhatsAppWidget />
+        </SmoothScrollProvider>
       </body>
     </html>
   );
