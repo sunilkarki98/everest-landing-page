@@ -106,8 +106,8 @@ export default function Navbar({
       ref={navRef}
       className={`bg-white text-primary shadow-lg py-3 relative z-50 font-sans ${className}`}
     >
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
+        <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
           {/* Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <Link
@@ -117,10 +117,10 @@ export default function Navbar({
               <Image
                 src={logoSrc}
                 alt={logoAlt || "Company Logo"}
-                width={160} // better for h-20 (≈80px) visual ratio
-                height={80}
-                className="h-12 sm:h-20 w-auto object-contain drop-shadow-sm"
-                style={{ width: "auto", height: "auto" }}
+                width={200}
+                height={100}
+                className="h-12 sm:h-16 lg:h-20 w-auto object-contain drop-shadow-sm"
+                style={{ width: "auto" }}
                 priority
               />
 

@@ -24,11 +24,11 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="relative group bg-white rounded-2xl shadow-xl overflow-hidden w-full flex flex-col h-full transform transition duration-500 hover:-translate-y-2 border border-gray-100"
+      className="relative group bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 flex flex-col h-full transform transition duration-500 hover:-translate-y-2 border border-gray-100"
       variants={fadeUpCard}
     >
-      {/* Image with square structural aspect ratio to reduce overall card height */}
-      <div className="relative w-full aspect-square overflow-hidden bg-gray-200">
+      {/* Image with tighter structural height to reduce overall card size */}
+      <div className="relative w-full h-[280px] sm:h-[320px] overflow-hidden bg-gray-200">
         <Image
           src={image}
           alt={name}

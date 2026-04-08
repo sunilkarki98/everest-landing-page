@@ -112,7 +112,7 @@ const BlogSection: React.FC = () => {
             <motion.article
               key={blog.id}
               className="bg-[#F9FAFB] rounded-xl shadow-md hover:shadow-xl transition-shadow 
-                         flex-shrink-0 w-full sm:w-[24rem] lg:w-[28rem] flex flex-col h-full p-5"
+                         flex-shrink-0 w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 sm:w-[24rem] lg:w-[28rem] flex flex-col h-full p-5"
               variants={fadeUpCard}
               role="article"
               aria-labelledby={`blog-title-${blog.id}`}

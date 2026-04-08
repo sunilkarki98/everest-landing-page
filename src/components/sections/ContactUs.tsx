@@ -95,7 +95,7 @@ const ContactUs = () => {
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto rounded-2xl shadow-2xl overflow-hidden flex flex-col sm:flex-row min-h-[650px] h-auto">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 rounded-2xl shadow-2xl overflow-hidden flex flex-col sm:flex-row min-h-[650px] h-auto">
         {/* Left Side */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}

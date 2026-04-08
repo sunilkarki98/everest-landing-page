@@ -38,7 +38,7 @@ export default function ServiceSection() {
           {services.map((service) => (
             <motion.div
               key={service.name}
-              className="group relative bg-white rounded-xl shadow-lg overflow-hidden w-full sm:w-80 cursor-pointer will-change-transform"
+              className="group relative bg-white rounded-xl shadow-lg overflow-hidden w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 sm:w-80 cursor-pointer will-change-transform"
               variants={fadeUpCard}
               whileHover={{ scale: 1.05 }}
               transition={cardHoverTransition}

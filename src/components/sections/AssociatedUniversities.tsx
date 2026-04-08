@@ -53,7 +53,7 @@ export default function AssociatedUniversities() {
           titleColor="text-purple-600" 
           className="!mb-3" 
         />
-        <p className="text-gray-600 text-base md:text-lg">
+        <p className="text-gray-600 text-base md:text-lg px-4 max-w-2xl mx-auto">
           Partner with leading educational institutions across Australia
         </p>
       </div>
