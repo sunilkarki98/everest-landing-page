@@ -14,12 +14,12 @@ import {
 const FooterSection = () => {
   return (
     <footer className="bg-gray-900 text-white pt-10">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-8">
         {/* Left section: logo, social, subscribe */}
         <div className="sm:col-span-2 md:col-span-1 space-y-4">
           <div className="flex flex-col items-start space-y-2">
             <Image
-              src="/logos/logo.png"
+              src="/logos/everestlogo.jpeg"
               alt="Everest Education Logo"
               width={150}
               height={50}
@@ -110,17 +110,20 @@ const FooterSection = () => {
           </ul>
         </div>
 
-        {/* Courses Abroad & Global Offices */}
+        {/* Courses Abroad */}
         <div>
           <h3 className="font-bold text-white mb-2 border-b border-green-500 inline-block">
             Courses Abroad
           </h3>
-          <ul className="mt-2 space-y-1 text-gray-300 mb-4">
+          <ul className="mt-2 space-y-1 text-gray-300">
             <li><Link href="/courses/BusinessStudies" className="hover:text-green-400 transition-colors">MBA in Australia</Link></li>
             <li><Link href="/" className="hover:text-green-400 transition-colors">MBA in USA</Link></li>
             <li><Link href="/" className="hover:text-green-400 transition-colors">MBA in Canada</Link></li>
           </ul>
+        </div>
 
+        {/* Global Offices */}
+        <div>
           <h3 className="font-bold text-white mb-2 border-b border-green-500 inline-block">
             Global Offices
           </h3>

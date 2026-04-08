@@ -16,7 +16,7 @@ interface NavbarProps {
 
 export default function Navbar({
   className = "",
-  logoSrc = "/logos/logo.png",
+  logoSrc = "/logos/everestlogo.png",
   logoAlt = "Everest Education",
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);

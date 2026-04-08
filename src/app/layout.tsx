@@ -13,6 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("http://localhost:3000"), // Update to production URL when deployed
   title: "Everest Education | Your Pathway to Global Universities",
   description:
     "Join 50,000+ students who secured their future in Australia, Canada, the UK, and New Zealand with our 99% visa success rate. Expert migration and education consultancy.",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "Everest Education",
     images: [
       {
-        url: "/logos/logo.png",
+        url: "/logos/everestlogo.png",
         width: 1200,
         height: 630,
         alt: "Everest Education Logo",
@@ -47,7 +48,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Everest Education | Your Pathway to Global Universities",
     description: "Expert migration and education consultancy for Australia, Canada, and the UK.",
-    images: ["/logos/logo.png"],
+    images: ["/logos/everestlogo.png"],
+  },
+  icons: {
+    icon: "/logos/everestlogo.png",
+    apple: "/logos/everestlogo.png",
   },
 };
 
