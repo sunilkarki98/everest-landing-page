@@ -24,6 +24,7 @@ const FooterSection = () => {
               width={150}
               height={50}
               className="object-contain rounded-lg"
+              style={{ width: "auto", height: "auto" }}
             />
             <p className="text-sm text-gray-300">Since {siteConfig.foundedYear}</p>
             <p className="text-sm text-gray-400">{siteConfig.description}</p>

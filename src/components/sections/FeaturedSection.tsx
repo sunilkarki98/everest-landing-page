@@ -59,7 +59,7 @@ export default function ImageCardCarousel() {
       <SectionHeading title="Featured Courses" />
 
       <div className="flex justify-center gap-6 flex-wrap">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {displayedItems.map((item) => (
             <motion.div
               key={item.title}
@@ -68,7 +68,7 @@ export default function ImageCardCarousel() {
               exit={{ opacity: 0, y: -80 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, ease: "easeOut" }}
-              className="group relative w-[90%] sm:w-[420px] md:w-[360px] lg:w-[420px] xl:w-[500px] flex-shrink-0 mb-16 sm:mb-0"
+              className="group relative w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] min-w-[280px] max-w-[420px] mx-auto flex-shrink-0 mb-16 sm:mb-0"
             >
               {/* Main Image */}
               <div className="relative h-[240px] md:h-[280px] lg:h-[320px] overflow-hidden rounded-lg">

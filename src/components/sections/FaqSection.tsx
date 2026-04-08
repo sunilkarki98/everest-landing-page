@@ -96,26 +96,28 @@ export default function FaqSection() {
             </div>
           ))}
         </div>
+        <div className="mt-8">
+          <a
+            href="#contact-us"
+            className="inline-flex bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-full items-center gap-2 shadow-lg transition-all"
+          >
+            Read More Q & A
+            <ArrowRight size={18} />
+          </a>
+        </div>
       </div>
 
-      {/* RIGHT SIDE - IMAGE + BUTTON */}
+      {/* RIGHT SIDE - IMAGE */}
       <div className="relative flex flex-col items-center justify-center">
         <div className="relative w-full h-[300px] sm:h-[420px] rounded-3xl overflow-hidden shadow-lg">
           <Image
             src="/images/faq.jpg"
             alt="FAQ section team"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
           />
         </div>
-
-        <a
-          href="#contact-us"
-          className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 sm:px-6 py-2 sm:py-3 rounded-full flex items-center gap-2 shadow-lg transition-all text-sm sm:text-base"
-        >
-          Read More Q & A
-          <ArrowRight size={18} />
-        </a>
       </div>
     </section>
   );

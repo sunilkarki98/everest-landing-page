@@ -108,6 +108,7 @@ const ContactUs = () => {
             src="/images/contact.jpg"
             alt="Contact Us"
             fill
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
           />
         </motion.div>

@@ -32,16 +32,16 @@ export default function HeroSection() {
         <motion.div
           key={slide.id}
           className="absolute inset-0"
-          initial={{ opacity: index === 0 ? 1 : 0 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: current === index ? 1 : 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
         >
           <Image
             src={slide.image}
             alt={`Study in ${slide.subtitle}`}
             fill
             className="object-cover"
-            priority // Preloading all hero images explicitly fixes the background flashing bug
+            priority={index === 0}
             sizes="100vw"
           />
         </motion.div>
@@ -63,7 +63,12 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+        className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4"
+      >
         
         {/* Hardware-Accelerated Static Title */}
         <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-semibold drop-shadow-2xl flex items-center justify-center gap-2 sm:gap-4 flex-wrap transform-gpu" style={{ WebkitFontSmoothing: "antialiased" }}>
@@ -107,7 +112,7 @@ export default function HeroSection() {
             Read More
           </a>
         </div>
-      </div>
+      </motion.div>
 
       {/* Navigation Arrows */}
       <button

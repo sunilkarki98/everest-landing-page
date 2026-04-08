@@ -20,13 +20,13 @@ export const siteConfig = {
   shortName: "Everest",
   description: "Connecting Life & Learning since 2006",
   foundedYear: 2006,
-  url: "https://everestgroupgroup.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://eevsgroup.com",
   
   contact: {
     emails: {
-      nepal: "nepal@everestgroupgroup.com",
-      adelaide: "adelaide@everestgroupgroup.com",
-      newZealand: "director.nz@everestgroupgroup.com",
+      nepal: "nepal@everestgroup.com",
+      adelaide: "adelaide@everestgroup.com",
+      newZealand: "director.nz@everestgroup.com",
       bagbazar: "bagbazar@everest.edu.np",
       baglung: "baglung@everest.edu.np",
     },

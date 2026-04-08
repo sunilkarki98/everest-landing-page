@@ -38,7 +38,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
         />
 
         {/* Social Icons on Hover */}
-        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20 z-20">
+        <div className="absolute inset-0 flex flex-wrap items-center justify-center gap-2 sm:gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20 z-20">
           <a
             href="#"
             aria-label={`${name} LinkedIn`}
@@ -135,9 +135,9 @@ const EmployeeSection: React.FC = () => {
           title="Our Everest Education Dedicated Team Members" 
           eyebrowColor="text-blue-400" 
           titleColor="text-gray-800"
-          className="mb-4 lg:mb-4" // override the default mb-10 to leave space for the button
+          className="mb-2 lg:mb-4"
         />
-        <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-full transition">
+        <button className="mt-2 bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-full transition">
           View All Team Members
         </button>
       </div>

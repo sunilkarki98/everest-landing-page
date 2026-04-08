@@ -83,12 +83,15 @@ export default function WelcomeSection() {
             Where we connect life & learning.
           </p>
 
-          {/* Stats — flex-wrap with centered last item */}
-          <div className="flex flex-wrap justify-center gap-6">
+          {/* Stats — grid with centered orphan items */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {stats.map((item, i) => (
               <motion.div
                 key={i}
-                className="bg-white rounded-xl shadow-2xl flex flex-col items-center justify-center py-6 px-4 text-center w-[calc(50%-12px)] sm:w-[calc(33.333%-16px)]"
+                className={`bg-white rounded-xl shadow-2xl flex flex-col items-center justify-center py-6 px-4 text-center ${
+                  i >= 3 ? "sm:col-span-1 col-span-1" : ""
+                }`}
+                style={i === 3 ? { gridColumn: "1 / 2" } : i === 4 ? { gridColumn: "2 / 3" } : undefined}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

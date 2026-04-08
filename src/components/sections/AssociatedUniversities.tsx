@@ -71,10 +71,11 @@ export default function AssociatedUniversities() {
 
         {/* Carousel content */}
         <div className="flex gap-3 sm:gap-6 overflow-hidden">
-          <AnimatePresence initial={false}>
+          <AnimatePresence mode="popLayout" initial={false}>
             {visibleUniversities.map((u) => (
               <motion.div
                 key={u.id}
+                layout
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}

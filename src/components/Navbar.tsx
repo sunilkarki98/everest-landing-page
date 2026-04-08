@@ -119,7 +119,8 @@ export default function Navbar({
                 alt={logoAlt || "Company Logo"}
                 width={160} // better for h-20 (≈80px) visual ratio
                 height={80}
-                className="h-20 w-auto object-contain drop-shadow-sm"
+                className="h-12 sm:h-20 w-auto object-contain drop-shadow-sm"
+                style={{ width: "auto", height: "auto" }}
                 priority
               />
 

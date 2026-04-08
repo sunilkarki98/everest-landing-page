@@ -45,7 +45,7 @@ const FeedbackSection = () => {
           {feedbacks.map((item, index) => (
             <div
               key={index}
-              className="bg-white text-gray-800 rounded-xl shadow-lg p-6 flex flex-col justify-between hover:shadow-2xl transition duration-300"
+              className="bg-white text-gray-800 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full hover:shadow-2xl transition duration-300"
             >
               <Quote className="text-blue-700 w-8 h-8 mb-3" />
               <p className="text-sm md:text-base font-normal leading-relaxed mb-6">

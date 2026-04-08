@@ -63,7 +63,7 @@ const jsonLd = {
     item: {
       "@type": "BlogPosting",
       headline: b.title,
-      url: `https://everestgroupgroup.com${b.link}`,
+      url: `https://everestgroup.com${b.link}`,
       datePublished: b.dateISO,
       author: { "@type": "Organization", name: b.author },
       image: b.image,
@@ -123,7 +123,7 @@ const BlogSection: React.FC = () => {
               <header className="mb-4 flex flex-col flex-1">
                 <h3
                   id={`blog-title-${blog.id}`}
-                  className="text-lg font-semibold text-[#00AEEF] mb-2 hover:underline cursor-pointer"
+                  className="text-lg font-semibold text-[#00AEEF] mb-2 hover:underline cursor-pointer min-h-[3rem]"
                 >
                   {blog.title}
                 </h3>
