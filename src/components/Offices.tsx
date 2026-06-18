@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { SectionHeading } from "./ui/SectionHeading";
+import { siteConfig } from "../config/site";
 
 type Office = {
   id: number;
@@ -26,15 +27,13 @@ const tabs = [
   "PHILIPPINES OFFICE",
 ];
 
-import { siteConfig } from "../config/site";
-
 const offices: Office[] = [
   {
     id: 1,
     country: "AUSTRALIA OFFICES",
     title: "Adelaide Office",
-    phone: siteConfig.contact.phones.adelaide,
-    email: siteConfig.contact.emails.adelaide,
+    phone: siteConfig.contact.phones.main,
+    email: siteConfig.contact.emails.main,
     address: "Suite 2, Level 1, 9A Hindley St, Adelaide SA 5000, Australia",
     mapLink: "https://maps.google.com/?q=9A+Hindley+St+Adelaide+SA+5000",
   },
@@ -42,8 +41,8 @@ const offices: Office[] = [
     id: 2,
     country: "NEW ZEALAND OFFICE",
     title: "Auckland Office",
-    phone: siteConfig.contact.phones.newZealand,
-    email: siteConfig.contact.emails.newZealand,
+    phone: siteConfig.contact.phones.secondary,
+    email: siteConfig.contact.emails.secondary,
     address:
       "Suite 202, 87–93 Queen Street, Dingwall Building, Auckland, New Zealand",
     mapLink: "https://maps.google.com/?q=87+Queen+Street+Auckland",
@@ -52,8 +51,8 @@ const offices: Office[] = [
     id: 3,
     country: "SOUTH ASIA OFFICES",
     title: "Bagbazar Office",
-    phone: siteConfig.contact.phones.bagbazar,
-    email: siteConfig.contact.emails.bagbazar,
+    phone: siteConfig.contact.phones.main,
+    email: siteConfig.contact.emails.main,
     address: "Bagbazar, Kathmandu (Opposite of Pipalbot), Nepal",
     mapLink: "https://maps.google.com/?q=Bagbazar+Kathmandu+Nepal",
   },
@@ -61,8 +60,8 @@ const offices: Office[] = [
     id: 4,
     country: "SOUTH ASIA OFFICES",
     title: "Baglung Office",
-    phone: siteConfig.contact.phones.baglung,
-    email: siteConfig.contact.emails.baglung,
+    phone: siteConfig.contact.phones.secondary,
+    email: siteConfig.contact.emails.secondary,
     address: "Hanumandas Road, Next to Hotel Peace Palace, Baglung, Nepal",
     mapLink: "https://maps.google.com/?q=Baglung+Nepal",
   },
@@ -92,11 +91,10 @@ export default function Offices() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-md text-base font-medium whitespace-nowrap transition-colors duration-200 ${
-                  activeTab === tab
-                    ? "bg-green-600 text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                className={`px-4 py-2 rounded-md text-base font-medium whitespace-nowrap transition-colors duration-200 ${activeTab === tab
+                  ? "bg-green-600 text-white shadow-md"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
               >
                 {tab}
               </button>
@@ -105,12 +103,10 @@ export default function Offices() {
         </div>
       </div>
 
-      {/* Heading */}
-      <SectionHeading 
-        title={activeTab === "ALL BRANCHES" ? "All Offices" : activeTab} 
+      <SectionHeading
+        title={activeTab === "ALL BRANCHES" ? "All Offices" : activeTab}
       />
 
-      {/* Cards */}
       <AnimatePresence mode="popLayout">
         <motion.div
           key={activeTab}
@@ -131,28 +127,35 @@ export default function Offices() {
                   {office.title}
                 </h3>
 
-                {/* Phone */}
-                <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 mb-2 text-sm text-gray-800 hover:text-blue-600 transition-colors">
+                <a
+                  href={`tel:${office.phone.replace(/\s/g, "")}`}
+                  className="flex items-center gap-2 mb-2 text-sm text-gray-800 hover:text-blue-600 transition-colors"
+                >
                   <Phone className="w-5 h-5 text-black flex-shrink-0" />
                   <span>{office.phone}</span>
                 </a>
 
-                {/* Email */}
-                <a href={`mailto:${office.email}`} className="flex items-center gap-2 mb-2 text-sm text-gray-800 hover:text-blue-600 transition-colors">
+                <a
+                  href={`mailto:${office.email}`}
+                  className="flex items-center gap-2 mb-2 text-sm text-gray-800 hover:text-blue-600 transition-colors"
+                >
                   <Mail className="w-5 h-5 text-black flex-shrink-0" />
                   <span>{office.email}</span>
                 </a>
 
-                {/* Address */}
                 <div className="flex items-start gap-2 text-sm text-gray-800 mb-4">
                   <MapPin className="w-5 h-5 text-black mt-0.5 flex-shrink-0" />
                   <span>{office.address}</span>
                 </div>
               </div>
 
-              {/* Get Directions — now functional */}
               <a
-                href={office.mapLink || `https://maps.google.com/?q=${encodeURIComponent(office.address)}`}
+                href={
+                  office.mapLink ||
+                  `https://maps.google.com/?q=${encodeURIComponent(
+                    office.address
+                  )}`
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-auto w-full bg-gradient-to-r from-violet-800 to-violet-400 text-white py-2.5 rounded-lg font-medium hover:from-violet-600 hover:to-blue-800 hover:-translate-y-1 transition-all ease-in-out duration-300 text-center block"
