@@ -135,7 +135,7 @@ export default function WelcomeSection() {
           >
             <CheckCircle2 size={16} /> Why Choose EEVS
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ export default function WelcomeSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight"
           >
-            Everest Since <span className="text-accent-text">2006</span>
+            Everest Since <span className="text-accent-text">2011</span>
           </motion.h2>
 
           <motion.p
@@ -159,7 +159,7 @@ export default function WelcomeSection() {
 
         {/* Combined Content Grid: Highlights on Left, Stats/Accreditations on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-          
+
           {/* Highlights Cards Grid (Left Column) */}
           <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
             {highlights.map((highlight, index) => {
@@ -175,7 +175,7 @@ export default function WelcomeSection() {
                 >
                   {/* Background hover sweep */}
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  
+
                   {/* Top gold accent line */}
                   <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-full" />
 
@@ -230,7 +230,7 @@ export default function WelcomeSection() {
             {/* Bottom Row: Compact Accreditations Card */}
             <div className="bg-gradient-to-r from-[#2a4f8f] via-[#325ba0] to-[#2a4f8f] rounded-2xl p-6 shadow-lg border border-secondary/40 flex-1 flex flex-col justify-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
-              
+
               <div className="relative z-10 flex items-center gap-4 mb-5 border-b border-white/15 pb-5">
                 <div className="relative w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center shrink-0 shadow-[0_0_15px_hsl(var(--accent)/0.25)]">
                   <div className="absolute inset-0 rounded-full border-t-2 border-accent animate-spin" style={{ animationDuration: '4s' }} />

@@ -19,9 +19,9 @@ export const siteConfig = {
   name: "Everest Education & Visa Services",
   shortName: "Everest Education",
   description: "Trusted education & visa services in Australia. Family-owned, student-first.",
-  foundedYear: 2006,
+  foundedYear: 2011,
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://everesteducation.com.au",
-  
+
   contact: {
     emails: {
       main: "info@eevsgroup.com",
