@@ -21,11 +21,13 @@ export default function Page() {
       {/* 2. Family Message */}
       <WelcomeSection />
 
-      {/* 3.5. Employee Section */}
-      <EmployeeSection />
+
 
       {/* 4. Our Services — 6 premium cards */}
       <ServicesSection />
+
+      {/* 3.5. Employee Section */}
+      <EmployeeSection />
 
       {/* 4.5 Popular Course Categories */}
       <CourseCategoriesSection />
