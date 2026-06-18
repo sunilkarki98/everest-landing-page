@@ -47,7 +47,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="bg-white max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 items-center">
+    <section className="bg-white max-w-7xl mx-auto px-4 sm:px-6 py-10 lg:py-14 grid lg:grid-cols-2 gap-12 items-center">
       {/* LEFT SIDE - FAQ */}
       <div className="flex flex-col justify-center">
         <SectionHeading 

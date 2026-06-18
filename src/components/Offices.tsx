@@ -83,7 +83,7 @@ export default function Offices() {
       : offices.filter((o) => normalize(o.country) === normalize(activeTab));
 
   return (
-    <section className="w-full py-12 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto">
+    <section className="w-full py-10 lg:py-14 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto">
       {/* Tabs */}
       <div className="mb-8">
         <div className="overflow-x-auto lg:overflow-x-visible scrollbar-hide">

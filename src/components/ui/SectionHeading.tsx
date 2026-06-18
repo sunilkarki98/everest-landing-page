@@ -2,15 +2,16 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
   eyebrow?: string;
   title: React.ReactNode;
   align?: "left" | "center";
-  eyebrowColor?: string;
-  titleColor?: string;
   className?: string;
   animationVariants?: Variants;
+  eyebrowColor?: string;
+  titleColor?: string;
 }
 
 const defaultHeadingVariants: Variants = {
@@ -26,29 +27,40 @@ export function SectionHeading({
   eyebrow,
   title,
   align = "center",
-  eyebrowColor = "text-blue-400",
-  titleColor = "text-gray-800",
-  className = "",
+  className,
   animationVariants = defaultHeadingVariants,
+  eyebrowColor,
+  titleColor,
 }: SectionHeadingProps) {
-  const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
+  const isCenter = align === "center";
   
   return (
     <motion.div
-      className={`mb-10 lg:mb-12 ${alignClass} ${className}`}
+      className={cn(
+        "mb-10 lg:mb-12 will-change-transform",
+        isCenter ? "text-center mx-auto" : "text-left",
+        className
+      )}
       variants={animationVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
       {eyebrow && (
-        <p className={`${eyebrowColor} font-semibold text-lg md:text-xl tracking-wide uppercase`}>
-          {eyebrow}
-        </p>
+        <div className={cn("flex items-center gap-3 mb-4", isCenter ? "justify-center" : "justify-start")}>
+          <span className="block w-6 sm:w-10 h-px bg-accent" />
+          <p className={cn("text-base md:text-lg font-medium tracking-[0.2em] uppercase", eyebrowColor || "text-accent")}>
+            {eyebrow}
+          </p>
+          <span className="block w-6 sm:w-10 h-px bg-accent" />
+        </div>
       )}
-      <h2 className={`${titleColor} text-3xl md:text-4xl lg:text-5xl font-extrabold mt-2 leading-tight`}>
+      <h2 className={cn("text-2xl md:text-3xl lg:text-4xl font-medium leading-tight", titleColor || "text-primary")}>
         {title}
       </h2>
+      {isCenter && (
+        <div className="w-16 h-0.5 mx-auto mt-4 bg-accent" />
+      )}
     </motion.div>
   );
 }

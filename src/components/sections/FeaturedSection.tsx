@@ -1,146 +1,144 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { MapPin, DollarSign, GraduationCap, Briefcase } from "lucide-react";
 import Image from "next/image";
-import { Info } from "lucide-react";
-import Link from "next/link";
-import { SectionHeading } from "../ui/SectionHeading";
+import { Container } from "@/components/layout/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const items = [
+const destinations = [
   {
-    image: "/images/business.jpg",
-    title: "Business Studies",
-    button: "Read More",
-    href: "/courses/BusinessStudies",
+    name: "Sydney",
+    country: "Australia",
+    universities: "UNSW, University of Sydney, UTS",
+    costOfLiving: "AUD $2,200 – $2,800/mo",
+    opportunities: "Finance, tech & healthcare hub.",
+    image: "https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?q=80&w=2070&auto=format&fit=crop",
+    gridClass: "md:col-span-1 md:row-span-1",
   },
   {
-    image: "/images/eng.jpg",
-    title: "Engineering",
-    button: "Read More",
-    href: "/courses/Engineering",
+    name: "Auckland",
+    country: "New Zealand",
+    universities: "University of Auckland, AUT, Victoria",
+    costOfLiving: "NZD $1,800 – $2,400/mo",
+    opportunities: "Agriculture, IT & tourism.",
+    image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=2070&auto=format&fit=crop",
+    gridClass: "md:col-span-1 md:row-span-1",
   },
   {
-    image: "/images/it.jpg",
-    title: "Information Technology",
-    button: "Read More",
-    href: "/courses/InformationTechnologies",
+    name: "London",
+    country: "United Kingdom",
+    universities: "UCL, Imperial, King's College",
+    costOfLiving: "GBP £1,800 – £2,500/mo",
+    opportunities: "Finance, law & creative arts.",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2070&auto=format&fit=crop",
+    gridClass: "md:col-span-1 md:row-span-1",
   },
   {
-    image: "/images/health.jpg",
-    title: "Health & Science",
-    button: "Read More",
-    href: "/courses/HealthAndScience",
+    name: "Toronto",
+    country: "Canada",
+    universities: "University of Toronto, Ryerson, York",
+    costOfLiving: "CAD $2,000 – $2,800/mo",
+    opportunities: "Tech, finance & healthcare.",
+    image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=2070&auto=format&fit=crop",
+    gridClass: "md:col-span-1 md:row-span-1",
+  },
+  {
+    name: "Tokyo",
+    country: "Japan",
+    universities: "Waseda, Keio, University of Tokyo",
+    costOfLiving: "JPY ¥120,000 – ¥180,000/mo",
+    opportunities: "Engineering, robotics & culture.",
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2070&auto=format&fit=crop",
+    gridClass: "md:col-span-1 md:row-span-1",
+  },
+  {
+    name: "Paris",
+    country: "Europe",
+    universities: "Sorbonne, Sciences Po, HEC Paris",
+    costOfLiving: "EUR €1,500 – €2,200/mo",
+    opportunities: "Fashion, business & research.",
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2070&auto=format&fit=crop",
+    gridClass: "md:col-span-1 md:row-span-1",
   },
 ];
 
-export default function ImageCardCarousel() {
-  const [page, setPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(2);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) setItemsPerPage(1);
-      else if (window.innerWidth < 1024) setItemsPerPage(2);
-      else setItemsPerPage(4);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-  const displayedItems = items.slice(
-    page * itemsPerPage,
-    page * itemsPerPage + itemsPerPage
-  );
-
+export default function FeaturedSection() {
   return (
-    <section id="popular-courses" className="w-full flex flex-col items-center gap-8 py-10 pb-10 relative">
-      <SectionHeading title="Featured Courses" />
+    <section id="popular-destinations" className="py-10 lg:py-14 bg-background">
+      <Container>
+        {/* Heading */}
+        <SectionHeading
+          eyebrow="Popular Destinations"
+          title="Study Abroad"
+        />
 
-      {/* Fixed-height wrapper prevents layout collapse during page transitions */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 min-h-[340px] md:min-h-[380px] lg:min-h-[400px]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={page}
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -60 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="flex justify-center gap-6 flex-wrap"
-          >
-            {displayedItems.map((item, idx) => (
-              <div
-                key={item.title}
-                className="group relative w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 sm:w-[calc(50%-1.5rem)] lg:w-[calc(25%-1.5rem)] flex-shrink-0"
-              >
-                {/* Main Image */}
-                <div className="relative h-[240px] md:h-[280px] lg:h-[320px] overflow-hidden rounded-lg">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    priority={page === 0 && idx === 0}
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw,
-                           (max-width: 1200px) 50vw,
-                           33vw"
-                  />
-                  {/* Green overlay */}
-                  <div className="absolute top-0 left-0 w-full h-0 bg-green-200/20 group-hover:h-full transition-all duration-1000 pointer-events-none"></div>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] gap-4 md:gap-6 mt-10">
+          {destinations.map((dest, index) => (
+            <motion.div
+              key={dest.name}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`group relative overflow-hidden rounded-2xl shadow-md border border-border ${dest.gridClass}`}
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={dest.image}
+                  alt={`${dest.name}, ${dest.country}`}
+                  fill
+                  className="object-cover brightness-110 contrast-105 transition-transform duration-700 ease-in-out group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+
+              {/* Gradient Overlay for legibility */}
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90" />
+
+              {/* Content Container — anchored to bottom-left */}
+              <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col justify-end p-5 md:p-6 h-full text-white">
+
+                {/* Glassmorphism Details Panel */}
+                <div className="space-y-3 opacity-0 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out group-hover:opacity-100 backdrop-blur-xl bg-white/10 p-4 rounded-xl border border-white/15 mb-4">
+                  <div className="flex gap-3 items-start">
+                    <GraduationCap className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+                    <div>
+                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60">Universities</p>
+                      <p className="text-sm font-medium">{dest.universities}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <DollarSign className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+                    <div>
+                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60">Cost of Living</p>
+                      <p className="text-sm font-medium">{dest.costOfLiving}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <Briefcase className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+                    <div>
+                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60">Opportunities</p>
+                      <p className="text-sm font-medium text-white/90">{dest.opportunities}</p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Overlapping Card */}
-                <div
-                  className="absolute left-1/2 -bottom-16 transform -translate-x-1/2 
-                             w-[85%] min-h-[200px] bg-white shadow-lg rounded-xl p-4 flex flex-col items-start overflow-hidden"
-                >
-                  {/* Blue overlay */}
-                  <span
-                    className="absolute bottom-0 left-0 w-full h-0 bg-blue-400/20
-                                   group-hover:h-full transition-all duration-1000 pointer-events-none rounded-xl"
-                  ></span>
-
-                  {/* Icon */}
-                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mb-3 relative z-10 flex-shrink-0">
-                    <Info className="w-5 h-5 text-gray-600" />
+                {/* Header — bottom-left aligned */}
+                <div className="mt-auto">
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-1" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.95), 0 0px 4px rgba(0,0,0,0.8)' }}>{dest.name}</h3>
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-accent" />
+                    <span className="text-sm font-semibold tracking-wide text-white/90">{dest.country}</span>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-[17px] leading-tight sm:text-lg font-semibold mb-3 relative z-10 flex-1">
-                    {item.title}
-                  </h3>
-
-                  {/* Button */}
-                  <Link
-                    href={item.href}
-                    className="px-4 py-2 mt-auto bg-blue-500 text-white rounded-lg hover:bg-blue-600 relative z-10 text-sm sm:text-base whitespace-nowrap"
-                  >
-                    {item.button}
-                  </Link>
                 </div>
               </div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Pagination Dots */}
-      {totalPages > 1 && (
-        <div className="flex gap-2 mt-6 py-2">
-          {Array.from({ length: totalPages }).map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setPage(idx)}
-              aria-label={`Go to page ${idx + 1}`}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                page === idx ? "bg-blue-500" : "bg-gray-300"
-              }`}
-            ></button>
+            </motion.div>
           ))}
         </div>
-      )}
+      </Container>
     </section>
   );
 }

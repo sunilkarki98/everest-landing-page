@@ -1,6 +1,6 @@
 // src/config/site.ts
 
-export type MenuKey = "popular" | "student" | "migration" | "other" | string;
+export type MenuKey = "courses" | "visaServices" | "visaMigration" | "abroadStudy" | "otherServices" | string;
 
 export type SubLink = {
   label: string;
@@ -16,27 +16,22 @@ export type MenuItem = {
 };
 
 export const siteConfig = {
-  name: "Everest Education",
-  shortName: "Everest",
-  description: "Connecting Life & Learning since 2006",
+  name: "Everest Education & Visa Services",
+  shortName: "Everest Education",
+  description: "Trusted education & visa services in Australia. Family-owned, student-first.",
   foundedYear: 2006,
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://eevsgroup.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://everesteducation.com.au",
   
   contact: {
     emails: {
-      nepal: "nepal@everestgroup.com",
-      adelaide: "adelaide@everestgroup.com",
-      newZealand: "director.nz@everestgroup.com",
-      bagbazar: "bagbazar@everest.edu.np",
-      baglung: "baglung@everest.edu.np",
+      main: "info@eevsgroup.com",
+      secondary: "everesteduaustralia@gmail.com",
     },
     phones: {
-      nepal: "+977-9800000000",
-      adelaide: "+61 (08) 7225 7892",
-      newZealand: "+64 95585152",
-      bagbazar: "+977 (01) 4256121 / 5356121",
-      baglung: "+977 (068) 522667",
+      main: "+61 406 000 815",
+      secondary: "+61 466 117 512",
     },
+    address: "Unit 6, 17–23 Oatley Court, Belconnen ACT 2615, Australia",
   },
 
   social: {
@@ -48,54 +43,67 @@ export const siteConfig = {
 
   nav: [
     {
-      key: "popular",
-      label: "Popular Courses",
-      href: null,
+      key: "courses",
+      label: "Courses",
+      href: "/courses",
       links: [
-        { label: "Business Studies", href: "/courses/BusinessStudies" },
-        { label: "Health And Science", href: "/courses/HealthAndScience" },
-        { label: "Information Technologies", href: "/courses/InformationTechnologies" },
-        { label: "Engineering", href: "/courses/Engineering" },
-        { label: "Trade Courses", href: "/courses/TradeCourses" },
+        { label: "Health & Science", href: "/courses/health-science" },
+        { label: "Information Technology (IT)", href: "/courses/it" },
+        { label: "Engineering", href: "/courses/engineering" },
+        { label: "Business & Management Studies", href: "/courses/business" },
+        { label: "Cookery & Hospitality", href: "/courses/cookery" },
+        { label: "Trade Courses", href: "/courses/trade" },
       ],
     },
     {
-      key: "student",
-      label: "Student Services",
-      href: null,
+      key: "visaServices",
+      label: "Visa Services",
+      href: "/visa-services",
       links: [
-        { label: "Education Service", href: "/services/EducationalService" },
-        { label: "Educational Partners", href: "/services/EducationalPartners" },
-        { label: "ScholarShip", href: "/services/ScholarshipService" },
+        { label: "Student Visa Applications", href: "/visa-services/student-visa" },
+        { label: "GTE Documentation", href: "/visa-services/gte" },
+        { label: "Visa Extensions", href: "/visa-services/extensions" },
+        { label: "Visa Guidance", href: "/visa-services/guidance" },
+        { label: "Visa Compliance Support", href: "/visa-services/compliance" },
       ],
     },
     {
-      key: "migration",
-      label: "Migration Services",
-      href: null,
+      key: "visaMigration",
+      label: "Visa & Migration",
+      href: "/migration",
       links: [
-        { label: "Student Visa/SC 500", href: "/migration/StudentVisa" },
-        { label: "Visitor Visa/SC600", href: "/migration/VisitorVisa" },
-        { label: "TSS Visa/SC 482", href: "/migration/TssVisa" },
-        { label: "Partner Visa", href: "/migration/PartnerVisa" },
-        { label: "Skilled Work Regional Visa/SC 491", href: "/migration/RegionalWorkVisa" },
-        { label: "Skilled Independent Visa", href: "/migration/IndependentVisa" },
-        { label: "PSW Temporary Resident Visa", href: "/migration/new-zealand" },
-        { label: "State Nomination Visa", href: "/migration/NominationVisa" },
-        { label: "407 Training Visa/SC 407", href: "/migration/TrainingVisa" },
-        { label: "Skill Assessment", href: "/migration/SKillAssessmentVisa" },
-        { label: "AAT-MRT", href: "/migration/ArtMrtVisa" },
+        { label: "Skilled Migration", href: "/migration/skilled" },
+        { label: "Family Visa", href: "/migration/family" },
+        { label: "Partner Visa", href: "/migration/partner" },
+        { label: "Skill Assessment", href: "/migration/skill-assessment" },
+        { label: "Citizenship Applications", href: "/migration/citizenship" },
+        { label: "ART Appeals", href: "/migration/art-appeals" },
       ],
     },
     {
-      key: "other",
+      key: "abroadStudy",
+      label: "Abroad Study",
+      href: "/abroad-study",
+      links: [
+        { label: "University Admissions", href: "/abroad-study/university" },
+        { label: "College Admissions", href: "/abroad-study/college" },
+        { label: "Course Selection", href: "/abroad-study/course-selection" },
+        { label: "Scholarship Assistance", href: "/abroad-study/scholarships" },
+        { label: "Student Counselling", href: "/abroad-study/counselling" },
+        { label: "Documentation Support", href: "/abroad-study/documentation" },
+      ],
+    },
+    {
+      key: "otherServices",
       label: "Other Services",
-      href: null,
+      href: "/other-services",
       links: [
-        { label: "OSHC/OHVC", href: "/services/OshcOhvcServices" },
-        { label: "NAATI/PTE", href: "/services/NaatiPteService" },
-        { label: "Professional Year", href: "/services/ProfessionalYear" },
+        { label: "Skill Assessment", href: "/other-services/skill-assessment" },
+        { label: "OSHC & OVHC", href: "/other-services/oshc" },
+        { label: "Taxation & Accounting", href: "/other-services/taxation" },
+        { label: "Business Setup & Advisory", href: "/other-services/business" },
+        { label: "Education Loan Guidance", href: "/other-services/loans" },
       ],
     },
-  ],
+  ] as MenuItem[],
 };

@@ -1,51 +1,36 @@
 "use client";
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { siteConfig } from "../config/site";
+import { Container } from "@/components/layout/Container";
 
 export default function TopBar() {
   return (
-    <div className="bg-primary text-white text-sm py-1">
-      <div className="container mx-auto px-2 py-1 flex justify-between items-center lg:px-12">
-        {/* Left side: City + Phone + Email */}
-        <div className="flex items-center gap-3 xl:gap-6 flex-wrap">
-          {/* City Selector */}
-          <div className="flex items-center gap-1 border border-white px-2 py-1 rounded-full">
-            <MapPin size={16} className="text-white flex-shrink-0" />
-            <select
-              className="bg-transparent text-white outline-none cursor-pointer"
-              defaultValue=""
-              aria-label="Select city"
-              onChange={(e) => {
-                const city = e.target.value;
-                if (city === "melbourne") {
-                  window.open("https://maps.google.com/?q=Melbourne,Australia", "_blank");
-                } else if (city === "kathmandu") {
-                  window.open("https://maps.google.com/?q=Kathmandu,Nepal", "_blank");
-                }
-              }}
-            >
-              <option value="" disabled>Select City</option>
-              <option value="melbourne">Melbourne</option>
-              <option value="kathmandu">Kathmandu</option>
-            </select>
-          </div>
-
+    <div className="bg-primary text-primary-foreground text-sm py-2">
+      <Container className="flex justify-between items-center px-4 lg:px-8">
+        {/* Left side: Phone + Email */}
+        <div className="flex items-center gap-4 md:gap-6">
           {/* Phone */}
-          <a href={`tel:${siteConfig.contact.phones.nepal.replace(/[^\d+]/g, '')}`} className="flex items-center gap-1 font-medium">
-            <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
-            <span className="hidden sm:inline">{siteConfig.contact.phones.nepal}</span>
+          <a
+            href={`tel:${siteConfig.contact.phones.main.replace(/[^\d+]/g, "")}`}
+            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+          >
+            <Phone className="w-4 h-4 text-secondary flex-shrink-0" />
+            <span className="hidden sm:inline">{siteConfig.contact.phones.main}</span>
           </a>
 
           {/* Email */}
-          <a href={`mailto:${siteConfig.contact.emails.nepal}`} className="hidden sm:flex items-center gap-1 font-medium">
-            <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
-            <span className="hidden md:inline">{siteConfig.contact.emails.nepal}</span>
+          <a
+            href={`mailto:${siteConfig.contact.emails.main}`}
+            className="hidden sm:flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+          >
+            <Mail className="w-4 h-4 text-secondary flex-shrink-0" />
+            <span className="hidden md:inline">{siteConfig.contact.emails.main}</span>
           </a>
         </div>
 
         {/* Right side: Social icons */}
-        <div className="flex gap-2 xl:gap-6">
+        <div className="flex gap-2 xl:gap-4">
           {[
             { bg: "bg-blue-700", link: siteConfig.social.facebook, path: "M22 12a10 10 0 1 0-11 9.95v-7.05h-2v-2.9h2v-2.2c0-2 1.2-3.1 3-3.1.87 0 1.8.15 1.8.15v2h-1c-1 0-1.3.63-1.3 1.28v1.87h2.2l-.35 2.9h-1.85v7.05A10 10 0 0 0 22 12", label: "Facebook" },
             { bg: "bg-sky-500", link: siteConfig.social.twitter, path: "M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.4.36a9.12 9.12 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.5 0c-2.5 0-4.5 2-4.5 4.5 0 .35.04.7.1 1.03A12.94 12.94 0 0 1 1.64 1.1a4.5 4.5 0 0 0-.61 2.27c0 1.57.8 2.95 2 3.76a4.47 4.47 0 0 1-2-.55v.06c0 2.18 1.55 4 3.61 4.43a4.52 4.52 0 0 1-2 .08c.57 1.8 2.24 3.1 4.2 3.14A9 9 0 0 1 0 19.54 12.78 12.78 0 0 0 6.92 21c8.3 0 12.85-6.88 12.85-12.85 0-.2 0-.39-.01-.58A9.22 9.22 0 0 0 23 3z", label: "Twitter" },
@@ -58,15 +43,15 @@ export default function TopBar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={item.label}
-              className={`${item.bg} w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full text-white transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:scale-110`}
+              className={`${item.bg} w-7 h-7 flex items-center justify-center rounded-full text-white transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:scale-110`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current">
                 <path d={item.path} />
               </svg>
             </a>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

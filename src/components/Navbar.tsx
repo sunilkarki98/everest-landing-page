@@ -5,8 +5,7 @@ import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { siteConfig, MenuItem, MenuKey } from "../config/site";
-
-
+import { Button } from "@/components/ui/Button";
 
 interface NavbarProps {
   className?: string;
@@ -21,10 +20,10 @@ export default function Navbar({
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<Record<MenuKey, boolean>>({
-    popular: false,
-    student: false,
+    studyAustralia: false,
+    studentVisa: false,
     migration: false,
-    other: false,
+    otherServices: false,
   });
   const [activeDropdown, setActiveDropdown] = useState<MenuKey | null>(null);
 
@@ -62,16 +61,28 @@ export default function Navbar({
         setMobileOpen(false);
         setActiveDropdown(null);
         setDropdownOpen({
-          popular: false,
-          student: false,
+          studyAustralia: false,
+          studentVisa: false,
           migration: false,
-          other: false,
+          otherServices: false,
         });
       }
     };
+    
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+
     document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [mobileOpen]);
 
   // --- Handlers ---
   const toggleMobileMenu = useCallback(
@@ -104,35 +115,35 @@ export default function Navbar({
   return (
     <nav
       ref={navRef}
-      className={`bg-white text-primary shadow-lg py-3 relative z-50 font-sans ${className}`}
+      className={`relative z-50 font-sans ${className}`}
     >
       <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
+        <div className="flex justify-between items-center h-14 sm:h-16 lg:h-[72px]">
           {/* Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <Link
               href="/"
-              className="flex items-center gap-1 font-bold text-xl transition-transform hover:scale-105"
+              className="flex items-center h-full gap-1 font-bold text-xl transition-transform hover:scale-105"
             >
               <Image
                 src={logoSrc}
                 alt={logoAlt || "Company Logo"}
                 width={200}
                 height={100}
-                className="h-12 sm:h-16 lg:h-20 w-auto object-contain drop-shadow-sm"
-                style={{ width: "auto" }}
+                className="h-14 sm:h-16 lg:h-[72px] w-auto object-contain drop-shadow-sm scale-[1.35] origin-center"
                 priority
               />
-
-              <span></span>
             </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center h-full space-x-1">
-            <Link href="/" className="px-4 py-2 font-medium relative group">
+            <Link
+              href="/"
+              className="px-4 py-2 font-medium relative group text-primary"
+            >
               Home
-              <span className="absolute inset-x-0 bottom-1 h-0.5 bg-blue-500 scale-x-100 transition-transform origin-left"></span>
+              <span className="absolute inset-x-0 bottom-1 h-0.5 scale-x-100 transition-transform origin-left bg-secondary"></span>
             </Link>
 
             {menus.map((menu) => (
@@ -140,18 +151,18 @@ export default function Navbar({
                 <button
                   onMouseEnter={() => handleMouseEnter(menu.key)}
                   onMouseLeave={handleMouseLeave}
-                  className="px-3 py-2 font-medium flex items-center gap-0 relative group"
+                  className="px-3 py-2 font-medium flex items-center gap-0 relative group text-primary"
                 >
                   {menu.label}
                   <ChevronDown
                     size={16}
-                    className="text-blue-500 translate-y-[1px]"
+                    className="translate-y-[1px] text-secondary"
                   />
-                  <span className="absolute inset-x-0 bottom-1 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                  <span className="absolute inset-x-0 bottom-1 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-secondary"></span>
                 </button>
 
                 <div
-                  className={`absolute top-full left-0 bg-white text-primary shadow-xl rounded-lg mt-1 w-72 border border-gray-100 transition-all duration-200 origin-top ${
+                  className={`absolute top-full left-0 bg-white/85 backdrop-blur-2xl text-foreground shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] rounded-xl mt-2 w-72 border border-white/60 transition-all duration-300 origin-top ${
                     activeDropdown === menu.key
                       ? "opacity-100 scale-100 translate-y-0"
                       : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
@@ -163,12 +174,12 @@ export default function Navbar({
                     {menu.href ? (
                       <Link
                         href={menu.href}
-                        className="block px-4 py-3 font-semibold text-blue-500 hover:bg-blue-50 border-b border-gray-100"
+                        className="block px-4 py-3 font-semibold border-b border-border text-primary"
                       >
                         {menu.label}
                       </Link>
                     ) : (
-                      <span className="block px-4 py-3 font-semibold text-gray-400 border-b border-gray-100 cursor-not-allowed">
+                      <span className="block px-4 py-3 font-semibold border-b border-border text-muted-foreground cursor-not-allowed">
                         {menu.label}
                       </span>
                     )}
@@ -176,11 +187,11 @@ export default function Navbar({
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-3 hover:bg-gray-50"
+                        className="block px-4 py-3 transition-colors duration-200 text-foreground hover:bg-secondary hover:text-secondary-foreground"
                       >
                         <div className="font-medium">{item.label}</div>
                         {item.description && (
-                          <div className="text-sm text-gray-500 mt-1">
+                          <div className="text-sm mt-1 opacity-80">
                             {item.description}
                           </div>
                         )}
@@ -192,12 +203,25 @@ export default function Navbar({
             ))}
 
             <Link
-              href="/contact"
-              className="px-4 py-2 font-medium relative group"
+              href="#contact-us"
+              className="px-4 py-2 font-medium relative group text-primary"
             >
               Contact
-              <span className="absolute inset-x-0 -bottom-0.5 h-0.75 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+              <span className="absolute inset-x-0 -bottom-0.5 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-secondary"></span>
             </Link>
+
+            {/* Book Consultation Button */}
+            <Button 
+              variant="accent" 
+              className="ml-4 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.4)] hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)] transition-all duration-300 hover:-translate-y-0.5 bg-gradient-to-r from-accent via-gold to-accent animate-moving-gradient border-none" 
+              asChild
+            >
+              <a href="#contact-us" className="flex items-center justify-center">
+                <span className="relative z-10 font-bold tracking-wide">Book Consultation</span>
+                {/* Premium Shine Sweep Effect */}
+                <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
+              </a>
+            </Button>
           </div>
 
           {/* Mobile Hamburger */}
@@ -211,17 +235,17 @@ export default function Navbar({
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden bg-white border-t border-gray-200 transition-all duration-300 ease-out ${
+        className={`lg:hidden bg-background border-t border-border transition-all duration-300 ease-out ${
           mobileOpen
             ? "max-h-[80vh] opacity-100 overflow-y-auto"
             : "max-h-0 opacity-0 pointer-events-none"
         } overflow-hidden`}
       >
-        <div className="px-4 py-4 space-y-1 text-primary">
+        <div className="px-4 py-4 space-y-1">
           <Link
             href="/"
             onClick={closeMobileMenu}
-            className="block py-3 px-4 font-medium text-base rounded-lg hover:bg-blue-50"
+            className="block py-3 px-4 font-medium text-base rounded-lg transition-colors text-primary hover:bg-muted"
           >
             Home
           </Link>
@@ -229,14 +253,14 @@ export default function Navbar({
             <div key={menu.key} className="space-y-1">
               <button
                 onClick={() => toggleDropdown(menu.key)}
-                className="flex items-center justify-between w-full py-3 px-4 font-medium text-base rounded-lg hover:bg-blue-50"
+                className="flex items-center justify-between w-full py-3 px-4 font-medium text-base rounded-lg transition-colors text-primary hover:bg-muted"
               >
                 <span>{menu.label}</span>
                 <ChevronDown
                   size={18}
-                  className={`${
+                  className={`text-secondary transition-transform ${
                     dropdownOpen[menu.key] ? "rotate-180" : ""
-                  } text-blue-500 transition-transform`}
+                  }`}
                 />
               </button>
               <div
@@ -247,25 +271,12 @@ export default function Navbar({
                 }`}
               >
                 <div className="pl-4 py-2 space-y-1">
-                  {menu.href ? (
-                    <Link
-                      href={menu.href}
-                      onClick={closeMobileMenu}
-                      className="block py-2 px-4 text-sm font-medium text-blue-500 rounded-md hover:bg-blue-50"
-                    >
-                      {menu.label}
-                    </Link>
-                  ) : (
-                    <span className="block py-2 px-4 text-sm text-gray-400 rounded-md cursor-not-allowed">
-                      {menu.label}
-                    </span>
-                  )}
                   {menu.links.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={closeMobileMenu}
-                      className="block py-2 px-4 text-sm rounded-md hover:bg-blue-50"
+                      className="block py-2 px-4 text-sm rounded-md transition-colors text-foreground hover:bg-secondary hover:text-secondary-foreground"
                     >
                       {item.label}
                     </Link>
@@ -275,12 +286,24 @@ export default function Navbar({
             </div>
           ))}
           <Link
-            href="/contact"
+            href="#contact-us"
             onClick={closeMobileMenu}
-            className="block py-3 px-4 font-medium text-base rounded-lg hover:bg-blue-50"
+            className="block py-3 px-4 font-medium text-base rounded-lg text-primary hover:bg-muted"
           >
             Contact
           </Link>
+          {/* Mobile Book Consultation */}
+          <Button 
+            variant="accent" 
+            className="w-full mt-2 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.3)] hover:shadow-[0_0_20px_hsl(var(--accent)/0.6)] transition-all duration-300 bg-gradient-to-r from-accent via-gold to-accent animate-moving-gradient border-none" 
+            asChild
+          >
+            <a href="#contact-us" onClick={closeMobileMenu} className="flex items-center justify-center">
+              <span className="relative z-10 font-bold tracking-wide">Book Consultation</span>
+              {/* Premium Shine Sweep Effect */}
+              <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
+            </a>
+          </Button>
         </div>
       </div>
 

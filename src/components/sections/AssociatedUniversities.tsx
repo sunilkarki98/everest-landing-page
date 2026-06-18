@@ -1,118 +1,70 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { SectionHeading } from "../ui/SectionHeading";
+import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import { Container } from "@/components/layout/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const universities = [
-  { id: 1, name: "TAFE", image: "/logos/universities/apic.png" },
-  { id: 2, name: "Navitas", image: "/logos/universities/apic.png" },
-  { id: 3, name: "APIC", image: "/logos/universities/apic.png" },
-  { id: 4, name: "Australian Institute", image: "/logos/universities/apic.png" },
-  { id: 5, name: "La Trobe", image: "/logos/universities/apic.png" },
-  { id: 6, name: "Deakin", image: "/logos/universities/apic.png" },
+  { name: "University of Sydney", location: "Sydney, AU", ranking: "Top 20" },
+  { name: "University of Toronto", location: "Toronto, CA", ranking: "Top 25" },
+  { name: "University College London", location: "London, UK", ranking: "Top 10" },
+  { name: "University of Auckland", location: "Auckland, NZ", ranking: "Top 70" },
+  { name: "University of Melbourne", location: "Melbourne, AU", ranking: "Top 15" },
+  { name: "King's College London", location: "London, UK", ranking: "Top 40" },
 ];
 
 export default function AssociatedUniversities() {
-  const [index, setIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(5);
-
-  // Responsive visible count
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 480) setVisibleCount(2);
-      else if (width < 768) setVisibleCount(3);
-      else if (width < 1024) setVisibleCount(4);
-      else setVisibleCount(5);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const nextSlide = () => setIndex((prev) => (prev + 1) % universities.length);
-  const prevSlide = () =>
-    setIndex((prev) => (prev - 1 + universities.length) % universities.length);
-
-  const visibleUniversities = useMemo(() => {
-    return Array.from({ length: visibleCount }, (_, i) => {
-      const idx = (index + i) % universities.length;
-      return universities[idx];
-    });
-  }, [index, visibleCount]);
+  // Duplicate array to ensure seamless loop
+  const marqueeItems = [...universities, ...universities, ...universities];
 
   return (
-    <section className="py-20 bg-white text-center select-none">
-      {/* Title */}
-      <div className="mb-10">
-        <SectionHeading 
-          title="Associated Universities" 
-          titleColor="text-purple-600" 
-          className="!mb-3" 
-        />
-        <p className="text-gray-600 text-base md:text-lg px-4 max-w-2xl mx-auto">
-          Partner with leading educational institutions across Australia
+    <section id="universities" className="py-16 lg:py-24 bg-white overflow-hidden border-b border-border/40">
+      <Container className="mb-10">
+        <SectionHeading eyebrow="Global Network" title="500+ University Partnerships" className="text-center" />
+        <p className="text-center mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
+          We collaborate with the world&apos;s leading institutions to ensure you find the perfect course for your career aspirations.
         </p>
-      </div>
+      </Container>
 
-      {/* Carousel */}
-      <div className="relative flex items-center justify-center gap-2 sm:gap-4 px-4">
-        {/* Left Arrow */}
-        <button
-          onClick={prevSlide}
-          aria-label="Previous universities"
-          className="p-2 sm:p-3 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-300 flex-shrink-0"
+      {/* Marquee Container */}
+      <div className="relative w-full flex overflow-hidden group">
+        {/* Left/Right Fade */}
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        
+        <motion.div
+          className="flex gap-6 w-max pl-6"
+          animate={{ x: ["0%", "-33.333%"] }}
+          transition={{ ease: "linear", duration: 25, repeat: Infinity }}
         >
-          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
-
-        {/* Carousel content */}
-        <div className="flex gap-3 sm:gap-6 overflow-hidden">
-          <AnimatePresence mode="popLayout" initial={false}>
-            {visibleUniversities.map((u) => (
-              <motion.div
-                key={u.id}
-                layout
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="flex flex-col items-center"
-              >
-                <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 p-[3px] shadow-md hover:shadow-lg transition">
-                  <div className="bg-white rounded-full w-full h-full flex items-center justify-center overflow-hidden">
-                    <Image
-                      src={u.image}
-                      alt={`${u.name} Logo`}
-                      width={128}
-                      height={128}
-                      className="object-cover w-[90%] h-[90%] rounded-full"
-                    />
+          {marqueeItems.map((uni, index) => (
+            <div
+              key={`${uni.name}-${index}`}
+              className="flex-shrink-0 w-72 flex items-center justify-between p-5 rounded-2xl border border-border/60 bg-gradient-to-br from-[#FFFEF8] to-white hover:border-accent/50 hover:shadow-xl transition-all duration-300 cursor-pointer group/card relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              
+              <div className="flex items-center gap-4 relative z-10">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold bg-[#F8F9FA] border border-border text-primary group-hover/card:bg-primary group-hover/card:text-white transition-colors duration-300">
+                  {uni.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-foreground group-hover/card:text-primary transition-colors">
+                    {uni.name}
+                  </h3>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
+                    <span>{uni.location}</span>
+                    <span className="w-1 h-1 rounded-full bg-border" />
+                    <span className="font-semibold text-accent-text">{uni.ranking}</span>
                   </div>
                 </div>
-                <p className="mt-2 text-xs sm:text-sm font-medium text-gray-700">{u.name}</p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={nextSlide}
-          aria-label="Next universities"
-          className="p-2 sm:p-3 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-300 flex-shrink-0"
-        >
-          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
+              </div>
+              <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover/card:opacity-100 group-hover/card:text-primary transition-all duration-300 -translate-x-2 group-hover/card:translate-x-0 relative z-10" />
+            </div>
+          ))}
+        </motion.div>
       </div>
-
-      {/* CTA Button */}
-      <button className="mt-12 px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300">
-        View All Partners
-      </button>
     </section>
   );
 }

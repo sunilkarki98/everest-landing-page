@@ -2,177 +2,133 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { ArrowRight, Calendar, Tag } from "lucide-react";
 import Link from "next/link";
-import Script from "next/script";
-import { SectionHeading } from "../ui/SectionHeading";
-import { fadeUpContainer, fadeUpCard, cardHoverTransition } from "../../lib/animations";
+import { Container } from "@/components/layout/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
-type Blog = {
-  id: number;
-  title: string;
-  dateISO: string;
-  dateReadable: string;
-  author: string;
-  image: string;
-  description: string;
-  link: string;
-};
-
-const blogs: Blog[] = [
+const articles = [
   {
     id: 1,
-    title: "Partner Visa (Subclass 820/801)",
-    dateISO: "2025-05-14",
-    dateReadable: "May 14, 2025",
-    author: "Everest Education",
-    image: "/images/blog/study.jpg",
-    description: "The first partner visa category is the Subclass 820 Visa.",
-    link: "/blog/partner-visa-820-801",
+    title: "Student Visa Changes 2026",
+    date: "Jun 2026",
+    description:
+      "Important updates to student visa requirements, processing times and eligibility criteria across major study destinations.",
+    href: "/blog/student-visa-changes-2026",
+    tag: "Visa Update",
+    accent: "from-blue-500 to-indigo-600",
+    accentLight: "bg-blue-50 text-blue-700",
+    featured: true,
   },
   {
     id: 2,
-    title: "Student Visa",
-    dateISO: "2025-02-20",
-    dateReadable: "Feb 20, 2025",
-    author: "Everest Education",
-    image: "/images/blog/convo.jpg",
-    description: "The Subclass 500 visa lets you study full-time in Australia.",
-    link: "/blog/student-visa",
+    title: "Scholarships for International Students",
+    date: "May 2026",
+    description:
+      "Discover the latest fully-funded scholarships available at top-ranked global universities for 2026 intake.",
+    href: "/blog/scholarships-international-students",
+    tag: "Scholarships",
+    accent: "from-amber-400 to-orange-500",
+    accentLight: "bg-amber-50 text-amber-700",
+    featured: false,
   },
   {
     id: 3,
-    title: "Temporary Skill Shortage Visa",
-    dateISO: "2024-12-02",
-    dateReadable: "Dec 02, 2024",
-    author: "Everest Education",
-    image: "/images/blog/hire.jpg",
+    title: "Working Rights Abroad",
+    date: "Apr 2026",
     description:
-      "Lets employers hire foreign workers to fill local skill shortages.",
-    link: "/blog/temporary-skill-shortage-visa",
+      "A comprehensive guide to working hours, conditions and legal rights for international students studying worldwide.",
+    href: "/blog/working-rights-abroad",
+    tag: "Work Rights",
+    accent: "from-emerald-400 to-teal-600",
+    accentLight: "bg-emerald-50 text-emerald-700",
+    featured: false,
   },
 ];
 
-// JSON-LD for SEO
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  itemListElement: blogs.map((b, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    item: {
-      "@type": "BlogPosting",
-      headline: b.title,
-      url: `https://everestgroup.com${b.link}`,
-      datePublished: b.dateISO,
-      author: { "@type": "Organization", name: b.author },
-      image: b.image,
-      description: b.description,
-    },
-  })),
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
 };
 
-
-// Clamp description text
-const clampStyle: React.CSSProperties = {
-  display: "-webkit-box",
-  WebkitLineClamp: 3,
-  WebkitBoxOrient: "vertical",
-  overflow: "hidden",
-};
-
-const BlogSection: React.FC = () => {
+export default function BlogSection() {
   return (
-    <>
-      {/* JSON-LD via Script component (App Router compatible) */}
-      <Script
-        id="blog-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    <section className="py-10 lg:py-14 bg-background relative overflow-hidden">
+      {/* Subtle grid texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #64748b 1px, transparent 1px), linear-gradient(to bottom, #64748b 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
       />
 
-      <section aria-label="Blog Section" className="py-14 container mx-auto px-6">
-        {/* Header */}
-        <SectionHeading 
-          eyebrow="Our Blogs" 
-          title="Latest Articles & News" 
-          eyebrowColor="text-[#00AEEF]" 
-          titleColor="text-[#1D3A6D]" 
+      <Container className="relative">
+        <SectionHeading
+          eyebrow="Stay Informed"
+          title="Latest Updates"
+          className="mb-10 lg:mb-14"
         />
 
-        {/* Blog Grid */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-8"
-          variants={fadeUpContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {blogs.map((blog) => (
-            <motion.article
-              key={blog.id}
-              className="bg-[#F9FAFB] rounded-xl shadow-md hover:shadow-xl transition-shadow 
-                         flex-shrink-0 w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 sm:w-[24rem] lg:w-[28rem] flex flex-col h-full p-5"
-              variants={fadeUpCard}
-              role="article"
-              aria-labelledby={`blog-title-${blog.id}`}
-              whileHover={{ scale: 1.03 }}
-              transition={cardHoverTransition}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {articles.map((article, index) => (
+            <motion.div
+              key={article.id}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
             >
-              {/* Header */}
-              <header className="mb-4 flex flex-col flex-1">
-                <h3
-                  id={`blog-title-${blog.id}`}
-                  className="text-lg font-semibold text-[#00AEEF] mb-2 hover:underline cursor-pointer min-h-[3rem]"
-                >
-                  {blog.title}
-                </h3>
+              <Link
+                href={article.href}
+                className="group relative flex flex-col h-full rounded-2xl bg-white border border-border hover:border-transparent hover:shadow-[0_8px_40px_rgba(0,0,0,0.10)] transition-all duration-400 overflow-hidden"
+              >
+                {/* Top accent bar */}
+                <div className={`h-1.5 w-full bg-gradient-to-r ${article.accent}`} />
 
-                <div className="flex text-base items-center justify-between whitespace-nowrap">
-                  <p className="text-gray-600">
-                    <span className="font-medium text-black">On</span>{" "}
-                    <time dateTime={blog.dateISO}>{blog.dateReadable}</time>
-                  </p>
-                  <p>
-                    <span className="ml-4 font-medium text-black">By</span>{" "}
-                    {blog.author}
+                <div className="flex flex-col flex-1 p-6 sm:p-7">
+                  {/* Tag + Date row */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span
+                      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full ${article.accentLight}`}
+                    >
+                      <Tag className="w-3 h-3" />
+                      {article.tag}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {article.date}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold text-primary leading-snug mb-3 group-hover:text-secondary transition-colors duration-300">
+                    {article.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed text-muted-foreground flex-1 mb-2">
+                    {article.description}
                   </p>
                 </div>
-              </header>
 
-              {/* Image */}
-              <div className="mt-4 overflow-hidden rounded-lg">
-                <Image
-                  src={blog.image}
-                  alt={`${blog.title} - ${blog.author}`}
-                  width={1200}
-                  height={600}
-                  className="w-full h-64 lg:h-80 object-cover transition-transform duration-700 ease-out hover:scale-110"
-                />
-              </div>
-
-              {/* Description */}
-              <div className="mt-6 text-xl font-medium text-[#1D3A6D] flex-1">
-                <p className="mb-3" style={clampStyle}>
-                  {blog.description}
-                </p>
-              </div>
-
-              {/* Button — uses Next.js Link for SPA navigation */}
-              <Link
-                href={blog.link}
-                className="relative inline-block w-1/2 bg-[#164386] text-white text-xl py-2.5 rounded-4xl font-medium text-center
-                           transition-all duration-700 ease-out hover:bg-[#1272da] hover:scale-105"
-                aria-label={`Read more about ${blog.title}`}
-              >
-                Explore more
+                {/* Hover overlay with centered CTA */}
+                <div className="absolute inset-0 bg-primary/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl">
+                  <span className="flex items-center gap-2 text-sm font-bold text-white drop-shadow-md bg-accent/30 backdrop-blur-md border border-accent/50 px-6 py-3 rounded-full shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    Read More
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
               </Link>
-            </motion.article>
+            </motion.div>
           ))}
-        </motion.div>
-      </section>
-    </>
+        </div>
+      </Container>
+    </section>
   );
-};
-
-export default BlogSection;
+}
