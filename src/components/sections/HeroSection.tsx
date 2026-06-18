@@ -18,7 +18,7 @@ const destinations = [
 
 const trustStats = [
   { icon: Users, value: "10,000+", label: "Students Placed" },
-  { icon: Award, value: "20+ Years", label: "Education Experts" },
+  { icon: Award, value: "15+ Years", label: "Education Experts" },
   { icon: GraduationCap, value: "98%", label: "Admission Success" },
 ];
 

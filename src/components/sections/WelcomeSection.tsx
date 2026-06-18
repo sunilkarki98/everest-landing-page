@@ -77,7 +77,7 @@ const Counter: React.FC<CounterProps> = ({ target, suffix = "" }) => {
 };
 
 const trustItems = [
-  { icon: Award, number: 20, suffix: "+", label: "Years Exp." },
+  { icon: Award, number: 15, suffix: "+", label: "Years Exp." },
   { icon: Users, number: 10000, suffix: "+", label: "Students" },
   { icon: Building2, number: 300, suffix: "+", label: "Institutions" },
   { icon: ThumbsUp, number: 98, suffix: "%", label: "Satisfaction" },
