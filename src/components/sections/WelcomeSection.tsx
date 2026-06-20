@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { Globe, HeartHandshake, Map, GraduationCap, Scale, FileCheck, CheckCircle2, Award, Users, Building2, ThumbsUp, ShieldCheck, FileSignature, Landmark } from "lucide-react";
+import React from "react";
+import { motion } from "framer-motion";
+import { Globe, HeartHandshake, Map, GraduationCap, Scale, FileCheck, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { Counter } from "@/components/ui/Counter";
+import { trustItems, accreditations } from "@/config/trust-data";
+import { AccreditationGradients } from "@/components/ui/AccreditationGradients";
 
 const highlights = [
   {
@@ -38,86 +41,13 @@ const highlights = [
   },
 ];
 
-// Counter component
-interface CounterProps {
-  target: number;
-  suffix?: string;
-}
 
-const Counter: React.FC<CounterProps> = ({ target, suffix = "" }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    let start = 0;
-    const duration = 1500;
-    const increment = target / (duration / 16);
-
-    const counter = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(counter);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-
-    return () => clearInterval(counter);
-  }, [isInView, target]);
-
-  return (
-    <div ref={ref} className="text-3xl font-extrabold text-primary tracking-tight">
-      {count.toLocaleString()}{suffix}
-    </div>
-  );
-};
-
-const trustItems = [
-  { icon: Award, number: 15, suffix: "+", label: "Years Exp." },
-  { icon: Users, number: 10000, suffix: "+", label: "Students" },
-  { icon: Building2, number: 300, suffix: "+", label: "Institutions" },
-  { icon: ThumbsUp, number: 98, suffix: "%", label: "Satisfaction" },
-];
-
-const accreditations = [
-  { name: "MARA Registered", desc: "Migration Agents", icon: FileSignature, gradientId: "grad-mara-light", stroke: "#B45309" },
-  { name: "QEAC Certified", desc: "Education Counsellors", icon: Award, gradientId: "grad-qeac-light", stroke: "#1D4ED8" },
-  { name: "PIER Agency", desc: "Professional Resources", icon: Globe, gradientId: "grad-pier-light", stroke: "#047857" },
-  { name: "Gov. Approved", desc: "Ministry of Education", icon: Landmark, gradientId: "grad-gov-light", stroke: "#5B21B6" },
-];
 
 export default function WelcomeSection() {
   return (
     <section className="relative overflow-hidden bg-white py-20 lg:py-28">
       {/* Decorative Gradients for Accreditations */}
-      <svg width="0" height="0" className="absolute" aria-hidden="true">
-        <defs>
-          <linearGradient id="grad-mara-light" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FDE68A" />
-            <stop offset="50%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#B45309" />
-          </linearGradient>
-          <linearGradient id="grad-qeac-light" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#BFDBFE" />
-            <stop offset="50%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#1D4ED8" />
-          </linearGradient>
-          <linearGradient id="grad-pier-light" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#A7F3D0" />
-            <stop offset="50%" stopColor="#10B981" />
-            <stop offset="100%" stopColor="#047857" />
-          </linearGradient>
-          <linearGradient id="grad-gov-light" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#DDD6FE" />
-            <stop offset="50%" stopColor="#8B5CF6" />
-            <stop offset="100%" stopColor="#5B21B6" />
-          </linearGradient>
-        </defs>
-      </svg>
+      <AccreditationGradients />
 
       {/* Subtle background decorations */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-[200px] bg-accent/5" />
@@ -166,7 +96,7 @@ export default function WelcomeSection() {
               const Icon = highlight.icon;
               return (
                 <motion.div
-                  key={index}
+                  key={highlight.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -190,7 +120,7 @@ export default function WelcomeSection() {
                   </div>
 
                   {/* Description */}
-                  <p className="relative z-10 text-sm text-muted-foreground leading-relaxed">
+                  <p className="relative z-10 text-base text-muted-foreground leading-relaxed">
                     {highlight.description}
                   </p>
                 </motion.div>

@@ -19,8 +19,10 @@ const caveat = Caveat({
   variable: "--font-caveat",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://eevsgroup.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://eevsgroup.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Everest Education & Visa Services | Study, Work & Migrate to Australia",
   description:
     "Trusted education & visa services in Australia. Family-owned, student-first. Study, work & migrate with confidence.",
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Everest Education & Visa Services",
     description: "Trusted education & visa services in Australia. Family-owned, student-first. Study, work & migrate with confidence.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://everesteducation.com.au",
+    url: SITE_URL,
     siteName: "Everest Education & Visa Services",
     images: [
       {
@@ -78,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${jakarta.variable} ${caveat.variable} font-sans antialiased`}
         style={{ backgroundColor: "#FFFFFF", color: "#1E293B" }}

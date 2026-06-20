@@ -10,22 +10,34 @@ export default function TopBar() {
       <Container className="flex justify-between items-center px-4 lg:px-8">
         {/* Left side: Phone + Email */}
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Phone */}
+          {/* Australia Phone */}
           <a
             href={`tel:${siteConfig.contact.phones.main.replace(/[^\d+]/g, "")}`}
             className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            title="Call Australia Office"
           >
-            <Phone className="w-4 h-4 text-secondary flex-shrink-0" />
+            <span className="text-base leading-none drop-shadow-sm" aria-label="Australia Flag">🇦🇺</span>
             <span className="hidden sm:inline">{siteConfig.contact.phones.main}</span>
+          </a>
+
+          {/* Nepal Phone */}
+          <a
+            href={`tel:${siteConfig.contact.phones.secondary.replace(/[^\d+]/g, "")}`}
+            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            title="Call Nepal Office"
+          >
+            <span className="text-base leading-none drop-shadow-sm" aria-label="Nepal Flag">🇳🇵</span>
+            <span className="hidden sm:inline">{siteConfig.contact.phones.secondary}</span>
           </a>
 
           {/* Email */}
           <a
             href={`mailto:${siteConfig.contact.emails.main}`}
-            className="hidden sm:flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            className="hidden md:flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            title="Email Us"
           >
             <Mail className="w-4 h-4 text-secondary flex-shrink-0" />
-            <span className="hidden md:inline">{siteConfig.contact.emails.main}</span>
+            <span className="hidden lg:inline">{siteConfig.contact.emails.main}</span>
           </a>
         </div>
 

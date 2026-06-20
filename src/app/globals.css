@@ -43,10 +43,10 @@ For Ahilya & Amulya — and for all who seek a better future.
     --accent-text: 43 74% 27%;
     /* Darker gold for text contrast */
 
-    /* Muted/Neutral (Silver/Grey) - Borders, secondary text */
     --muted: 0 0% 95%;
     /* Light gray for subtle backgrounds */
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 220 15% 40%;
+    /* Darker slate-gray for sharp text readability */
     /* Darker gray for muted text */
 
     /* Borders & Inputs */
@@ -166,18 +166,12 @@ For Ahilya & Amulya — and for all who seek a better future.
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    scroll-behavior: smooth;
     margin: 0;
     min-width: 320px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
     overflow-x: hidden;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 }
 

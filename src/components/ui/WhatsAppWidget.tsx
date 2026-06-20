@@ -1,16 +1,18 @@
 "use client";
 
 import React from "react";
+import { siteConfig } from "@/config/site";
 
 export default function WhatsAppWidget() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "9779800000000";
+  const defaultNumber = siteConfig.contact.phones.main.replace(/[^\d+]/g, "");
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || defaultNumber;
 
   return (
     <a
       href={`https://wa.me/${whatsappNumber}?text=Hi%21%20I%27m%20interested%20in%20a%20free%20consultation%20with%20Everest%20Education.`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-whatsapp text-white rounded-full shadow-[0_4px_20px] shadow-whatsapp/40 hover:scale-110 hover:brightness-95 transition-all duration-300 animate-bounce group"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-whatsapp text-white rounded-full shadow-[0_4px_20px] shadow-whatsapp/40 hover:scale-110 hover:brightness-95 transition-all duration-300 group"
       aria-label="Chat with us on WhatsApp"
     >
       <svg

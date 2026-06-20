@@ -20,9 +20,10 @@ export default function Navbar({
 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<Record<MenuKey, boolean>>({
-    studyAustralia: false,
-    studentVisa: false,
-    migration: false,
+    courses: false,
+    visaServices: false,
+    visaMigration: false,
+    abroadStudy: false,
     otherServices: false,
   });
   const [activeDropdown, setActiveDropdown] = useState<MenuKey | null>(null);
@@ -61,9 +62,10 @@ export default function Navbar({
         setMobileOpen(false);
         setActiveDropdown(null);
         setDropdownOpen({
-          studyAustralia: false,
-          studentVisa: false,
-          migration: false,
+          courses: false,
+          visaServices: false,
+          visaMigration: false,
+          abroadStudy: false,
           otherServices: false,
         });
       }
@@ -213,7 +215,7 @@ export default function Navbar({
             {/* Book Consultation Button */}
             <Button 
               variant="accent" 
-              className="ml-4 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.4)] hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)] transition-all duration-300 hover:-translate-y-0.5 bg-gradient-to-r from-accent via-gold to-accent animate-moving-gradient border-none" 
+              className="ml-4 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.4)] hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)] transition-all duration-300 hover:-translate-y-0.5 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none" 
               asChild
             >
               <a href="#contact-us" className="flex items-center justify-center">
@@ -226,7 +228,7 @@ export default function Navbar({
 
           {/* Mobile Hamburger */}
           <div className="lg:hidden flex items-center gap-2">
-            <button onClick={toggleMobileMenu} className="p-2 text-primary">
+            <button onClick={toggleMobileMenu} className="p-2 text-primary" aria-label="Toggle mobile menu">
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -295,7 +297,7 @@ export default function Navbar({
           {/* Mobile Book Consultation */}
           <Button 
             variant="accent" 
-            className="w-full mt-2 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.3)] hover:shadow-[0_0_20px_hsl(var(--accent)/0.6)] transition-all duration-300 bg-gradient-to-r from-accent via-gold to-accent animate-moving-gradient border-none" 
+            className="w-full mt-2 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.3)] hover:shadow-[0_0_20px_hsl(var(--accent)/0.6)] transition-all duration-300 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none" 
             asChild
           >
             <a href="#contact-us" onClick={closeMobileMenu} className="flex items-center justify-center">

@@ -1,6 +1,6 @@
 // src/config/site.ts
 
-export type MenuKey = "courses" | "visaServices" | "visaMigration" | "abroadStudy" | "otherServices" | string;
+export type MenuKey = "courses" | "visaServices" | "visaMigration" | "abroadStudy" | "otherServices";
 
 export type SubLink = {
   label: string;
@@ -29,7 +29,7 @@ export const siteConfig = {
     },
     phones: {
       main: "+61 406 000 815",
-      secondary: "+61 466 117 512",
+      secondary: "+977 9749453158",
     },
     address: "Unit 6, 17–23 Oatley Court, Belconnen ACT 2615, Australia",
   },
@@ -39,6 +39,13 @@ export const siteConfig = {
     twitter: "https://twitter.com/EverestEduGroup",
     instagram: "https://www.instagram.com/EverestEduGroup",
     linkedin: "https://www.linkedin.com/company/EverestEduGroup",
+  },
+
+  stats: {
+    universities: 300,
+    students: 10000,
+    yearsExp: 15,
+    satisfaction: 98,
   },
 
   nav: [

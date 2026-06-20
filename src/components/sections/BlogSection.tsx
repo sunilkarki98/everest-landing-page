@@ -82,6 +82,7 @@ export default function BlogSection() {
               custom={index}
               initial="hidden"
               whileInView="visible"
+              variants={cardVariants}
               viewport={{ once: true, amount: 0.2 }}
             >
               <Link
@@ -112,7 +113,7 @@ export default function BlogSection() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm leading-relaxed text-muted-foreground flex-1 mb-2">
+                  <p className="text-base leading-relaxed text-muted-foreground flex-1 mb-2">
                     {article.description}
                   </p>
                 </div>

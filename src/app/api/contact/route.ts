@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL || "";
 
 // Basic rate limiting: track submissions per IP
+// NOTE: This uses an in-memory Map which is volatile in serverless environments (like Vercel).
+// The state will reset on every cold start or new instance. 
+// For robust production stability, migrate this to a KV store like Redis (Upstash).
 const submissions = new Map<string, { count: number; lastReset: number }>();
 const RATE_LIMIT = 5; // max submissions per window
 const RATE_WINDOW = 60 * 60 * 1000; // 1 hour

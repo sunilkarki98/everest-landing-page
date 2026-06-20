@@ -4,11 +4,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { siteConfig } from "@/config/site";
 
 const testimonials = [
   {
@@ -64,7 +67,7 @@ function TestimonialCard({ item }: { item: (typeof testimonials)[number] }) {
       </div>
 
       {/* Feedback */}
-      <p className="text-sm sm:text-base leading-relaxed mb-8 flex-1 text-foreground italic">
+      <p className="text-base sm:text-lg leading-relaxed mb-8 flex-1 text-foreground italic">
         &ldquo;{item.feedback}&rdquo;
       </p>
 
@@ -96,11 +99,11 @@ function TestimonialCard({ item }: { item: (typeof testimonials)[number] }) {
 
 /* ── Main Section ── */
 export default function FeedbackSection() {
-  const autoplay = Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: false });
+  const autoplayRef = React.useRef(Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: false }));
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "start", slidesToScroll: "auto" },
-    [autoplay]
+    [autoplayRef.current]
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -135,7 +138,7 @@ export default function FeedbackSection() {
             className="mb-4"
           />
           <p className="text-white/80 max-w-2xl mx-auto text-base sm:text-lg">
-            Real experiences from students who achieved their study and migration goals with EEVS.
+            Real experiences from students who achieved their study and migration goals with {siteConfig.shortName}.
           </p>
         </div>
 
@@ -186,6 +189,19 @@ export default function FeedbackSection() {
               ))}
             </div>
           )}
+          {/* View All Button */}
+          <div className="mt-10 flex justify-center">
+            <Button 
+              variant="outline" 
+              className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white group transition-all duration-300" 
+              asChild
+            >
+              <Link href="/success-stories">
+                Read All Success Stories
+                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </Container>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { SectionHeading } from "../ui/SectionHeading";
 import { motion } from "framer-motion";
 import { MapPin, Globe2, Eye } from "lucide-react";
@@ -8,14 +8,15 @@ import { MapPin, Globe2, Eye } from "lucide-react";
 interface Branch {
   id: number;
   name: string;
+  country: string;
   query: string;
 }
 
 const activeBranches: Branch[] = [
-  { id: 1, name: "Kathmandu Office", query: "Kathmandu, Nepal" },
-  { id: 2, name: "Butwal Office", query: "Butwal, Nepal" },
-  { id: 3, name: "Canberra Office", query: "Canberra, Australia" },
-  { id: 4, name: "Perth Office", query: "Perth, Australia" },
+  { id: 1, name: "Kathmandu Office", country: "Nepal", query: "Kathmandu, Nepal" },
+  { id: 2, name: "Butwal Office", country: "Nepal", query: "Butwal, Nepal" },
+  { id: 3, name: "Canberra Office", country: "Australia", query: "Canberra, Australia" },
+  { id: 4, name: "Perth Office", country: "Australia", query: "Perth, Australia" },
 ];
 
 const futureBranches = [
@@ -26,6 +27,17 @@ const futureBranches = [
 const BranchesMapSection: FC = () => {
   const [loadedMaps, setLoadedMaps] = useState<Record<number, boolean>>({});
 
+  useEffect(() => {
+    // Check if window exists (client-side) and if screen is laptop/desktop (lg: >= 1024px)
+    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+      const allLoaded = activeBranches.reduce((acc, branch) => {
+        acc[branch.id] = true;
+        return acc;
+      }, {} as Record<number, boolean>);
+      setLoadedMaps(allLoaded);
+    }
+  }, []);
+
   const handleLoadMap = (id: number) => {
     setLoadedMaps((prev) => ({ ...prev, [id]: true }));
   };
@@ -33,7 +45,7 @@ const BranchesMapSection: FC = () => {
   return (
     <section
       id="our-branches"
-      className="relative bg-slate-50 text-gray-900 py-16 lg:py-24 overflow-hidden border-t border-border/50"
+      className="relative bg-primary/[0.03] text-gray-900 py-16 lg:py-24 overflow-hidden border-t border-border/50"
     >
       {/* Subtle Background Elements */}
       <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.015] mix-blend-overlay pointer-events-none" />
@@ -71,9 +83,12 @@ const BranchesMapSection: FC = () => {
                 <div className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
                   <MapPin size={18} strokeWidth={2} />
                 </div>
-                <h3 className="text-lg font-bold text-primary tracking-wide">
-                  {branch.name}
-                </h3>
+                <div>
+                  <h3 className="text-lg font-bold text-primary tracking-wide leading-tight">
+                    {branch.name}
+                  </h3>
+                  <p className="text-xs font-bold text-accent-text uppercase tracking-widest mt-0.5">{branch.country}</p>
+                </div>
               </div>
 
               <div className="relative w-full h-[220px] rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white group-hover:border-accent/40 group-hover:shadow-xl transition-all duration-500 flex items-center justify-center">
@@ -112,7 +127,7 @@ const BranchesMapSection: FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-3xl overflow-hidden bg-white border border-slate-200 p-8 sm:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8"
+          className="relative rounded-3xl overflow-hidden bg-white border border-slate-200 p-5 lg:p-6 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-5"
         >
           {/* Decorative background */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
@@ -133,11 +148,16 @@ const BranchesMapSection: FC = () => {
             {futureBranches.map((branch) => (
               <div
                 key={branch.id}
-                className="bg-slate-50 border border-slate-100 rounded-2xl p-6 text-center hover:bg-white hover:shadow-md hover:border-accent/30 transition-all duration-300 flex-1 md:min-w-[200px]"
+                className="bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-100/50 rounded-xl p-4 text-left shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex-1 min-w-[150px] md:min-w-[170px] flex flex-col justify-center group relative overflow-hidden"
               >
-                <div className="text-xs font-bold uppercase tracking-widest text-accent mb-3">Coming Soon</div>
-                <h5 className="text-xl font-bold text-primary mb-1">{branch.name}</h5>
-                <p className="text-sm text-muted-foreground">{branch.region}</p>
+                {/* Decorative glow inside card */}
+                <div className="absolute -top-4 -right-4 w-16 h-16 bg-accent/10 rounded-full blur-xl pointer-events-none transition-all duration-500 group-hover:bg-accent/20" />
+
+                <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <h5 className="text-base font-bold text-primary leading-tight">{branch.name}</h5>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent-text bg-accent/20 px-2 py-1 rounded-md shadow-sm shrink-0">Soon</span>
+                </div>
+                <p className="relative z-10 text-sm text-slate-500 font-medium">{branch.region}</p>
               </div>
             ))}
           </div>

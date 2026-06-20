@@ -4,8 +4,9 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Facebook, ArrowRight } from "lucide-react";
-import { SectionHeading } from "../ui/SectionHeading";
-import { fadeUpContainer, fadeUpCard } from "../../lib/animations";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { fadeUpContainer, fadeUpCard } from "@/lib/animations";
+import { siteConfig } from "@/config/site";
 
 type EmployeeCardProps = {
   name: string;
@@ -40,21 +41,27 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
         {/* Social Icons on Hover */}
         <div className="absolute inset-0 flex flex-wrap items-center justify-center gap-3 sm:gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-primary/40 backdrop-blur-sm z-20">
           <a
-            href="#"
+            href={siteConfig.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={`${name} LinkedIn`}
             className="p-3 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-accent hover:text-primary transition transform hover:scale-110 shadow-lg"
           >
             <Linkedin className="w-5 h-5" strokeWidth={1.5} />
           </a>
           <a
-            href="#"
+            href={siteConfig.social.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={`${name} Twitter`}
             className="p-3 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-accent hover:text-primary transition transform hover:scale-110 shadow-lg"
           >
             <Twitter className="w-5 h-5" strokeWidth={1.5} />
           </a>
           <a
-            href="#"
+            href={siteConfig.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={`${name} Facebook`}
             className="p-3 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-accent hover:text-primary transition transform hover:scale-110 shadow-lg"
           >
@@ -72,8 +79,8 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
         <div className="relative z-10 p-6 flex flex-col flex-grow transition-colors duration-500 group-hover:text-white">
           <h3 className="text-xl font-bold text-primary group-hover:text-white transition-colors">{name}</h3>
           <p className="text-sm font-semibold text-accent mt-1 uppercase tracking-wider">{role}</p>
-          <p className="text-sm mt-3 font-medium opacity-90 text-slate-600 group-hover:text-white/90 transition-colors">{phone}</p>
-          <p className="text-sm mt-2 leading-relaxed font-light text-slate-500 group-hover:text-white/80 transition-colors">{description}</p>
+          <p className="text-base mt-3 font-medium opacity-90 text-slate-600 group-hover:text-white/90 transition-colors">{phone}</p>
+          <p className="text-base mt-2 leading-relaxed font-light text-slate-500 group-hover:text-white/80 transition-colors">{description}</p>
         </div>
       </div>
     </motion.div>

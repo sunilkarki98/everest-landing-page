@@ -16,7 +16,8 @@ import {
   Calculator,
   Building,
   Landmark,
-  Plane
+  Plane,
+  School
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -53,8 +54,7 @@ const serviceCategories = {
   ],
 };
 
-// Lucide React School Icon since it wasn't imported directly above
-import { School } from "lucide-react";
+
 
 export default function ServicesSection() {
   const [activeTab, setActiveTab] = useState<"education" | "migration" | "other">("education");
@@ -110,7 +110,7 @@ export default function ServicesSection() {
                 const Icon = service.icon;
                 return (
                   <motion.div
-                    key={index}
+                    key={service.name}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.05, duration: 0.3 }}
@@ -127,7 +127,7 @@ export default function ServicesSection() {
                       </h3>
                     </div>
                     
-                    <p className="text-sm text-muted-foreground leading-relaxed relative z-10">
+                    <p className="text-base text-muted-foreground leading-relaxed relative z-10">
                       {service.description}
                     </p>
                   </motion.div>

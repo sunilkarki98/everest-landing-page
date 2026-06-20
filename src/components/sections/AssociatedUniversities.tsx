@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { siteConfig } from "@/config/site";
 
 const universities = [
   { name: "University of Sydney", location: "Sydney, AU", ranking: "Top 20" },
@@ -21,7 +22,7 @@ export default function AssociatedUniversities() {
   return (
     <section id="universities" className="py-16 lg:py-24 bg-white overflow-hidden border-b border-border/40">
       <Container className="mb-10">
-        <SectionHeading eyebrow="Global Network" title="500+ University Partnerships" className="text-center" />
+        <SectionHeading eyebrow="Global Network" title={`${siteConfig.stats.universities}+ University Partnerships`} className="text-center" />
         <p className="text-center mt-4 text-muted-foreground max-w-2xl mx-auto text-lg">
           We collaborate with the world&apos;s leading institutions to ensure you find the perfect course for your career aspirations.
         </p>

@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, Users, Award, GraduationCap } from "lucide-react";
+import { CheckCircle2, Users, Award, GraduationCap, QrCode } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 const destinations = [
   { name: "Australia", image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=2070&auto=format&fit=crop" },
@@ -27,16 +28,17 @@ export default function HeroSection() {
   const rightContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Preload next image to avoid flickering
-    const nextIndex = (currentIndex + 1) % destinations.length;
-    const img = new window.Image();
-    img.src = destinations[nextIndex].image;
-
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % destinations.length);
+      setCurrentIndex((prev) => {
+        const next = (prev + 1) % destinations.length;
+        // Preload next image to avoid flickering
+        const img = new window.Image();
+        img.src = destinations[(next + 1) % destinations.length].image;
+        return next;
+      });
     }, 3500); // Slightly longer interval so users can appreciate the image
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, []);
 
   return (
     <section className="relative w-full pt-32 pb-16 lg:pt-40 lg:pb-16 overflow-hidden bg-black">
@@ -56,8 +58,9 @@ export default function HeroSection() {
               src={destinations[currentIndex].image}
               alt={destinations[currentIndex].name}
               fill
+              sizes="100vw"
               className="object-cover brightness-105 contrast-105"
-              priority
+              priority={currentIndex === 0}
             />
           </motion.div>
         </AnimatePresence>
@@ -131,7 +134,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center"
           >
             {/* Primary CTA */}
             <a
@@ -166,10 +169,10 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="flex flex-wrap items-center gap-6 sm:gap-10 mt-12 pt-8 border-t border-white/20 w-full max-w-3xl"
           >
-            {trustStats.map((stat, idx) => {
+            {trustStats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div key={idx} className="flex items-center gap-4">
+                <div key={stat.label} className="flex items-center gap-4">
                   <div className="relative">
                     <Icon
                       size={38}
@@ -190,41 +193,46 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* RIGHT SIDE - Floating Cards (Bouncing) */}
-        <div ref={rightContainerRef} className="hidden lg:flex w-full lg:w-2/5 relative min-h-[500px] flex-col justify-center items-end pr-10">
-          {/* Floating Card 1: Success Alert */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 5, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute top-16 right-12 xl:right-24 bg-gradient-to-br from-accent/20 to-black/40 backdrop-blur-md p-4 rounded-2xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] flex items-center gap-4 border border-accent/30 z-20 cursor-default will-change-transform"
-          >
-            <div className="w-12 h-12 rounded-full bg-green-500/30 flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
-              <CheckCircle2 size={22} className="text-green-400 drop-shadow-md" />
-            </div>
-            <div>
-              <p className="text-[12px] font-bold text-green-300 uppercase tracking-widest mb-0.5 drop-shadow-md">Visa Granted</p>
-              <p className="text-md font-bold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Subclass 500</p>
-            </div>
-          </motion.div>
-
-          {/* Floating Card 2: Partner Uni */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 5.5, delay: 1.5, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute bottom-4 left-16 lg:left-32 xl:left-48 bg-gradient-to-br from-accent/20 to-black/40 backdrop-blur-md p-4 rounded-2xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] border border-accent/30 z-20 cursor-default will-change-transform"
-          >
-            <p className="text-xs font-bold text-accent uppercase tracking-widest mb-3 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Partner Universities</p>
-            <div className="flex -space-x-4">
-              {["USyd", "UoM", "UNSW", "UCL", "UoT"].map((uni, i) => (
-                <div key={i} className="w-14 h-14 rounded-full bg-white/10 border-2 border-white/30 shadow-lg flex items-center justify-center font-bold text-[10px] text-white z-10 relative backdrop-blur-md">
-                  {uni}
-                </div>
-              ))}
-              <div className="w-14 h-14 rounded-full bg-accent border-2 border-white/30 shadow-lg flex items-center justify-center font-bold text-sm text-primary z-20 relative">
-                300+
+        {/* RIGHT SIDE - Floating QR Code */}
+        {/* RIGHT SIDE - Floating QR Code */}
+        <div
+          ref={rightContainerRef}
+          className="hidden lg:flex w-full lg:w-2/5 relative min-h-[500px] flex-col justify-end items-end"
+        >
+          <div className="absolute -bottom-12 right-0 z-30">
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 6,
+                ease: [0.4, 0, 0.2, 1],
+              }}
+              className="bg-gradient-to-br from-accent/20 to-black/40 backdrop-blur-md p-5 pb-2 rounded-2xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] flex flex-col items-center justify-center border border-accent/30 cursor-default will-change-transform relative aspect-square w-56"
+            >
+              {/* Larger QR without increasing outer card size */}
+              <div className="relative w-40 h-40 mb-3 bg-white/95 p-2 shadow-inner border border-white/50">
+                <Image
+                  src="/contacusQR.jpeg"
+                  alt="Contact QR Code"
+                  fill
+                  sizes="160px"
+                  className="object-contain"
+                  priority
+                />
               </div>
-            </div>
-          </motion.div>
+
+              {/* Content */}
+              <div className="text-center">
+                <h4 className="font-extrabold text-white text-base tracking-tight drop-shadow-md">
+                  Got Questions?
+                </h4>
+
+                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent drop-shadow-md">
+                  Scan to WhatsApp
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
       </div>
