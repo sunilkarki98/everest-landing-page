@@ -15,6 +15,7 @@ type EmployeeCardProps = {
   role: string;
   description: string;
   image: string;
+  priority?: boolean;
 };
 
 const EmployeeCard: React.FC<EmployeeCardProps> = ({
@@ -23,6 +24,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
   role,
   description,
   image,
+  priority,
 }) => {
   return (
     <motion.div
@@ -35,6 +37,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
           src={image}
           alt={name}
           fill
+          priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
@@ -133,8 +136,8 @@ const EmployeeSection: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {team.map((member) => (
-          <EmployeeCard key={member.name} {...member} />
+        {team.map((member, index) => (
+          <EmployeeCard key={member.name} {...member} priority={index < 2} />
         ))}
       </motion.div>
     </section>
