@@ -1,6 +1,7 @@
 // src/config/site.ts
+import { migrationServices, studyServices, otherServices } from "@/data/services";
 
-export type MenuKey = "courses" | "visaServices" | "visaMigration" | "abroadStudy" | "otherServices";
+export type MenuKey = "courses" | "visaMigration" | "abroadStudy" | "otherServices";
 
 export type SubLink = {
   label: string;
@@ -35,7 +36,7 @@ export const siteConfig = {
   },
 
   social: {
-    facebook: "https://www.facebook.com/EverestEducationGroup",
+    facebook: "https://www.facebook.com/EEVSAustralia/",
     twitter: "https://twitter.com/EverestEduGroup",
     instagram: "https://www.instagram.com/EverestEduGroup",
     linkedin: "https://www.linkedin.com/company/EverestEduGroup",
@@ -54,7 +55,7 @@ export const siteConfig = {
       label: "Courses",
       href: "/courses",
       links: [
-        { label: "Health & Science", href: "/courses/health-science" },
+        { label: "Health & Science", href: "/courses/health" },
         { label: "Information Technology (IT)", href: "/courses/it" },
         { label: "Engineering", href: "/courses/engineering" },
         { label: "Business & Management Studies", href: "/courses/business" },
@@ -63,54 +64,31 @@ export const siteConfig = {
       ],
     },
     {
-      key: "visaServices",
-      label: "Visa Services",
-      href: "/visa-services",
-      links: [
-        { label: "Student Visa Applications", href: "/visa-services/student-visa" },
-        { label: "GTE Documentation", href: "/visa-services/gte" },
-        { label: "Visa Extensions", href: "/visa-services/extensions" },
-        { label: "Visa Guidance", href: "/visa-services/guidance" },
-        { label: "Visa Compliance Support", href: "/visa-services/compliance" },
-      ],
-    },
-    {
       key: "visaMigration",
       label: "Visa & Migration",
       href: "/migration",
-      links: [
-        { label: "Skilled Migration", href: "/migration/skilled" },
-        { label: "Family Visa", href: "/migration/family" },
-        { label: "Partner Visa", href: "/migration/partner" },
-        { label: "Skill Assessment", href: "/migration/skill-assessment" },
-        { label: "Citizenship Applications", href: "/migration/citizenship" },
-        { label: "ART Appeals", href: "/migration/art-appeals" },
-      ],
+      links: migrationServices.map(service => ({
+        label: service.title,
+        href: `/migration?service=${service.id}`
+      })),
     },
     {
       key: "abroadStudy",
       label: "Abroad Study",
       href: "/abroad-study",
-      links: [
-        { label: "University Admissions", href: "/abroad-study/university" },
-        { label: "College Admissions", href: "/abroad-study/college" },
-        { label: "Course Selection", href: "/abroad-study/course-selection" },
-        { label: "Scholarship Assistance", href: "/abroad-study/scholarships" },
-        { label: "Student Counselling", href: "/abroad-study/counselling" },
-        { label: "Documentation Support", href: "/abroad-study/documentation" },
-      ],
+      links: studyServices.map(service => ({
+        label: service.title,
+        href: `/abroad-study?service=${service.id}`
+      })),
     },
     {
       key: "otherServices",
       label: "Other Services",
       href: "/other-services",
-      links: [
-        { label: "Skill Assessment", href: "/other-services/skill-assessment" },
-        { label: "OSHC & OVHC", href: "/other-services/oshc" },
-        { label: "Taxation & Accounting", href: "/other-services/taxation" },
-        { label: "Business Setup & Advisory", href: "/other-services/business" },
-        { label: "Education Loan Guidance", href: "/other-services/loans" },
-      ],
+      links: otherServices.map(service => ({
+        label: service.title,
+        href: `/other-services?service=${service.id}`
+      })),
     },
   ] as MenuItem[],
 };

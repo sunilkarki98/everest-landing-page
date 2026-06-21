@@ -2,44 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Globe, HeartHandshake, Map, GraduationCap, Scale, FileCheck, CheckCircle2, ShieldCheck } from "lucide-react";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Counter } from "@/components/ui/Counter";
 import { trustItems, accreditations } from "@/config/trust-data";
 import { AccreditationGradients } from "@/components/ui/AccreditationGradients";
-
-const highlights = [
-  {
-    icon: HeartHandshake,
-    title: "Australia & Nepal Family Owned",
-    description: "Built on family values, ensuring personal care and trust at every step of your journey.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Direct Partnerships",
-    description: "Strong ties with leading colleges and universities for seamless admission processes.",
-  },
-  {
-    icon: Globe,
-    title: "Global Network",
-    description: "A vast network of educational institutions across Australia, NZ, UK, Canada, and beyond.",
-  },
-  {
-    icon: Map,
-    title: "Personalized Support",
-    description: "One-on-one student guidance tailored to your unique goals and circumstances.",
-  },
-  {
-    icon: Scale,
-    title: "Migration Expertise",
-    description: "Experienced migration agents who simplify complex visa and citizenship pathways.",
-  },
-  {
-    icon: FileCheck,
-    title: "End-to-End Assistance",
-    description: "From initial counselling to final visa lodgement — we handle it all for you.",
-  },
-];
+import { welcomeHighlights as highlights } from "@/data/home";
 
 
 
@@ -159,7 +127,6 @@ export default function WelcomeSection() {
 
             {/* Bottom Row: Compact Accreditations Card */}
             <div className="bg-gradient-to-r from-[#2a4f8f] via-[#325ba0] to-[#2a4f8f] rounded-2xl p-6 shadow-lg border border-secondary/40 flex-1 flex flex-col justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.05] mix-blend-overlay pointer-events-none" />
 
               <div className="relative z-10 flex items-center gap-4 mb-5 border-b border-white/15 pb-5">
                 <div className="relative w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center shrink-0 shadow-[0_0_15px_hsl(var(--accent)/0.25)]">

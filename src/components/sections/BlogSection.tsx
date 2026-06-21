@@ -7,44 +7,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const articles = [
-  {
-    id: 1,
-    title: "Student Visa Changes 2026",
-    date: "Jun 2026",
-    description:
-      "Important updates to student visa requirements, processing times and eligibility criteria across major study destinations.",
-    href: "/blog/student-visa-changes-2026",
-    tag: "Visa Update",
-    accent: "from-blue-500 to-indigo-600",
-    accentLight: "bg-blue-50 text-blue-700",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Scholarships for International Students",
-    date: "May 2026",
-    description:
-      "Discover the latest fully-funded scholarships available at top-ranked global universities for 2026 intake.",
-    href: "/blog/scholarships-international-students",
-    tag: "Scholarships",
-    accent: "from-amber-400 to-orange-500",
-    accentLight: "bg-amber-50 text-amber-700",
-    featured: false,
-  },
-  {
-    id: 3,
-    title: "Working Rights Abroad",
-    date: "Apr 2026",
-    description:
-      "A comprehensive guide to working hours, conditions and legal rights for international students studying worldwide.",
-    href: "/blog/working-rights-abroad",
-    tag: "Work Rights",
-    accent: "from-emerald-400 to-teal-600",
-    accentLight: "bg-emerald-50 text-emerald-700",
-    featured: false,
-  },
-];
+import { latestArticles as articles } from "@/data/home";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 28 },

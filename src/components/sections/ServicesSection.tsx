@@ -3,58 +3,20 @@
 import { useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  GraduationCap,
-  Briefcase,
-  Globe,
-  FileText,
-  BookOpen,
-  Users,
-  Heart,
-  Scale,
-  ShieldCheck,
-  Calculator,
-  Building,
-  Landmark,
-  Plane,
-  School
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { migrationServices, studyServices, otherServices } from "@/data/services";
+import Link from "next/link";
 
-interface ServiceItem {
-  icon: LucideIcon;
-  name: string;
-  description: string;
-}
-
-const serviceCategories = {
-  education: [
-    { icon: School, name: "College & University Admissions", description: "Direct assistance applying to top institutions." },
-    { icon: Briefcase, name: "Professional Year (PY)", description: "Enhance your employability with PY programs." },
-    { icon: GraduationCap, name: "Scholarship Assistance", description: "Find and secure international scholarships." },
-    { icon: FileText, name: "SOP & GTE Documentation", description: "Expert guidance on your supporting documents." },
-    { icon: BookOpen, name: "PTE Preparation", description: "Comprehensive coaching for PTE success." },
-    { icon: BookOpen, name: "IELTS Preparation", description: "Targeted training to achieve your desired band." },
-    { icon: Users, name: "Education Counselling", description: "Personalized advice for your career pathway." },
-    { icon: Plane, name: "Student Visa Assistance", description: "End-to-end support for your visa application." },
-  ],
-  migration: [
-    { icon: Plane, name: "Skilled Migration Visas", description: "Pathways for skilled workers to live in Australia." },
-    { icon: Users, name: "Family Visas", description: "Reunite with your family members abroad." },
-    { icon: Heart, name: "Partner Visas", description: "Bring your partner with expert application support." },
-    { icon: FileText, name: "Skill Assessments", description: "Assistance with obtaining positive assessments." },
-    { icon: Globe, name: "Citizenship Applications", description: "The final step to becoming an Australian citizen." },
-    { icon: Scale, name: "ART Appeals", description: "Professional representation for visa appeals." },
-  ],
-  other: [
-    { icon: ShieldCheck, name: "OSHC & OVHC", description: "Affordable health insurance for your stay." },
-    { icon: Calculator, name: "Taxation & Accounting", description: "Professional tax returns and financial support." },
-    { icon: Building, name: "Business Setup & Advisory", description: "Guidance for establishing a business in Australia." },
-    { icon: Landmark, name: "Education Loan Guidance", description: "Expert advice on educational financing options." },
-  ],
+const getHref = (tab: "education" | "migration" | "other", id: string) => {
+  if (tab === "education") return `/abroad-study?service=${id}`;
+  if (tab === "migration") return `/migration?service=${id}`;
+  return `/other-services?service=${id}`;
 };
 
-
+const serviceData = {
+  education: studyServices,
+  migration: migrationServices,
+  other: otherServices,
+};
 
 export default function ServicesSection() {
   const [activeTab, setActiveTab] = useState<"education" | "migration" | "other">("education");
@@ -106,31 +68,32 @@ export default function ServicesSection() {
               transition={{ duration: 0.4 }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
             >
-              {serviceCategories[activeTab].map((service, index) => {
+              {serviceData[activeTab].map((service, index) => {
                 const Icon = service.icon;
                 return (
-                  <motion.div
-                    key={service.name}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05, duration: 0.3 }}
-                    className="group bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-accent hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <Link href={getHref(activeTab, service.id)} key={service.id} passHref>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.05, duration: 0.3 }}
+                      className="group bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-accent hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left relative overflow-hidden h-full"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                    <div className="flex items-start gap-3 mb-3 relative z-10">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-gold flex items-center justify-center shrink-0 shadow-sm shadow-accent/20 group-hover:scale-110 transition-transform duration-300">
-                        <Icon size={24} className="text-primary" strokeWidth={2} />
+                      <div className="flex items-start gap-3 mb-3 relative z-10">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-gold flex items-center justify-center shrink-0 shadow-sm shadow-accent/20 group-hover:scale-110 transition-transform duration-300">
+                          <Icon size={24} className="text-primary" strokeWidth={2} />
+                        </div>
+                        <h3 className="text-base font-bold text-primary group-hover:text-accent transition-colors duration-300 leading-tight pt-1">
+                          {service.title}
+                        </h3>
                       </div>
-                      <h3 className="text-base font-bold text-primary group-hover:text-accent transition-colors duration-300 leading-tight pt-1">
-                        {service.name}
-                      </h3>
-                    </div>
-                    
-                    <p className="text-base text-muted-foreground leading-relaxed relative z-10">
-                      {service.description}
-                    </p>
-                  </motion.div>
+                      
+                      <p className="text-base text-muted-foreground leading-relaxed relative z-10">
+                        {service.description}
+                      </p>
+                    </motion.div>
+                  </Link>
                 );
               })}
             </motion.div>

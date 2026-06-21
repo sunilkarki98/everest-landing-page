@@ -62,7 +62,7 @@ const caseStudies = [
     name: "Sanjeet Parajuli",
     course: "BSc Business — King's College London",
     flag: "🇬🇧",
-    image: "https://images.unsplash.com/photo-1525134479668-1bea5c340c86?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop",
     outcome: "Accepted to Top 40 Global Uni",
     rating: 5,
     quote: "Their knowledge of the UK UCAS system saved me from making critical application errors.",
@@ -192,7 +192,6 @@ export default function SuccessStoriesPage() {
 
       {/* CTA Banner */}
       <section className="py-20 bg-primary text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
         <div className="pointer-events-none absolute -top-40 -right-40 w-96 h-96 rounded-full blur-[120px] bg-accent/20" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 w-[30rem] h-[30rem] rounded-full blur-[120px] bg-secondary/10" />
 

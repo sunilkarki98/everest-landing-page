@@ -2,26 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, Users, Award, GraduationCap, QrCode } from "lucide-react";
-import { siteConfig } from "@/config/site";
-
-const destinations = [
-  { name: "Australia", image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=2070&auto=format&fit=crop" },
-  { name: "UK", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2070&auto=format&fit=crop" },
-  { name: "Canada", image: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=80&w=2011&auto=format&fit=crop" },
-  { name: "USA", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=2070&auto=format&fit=crop" },
-  { name: "Japan", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop" },
-  { name: "South Korea", image: "https://images.unsplash.com/photo-1517154421773-0529f29ea451?q=80&w=2070&auto=format&fit=crop" },
-  { name: "Europe", image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=2070&auto=format&fit=crop" },
-];
-
-const trustStats = [
-  { icon: Users, value: "10,000+", label: "Students Placed" },
-  { icon: Award, value: "15+ Years", label: "Education Experts" },
-  { icon: GraduationCap, value: "98%", label: "Admission Success" },
-];
+import { heroDestinations as destinations, trustStats } from "@/data/home";
 
 export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,12 +16,11 @@ export default function HeroSection() {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
         const next = (prev + 1) % destinations.length;
-        // Preload next image to avoid flickering
         const img = new window.Image();
         img.src = destinations[(next + 1) % destinations.length].image;
         return next;
       });
-    }, 3500); // Slightly longer interval so users can appreciate the image
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
@@ -137,15 +121,15 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center"
           >
             {/* Primary CTA */}
-            <a
+            <Link
               href="#contact-us"
               className="inline-flex h-12 sm:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-accent px-8 text-lg sm:text-xl font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
             >
               Book Free Consultation
-            </a>
+            </Link>
 
             <Button variant="outline" className="h-12 sm:h-14 px-6 text-xl font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
-              <a href="#universities">Explore</a>
+              <Link href="#universities">Explore</Link>
             </Button>
           </motion.div>
 
@@ -214,9 +198,9 @@ export default function HeroSection() {
                 <Image
                   src="/contacusQR.jpeg"
                   alt="Contact QR Code"
-                  fill
-                  sizes="160px"
-                  className="object-contain"
+                  width={160}
+                  height={160}
+                  className="object-contain w-full h-full"
                   priority
                 />
               </div>

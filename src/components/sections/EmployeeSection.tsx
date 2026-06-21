@@ -7,6 +7,7 @@ import { Linkedin, Twitter, Facebook, ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { fadeUpContainer, fadeUpCard } from "@/lib/animations";
 import { siteConfig } from "@/config/site";
+import { teamMembers as team } from "@/data/home";
 
 type EmployeeCardProps = {
   name: string;
@@ -25,63 +26,69 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="relative group bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-sm mx-auto sm:max-w-none sm:mx-0 flex flex-col h-full transform transition duration-500 hover:-translate-y-2 border border-slate-100"
+      className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-border/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-accent/30"
       variants={fadeUpCard}
     >
-      {/* Image with tighter structural height to reduce overall card size */}
-      <div className="relative w-full h-[280px] sm:h-[320px] overflow-hidden bg-slate-100">
+      {/* Image Container */}
+      <div className="relative w-full h-[300px] sm:h-[320px] overflow-hidden bg-slate-50">
         <Image
           src={image}
           alt={name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
+        
+        {/* Soft gradient overlay for social icons */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-        {/* Social Icons on Hover */}
-        <div className="absolute inset-0 flex flex-wrap items-center justify-center gap-3 sm:gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-primary/40 backdrop-blur-sm z-20">
+        {/* Social Icons on Hover - Sliding up slightly */}
+        <div className="absolute bottom-6 inset-x-0 flex items-center justify-center gap-3.5 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-20">
           <a
             href={siteConfig.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${name} LinkedIn`}
-            className="p-3 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-accent hover:text-primary transition transform hover:scale-110 shadow-lg"
+            className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-accent hover:border-accent hover:text-primary transition-colors shadow-lg"
           >
-            <Linkedin className="w-5 h-5" strokeWidth={1.5} />
+            <Linkedin className="w-4 h-4" strokeWidth={2} />
           </a>
           <a
             href={siteConfig.social.twitter}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${name} Twitter`}
-            className="p-3 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-accent hover:text-primary transition transform hover:scale-110 shadow-lg"
+            className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-accent hover:border-accent hover:text-primary transition-colors shadow-lg"
           >
-            <Twitter className="w-5 h-5" strokeWidth={1.5} />
+            <Twitter className="w-4 h-4" strokeWidth={2} />
           </a>
           <a
             href={siteConfig.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${name} Facebook`}
-            className="p-3 rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-accent hover:text-primary transition transform hover:scale-110 shadow-lg"
+            className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-accent hover:border-accent hover:text-primary transition-colors shadow-lg"
           >
-            <Facebook className="w-5 h-5" strokeWidth={1.5} />
+            <Facebook className="w-4 h-4" strokeWidth={2} />
           </a>
         </div>
       </div>
 
-      {/* Text Info sliding box */}
-      <div className="relative flex-grow flex flex-col overflow-hidden">
-        {/* Navy Shade Background animates by transforming its Y axis perfectly to fill the container */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary via-primary/95 to-primary/90 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
-        
-        {/* Content Box */}
-        <div className="relative z-10 p-6 flex flex-col flex-grow transition-colors duration-500 group-hover:text-white">
-          <h3 className="text-xl font-bold text-primary group-hover:text-white transition-colors">{name}</h3>
-          <p className="text-sm font-semibold text-accent mt-1 uppercase tracking-wider">{role}</p>
-          <p className="text-base mt-3 font-medium opacity-90 text-slate-600 group-hover:text-white/90 transition-colors">{phone}</p>
-          <p className="text-base mt-2 leading-relaxed font-light text-slate-500 group-hover:text-white/80 transition-colors">{description}</p>
+      {/* Content Box */}
+      <div className="relative p-6 sm:p-7 flex flex-col flex-grow bg-white">
+        <div className="mb-4">
+           <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-slate-50 border border-slate-100 text-[11px] font-bold text-accent tracking-wider uppercase mb-3">
+             {role}
+           </span>
+           <h3 className="text-xl sm:text-2xl font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">
+             {name}
+           </h3>
+           <p className="text-sm font-medium text-slate-500 mt-1">{phone}</p>
         </div>
+        
+        <p className="text-base leading-relaxed text-slate-600 font-light flex-grow">
+          {description}
+        </p>
       </div>
     </motion.div>
   );
@@ -96,41 +103,6 @@ type Employee = {
 };
 
 const EmployeeSection: React.FC = () => {
-  const team: Employee[] = [
-    {
-      name: "Laura Awasthi",
-      phone: "+977 9801234567",
-      role: "Senior Consultant",
-      description:
-        "Laura has 10+ years of experience in education consultancy and student migration services.",
-      image: "/images/employees/sika.jpg",
-    },
-    {
-      name: "Jane Smith",
-      phone: "+977 9807654321",
-      role: "Visa Expert",
-      description:
-        "Jane specializes in student visas and has helped thousands of students achieve their dreams of studying abroad.",
-      image: "/images/employees/chika.jpg",
-    },
-    {
-      name: "Emmy Johnson",
-      phone: "+977 9812345678",
-      role: "Migration Agent",
-      description:
-        "Emmy is an expert in migration laws and ensures smooth processes for students and families. She is also expert in IELTS training.",
-      image: "/images/employees/gwife.jpg",
-    },
-    {
-      name: "Sophia Williams",
-      phone: "+977 9823456789",
-      role: "Career Advisor",
-      description:
-        "Sophia guides students to make the best choices for their career goals and education abroad.",
-      image: "/images/employees/golendra.jpg",
-    },
-  ];
-
   return (
     <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
       {/* Subtle Background Elements */}

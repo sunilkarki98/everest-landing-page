@@ -205,7 +205,7 @@ const ContactUs = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               viewport={{ once: true }}
-              className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-card text-card-foreground bg-[url('/noise.png')] bg-blend-soft-light"
+              className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-card text-card-foreground"
             >
               <div className="w-full max-w-[540px]">
                 <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-primary tracking-tight">
@@ -273,7 +273,7 @@ const ContactUs = () => {
                       onChange={handleChange}
                       required
                       maxLength={2000}
-                      className="flex w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 transition-all resize-none shadow-sm"
+                      className="flex w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary disabled:cursor-not-allowed disabled:opacity-50 transition-all resize-none shadow-sm break-words"
                       aria-invalid={error && error.includes("Message") ? "true" : "false"}
                     ></textarea>
                   </div>

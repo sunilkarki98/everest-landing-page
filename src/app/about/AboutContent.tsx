@@ -21,7 +21,6 @@ export default function AboutContent() {
       
       {/* Introduction Section */}
       <section className="py-24 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.02] mix-blend-overlay pointer-events-none" />
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -66,6 +65,8 @@ export default function AboutContent() {
                   src="/images/contact.jpg" 
                   alt="Everest Education Consultants" 
                   fill 
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
@@ -134,7 +135,7 @@ export default function AboutContent() {
                 viewport={{ once: true }}
                 className="relative h-[400px] lg:h-[500px] rounded-[2.5rem] overflow-hidden shadow-xl order-1 lg:order-2"
               >
-                <Image src="/images/education.jpg" alt="Our Mission" fill className="object-cover" />
+                <Image src="/images/education.jpg" alt="Our Mission" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
               </motion.div>
             </div>
 
@@ -147,7 +148,7 @@ export default function AboutContent() {
                 viewport={{ once: true }}
                 className="relative h-[400px] lg:h-[500px] rounded-[2.5rem] overflow-hidden shadow-xl"
               >
-                <Image src="/images/business.jpg" alt="Our Vision" fill className="object-cover" />
+                <Image src="/images/business.jpg" alt="Our Vision" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -204,7 +205,7 @@ export default function AboutContent() {
                 viewport={{ once: true }}
                 className="relative h-[400px] lg:h-[500px] rounded-[2.5rem] overflow-hidden shadow-xl order-1 lg:order-2"
               >
-                <Image src="/images/eng.jpg" alt="Our Goal" fill className="object-cover" />
+                <Image src="/images/eng.jpg" alt="Our Goal" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
               </motion.div>
             </div>
 
@@ -219,7 +220,6 @@ export default function AboutContent() {
 
       {/* Partner With Us CTA */}
       <section className="py-16 bg-primary text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-accent/20 rounded-full blur-[100px] pointer-events-none" />
         
         <Container className="relative z-10 max-w-5xl">
@@ -247,7 +247,7 @@ export default function AboutContent() {
             <div className="flex justify-center lg:justify-end">
               <div className="bg-white p-6 rounded-[2rem] shadow-2xl max-w-xs w-full border border-slate-200">
                 <div className="w-full aspect-square relative rounded-xl overflow-hidden mb-5 shadow-inner bg-slate-50 border border-slate-100">
-                  <Image src="/contacusQR.jpeg" alt="Contact QR Code" fill sizes="(max-width: 768px) 100vw, 250px" className="object-contain p-2" />
+                  <Image src="/contacusQR.jpeg" alt="Contact QR Code" width={250} height={250} className="object-contain p-2 w-full h-full" />
                 </div>
                 <div className="text-center">
                   <div className="text-primary font-black text-xl tracking-tight mb-1">Scan to Connect</div>

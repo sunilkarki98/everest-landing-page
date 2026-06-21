@@ -6,62 +6,7 @@ import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const destinations = [
-  {
-    name: "Sydney",
-    country: "Australia",
-    universities: "UNSW, University of Sydney, UTS",
-    costOfLiving: "AUD $2,200 – $2,800/mo",
-    opportunities: "Finance, tech & healthcare hub.",
-    image: "https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?q=80&w=2070&auto=format&fit=crop",
-    gridClass: "md:col-span-1 md:row-span-1",
-  },
-  {
-    name: "Auckland",
-    country: "New Zealand",
-    universities: "University of Auckland, AUT, Victoria",
-    costOfLiving: "NZD $1,800 – $2,400/mo",
-    opportunities: "Agriculture, IT & tourism.",
-    image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=2070&auto=format&fit=crop",
-    gridClass: "md:col-span-1 md:row-span-1",
-  },
-  {
-    name: "London",
-    country: "United Kingdom",
-    universities: "UCL, Imperial, King's College",
-    costOfLiving: "GBP £1,800 – £2,500/mo",
-    opportunities: "Finance, law & creative arts.",
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2070&auto=format&fit=crop",
-    gridClass: "md:col-span-1 md:row-span-1",
-  },
-  {
-    name: "Toronto",
-    country: "Canada",
-    universities: "University of Toronto, Ryerson, York",
-    costOfLiving: "CAD $2,000 – $2,800/mo",
-    opportunities: "Tech, finance & healthcare.",
-    image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=2070&auto=format&fit=crop",
-    gridClass: "md:col-span-1 md:row-span-1",
-  },
-  {
-    name: "Tokyo",
-    country: "Japan",
-    universities: "Waseda, Keio, University of Tokyo",
-    costOfLiving: "JPY ¥120,000 – ¥180,000/mo",
-    opportunities: "Engineering, robotics & culture.",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2070&auto=format&fit=crop",
-    gridClass: "md:col-span-1 md:row-span-1",
-  },
-  {
-    name: "Paris",
-    country: "Europe",
-    universities: "Sorbonne, Sciences Po, HEC Paris",
-    costOfLiving: "EUR €1,500 – €2,200/mo",
-    opportunities: "Fashion, business & research.",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2070&auto=format&fit=crop",
-    gridClass: "md:col-span-1 md:row-span-1",
-  },
-];
+import { featuredDestinations as destinations } from "@/data/home";
 
 export default function FeaturedSection() {
   return (

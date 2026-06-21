@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { siteConfig, MenuItem, MenuKey } from "../config/site";
@@ -18,10 +19,10 @@ export default function Navbar({
   logoSrc = "/logos/everestlogo.png",
   logoAlt = "Everest Education",
 }: NavbarProps) {
+  const pathname = usePathname() || "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<Record<MenuKey, boolean>>({
     courses: false,
-    visaServices: false,
     visaMigration: false,
     abroadStudy: false,
     otherServices: false,
@@ -63,14 +64,13 @@ export default function Navbar({
         setActiveDropdown(null);
         setDropdownOpen({
           courses: false,
-          visaServices: false,
           visaMigration: false,
           abroadStudy: false,
           otherServices: false,
         });
       }
     };
-    
+
     const handleResize = () => {
       if (window.innerWidth >= 1024 && mobileOpen) {
         setMobileOpen(false);
@@ -79,7 +79,7 @@ export default function Navbar({
 
     document.addEventListener("keydown", handleEscape);
     window.addEventListener("resize", handleResize);
-    
+
     return () => {
       document.removeEventListener("keydown", handleEscape);
       window.removeEventListener("resize", handleResize);
@@ -142,10 +142,10 @@ export default function Navbar({
           <div className="hidden lg:flex items-center h-full space-x-1">
             <Link
               href="/"
-              className="px-4 py-2 font-medium relative group text-primary"
+              className={`px-4 py-2 font-medium relative group ${pathname === "/" ? "text-accent" : "text-primary hover:text-accent"}`}
             >
               Home
-              <span className="absolute inset-x-0 bottom-1 h-0.5 scale-x-100 transition-transform origin-left bg-secondary"></span>
+              <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-secondary ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
             </Link>
 
             {menus.map((menu) => (
@@ -153,22 +153,21 @@ export default function Navbar({
                 <button
                   onMouseEnter={() => handleMouseEnter(menu.key)}
                   onMouseLeave={handleMouseLeave}
-                  className="px-3 py-2 font-medium flex items-center gap-0 relative group text-primary"
+                  className={`px-3 py-2 font-medium flex items-center gap-0 relative group ${menu.href && pathname.startsWith(menu.href) ? "text-accent" : "text-primary hover:text-accent"}`}
                 >
                   {menu.label}
                   <ChevronDown
                     size={16}
                     className="translate-y-[1px] text-secondary"
                   />
-                  <span className="absolute inset-x-0 bottom-1 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-secondary"></span>
+                  <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-secondary ${menu.href && pathname.startsWith(menu.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
                 </button>
 
                 <div
-                  className={`absolute top-full left-0 bg-white/85 backdrop-blur-2xl text-foreground shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] rounded-xl mt-2 w-72 border border-white/60 transition-all duration-300 origin-top ${
-                    activeDropdown === menu.key
-                      ? "opacity-100 scale-100 translate-y-0"
-                      : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                  }`}
+                  className={`absolute top-full left-0 bg-white/85 backdrop-blur-2xl text-foreground shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] rounded-xl mt-2 w-72 border border-white/60 transition-all duration-300 origin-top ${activeDropdown === menu.key
+                    ? "opacity-100 scale-100 translate-y-0"
+                    : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                    }`}
                   onMouseEnter={() => handleMouseEnter(menu.key)}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -187,7 +186,7 @@ export default function Navbar({
                     )}
                     {menu.links.map((item) => (
                       <Link
-                        key={item.href}
+                        key={item.label}
                         href={item.href}
                         className="block px-4 py-3 transition-colors duration-200 text-foreground hover:bg-secondary hover:text-secondary-foreground"
                       >
@@ -205,6 +204,14 @@ export default function Navbar({
             ))}
 
             <Link
+              href="/blog"
+              className={`px-4 py-2 font-medium relative group ${pathname.startsWith("/blog") ? "text-accent" : "text-primary hover:text-accent"}`}
+            >
+              Blog
+              <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-secondary ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+            </Link>
+
+            <Link
               href="#contact-us"
               className="px-4 py-2 font-medium relative group text-primary"
             >
@@ -213,16 +220,16 @@ export default function Navbar({
             </Link>
 
             {/* Book Consultation Button */}
-            <Button 
-              variant="accent" 
-              className="ml-4 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.4)] hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)] transition-all duration-300 hover:-translate-y-0.5 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none" 
+            <Button
+              variant="accent"
+              className="ml-4 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.4)] hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)] transition-all duration-300 hover:-translate-y-0.5 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none"
               asChild
             >
-              <a href="#contact-us" className="flex items-center justify-center">
+              <Link href="#contact-us" className="flex items-center justify-center">
                 <span className="relative z-10 font-bold tracking-wide">Book Consultation</span>
                 {/* Premium Shine Sweep Effect */}
                 <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
-              </a>
+              </Link>
             </Button>
           </div>
 
@@ -237,11 +244,10 @@ export default function Navbar({
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden bg-background border-t border-border transition-all duration-300 ease-out ${
-          mobileOpen
-            ? "max-h-[80vh] opacity-100 overflow-y-auto"
-            : "max-h-0 opacity-0 pointer-events-none"
-        } overflow-hidden`}
+        className={`lg:hidden bg-background border-t border-border transition-all duration-300 ease-out ${mobileOpen
+          ? "max-h-[80vh] opacity-100 overflow-y-auto"
+          : "max-h-0 opacity-0 pointer-events-none"
+          } overflow-hidden`}
       >
         <div className="px-4 py-4 space-y-1">
           <Link
@@ -251,6 +257,23 @@ export default function Navbar({
           >
             Home
           </Link>
+
+          <Link
+            href="/blog"
+            onClick={closeMobileMenu}
+            className="block py-3 px-4 font-medium text-base rounded-lg transition-colors text-primary hover:bg-muted"
+          >
+            Blog
+          </Link>
+
+          <Link
+            href="#contact-us"
+            onClick={closeMobileMenu}
+            className="block py-3 px-4 font-medium text-base rounded-lg transition-colors text-primary hover:bg-muted"
+          >
+            Contact
+          </Link>
+
           {menus.map((menu) => (
             <div key={menu.key} className="space-y-1">
               <button
@@ -260,22 +283,20 @@ export default function Navbar({
                 <span>{menu.label}</span>
                 <ChevronDown
                   size={18}
-                  className={`text-secondary transition-transform ${
-                    dropdownOpen[menu.key] ? "rotate-180" : ""
-                  }`}
+                  className={`text-secondary transition-transform ${dropdownOpen[menu.key] ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-out ${
-                  dropdownOpen[menu.key]
-                    ? "max-h-96 opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ease-out ${dropdownOpen[menu.key]
+                  ? "max-h-96 opacity-100"
+                  : "max-h-0 opacity-0"
+                  }`}
               >
                 <div className="pl-4 py-2 space-y-1">
                   {menu.links.map((item) => (
                     <Link
-                      key={item.href}
+                      key={item.label}
                       href={item.href}
                       onClick={closeMobileMenu}
                       className="block py-2 px-4 text-sm rounded-md transition-colors text-foreground hover:bg-secondary hover:text-secondary-foreground"
@@ -295,16 +316,16 @@ export default function Navbar({
             Contact
           </Link>
           {/* Mobile Book Consultation */}
-          <Button 
-            variant="accent" 
-            className="w-full mt-2 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.3)] hover:shadow-[0_0_20px_hsl(var(--accent)/0.6)] transition-all duration-300 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none" 
+          <Button
+            variant="accent"
+            className="w-full mt-2 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.3)] hover:shadow-[0_0_20px_hsl(var(--accent)/0.6)] transition-all duration-300 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none"
             asChild
           >
-            <a href="#contact-us" onClick={closeMobileMenu} className="flex items-center justify-center">
+            <Link href="#contact-us" onClick={closeMobileMenu} className="flex items-center justify-center">
               <span className="relative z-10 font-bold tracking-wide">Book Consultation</span>
               {/* Premium Shine Sweep Effect */}
               <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

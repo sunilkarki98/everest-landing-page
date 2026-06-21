@@ -12,17 +12,7 @@ interface Branch {
   query: string;
 }
 
-const activeBranches: Branch[] = [
-  { id: 1, name: "Kathmandu Office", country: "Nepal", query: "Kathmandu, Nepal" },
-  { id: 2, name: "Butwal Office", country: "Nepal", query: "Butwal, Nepal" },
-  { id: 3, name: "Canberra Office", country: "Australia", query: "Canberra, Australia" },
-  { id: 4, name: "Perth Office", country: "Australia", query: "Perth, Australia" },
-];
-
-const futureBranches = [
-  { id: 5, name: "USA Office", region: "North America" },
-  { id: 6, name: "Japan Office", region: "Asia" },
-];
+import { activeBranches, futureBranches } from "@/data/home";
 
 const BranchesMapSection: FC = () => {
   const [loadedMaps, setLoadedMaps] = useState<Record<number, boolean>>({});
@@ -45,10 +35,9 @@ const BranchesMapSection: FC = () => {
   return (
     <section
       id="our-branches"
-      className="relative bg-primary/[0.03] text-gray-900 py-16 lg:py-24 overflow-hidden border-t border-border/50"
+      className="relative bg-primary/[0.03] text-gray-900 py-10 lg:py-16 overflow-hidden border-t border-border/50"
     >
       {/* Subtle Background Elements */}
-      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.015] mix-blend-overlay pointer-events-none" />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
       <div className="pointer-events-none absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] bg-accent/10" />
       <div className="pointer-events-none absolute -bottom-40 -right-40 w-[30rem] h-[30rem] rounded-full blur-[120px] bg-blue-500/10" />
@@ -56,20 +45,20 @@ const BranchesMapSection: FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <SectionHeading
             eyebrow="Our Global Presence"
             title="Visit Our Offices"
             titleColor="text-primary"
-            className="mb-6"
+            className="mb-4"
           />
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-base">
             With dedicated locations across Nepal and Australia, our expert team is always within reach to guide your education and migration journey.
           </p>
         </div>
 
         {/* Active Offices Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {activeBranches.map((branch, index) => (
             <motion.div
               key={branch.id}
@@ -91,7 +80,7 @@ const BranchesMapSection: FC = () => {
                 </div>
               </div>
 
-              <div className="relative w-full h-[220px] rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white group-hover:border-accent/40 group-hover:shadow-xl transition-all duration-500 flex items-center justify-center">
+              <div className="relative w-full h-[180px] rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-white group-hover:border-accent/40 group-hover:shadow-md transition-all duration-500 flex items-center justify-center">
 
                 {loadedMaps[branch.id] ? (
                   <iframe

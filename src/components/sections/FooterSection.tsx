@@ -4,7 +4,7 @@ import Link from "next/link";
 import { siteConfig } from "../../config/site";
 import { Container } from "@/components/layout/Container";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 
 const FooterSection = () => {
   return (
@@ -16,13 +16,12 @@ const FooterSection = () => {
             <Image
               src="/logos/everestlogo.jpeg"
               alt="Everest Education Logo"
-              width={150}
-              height={50}
-              className="object-contain rounded-lg opacity-80 hover:opacity-100 transition-opacity mix-blend-luminosity hover:mix-blend-normal"
-              style={{ width: "auto", height: "auto" }}
+              width={130}
+              height={45}
+              className="object-contain rounded-lg w-32 h-auto"
             />
-            <p className="text-sm opacity-70">Since {siteConfig.foundedYear}</p>
-            <p className="text-sm opacity-60">{siteConfig.description}</p>
+            <p className="text-sm text-white/80">Since <span className="text-accent font-bold text-base">{siteConfig.foundedYear}</span></p>
+            <p className="text-base opacity-60">{siteConfig.description}</p>
           </div>
           <div className="mt-6">
             <h3 className="font-bold text-white mb-3 text-sm tracking-wider uppercase">Follow Us On</h3>
@@ -59,6 +58,16 @@ const FooterSection = () => {
             <li><Link href="/courses" className="transition-colors hover:text-secondary">Courses</Link></li>
             <li><Link href="/visa-services" className="transition-colors hover:text-secondary">Visa Services</Link></li>
             <li><Link href="/migration" className="transition-colors hover:text-secondary">Visa & Migration</Link></li>
+            <li className="pt-4">
+              <a 
+                href="https://condat.com.au/condat/318/all-clients" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-lg font-medium transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-md group w-fit"
+              >
+                Client Portal (CRM) <ArrowRight className="w-4 h-4 text-secondary group-hover:translate-x-1 transition-transform" />
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -71,7 +80,7 @@ const FooterSection = () => {
             <li><Link href="/abroad-study" className="transition-colors hover:text-secondary">Abroad Study</Link></li>
             <li><Link href="/other-services" className="transition-colors hover:text-secondary">Other Services</Link></li>
             <li><Link href="/success-stories" className="transition-colors hover:text-secondary">Student Success Stories</Link></li>
-            <li><Link href="/blogs" className="transition-colors hover:text-secondary">Blogs</Link></li>
+            <li><Link href="/blog" className="transition-colors hover:text-secondary">Blog</Link></li>
             <li><Link href="/careers" className="transition-colors hover:text-secondary">Careers</Link></li>
           </ul>
         </div>
