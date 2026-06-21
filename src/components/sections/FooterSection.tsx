@@ -11,14 +11,16 @@ const FooterSection = () => {
       <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         {/* Logo & About */}
         <div className="sm:col-span-2 lg:col-span-1 space-y-4">
-          <div className="flex flex-col items-start space-y-2">
-            <Image
-              src="/logos/everestlogo.jpeg"
-              alt="Everest Education Logo"
-              width={130}
-              height={45}
-              className="object-contain rounded-lg w-32 h-auto"
-            />
+          <div className="flex flex-col items-start space-y-4">
+            <div className="bg-white/95 backdrop-blur-sm rounded-sm shadow-md border border-white/20 inline-flex items-center justify-center overflow-hidden">
+              <Image
+                src="/logos/everestlogo.png"
+                alt="Everest Education Logo"
+                width={140}
+                height={48}
+                className="object-contain w-36 h-auto"
+              />
+            </div>
             <p className="text-sm text-white/80">Since <span className="text-accent font-bold text-base">{siteConfig.foundedYear}</span></p>
             <p className="text-base opacity-60">{siteConfig.description}</p>
           </div>
@@ -26,16 +28,16 @@ const FooterSection = () => {
             <h3 className="font-bold text-white mb-3 text-sm tracking-wider uppercase">Follow Us On</h3>
             <div className="flex gap-5 items-center">
               <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors text-white hover:text-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
               </a>
               <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-colors text-white hover:text-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><path d="M16.11 7.91h.01"/><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><path d="M16.11 7.91h.01" /><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /></svg>
               </a>
               <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-colors text-white hover:text-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
               </a>
               <a href={siteConfig.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="transition-colors text-white hover:text-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
               </a>
               <a href="https://wa.me/61406000815" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="transition-colors text-white hover:text-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -58,10 +60,10 @@ const FooterSection = () => {
             <li><Link href="/visa-services" className="transition-colors hover:text-secondary">Visa Services</Link></li>
             <li><Link href="/migration" className="transition-colors hover:text-secondary">Visa & Migration</Link></li>
             <li className="pt-4">
-              <a 
-                href="https://condat.com.au/condat/318/all-clients" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://condat.com.au/condat/318/all-clients"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-lg font-medium transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-md group w-fit"
               >
                 Client Portal (CRM) <ArrowRight className="w-4 h-4 text-secondary group-hover:translate-x-1 transition-transform" />
