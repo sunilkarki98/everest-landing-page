@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, StarHalf } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -73,11 +73,12 @@ export default function HeroSection() {
 
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-colors cursor-default">
               <div className="flex items-center gap-0.5">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(4)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 text-[#FFB400] fill-[#FFB400]" />
                 ))}
+                <StarHalf className="w-4 h-4 text-[#FFB400] fill-[#FFB400]" />
               </div>
-              <span className="text-sm font-bold text-white tracking-wide uppercase">5.0 Google Rating</span>
+              <span className="text-sm font-bold text-white tracking-wide uppercase">4.8 Google Rating</span>
             </div>
           </motion.div>
 

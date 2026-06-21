@@ -43,9 +43,9 @@ function TestimonialCard({ item }: { item: Testimonial }) {
 
       {/* Footer */}
       <div className="pt-5 border-t border-border flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center font-bold text-primary relative overflow-hidden shrink-0 border-2 border-white shadow-sm">
+        <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center font-bold text-primary relative overflow-hidden shrink-0 border-[3px] border-white shadow-sm">
            {item.image ? (
-             <Image src={item.image} alt={item.name} fill className="object-cover" sizes="48px" />
+             <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
            ) : (
              <span className="text-lg">{item.name.charAt(0)}</span>
            )}

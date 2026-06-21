@@ -116,37 +116,37 @@ const BranchesMapSection: FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-3xl overflow-hidden bg-white border border-slate-200 p-5 lg:p-6 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-5"
+          className="relative rounded-2xl overflow-hidden bg-white border border-slate-200 p-4 lg:p-5 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-4"
         >
           {/* Decorative background */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-lg text-center md:text-left">
-            <h4 className="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center justify-center md:justify-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                <Globe2 className="text-accent" size={20} />
+            <h4 className="text-xl sm:text-2xl font-bold text-primary mb-1.5 flex items-center justify-center md:justify-start gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                <Globe2 className="text-accent" size={16} />
               </div>
               Future Expansion
             </h4>
-            <p className="text-muted-foreground leading-relaxed text-lg">
+            <p className="text-muted-foreground leading-snug text-sm">
               We are constantly growing to better serve our international students. We are excited to announce new EEVS branches opening soon.
             </p>
           </div>
 
-          <div className="relative z-10 flex flex-col sm:flex-row gap-4 sm:gap-6 w-full md:w-auto">
+          <div className="relative z-10 flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             {futureBranches.map((branch) => (
               <div
                 key={branch.id}
-                className="bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-100/50 rounded-xl p-4 text-left shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex-1 min-w-[150px] md:min-w-[170px] flex flex-col justify-center group relative overflow-hidden"
+                className="bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-100/50 rounded-xl p-3 text-left shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex-1 min-w-[130px] flex flex-col justify-center group relative overflow-hidden"
               >
                 {/* Decorative glow inside card */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-accent/10 rounded-full blur-xl pointer-events-none transition-all duration-500 group-hover:bg-accent/20" />
+                <div className="absolute -top-4 -right-4 w-12 h-12 bg-accent/10 rounded-full blur-xl pointer-events-none transition-all duration-500 group-hover:bg-accent/20" />
 
-                <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                  <h5 className="text-base font-bold text-primary leading-tight">{branch.name}</h5>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent-text bg-accent/20 px-2 py-1 rounded-md shadow-sm shrink-0">Soon</span>
+                <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 mb-1">
+                  <h5 className="text-sm font-bold text-primary leading-tight">{branch.name}</h5>
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-accent-text bg-accent/20 px-1.5 py-0.5 rounded shadow-sm shrink-0">Soon</span>
                 </div>
-                <p className="relative z-10 text-sm text-slate-500 font-medium">{branch.region}</p>
+                <p className="relative z-10 text-xs text-slate-500 font-medium">{branch.region}</p>
               </div>
             ))}
           </div>

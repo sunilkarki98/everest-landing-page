@@ -21,7 +21,7 @@ const FooterSection = () => {
                 className="object-contain w-36 h-auto"
               />
             </div>
-            <p className="text-sm text-white/80">Since <span className="text-accent font-bold text-base">{siteConfig.foundedYear}</span></p>
+            <p className="text-base text-white/80">Since <span className="text-accent font-bold text-base">{siteConfig.foundedYear}</span></p>
             <p className="text-base opacity-60">{siteConfig.description}</p>
           </div>
           <div className="mt-6">
