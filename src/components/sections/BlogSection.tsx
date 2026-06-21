@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowRight, Calendar, Tag } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
@@ -9,12 +9,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 import { latestArticles as articles } from "@/data/home";
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.55, delay: i * 0.1, ease: "easeOut" },
   }),
 };
 

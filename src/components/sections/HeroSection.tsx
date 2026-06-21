@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -59,15 +59,26 @@ export default function HeroSection() {
         {/* LEFT SIDE - Content */}
         <div className="w-full lg:w-3/5 flex flex-col items-start text-left">
 
-          {/* Trust Badge */}
+          {/* Eyebrow & Trust Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-2.5 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20 mb-6"
+            className="flex flex-wrap items-center gap-3 mb-4 sm:mb-6"
           >
-            <span className="text-lg leading-none">🏆</span>
-            <span className="text-sm font-bold text-white tracking-wide uppercase">The Most Trusted Agency</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-colors cursor-default">
+              <span className="text-lg leading-none">🏆</span>
+              <span className="text-sm font-bold text-white tracking-wide uppercase">The Most Trusted Agency</span>
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-colors cursor-default">
+              <div className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-[#FFB400] fill-[#FFB400]" />
+                ))}
+              </div>
+              <span className="text-sm font-bold text-white tracking-wide uppercase">5.0 Google Rating</span>
+            </div>
           </motion.div>
 
           {/* Main Headline */}

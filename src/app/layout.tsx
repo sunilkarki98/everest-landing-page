@@ -5,6 +5,7 @@ import Header from "@/components/Header"; // Import Header
 import FooterSection from "@/components/sections/FooterSection";
 import WhatsAppWidget from "@/components/ui/WhatsAppWidget";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 // Load Plus Jakarta Sans font
 const jakarta = Plus_Jakarta_Sans({
@@ -95,6 +96,7 @@ export default function RootLayout({
           <main id="main-content">{children}</main>
           <FooterSection />
           <WhatsAppWidget />
+          <Analytics />
         </SmoothScrollProvider>
       </body>
     </html>

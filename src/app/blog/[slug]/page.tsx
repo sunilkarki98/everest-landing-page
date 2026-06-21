@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, Clock, ChevronLeft, Share2, Facebook, Twitter, Linkedin, User } from "lucide-react";
+import { Calendar, Clock, ChevronLeft, Share2, User } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import ContactUs from "@/components/sections/ContactUs";
 import { Badge } from "@/components/ui/Badge";
@@ -117,9 +117,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <Share2 size={16} /> Share Article
                 </h4>
                 <div className="flex gap-4">
-                  <button className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-colors"><Facebook size={18} /></button>
-                  <button className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#1DA1F2]/20 flex items-center justify-center text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white transition-colors"><Twitter size={18} /></button>
-                  <button className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors"><Linkedin size={18} /></button>
+                  <button className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </button>
+                  <button className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#1DA1F2]/20 flex items-center justify-center text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                  </button>
+                  <button className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
