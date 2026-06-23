@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Star, StarHalf } from "lucide-react";
+import { ArrowRight, Star, StarHalf, X, QrCode } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -10,6 +10,7 @@ import { heroDestinations as destinations, trustStats } from "@/data/home";
 
 export default function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isQrOpen, setIsQrOpen] = useState(false);
   const rightContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,15 +72,30 @@ export default function HeroSection() {
               <span className="text-sm font-bold text-white tracking-wide uppercase">The Most Trusted Agency</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-colors cursor-default">
+            <a
+              href="https://share.google/Bp8LPnaFi9wzvzr3a"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-all cursor-pointer group"
+            >
               <div className="flex items-center gap-0.5">
                 {[...Array(4)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-[#FFB400] fill-[#FFB400]" />
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFB400" className="w-4 h-4 group-hover:scale-110 transition-transform">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  </svg>
                 ))}
-                <StarHalf className="w-4 h-4 text-[#FFB400] fill-[#FFB400]" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 group-hover:scale-110 transition-transform">
+                  <defs>
+                    <linearGradient id="halfStar" x1="0" x2="100%" y1="0" y2="0">
+                      <stop offset="50%" stopColor="#FFB400" />
+                      <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                    </linearGradient>
+                  </defs>
+                  <path fill="url(#halfStar)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
               </div>
-              <span className="text-sm font-bold text-white tracking-wide uppercase">4.8 Google Rating</span>
-            </div>
+              <span className="text-sm font-bold text-white tracking-wide uppercase group-hover:text-accent transition-colors">4.8 Google Rating</span>
+            </a>
           </motion.div>
 
           {/* Main Headline */}
@@ -189,49 +205,113 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* RIGHT SIDE - Floating QR Code */}
-        {/* RIGHT SIDE - Floating QR Code */}
+        {/* RIGHT SIDE - Useful Links & QR Button */}
         <div
           ref={rightContainerRef}
           className="hidden lg:flex w-full lg:w-2/5 relative min-h-[500px] flex-col justify-end items-end"
         >
-          <div className="absolute -bottom-12 right-0 z-30">
+          <div className="absolute -bottom-12 right-0 z-30 flex flex-col items-end gap-6">
+
+            {/* Useful Links */}
             <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 6,
-                ease: [0.4, 0, 0.2, 1],
-              }}
-              className="bg-gradient-to-br from-accent/20 to-black/40 backdrop-blur-md p-5 pb-2 rounded-2xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] flex flex-col items-center justify-center border border-accent/30 cursor-default will-change-transform relative aspect-square w-56"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="bg-white/5 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-lg flex flex-col gap-2.5 w-[240px]"
             >
-              {/* Larger QR without increasing outer card size */}
-              <div className="relative w-40 h-40 mb-3 bg-white/95 p-2 shadow-inner border border-white/50">
-                <Image
-                  src="/contacusQR.jpeg"
-                  alt="Contact QR Code"
-                  width={160}
-                  height={160}
-                  className="object-contain w-full h-full"
-                  priority
-                />
+              <h4 className="text-sm font-bold text-accent uppercase tracking-wider drop-shadow-md border-b border-white/10 pb-2 mb-1">
+                Useful Links
+              </h4>
+
+              {[
+                { label: "ImmiAccount", href: "https://online.immi.gov.au/ola/app" },
+                { label: "VEVO Check", href: "https://online.immi.gov.au/evo/firstParty?actionType=query" },
+                { label: "PTE Booking", href: "https://www.pearsonpte.com/" },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between text-sm font-medium text-white/90 hover:text-accent transition-colors py-1"
+                >
+                  <span>{link.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                </a>
+              ))}
+            </motion.div>
+
+            {/* QR Popup Trigger */}
+            <motion.button
+              onClick={() => setIsQrOpen(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-br from-accent/20 to-black/40 backdrop-blur-md py-3 px-5 rounded-2xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] flex items-center gap-3 border border-accent/30 hover:border-accent/60 transition-colors w-[240px]"
+            >
+              <div className="bg-white/90 p-1.5 rounded-lg shrink-0">
+                <QrCode className="w-5 h-5 text-primary" />
               </div>
-
-              {/* Content */}
-              <div className="text-center">
-                <h4 className="font-extrabold text-white text-base tracking-tight drop-shadow-md">
+              <div className="text-left">
+                <p className="font-extrabold text-white text-sm tracking-tight drop-shadow-md leading-none mb-1">
                   Got Questions?
-                </h4>
-
-                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent drop-shadow-md">
+                </p>
+                <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-accent drop-shadow-md leading-none">
                   Scan to WhatsApp
                 </p>
               </div>
-            </motion.div>
+            </motion.button>
           </div>
         </div>
 
       </div>
+
+      {/* QR Code Modal */}
+      <AnimatePresence>
+        {isQrOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsQrOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-white p-8 pb-10 rounded-3xl shadow-2xl flex flex-col items-center justify-center max-w-sm w-full"
+            >
+              <button
+                onClick={() => setIsQrOpen(false)}
+                className="absolute top-4 right-4 p-2 bg-muted text-muted-foreground hover:bg-muted/80 hover:text-primary rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <h3 className="text-2xl font-bold text-primary mb-2 mt-2 text-center" style={{ fontFamily: "serif" }}>Scan to Connect</h3>
+              <p className="text-muted-foreground text-sm text-center mb-8">
+                Open your camera and scan the QR code to chat with us on WhatsApp instantly.
+              </p>
+
+              <div className="relative w-48 h-48 bg-white p-2 shadow-inner border border-border/50 rounded-xl overflow-hidden">
+                <Image
+                  src="/contacusQR.jpeg"
+                  alt="Contact QR Code"
+                  width={192}
+                  height={192}
+                  className="object-contain w-full h-full"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }

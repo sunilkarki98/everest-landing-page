@@ -1,87 +1,161 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { MapPin, DollarSign, GraduationCap, Briefcase } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, GraduationCap, ArrowRight, Users, Coffee } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Button } from "@/components/ui/Button";
 
 import { featuredDestinations as destinations } from "@/data/home";
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+};
+
 export default function FeaturedSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const activeDest = destinations[activeIndex];
+
+  const paginate = (newDirection: number) => {
+    setDirection(newDirection);
+    let nextIndex = activeIndex + newDirection;
+    if (nextIndex < 0) nextIndex = destinations.length - 1;
+    if (nextIndex >= destinations.length) nextIndex = 0;
+    setActiveIndex(nextIndex);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      paginate(1);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [activeIndex]);
+
   return (
-    <section id="popular-destinations" className="py-10 lg:py-14 bg-background">
+    <section id="popular-destinations" className="py-10 lg:py-16 bg-background overflow-hidden">
       <Container>
-        {/* Heading */}
-        <SectionHeading
-          eyebrow="Popular Destinations"
-          title="Study Abroad"
-        />
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[300px] gap-4 md:gap-6 mt-10">
-          {destinations.map((dest, index) => (
-            <motion.div
-              key={dest.name}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`group relative overflow-hidden rounded-2xl shadow-md border border-border ${dest.gridClass}`}
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0 z-0">
+          {/* Left Column */}
+          <div className="w-full lg:w-[40%] flex flex-col justify-center items-start relative z-10 py-4 lg:py-8">
+            {/* Header Content */}
+            <div className="mb-6 w-full">
+              <p className="text-[15px] sm:text-base font-bold uppercase tracking-[0.2em] text-accent mb-4 sm:mb-6">
+                Popular Destinations
+              </p>
+
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-primary mb-2 tracking-tight" style={{ fontFamily: "serif" }}>
+                Study Abroad,
+              </h2>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-accent italic mb-6 sm:mb-8 tracking-tight" style={{ fontFamily: "serif" }}>
+                Explore the World
+              </h2>
+
+              <p className="text-muted-foreground max-w-md text-base sm:text-base leading-relaxed mb-2">
+                Discover top cities around the world and begin a life-changing academic journey & career.
+              </p>
+
+            </div>
+
+            {/* Changing Content */}
+            <div className="relative min-h-[360px] w-full flex flex-col">
+              <div className="mb-6">
+                <h3 className="text-4xl sm:text-5xl lg:text-5xl font-medium text-primary tracking-tight" style={{ fontFamily: "serif" }}>
+                  {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
+                </h3>
+              </div>
+
+              <p className="text-muted-foreground text-[15px] sm:text-base leading-relaxed mb-8 sm:mb-10 max-w-[420px] min-h-[100px] sm:min-h-[80px]">
+                Experience world-class education and a vibrant lifestyle in {activeDest.country}. {activeDest.name} offers top universities, diverse culture, and {activeDest.opportunities.toLowerCase()}
+              </p>
+
+              <div className="flex flex-wrap items-center gap-6 sm:gap-10 mb-8 sm:mb-10">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
+                    <GraduationCap className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="text-[10px] font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
+                    <Users className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="text-[10px] font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
+                    <Coffee className="w-5 h-5 text-accent" />
+                  </div>
+                  <span className="text-[10px] font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
+                </div>
+              </div>
+
+              <Button className="rounded-full w-fit bg-primary text-primary-foreground hover:bg-primary/90 group pl-6 pr-5 h-12 shadow-md">
+                Explore {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
+                <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1.5 transition-transform duration-300" />
+              </Button>
+            </div>
+
+          </div>
+
+          {/* Right Column - Image Carousel */}
+          <div className="w-full lg:w-[60%] min-h-[350px] sm:min-h-[450px] lg:min-h-[550px] relative rounded-3xl sm:rounded-[40px] overflow-hidden shadow-2xl flex-grow">
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={activeIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 250, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+                className="absolute inset-0"
+              >
                 <Image
-                  src={dest.image}
-                  alt={`${dest.name}, ${dest.country}`}
+                  src={activeDest.image}
+                  alt={`${activeDest.name}, ${activeDest.country}`}
                   fill
-                  className="object-cover brightness-110 contrast-105 transition-transform duration-700 ease-in-out group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  priority={activeIndex === 0}
                 />
-              </div>
 
-              {/* Gradient Overlay for legibility */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-90" />
+                {/* Subtle gradient overlay for better text contrast on the glass card */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
 
-              {/* Content Container — anchored to bottom-left */}
-              <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col justify-end p-5 md:p-6 h-full text-white">
-
-                {/* Glassmorphism Details Panel */}
-                <div className="space-y-3 opacity-0 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out group-hover:opacity-100 backdrop-blur-xl bg-white/10 p-4 rounded-xl border border-white/15 mb-4">
-                  <div className="flex gap-3 items-start">
-                    <GraduationCap className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
-                    <div>
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60">Universities</p>
-                      <p className="text-sm font-medium">{dest.universities}</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <DollarSign className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
-                    <div>
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60">Cost of Living</p>
-                      <p className="text-sm font-medium">{dest.costOfLiving}</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <Briefcase className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
-                    <div>
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60">Opportunities</p>
-                      <p className="text-sm font-medium text-white/90">{dest.opportunities}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Header — bottom-left aligned */}
-                <div className="mt-auto">
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-1" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.95), 0 0px 4px rgba(0,0,0,0.8)' }}>{dest.name}</h3>
-                  <div className="flex items-center gap-1.5">
+                {/* Glassmorphism Details Card (Small, Top Right) */}
+                <div className="absolute top-4 right-4 sm:top-6 sm:right-6 backdrop-blur-xl bg-black/20 border border-white/20 p-2.5 sm:p-3 rounded-xl shadow-xl flex items-center gap-2.5 w-auto">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
                     <MapPin className="w-3.5 h-3.5 text-accent" />
-                    <span className="text-sm font-semibold tracking-wide text-white/90">{dest.country}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold tracking-widest uppercase text-[9px] sm:text-[10px] mb-0.5">{activeDest.name}, {activeDest.country}</h4>
+                    <p className="text-white/80 text-[8px] sm:text-[9px] font-medium tracking-wide">Study. Grow. Succeed.</p>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
       </Container>
     </section>

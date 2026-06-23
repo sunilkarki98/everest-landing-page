@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, User } from "lucide-react";
 import Image from "next/image";
 import { siteConfig, MenuItem, MenuKey } from "../config/site";
 import { Button } from "@/components/ui/Button";
@@ -231,6 +231,17 @@ export default function Navbar({
                 <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
               </Link>
             </Button>
+
+            {/* ImmiAccount Portal Button */}
+            <a
+              href="https://online.immi.gov.au/ola/app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 hidden xl:flex items-center gap-2 px-4 py-2 text-sm font-bold text-primary bg-primary/5 hover:bg-primary/10 rounded-full transition-colors border border-primary/10"
+            >
+              <User className="w-4 h-4" />
+              ImmiAccount
+            </a>
           </div>
 
           {/* Mobile Hamburger */}
@@ -315,6 +326,19 @@ export default function Navbar({
           >
             Contact
           </Link>
+
+          {/* Mobile ImmiAccount */}
+          <a
+            href="https://online.immi.gov.au/ola/app"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMobileMenu}
+            className="flex items-center justify-center gap-2 w-full py-2.5 mt-2 font-bold text-base rounded-xl transition-colors border-2 border-primary/10 text-primary hover:bg-primary/5"
+          >
+            <User className="w-5 h-5" />
+            ImmiAccount Login
+          </a>
+
           {/* Mobile Book Consultation */}
           <Button
             variant="accent"

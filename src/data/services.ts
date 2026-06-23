@@ -85,7 +85,7 @@ export const migrationServices: ServiceDetail[] = [
   },
   {
     id: "visa-extensions",
-    title: "Visa Extensions (485)",
+    title: "PSW/TR (485)",
     description: "Transition from a Student Visa to a Temporary Graduate Visa (Subclass 485).",
     icon: ShieldCheck,
     overview: "The Temporary Graduate visa (subclass 485) allows international students to live, study and work in Australia after finishing their studies. We ensure you meet the stringent application deadlines and requirements.",
