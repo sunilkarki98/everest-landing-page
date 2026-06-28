@@ -4,13 +4,11 @@ import { getGoogleReviews } from "@/lib/google-reviews";
 
 const WelcomeSection = dynamic(() => import("@/components/sections/WelcomeSection"));
 const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection"));
-const CourseCategoriesSection = dynamic(() => import("@/components/sections/CourseCategoriesSection"));
 const FeaturedSection = dynamic(() => import("@/components/sections/FeaturedSection"));
-const AssociatedUniversities = dynamic(() => import("@/components/sections/AssociatedUniversities"));
+const StudyPathwaysSection = dynamic(() => import("@/components/sections/StudyPathwaysSection"));
 const FeedbackSection = dynamic(() => import("@/components/sections/FeedbackSection"));
 const BlogSection = dynamic(() => import("@/components/sections/BlogSection"));
-const ContactUs = dynamic(() => import("@/components/sections/ContactUs"));
-const BranchesMapSection = dynamic(() => import("@/components/sections/BranchesMapSection"));
+const GlobalContactSection = dynamic(() => import("@/components/sections/GlobalContactSection"));
 const EmployeeSection = dynamic(() => import("@/components/sections/EmployeeSection"));
 
 export default async function Page() {
@@ -29,15 +27,11 @@ export default async function Page() {
       {/* 4. Our Services — 6 premium cards */}
       <ServicesSection />
 
-      {/* 4.5 Popular Course Categories */}
-      <CourseCategoriesSection />
+      {/* 4.5 Study Pathways & Universities */}
+      <StudyPathwaysSection />
 
-
-      {/* 5. Study in Australia — Sydney, Melbourne, Brisbane, Adelaide, Perth */}
+      {/* 6. Study in Australia — Sydney, Melbourne, Brisbane, Adelaide, Perth */}
       <FeaturedSection />
-
-      {/* 6. Partner Universities — Grid */}
-      <AssociatedUniversities />
 
       {/* 3.5. Employee Section */}
       <EmployeeSection />
@@ -49,11 +43,8 @@ export default async function Page() {
       <BlogSection />
 
 
-      {/* 9. Contact Section — Split Layout */}
-      <ContactUs />
-
-      {/* 10. Map Section — Global Offices */}
-      <BranchesMapSection />
+      {/* 9. Global Contact Hub */}
+      <GlobalContactSection />
     </>
   );
 }

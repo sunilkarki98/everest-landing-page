@@ -92,7 +92,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="hidden lg:flex flex-col items-center shrink-0"
           >
             <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl border border-white transform hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-accent/20 w-40 h-40 relative overflow-hidden mb-3">
-              <Image src="/contacusQR.jpeg" alt="Contact QR Code" fill sizes="160px" className="object-cover" />
+              <Image src="/contacusQR.jpeg" alt="Contact QR Code" fill sizes="160px" className="object-cover" priority />
             </div>
             <div className="font-extrabold text-primary text-sm uppercase tracking-widest tracking-[0.2em]">Contact Us</div>
           </motion.div>

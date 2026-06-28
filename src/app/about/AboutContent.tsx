@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import EmployeeSection from "@/components/sections/EmployeeSection";
-import ContactUs from "@/components/sections/ContactUs";
+import CallToAction from "@/components/sections/CallToAction";
 import { Target, Eye, Flag, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function AboutContent() {
@@ -236,7 +236,9 @@ export default function AboutContent() {
                 We are always looking to build successful international partnerships. Collaborate with EEVS to create new educational opportunities and expand global reach together.
               </p>
               <a 
-                href="#contact-us" 
+                href="https://condat.com.au/condat/318/customer?method=website" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 justify-center h-14 px-8 rounded-full font-bold text-base bg-accent text-primary hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_hsl(var(--accent)/0.5)] group"
               >
                 Get In Touch Today
@@ -259,7 +261,7 @@ export default function AboutContent() {
         </Container>
       </section>
 
-      <ContactUs />
+      <CallToAction />
     </main>
   );
 }

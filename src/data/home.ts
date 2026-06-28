@@ -1,6 +1,6 @@
-import { 
-  Users, Award, GraduationCap, HeartHandshake, Globe, Map as MapIcon, 
-  Scale, FileCheck, MapPin, DollarSign, Briefcase 
+import {
+  Users, Award, GraduationCap, HeartHandshake, Globe, Map as MapIcon,
+  Scale, FileCheck
 } from "lucide-react";
 
 export const heroDestinations = [
@@ -151,10 +151,10 @@ export const testimonials = [
 ];
 
 export const activeBranches = [
-  { id: 1, name: "Kathmandu Office", country: "Nepal", query: "Kathmandu, Nepal" },
-  { id: 2, name: "Butwal Office", country: "Nepal", query: "Butwal, Nepal" },
-  { id: 3, name: "Canberra Office", country: "Australia", query: "Canberra, Australia" },
-  { id: 4, name: "Perth Office", country: "Australia", query: "Perth, Australia" },
+  { id: 1, name: "Kathmandu Office", country: "Nepal", query: "Kathmandu, Nepal", address: "Baneshwor, Kathmandu" },
+  { id: 2, name: "Butwal Office", country: "Nepal", query: "Butwal, Nepal", address: "Milanchowk, Butwal" },
+  { id: 3, name: "Canberra Office", country: "Australia", query: "17-23 Oatley Court, Belconnen ACT 2615, Australia", address: "Belconnen, Canberra ACT" },
+  { id: 4, name: "Perth Office", country: "Australia", query: "Perth, Australia", address: "Perth CBD, Western Australia" },
 ];
 
 export const futureBranches = [

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/layout/Container";
-import ContactUs from "@/components/sections/ContactUs";
+import CallToAction from "@/components/sections/CallToAction";
 import { ArrowRight } from "lucide-react";
 import { detailedCourses } from "@/data/courses";
 
@@ -105,7 +105,7 @@ export default function CoursesPage() {
         </Container>
       </section>
 
-      <ContactUs />
+      <CallToAction />
     </main>
   );
 }

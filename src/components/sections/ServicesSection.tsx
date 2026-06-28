@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { motion, AnimatePresence } from "framer-motion";
-import { migrationServices, studyServices, otherServices } from "@/data/services";
+import { migrationServices, studyServices, otherServices, iconMap } from "@/data/services";
 import Link from "next/link";
+import { ChevronRight, ArrowRight } from "lucide-react";
 
 const getHref = (tab: "education" | "migration" | "other", id: string) => {
   if (tab === "education") return `/abroad-study?service=${id}`;
@@ -69,7 +70,7 @@ export default function ServicesSection() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
             >
               {serviceData[activeTab].map((service, index) => {
-                const Icon = service.icon;
+                const Icon = iconMap[service.icon] || ChevronRight;
                 return (
                   <Link href={getHref(activeTab, service.id)} key={service.id} passHref>
                     <motion.div
@@ -89,9 +90,14 @@ export default function ServicesSection() {
                         </h3>
                       </div>
                       
-                      <p className="text-base text-muted-foreground leading-relaxed relative z-10">
+                      <p className="text-base text-muted-foreground leading-relaxed relative z-10 flex-grow">
                         {service.description}
                       </p>
+
+                      {/* Hover Arrow Icon */}
+                      <div className="absolute bottom-5 right-5 w-8 h-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent opacity-0 scale-75 -translate-x-2 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-x-0 transition-all duration-300 shadow-sm z-10">
+                        <ArrowRight size={14} strokeWidth={3} />
+                      </div>
                     </motion.div>
                   </Link>
                 );

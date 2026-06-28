@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileQuestion, ArrowLeft, Home } from "lucide-react";
+import { FileQuestion, Home } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 
@@ -16,7 +16,7 @@ export default function NotFound() {
         <h2 className="text-2xl font-semibold text-primary mb-6">Page Not Found</h2>
         
         <p className="text-muted-foreground mb-10 text-lg">
-          We couldn't find the page you were looking for. It might have been moved or doesn't exist anymore.
+          We couldn&apos;t find the page you were looking for. It might have been moved or doesn&apos;t exist anymore.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

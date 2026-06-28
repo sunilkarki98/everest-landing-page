@@ -119,7 +119,7 @@ export default function Navbar({
       ref={navRef}
       className={`relative z-50 font-sans ${className}`}
     >
-      <div className="max-w-[90rem] mx-auto px-4 lg:px-8">
+      <div className="w-full mx-auto px-4 lg:px-8 xl:px-12">
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-[72px]">
           {/* Logo */}
           <div className="flex items-center gap-2 flex-shrink-0">
@@ -139,13 +139,13 @@ export default function Navbar({
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center h-full space-x-1">
+          <div className="hidden lg:flex flex-1 justify-end items-center h-full space-x-3 lg:space-x-6 xl:space-x-8 px-4 lg:mr-12 xl:mr-16">
             <Link
               href="/"
               className={`px-4 py-2 font-medium relative group ${pathname === "/" ? "text-accent" : "text-primary hover:text-accent"}`}
             >
               Home
-              <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-secondary ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+              <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-primary ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
             </Link>
 
             {menus.map((menu) => (
@@ -160,7 +160,7 @@ export default function Navbar({
                     size={16}
                     className="translate-y-[1px] text-secondary"
                   />
-                  <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-secondary ${menu.href && pathname.startsWith(menu.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+                  <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-primary ${menu.href && pathname.startsWith(menu.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
                 </button>
 
                 <div
@@ -208,28 +208,33 @@ export default function Navbar({
               className={`px-4 py-2 font-medium relative group ${pathname.startsWith("/blog") ? "text-accent" : "text-primary hover:text-accent"}`}
             >
               Blog
-              <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-secondary ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+              <span className={`absolute inset-x-0 bottom-1 h-0.5 transition-transform origin-left bg-primary ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
             </Link>
 
-            <Link
-              href="#contact-us"
+            <a
+              href="https://condat.com.au/condat/318/customer?method=website"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 font-medium relative group text-primary"
             >
               Contact
-              <span className="absolute inset-x-0 -bottom-0.5 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-secondary"></span>
-            </Link>
+              <span className="absolute inset-x-0 -bottom-0.5 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left bg-primary"></span>
+            </a>
+          </div>
 
+          {/* Action Buttons */}
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
             {/* Book Consultation Button */}
             <Button
               variant="accent"
               className="ml-4 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.4)] hover:shadow-[0_0_25px_hsl(var(--accent)/0.7)] transition-all duration-300 hover:-translate-y-0.5 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none"
               asChild
             >
-              <Link href="#contact-us" className="flex items-center justify-center">
+              <a href="https://condat.com.au/condat/318/customer?method=website" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                 <span className="relative z-10 font-bold tracking-wide">Book Consultation</span>
                 {/* Premium Shine Sweep Effect */}
                 <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
-              </Link>
+              </a>
             </Button>
 
             {/* ImmiAccount Portal Button */}
@@ -319,13 +324,15 @@ export default function Navbar({
               </div>
             </div>
           ))}
-          <Link
-            href="#contact-us"
+          <a
+            href="https://condat.com.au/condat/318/customer?method=website"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeMobileMenu}
             className="block py-3 px-4 font-medium text-base rounded-lg text-primary hover:bg-muted"
           >
             Contact
-          </Link>
+          </a>
 
           {/* Mobile ImmiAccount */}
           <a
@@ -345,11 +352,11 @@ export default function Navbar({
             className="w-full mt-2 relative overflow-hidden group shadow-[0_0_15px_hsl(var(--accent)/0.3)] hover:shadow-[0_0_20px_hsl(var(--accent)/0.6)] transition-all duration-300 bg-gradient-to-r from-accent via-yellow-300 to-accent animate-moving-gradient border-none"
             asChild
           >
-            <Link href="#contact-us" onClick={closeMobileMenu} className="flex items-center justify-center">
+            <a href="https://condat.com.au/condat/318/customer?method=website" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="flex items-center justify-center">
               <span className="relative z-10 font-bold tracking-wide">Book Consultation</span>
               {/* Premium Shine Sweep Effect */}
               <span className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-all duration-700 ease-out group-hover:left-[200%] z-0" />
-            </Link>
+            </a>
           </Button>
         </div>
       </div>

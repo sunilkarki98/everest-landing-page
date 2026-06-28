@@ -2,13 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "../../config/site";
-import { Container } from "@/components/layout/Container";
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 
 const FooterSection = () => {
   return (
-    <footer className="bg-primary text-primary-foreground pt-12">
-      <Container className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+    <footer className="bg-navy-dark text-primary-foreground pt-10 border-t border-white/10 shadow-[0_-4px_30px_rgba(0,0,0,0.15)] relative overflow-hidden">
+      <div className="w-full mx-auto px-4 lg:px-8 xl:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-8 lg:gap-8">
         {/* Logo & About */}
         <div className="sm:col-span-2 lg:col-span-1 space-y-4">
           <div className="flex flex-col items-start space-y-4">
@@ -66,7 +65,7 @@ const FooterSection = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-lg font-medium transition-all duration-300 backdrop-blur-sm shadow-sm hover:shadow-md group w-fit"
               >
-                Client Portal (CRM) <ArrowRight className="w-4 h-4 text-secondary group-hover:translate-x-1 transition-transform" />
+                Client Portal (CRM) <ExternalLink className="w-4 h-4 text-secondary group-hover:translate-x-1 transition-transform" />
               </a>
             </li>
           </ul>
@@ -130,24 +129,24 @@ const FooterSection = () => {
             </li>
           </ul>
         </div>
-      </Container>
+      </div>
 
       {/* Bottom Bar */}
-      <div className="mt-10">
+      <div className="mt-8">
         {/* Tagline */}
-        <div className="text-center py-4">
-          <p className="opacity-80 text-sm font-medium">
+        <div className="text-center py-2.5">
+          <p className="opacity-80 text-[13px] font-medium">
             Trusted Education & Visa Services Worldwide
           </p>
         </div>
 
         {/* Gold Divider */}
-        <Container>
-          <div className="h-px bg-accent" />
-        </Container>
+        <div className="w-full mx-auto px-4 lg:px-8 xl:px-12">
+          <div className="h-px bg-accent/80" />
+        </div>
 
         {/* Copyright */}
-        <div className="py-4 text-center opacity-60 text-sm">
+        <div className="py-3 text-center opacity-60 text-[13px]">
           © Everest Education & Visa Services (EEVS). All Rights Reserved.
         </div>
       </div>

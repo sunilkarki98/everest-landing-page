@@ -45,6 +45,7 @@ export default function FeaturedSection() {
       paginate(1);
     }, 5000);
     return () => clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 
   return (
@@ -60,10 +61,10 @@ export default function FeaturedSection() {
                 Popular Destinations
               </p>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-primary mb-2 tracking-tight" style={{ fontFamily: "serif" }}>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-primary mb-2 tracking-tight font-serif">
                 Study Abroad,
               </h2>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-accent italic mb-6 sm:mb-8 tracking-tight" style={{ fontFamily: "serif" }}>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-accent italic mb-6 sm:mb-8 tracking-tight font-serif">
                 Explore the World
               </h2>
 
@@ -76,7 +77,7 @@ export default function FeaturedSection() {
             {/* Changing Content */}
             <div className="relative min-h-[360px] w-full flex flex-col">
               <div className="mb-6">
-                <h3 className="text-4xl sm:text-5xl lg:text-5xl font-medium text-primary tracking-tight" style={{ fontFamily: "serif" }}>
+                <h3 className="text-4xl sm:text-5xl lg:text-5xl font-medium text-primary tracking-tight font-serif">
                   {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
                 </h3>
               </div>

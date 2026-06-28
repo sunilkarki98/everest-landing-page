@@ -1,13 +1,12 @@
 "use client";
 
-import { Phone, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { siteConfig } from "../config/site";
-import { Container } from "@/components/layout/Container";
 
 export default function TopBar() {
   return (
     <div className="bg-primary text-primary-foreground text-sm py-2">
-      <Container className="flex justify-between items-center px-4 lg:px-8">
+      <div className="w-full mx-auto flex justify-between items-center px-4 lg:px-8 xl:px-12">
         {/* Left side: Phone + Email */}
         <div className="flex items-center gap-4 md:gap-6">
           {/* Australia Phone */}
@@ -63,7 +62,7 @@ export default function TopBar() {
             </a>
           ))}
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Star, StarHalf, X, QrCode } from "lucide-react";
+import { ArrowRight, X, QrCode, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -149,12 +149,14 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center"
           >
             {/* Primary CTA */}
-            <Link
-              href="#contact-us"
+            <a
+              href="https://condat.com.au/condat/318/customer?method=website"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-12 sm:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-accent px-8 text-lg sm:text-xl font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
             >
               Book Free Consultation
-            </Link>
+            </a>
 
             <Button variant="outline" className="h-12 sm:h-14 px-6 text-xl font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
               <Link href="#universities">Explore</Link>
@@ -219,14 +221,16 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="bg-white/5 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-lg flex flex-col gap-2.5 w-[240px]"
             >
-              <h4 className="text-sm font-bold text-accent uppercase tracking-wider drop-shadow-md border-b border-white/10 pb-2 mb-1">
+              <h4 className="flex items-center gap-2 text-sm font-bold text-accent uppercase tracking-wider drop-shadow-md border-b border-white/10 pb-2 mb-1">
                 Useful Links
+                <ExternalLink className="w-4 h-4" />
               </h4>
 
               {[
-                { label: "ImmiAccount", href: "https://online.immi.gov.au/ola/app" },
-                { label: "VEVO Check", href: "https://online.immi.gov.au/evo/firstParty?actionType=query" },
-                { label: "PTE Booking", href: "https://www.pearsonpte.com/" },
+                { label: "VEVO Visa Check", href: "https://online.immi.gov.au/evo/firstParty?actionType=query" },
+                { label: "Create USI (Student ID)", href: "https://www.usi.gov.au/students/get-a-usi" },
+                { label: "Apply for TFN (Tax)", href: "https://www.ato.gov.au/Individuals/Tax-file-number/Apply-for-a-TFN/" },
+                { label: "Book PTE Academic", href: "https://www.pearsonpte.com/" },
               ].map((link) => (
                 <a
                   key={link.label}
@@ -235,8 +239,8 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   className="group flex items-center justify-between text-sm font-medium text-white/90 hover:text-accent transition-colors py-1"
                 >
-                  <span>{link.label}</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  <span className="group-hover:underline underline-offset-4 decoration-accent/50">{link.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-accent" />
                 </a>
               ))}
             </motion.div>
@@ -292,7 +296,7 @@ export default function HeroSection() {
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="text-2xl font-bold text-primary mb-2 mt-2 text-center" style={{ fontFamily: "serif" }}>Scan to Connect</h3>
+              <h3 className="text-2xl font-bold text-primary mb-2 mt-2 text-center font-serif">Scan to Connect</h3>
               <p className="text-muted-foreground text-sm text-center mb-8">
                 Open your camera and scan the QR code to chat with us on WhatsApp instantly.
               </p>

@@ -1,7 +1,6 @@
 import React from "react";
 import { PageHeader } from "@/components/layout/PageHeader";
-import ContactUs from "@/components/sections/ContactUs";
-import BranchesMapSection from "@/components/sections/BranchesMapSection";
+import GlobalContactSection from "@/components/sections/GlobalContactSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,11 +19,8 @@ export default function ContactPage() {
       
       {/* We reuse the comprehensive Contact Us form from the homepage */}
       <div className="pt-10">
-        <ContactUs />
+        <GlobalContactSection />
       </div>
-
-      {/* And the premium Branches Map Section */}
-      <BranchesMapSection />
     </main>
   );
 }

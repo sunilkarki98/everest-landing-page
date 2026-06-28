@@ -10,6 +10,13 @@ export interface Testimonial {
   image?: string;
 }
 
+interface GoogleReview {
+  author_name: string;
+  text: string;
+  rating: number;
+  profile_photo_url?: string;
+}
+
 export async function getGoogleReviews(): Promise<Testimonial[]> {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID;
@@ -37,10 +44,10 @@ export async function getGoogleReviews(): Promise<Testimonial[]> {
     const reviews = data.result?.reviews || [];
 
     // Filter only 4 and 5 star reviews
-    const topReviews = reviews.filter((r: any) => r.rating >= 4);
+    const topReviews = reviews.filter((r: GoogleReview) => r.rating >= 4);
 
     // Map Google's review structure to our website's interface
-    const mappedReviews: Testimonial[] = topReviews.map((r: any) => ({
+    const mappedReviews: Testimonial[] = topReviews.map((r: GoogleReview) => ({
       name: r.author_name,
       feedback: r.text,
       rating: r.rating,

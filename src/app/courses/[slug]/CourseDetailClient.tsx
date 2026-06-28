@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/layout/Container";
-import ContactUs from "@/components/sections/ContactUs";
+import CallToAction from "@/components/sections/CallToAction";
 import { detailedCourses } from "@/data/courses";
 import { CheckCircle2, ChevronRight, GraduationCap, Landmark, CircleDollarSign, TrendingUp, BookOpen } from "lucide-react";
 
@@ -80,7 +80,7 @@ export function CourseDetailClient({ slug }: { slug: string }) {
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
-                  <NavIcon size={16} className={`relative z-10 ${isActive ? "text-primary" : "text-slate-400"}`} />
+                  <NavIcon size={18} className={`relative z-10 transition-colors duration-300 ${isActive ? "text-primary" : course.iconColor}`} />
                   <span className="relative z-10">{course.title}</span>
                 </Link>
               );
@@ -196,21 +196,8 @@ export function CourseDetailClient({ slug }: { slug: string }) {
                 </motion.div>
               </AnimatePresence>
 
-              {/* General Industry Context */}
-              <div className="mb-12 p-8 bg-gradient-to-br from-primary/[0.03] to-transparent rounded-3xl border border-primary/5">
-                <h4 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <BookOpen size={14} />
-                  </div>
-                  Why study {currentCourse.title}?
-                </h4>
-                <p className="text-slate-600 leading-relaxed text-lg">
-                  {currentCourse.description}
-                </p>
-              </div>
-
               {/* Unified Key Information Block */}
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 mb-10 shadow-sm">
+              <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 mb-12 shadow-sm">
                 <h4 className="text-lg font-bold text-primary mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                   <div className="w-1.5 h-5 bg-accent rounded-full" />
                   Key Information
@@ -227,7 +214,7 @@ export function CourseDetailClient({ slug }: { slug: string }) {
                       <BookOpen size={16} className="text-accent" /> Standard Duration
                     </span>
                     <div className="flex flex-col gap-1">
-                      {activeProgram.duration.split('|').map((dur, i) => (
+                      {activeProgram.duration.split('|').map((dur: string, i: number) => (
                         <span key={i} className="text-sm font-semibold text-slate-700 block">{dur.trim()}</span>
                       ))}
                     </div>
@@ -259,8 +246,37 @@ export function CourseDetailClient({ slug }: { slug: string }) {
                 </div>
               </div>
 
+              {/* General Industry Context */}
+              <div className="mb-12 p-8 bg-gradient-to-br from-primary/[0.03] to-transparent rounded-3xl border border-primary/5">
+                <h4 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <BookOpen size={14} />
+                  </div>
+                  Why study {currentCourse.title}?
+                </h4>
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  {currentCourse.longDescription}
+                </p>
+              </div>
+
+              {/* Migration Pathway Callout */}
+              <div className="mb-12 p-6 md:p-8 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl border border-emerald-200 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-100/50 rounded-full blur-2xl pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <TrendingUp size={20} className="text-emerald-600" />
+                    </div>
+                    <h4 className="text-lg font-bold text-emerald-800">Migration Pathway</h4>
+                  </div>
+                  <p className="text-emerald-700 leading-relaxed">
+                    Many {currentCourse.title} occupations are listed on Australia&apos;s Skilled Occupation List, providing graduates with a direct pathway to Permanent Residency through skilled migration (Subclass 189, 190, or 491). Combined with a Temporary Graduate Visa (Subclass 485) and a Professional Year Program where applicable, international students can build a complete study-to-PR strategy.
+                  </p>
+                </div>
+              </div>
+
               {/* Top Universities */}
-              <div>
+              <div className="mb-10">
                 <h3 className="text-xl font-bold text-primary mb-6 flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
                     <Landmark size={18} />
@@ -286,13 +302,20 @@ export function CourseDetailClient({ slug }: { slug: string }) {
                 </ul>
               </div>
 
+              {/* Content Disclaimer */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Information on this page is indicative and subject to change. Tuition fees, entry requirements, and intake dates may vary by institution and are updated periodically. <a href="https://condat.com.au/condat/318/customer?method=website" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent font-semibold underline">Contact our counsellors</a> for the latest confirmed details.
+                </p>
+              </div>
+
             </motion.div>
           </div>
         </div>
       </Container>
       
       <div id="contact">
-        <ContactUs />
+        <CallToAction />
       </div>
     </main>
   );

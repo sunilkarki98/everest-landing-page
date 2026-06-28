@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { fadeUpContainer, fadeUpCard } from "@/lib/animations";
 import { siteConfig } from "@/config/site";
@@ -80,16 +80,19 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       {/* Content Box */}
       <div className="relative p-6 sm:p-7 flex flex-col flex-grow bg-white">
         <div className="mb-4">
-           <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-slate-50 border border-slate-100 text-[11px] font-bold text-accent tracking-wider uppercase mb-3">
+           <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-primary text-xs font-bold text-white tracking-wider uppercase mb-3">
              {role}
            </span>
            <h3 className="text-xl sm:text-2xl font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">
              {name}
            </h3>
-           <p className="text-sm font-medium text-slate-500 mt-1">{phone}</p>
+           <p className="text-sm font-semibold text-slate-700 mt-2 flex items-center gap-1.5 antialiased">
+             <Phone className="w-3.5 h-3.5 text-accent" />
+             {phone}
+           </p>
         </div>
         
-        <p className="text-base leading-relaxed text-slate-600 font-light flex-grow">
+        <p className="text-base leading-relaxed text-slate-700 font-medium flex-grow antialiased">
           {description}
         </p>
       </div>
@@ -97,13 +100,6 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
   );
 };
 
-type Employee = {
-  name: string;
-  phone: string;
-  role: string;
-  description: string;
-  image: string;
-};
 
 const EmployeeSection: React.FC = () => {
   return (

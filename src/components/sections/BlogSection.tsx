@@ -2,12 +2,13 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, Calendar, Tag } from "lucide-react";
+import { ArrowRight, Calendar, Clock, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
-import { latestArticles as articles } from "@/data/home";
+import { Badge } from "@/components/ui/Badge";
+import { blogPosts } from "@/data/blog";
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -18,7 +19,20 @@ const cardVariants: Variants = {
   }),
 };
 
+// Format date for display
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-AU", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
+
 export default function BlogSection() {
+  // Show latest 3 blog posts
+  const articles = blogPosts.slice(0, 3);
+
   return (
     <section className="py-10 lg:py-14 bg-background relative overflow-hidden">
       {/* Subtle grid texture */}
@@ -32,16 +46,24 @@ export default function BlogSection() {
       />
 
       <Container className="relative">
-        <SectionHeading
-          eyebrow="Stay Informed"
-          title="Latest Updates"
-          className="mb-10 lg:mb-14"
-        />
+        <div className="flex items-end justify-between mb-10 lg:mb-14">
+          <SectionHeading
+            eyebrow="Insights"
+            title="Insights & Updates"
+            className="mb-0"
+          />
+          <Link
+            href="/blog"
+            className="hidden sm:inline-flex items-center gap-2 text-accent font-bold text-sm hover:translate-x-1 transition-transform"
+          >
+            View All <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {articles.map((article, index) => (
+          {articles.map((post, index) => (
             <motion.div
-              key={article.id}
+              key={post.id}
               custom={index}
               initial="hidden"
               whileInView="visible"
@@ -49,48 +71,72 @@ export default function BlogSection() {
               viewport={{ once: true, amount: 0.2 }}
             >
               <Link
-                href={article.href}
-                className="group relative flex flex-col h-full rounded-2xl bg-white border border-border hover:border-transparent hover:shadow-[0_8px_40px_rgba(0,0,0,0.10)] transition-all duration-400 overflow-hidden"
+                href={`/blog/${post.id}`}
+                className="group flex flex-col h-full rounded-2xl bg-white border border-border hover:border-transparent hover:shadow-[0_8px_40px_rgba(0,0,0,0.10)] transition-all duration-400 overflow-hidden"
               >
-                {/* Top accent bar */}
-                <div className={`h-1.5 w-full bg-gradient-to-r ${article.accent}`} />
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-white/95 text-primary border-none shadow-md backdrop-blur-sm text-xs">
+                      {post.category}
+                    </Badge>
+                  </div>
+                </div>
 
                 <div className="flex flex-col flex-1 p-6 sm:p-7">
-                  {/* Tag + Date row */}
-                  <div className="flex items-center justify-between mb-5">
-                    <span
-                      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full ${article.accentLight}`}
-                    >
-                      <Tag className="w-3 h-3" />
-                      {article.tag}
-                    </span>
-                    <span className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                  {/* Date + Read Time */}
+                  <div className="flex items-center gap-3 text-xs text-slate-700 font-semibold antialiased mb-4">
+                    <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
-                      {article.date}
+                      {formatDate(post.date)}
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5" />
+                      {post.readTime}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-primary leading-snug mb-3 group-hover:text-secondary transition-colors duration-300">
-                    {article.title}
+                  <h3 className="text-lg font-bold text-primary leading-snug mb-3 group-hover:text-accent transition-colors duration-300 line-clamp-2">
+                    {post.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-base leading-relaxed text-muted-foreground flex-1 mb-2">
-                    {article.description}
+                  {/* Excerpt */}
+                  <p className="text-sm leading-relaxed text-muted-foreground flex-1 mb-4 line-clamp-2">
+                    {post.excerpt}
                   </p>
-                </div>
 
-                {/* Hover overlay with centered CTA */}
-                <div className="absolute inset-0 bg-primary/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl">
-                  <span className="flex items-center gap-2 text-sm font-bold text-white drop-shadow-md bg-accent/30 backdrop-blur-md border border-accent/50 px-6 py-3 rounded-full shadow-lg translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    Read More
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
+                  {/* Footer */}
+                  <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-700 uppercase tracking-widest antialiased">
+                      {post.author}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-primary transition-colors">
+                      <ChevronRight size={18} />
+                    </div>
+                  </div>
                 </div>
               </Link>
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile "View All" link */}
+        <div className="mt-8 text-center sm:hidden">
+          <Link
+            href="/blog"
+            className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full font-bold bg-slate-100 text-primary w-full"
+          >
+            View All Insights
+          </Link>
         </div>
       </Container>
     </section>
