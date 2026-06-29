@@ -131,10 +131,10 @@ export function ServiceDetailClient({
                     <ActiveIcon size={40} className="text-accent" />
                   </div>
                   <div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3 leading-tight tracking-tight">
+                    <h2 className="text-ui-section-title font-bold text-primary mb-3 leading-tight tracking-tight">
                       {activeService.title}
                     </h2>
-                    <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                    <p className="text-ui-lead text-slate-500 font-medium leading-relaxed">
                       {activeService.description}
                     </p>
                   </div>
@@ -142,8 +142,8 @@ export function ServiceDetailClient({
 
                 {/* Overview */}
                 <div className="mb-12">
-                  <h3 className="text-xl font-bold text-primary mb-4">Overview</h3>
-                  <p className="text-slate-600 leading-relaxed text-lg">
+                  <h3 className="text-ui-card-title font-bold text-primary mb-4">Overview</h3>
+                  <p className="text-slate-600 leading-relaxed text-ui-body">
                     {activeService.overview}
                   </p>
                 </div>
@@ -156,8 +156,8 @@ export function ServiceDetailClient({
                         <HelpCircle size={18} className="text-amber-600" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-amber-800 mb-2">Important Notice</h4>
-                        <p className="text-amber-700 leading-relaxed text-sm">
+                        <h4 className="font-bold text-amber-800 mb-2 text-ui-card-title">Important Notice</h4>
+                        <p className="text-amber-700 leading-relaxed text-ui-small">
                           {activeService.importantNote}
                         </p>
                       </div>
@@ -168,7 +168,7 @@ export function ServiceDetailClient({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                   {/* Key Benefits Grid */}
                   <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 h-full">
-                    <h3 className="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                    <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
                       <CheckCircle2 className="text-accent" size={20} />
                       Key Benefits & Features
                     </h3>
@@ -178,7 +178,7 @@ export function ServiceDetailClient({
                           <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center shrink-0 mt-0.5">
                             <CheckCircle2 size={14} className="text-accent" />
                           </div>
-                          <span className="text-sm font-semibold text-slate-700 leading-snug">{benefit}</span>
+                          <span className="text-ui-small font-semibold text-slate-700 leading-snug">{benefit}</span>
                         </div>
                       ))}
                     </div>
@@ -187,7 +187,7 @@ export function ServiceDetailClient({
                   {/* Eligibility / Who Is This For? */}
                   {activeService.eligibility && (
                     <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm h-full">
-                      <h3 className="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                      <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
                         <ListChecks className="text-emerald-500" size={20} />
                         Eligibility Criteria
                       </h3>
@@ -197,7 +197,7 @@ export function ServiceDetailClient({
                             <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5">
                               <CheckCircle2 size={12} className="text-emerald-500" />
                             </div>
-                            <span className="text-slate-600 text-sm leading-relaxed">{item}</span>
+                            <span className="text-slate-600 text-ui-small leading-relaxed">{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -207,7 +207,7 @@ export function ServiceDetailClient({
 
                 {/* Process Steps */}
                 <div className="mb-12">
-                  <h3 className="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                  <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
                     <ListChecks className="text-secondary" size={24} />
                     Our Process
                   </h3>
@@ -223,8 +223,8 @@ export function ServiceDetailClient({
                           )}
                         </div>
                         <div className="pt-2 pb-6">
-                          <h4 className="text-lg font-bold text-primary mb-2">{step.title}</h4>
-                          <p className="text-slate-600 leading-relaxed">{step.desc}</p>
+                          <h4 className="text-ui-card-title font-bold text-primary mb-2">{step.title}</h4>
+                          <p className="text-slate-600 leading-relaxed text-ui-body">{step.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -233,21 +233,21 @@ export function ServiceDetailClient({
 
                 {/* FAQs - Accordion */}
                 <div className="border-t border-slate-100 pt-10">
-                  <h3 className="text-xl font-bold text-primary mb-6 flex items-center gap-2">
+                  <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
                     <HelpCircle className="text-slate-400" size={24} />
                     Frequently Asked Questions
                   </h3>
                   <div className="space-y-3">
                     {activeService.faqs.map((faq, i) => (
                       <details key={i} className="group bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-slate-300 transition-colors [&_summary::-webkit-details-marker]:hidden">
-                        <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-primary text-base">
+                        <summary className="flex items-center justify-between p-6 cursor-pointer font-bold text-primary text-ui-body">
                           <span>{faq.q}</span>
                           <span className="transition-transform group-open:rotate-180 w-6 h-6 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 shrink-0">
                             <ChevronRight size={16} className="group-open:hidden" />
                             <ChevronRight size={16} className="hidden group-open:block rotate-90" />
                           </span>
                         </summary>
-                        <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4 mt-2 hidden group-open:block animate-in fade-in slide-in-from-top-2">
+                        <div className="px-6 pb-6 text-slate-600 text-ui-small leading-relaxed border-t border-slate-100 pt-4 mt-2 hidden group-open:block animate-in fade-in slide-in-from-top-2">
                           {faq.a}
                         </div>
                       </details>
@@ -259,8 +259,8 @@ export function ServiceDetailClient({
                 <div className="mt-10 p-6 md:p-8 bg-gradient-to-br from-[#2a4f8f] to-[#1a365d] rounded-2xl text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
                   <div className="relative z-10 flex-1 text-center md:text-left">
-                    <h4 className="font-bold text-xl md:text-2xl mb-2">Need Professional Guidance?</h4>
-                    <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                    <h4 className="font-bold text-ui-card-title mb-2">Need Professional Guidance?</h4>
+                    <p className="text-white/80 text-ui-body leading-relaxed">
                       Have questions about {activeService.title}? Speak directly to our Everest Migration Experts to explore your options.
                     </p>
                   </div>

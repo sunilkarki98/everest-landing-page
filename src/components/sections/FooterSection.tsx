@@ -20,11 +20,11 @@ const FooterSection = () => {
                 className="object-contain w-36 h-auto"
               />
             </div>
-            <p className="text-base text-white/80">Since <span className="text-accent font-bold text-base">{siteConfig.foundedYear}</span></p>
-            <p className="text-base opacity-60">{siteConfig.description}</p>
+            <p className="text-ui-body text-white/80">Since <span className="text-accent font-bold text-ui-body">{siteConfig.foundedYear}</span></p>
+            <p className="text-ui-body opacity-60">{siteConfig.description}</p>
           </div>
           <div className="mt-6">
-            <h3 className="font-bold text-white mb-3 text-sm tracking-wider uppercase">Follow Us On</h3>
+            <h3 className="font-bold text-white mb-3 text-ui-small tracking-wider uppercase">Follow Us On</h3>
             <div className="flex gap-5 items-center">
               <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors text-white hover:text-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
@@ -135,7 +135,7 @@ const FooterSection = () => {
       <div className="mt-8">
         {/* Tagline */}
         <div className="text-center py-2.5">
-          <p className="opacity-80 text-[13px] font-medium">
+          <p className="opacity-80 text-ui-small font-medium">
             Trusted Education & Visa Services Worldwide
           </p>
         </div>
@@ -146,7 +146,7 @@ const FooterSection = () => {
         </div>
 
         {/* Copyright */}
-        <div className="py-3 text-center opacity-60 text-[13px]">
+        <div className="py-3 text-center opacity-60 text-ui-small">
           © Everest Education & Visa Services (EEVS). All Rights Reserved.
         </div>
       </div>

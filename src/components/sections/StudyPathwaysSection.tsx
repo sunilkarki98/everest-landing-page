@@ -44,15 +44,15 @@ export default function StudyPathwaysSection() {
           
           {/* Left Content (Text) */}
           <div className="xl:w-5/12 relative z-10 flex flex-col justify-center">
-            <div className="inline-flex items-center self-start gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-bold mb-6 uppercase tracking-wider">
+            <div className="inline-flex items-center self-start gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-ui-small font-bold mb-6 uppercase tracking-wider">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               Your Academic Future
             </div>
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-primary mb-6 leading-[1.1] tracking-tight">
+            <h2 className="text-ui-section-title font-extrabold text-primary mb-6 tracking-tight">
               Study Pathways &<br />
               <span className="text-accent">Partner Universities</span>
             </h2>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-lg mb-8">
+            <p className="text-ui-lead text-slate-600 leading-relaxed max-w-lg mb-8">
               Explore our core study disciplines and discover the world-class Australian institutions where you can launch your career. We provide comprehensive study support across all major academic fields.
             </p>
             <Link href="/courses" className="inline-flex items-center self-start gap-2 font-bold text-primary hover:text-accent transition-colors duration-300 group">
@@ -73,11 +73,11 @@ export default function StudyPathwaysSection() {
                         <div className={`w-12 h-12 rounded-xl ${course.bgLight} ${course.borderLight} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 shadow-sm`}>
                           <Icon size={24} className={course.iconColor} strokeWidth={2.5} />
                         </div>
-                        <h4 className={`text-base font-extrabold text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r ${course.color} transition-all leading-tight antialiased tracking-tight`}>
+                        <h4 className={`text-ui-card-title font-extrabold text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r ${course.color} transition-all leading-tight antialiased tracking-tight`}>
                           {course.title}
                         </h4>
                       </div>
-                      <p className="text-slate-600 font-medium text-[13px] leading-relaxed mb-4 flex-grow antialiased">
+                      <p className="text-slate-600 font-medium text-ui-body leading-relaxed mb-4 flex-grow antialiased">
                         {course.tagline || course.description.substring(0, 80) + '...'}
                       </p>
                       
@@ -99,9 +99,9 @@ export default function StudyPathwaysSection() {
           {/* Partner Institutions Section */}
           <div className="mb-12">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-              <h3 className="text-2xl font-bold text-primary">Study at Our <span className="text-accent">300+</span> Global Partner Institutions</h3>
+              <h3 className="text-ui-card-title text-primary">Study at Our <span className="text-accent">300+</span> Global Partner Institutions</h3>
               <div className="flex items-center gap-4">
-                <Link href="/about" className="hidden md:flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-accent transition-colors">
+                <Link href="/about" className="hidden md:flex items-center gap-2 text-ui-small font-semibold text-slate-500 hover:text-accent transition-colors">
                   View All Partners <ArrowRight size={16} />
                 </Link>
                 <div className="flex items-center gap-2">
@@ -135,11 +135,11 @@ export default function StudyPathwaysSection() {
                     )}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h4 className="text-sm font-bold text-primary group-hover:text-accent transition-colors truncate leading-snug mb-1">
+                    <h4 className="text-ui-body font-bold text-primary group-hover:text-accent transition-colors truncate leading-snug mb-1">
                       {uni.name}
                     </h4>
-                    <span className="text-xs text-slate-500 font-medium flex items-center gap-1.5 truncate">
-                      <span className="text-sm leading-none shrink-0" title={uni.country}>{getFlagEmoji(uni.country)}</span>
+                    <span className="text-ui-small text-slate-500 font-medium flex items-center gap-1.5 truncate">
+                      <span className="text-ui-small leading-none shrink-0" title={uni.country}>{getFlagEmoji(uni.country)}</span>
                       <span className="truncate">{uni.location.split(',')[0]}, {uni.country}</span>
                     </span>
                   </div>
@@ -152,8 +152,8 @@ export default function StudyPathwaysSection() {
                   <ArrowRight size={24} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h4 className="text-sm font-bold text-slate-700 mb-0.5 truncate">Explore More</h4>
-                  <span className="text-xs text-slate-500 font-medium truncate block">300+ Partners</span>
+                  <h4 className="text-ui-body font-bold text-slate-700 mb-0.5 truncate">Explore More</h4>
+                  <span className="text-ui-small text-slate-500 font-medium truncate block">300+ Partners</span>
                 </div>
               </Link>
             </div>
@@ -169,8 +169,8 @@ export default function StudyPathwaysSection() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
               </div>
               <div>
-                <h4 className="text-white font-bold text-lg mb-1">Not sure where to start?</h4>
-                <p className="text-white/70 text-sm">Get personalized guidance from our experienced education consultants.</p>
+                <h4 className="text-white font-bold text-ui-card-title mb-1">Not sure where to start?</h4>
+                <p className="text-white/70 text-ui-body">Get personalized guidance from our experienced education consultants.</p>
               </div>
             </div>
             

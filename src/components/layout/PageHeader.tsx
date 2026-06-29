@@ -41,7 +41,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="flex items-center gap-2 text-base font-medium text-muted-foreground mb-4"
+                className="flex items-center gap-2 text-ui-body font-medium text-muted-foreground mb-4"
               >
                 <Link href="/" className="hover:text-accent transition-colors">
                   Home
@@ -66,7 +66,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight mb-4 text-primary"
+              className="text-ui-section-title font-medium tracking-tight mb-4 text-primary"
             >
               {title}
             </motion.h1>
@@ -77,7 +77,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl"
+                className="text-ui-lead text-muted-foreground leading-relaxed max-w-2xl"
               >
                 {subtitle}
               </motion.p>
@@ -94,7 +94,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl border border-white transform hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-accent/20 w-40 h-40 relative overflow-hidden mb-3">
               <Image src="/contacusQR.jpeg" alt="Contact QR Code" fill sizes="160px" className="object-cover" priority />
             </div>
-            <div className="font-extrabold text-primary text-sm uppercase tracking-widest tracking-[0.2em]">Contact Us</div>
+            <div className="font-extrabold text-primary text-ui-small uppercase tracking-widest tracking-[0.2em]">Contact Us</div>
           </motion.div>
         </div>
       </Container>

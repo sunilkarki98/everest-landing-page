@@ -192,7 +192,7 @@ export default function Navbar({
                       >
                         <div className="font-medium">{item.label}</div>
                         {item.description && (
-                          <div className="text-sm mt-1 opacity-80">
+                          <div className="text-ui-small mt-1 opacity-80">
                             {item.description}
                           </div>
                         )}
@@ -242,7 +242,7 @@ export default function Navbar({
               href="https://online.immi.gov.au/ola/app"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 hidden xl:flex items-center gap-2 px-4 py-2 text-sm font-bold text-primary bg-primary/5 hover:bg-primary/10 rounded-full transition-colors border border-primary/10"
+              className="ml-2 hidden xl:flex items-center gap-2 px-4 py-2 text-ui-small font-bold text-primary bg-primary/5 hover:bg-primary/10 rounded-full transition-colors border border-primary/10"
             >
               <User className="w-4 h-4" />
               ImmiAccount
@@ -315,7 +315,7 @@ export default function Navbar({
                       key={item.label}
                       href={item.href}
                       onClick={closeMobileMenu}
-                      className="block py-2 px-4 text-sm rounded-md transition-colors text-foreground hover:bg-secondary hover:text-secondary-foreground"
+                      className="block py-2 px-4 text-ui-small rounded-md transition-colors text-foreground hover:bg-secondary hover:text-secondary-foreground"
                     >
                       {item.label}
                     </Link>

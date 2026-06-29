@@ -54,7 +54,7 @@ export default function BlogSection() {
           />
           <Link
             href="/blog"
-            className="hidden sm:inline-flex items-center gap-2 text-accent font-bold text-sm hover:translate-x-1 transition-transform"
+            className="hidden sm:inline-flex items-center gap-2 text-accent font-bold text-ui-small hover:translate-x-1 transition-transform"
           >
             View All <ArrowRight className="w-4 h-4" />
           </Link>
@@ -84,7 +84,7 @@ export default function BlogSection() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-white/95 text-primary border-none shadow-md backdrop-blur-sm text-xs">
+                    <Badge className="bg-white/95 text-primary border-none shadow-md backdrop-blur-sm text-ui-small">
                       {post.category}
                     </Badge>
                   </div>
@@ -92,7 +92,7 @@ export default function BlogSection() {
 
                 <div className="flex flex-col flex-1 p-6 sm:p-7">
                   {/* Date + Read Time */}
-                  <div className="flex items-center gap-3 text-xs text-slate-700 font-semibold antialiased mb-4">
+                  <div className="flex items-center gap-3 text-ui-small text-slate-700 font-semibold antialiased mb-4">
                     <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
                       {formatDate(post.date)}
@@ -105,18 +105,18 @@ export default function BlogSection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-bold text-primary leading-snug mb-3 group-hover:text-accent transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-ui-card-title text-primary leading-snug mb-3 group-hover:text-accent transition-colors duration-300 line-clamp-2">
                     {post.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-sm leading-relaxed text-muted-foreground flex-1 mb-4 line-clamp-2">
+                  <p className="text-ui-body text-muted-foreground flex-1 mb-4 line-clamp-2">
                     {post.excerpt}
                   </p>
 
                   {/* Footer */}
                   <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-700 uppercase tracking-widest antialiased">
+                    <span className="text-ui-small font-bold text-slate-700 uppercase tracking-widest antialiased">
                       {post.author}
                     </span>
                     <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-primary transition-colors">

@@ -69,7 +69,7 @@ export default function HeroSection() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg hover:bg-white/20 transition-colors cursor-default">
               <span className="text-lg leading-none">🏆</span>
-              <span className="text-sm font-bold text-white tracking-wide uppercase">The Most Trusted Agency</span>
+              <span className="text-ui-small font-bold text-white tracking-wide uppercase">The Most Trusted Agency</span>
             </div>
 
             <a
@@ -94,7 +94,7 @@ export default function HeroSection() {
                   <path fill="url(#halfStar)" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                 </svg>
               </div>
-              <span className="text-sm font-bold text-white tracking-wide uppercase group-hover:text-accent transition-colors">4.8 Google Rating</span>
+              <span className="text-ui-small font-bold text-white tracking-wide uppercase group-hover:text-accent transition-colors">4.8 Google Rating</span>
             </a>
           </motion.div>
 
@@ -103,7 +103,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="text-4xl sm:text-5xl font-[family-name:var(--font-caveat)] text-accent tracking-wide mb-2 drop-shadow-md"
+            className="text-ui-section-title font-[family-name:var(--font-caveat)] text-accent tracking-wide mb-2 drop-shadow-md"
           >
             Your Journey Starts Here
           </motion.div>
@@ -111,11 +111,11 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-medium text-white leading-[1.1] tracking-tight mb-6"
+            className="text-ui-hero font-medium text-white leading-[1.1] tracking-tight mb-6"
           >
-            Migrate <span className="text-accent text-5xl lg:text-6xl font-bold align-middle">·</span> Study <span className="text-accent text-5xl lg:text-6xl font-bold align-middle">·</span> Work
+            Migrate <span className="text-accent text-ui-hero font-bold align-middle">·</span> Study <span className="text-accent text-ui-hero font-bold align-middle">·</span> Work
             <br />
-            <span className="text-accent inline-flex relative min-w-[12rem] sm:min-w-[20rem] font-[family-name:var(--font-caveat)] font-medium text-5xl sm:text-6xl lg:text-[5.5rem] leading-none tracking-normal mt-2">
+            <span className="text-accent inline-flex relative min-w-[12rem] sm:min-w-[20rem] font-[family-name:var(--font-caveat)] font-medium text-ui-hero leading-none tracking-normal mt-2">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentIndex}
@@ -136,7 +136,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-white/90 mb-8 max-w-xl drop-shadow-md font-medium"
+            className="text-ui-lead text-white/90 mb-8 max-w-xl drop-shadow-md font-medium"
           >
             Helping students and migrants build a brighter future with <span className="font-bold text-accent">honesty</span>, <span className="font-bold text-accent">care</span> & <span className="font-bold text-accent">professional</span> guidance.
           </motion.p>
@@ -153,12 +153,12 @@ export default function HeroSection() {
               href="https://condat.com.au/condat/318/customer?method=website"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 sm:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-accent px-8 text-lg sm:text-xl font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
+              className="inline-flex h-12 sm:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-accent px-8 text-ui-card-title font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
             >
               Book Free Consultation
             </a>
 
-            <Button variant="outline" className="h-12 sm:h-14 px-6 text-xl font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
+            <Button variant="outline" className="h-12 sm:h-14 px-6 text-ui-card-title font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
               <Link href="#universities">Explore</Link>
             </Button>
           </motion.div>
@@ -194,10 +194,10 @@ export default function HeroSection() {
                     />
                   </div>
                   <div>
-                    <p className="font-extrabold text-xl sm:text-2xl text-white" style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.6), 2px 2px 0 rgba(0,0,0,0.4), 3px 3px 0 rgba(0,0,0,0.2)' }}>
+                    <p className="font-extrabold text-ui-card-title text-white" style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.6), 2px 2px 0 rgba(0,0,0,0.4), 3px 3px 0 rgba(0,0,0,0.2)' }}>
                       {stat.value}
                     </p>
-                    <p className="text-sm font-bold text-accent uppercase tracking-widest drop-shadow-md">
+                    <p className="text-ui-small font-bold text-accent uppercase tracking-widest drop-shadow-md">
                       {stat.label}
                     </p>
                   </div>
@@ -221,7 +221,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="bg-white/5 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-lg flex flex-col gap-2.5 w-[240px]"
             >
-              <h4 className="flex items-center gap-2 text-sm font-bold text-accent uppercase tracking-wider drop-shadow-md border-b border-white/10 pb-2 mb-1">
+              <h4 className="flex items-center gap-2 text-ui-small font-bold text-accent uppercase tracking-wider drop-shadow-md border-b border-white/10 pb-2 mb-1">
                 Useful Links
                 <ExternalLink className="w-4 h-4" />
               </h4>
@@ -237,7 +237,7 @@ export default function HeroSection() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between text-sm font-medium text-white/90 hover:text-accent transition-colors py-1"
+                  className="group flex items-center justify-between text-ui-body font-medium text-white/90 hover:text-accent transition-colors py-1"
                 >
                   <span className="group-hover:underline underline-offset-4 decoration-accent/50">{link.label}</span>
                   <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-accent" />
@@ -256,10 +256,10 @@ export default function HeroSection() {
                 <QrCode className="w-5 h-5 text-primary" />
               </div>
               <div className="text-left">
-                <p className="font-extrabold text-white text-sm tracking-tight drop-shadow-md leading-none mb-1">
+                <p className="font-extrabold text-white text-ui-body tracking-tight drop-shadow-md leading-none mb-1">
                   Got Questions?
                 </p>
-                <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-accent drop-shadow-md leading-none">
+                <p className="text-ui-small font-bold uppercase tracking-[0.15em] text-accent drop-shadow-md leading-none">
                   Scan to WhatsApp
                 </p>
               </div>
@@ -296,8 +296,8 @@ export default function HeroSection() {
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="text-2xl font-bold text-primary mb-2 mt-2 text-center font-serif">Scan to Connect</h3>
-              <p className="text-muted-foreground text-sm text-center mb-8">
+              <h3 className="text-ui-section-title font-bold text-primary mb-2 mt-2 text-center font-serif">Scan to Connect</h3>
+              <p className="text-muted-foreground text-ui-body text-center mb-8">
                 Open your camera and scan the QR code to chat with us on WhatsApp instantly.
               </p>
 

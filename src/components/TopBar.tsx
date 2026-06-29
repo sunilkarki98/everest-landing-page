@@ -5,7 +5,7 @@ import { siteConfig } from "../config/site";
 
 export default function TopBar() {
   return (
-    <div className="bg-primary text-primary-foreground text-sm py-2">
+    <div className="bg-primary text-primary-foreground text-ui-small py-2">
       <div className="w-full mx-auto flex justify-between items-center px-4 lg:px-8 xl:px-12">
         {/* Left side: Phone + Email */}
         <div className="flex items-center gap-4 md:gap-6">

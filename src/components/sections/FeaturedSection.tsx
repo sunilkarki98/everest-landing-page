@@ -57,18 +57,18 @@ export default function FeaturedSection() {
           <div className="w-full lg:w-[40%] flex flex-col justify-center items-start relative z-10 py-4 lg:py-8">
             {/* Header Content */}
             <div className="mb-6 w-full">
-              <p className="text-[15px] sm:text-base font-bold uppercase tracking-[0.2em] text-accent mb-4 sm:mb-6">
+              <p className="text-ui-small font-bold uppercase tracking-[0.2em] text-accent mb-4 sm:mb-6">
                 Popular Destinations
               </p>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-primary mb-2 tracking-tight font-serif">
+              <h2 className="text-ui-section-title font-medium text-primary mb-2 tracking-tight font-serif">
                 Study Abroad,
               </h2>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-accent italic mb-6 sm:mb-8 tracking-tight font-serif">
+              <h2 className="text-ui-section-title font-medium text-accent italic mb-6 sm:mb-8 tracking-tight font-serif">
                 Explore the World
               </h2>
 
-              <p className="text-muted-foreground max-w-md text-base sm:text-base leading-relaxed mb-2">
+              <p className="text-muted-foreground max-w-md text-ui-body leading-relaxed mb-2">
                 Discover top cities around the world and begin a life-changing academic journey & career.
               </p>
 
@@ -77,12 +77,12 @@ export default function FeaturedSection() {
             {/* Changing Content */}
             <div className="relative min-h-[360px] w-full flex flex-col">
               <div className="mb-6">
-                <h3 className="text-4xl sm:text-5xl lg:text-5xl font-medium text-primary tracking-tight font-serif">
+                <h3 className="text-ui-section-title font-medium text-primary tracking-tight font-serif">
                   {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
                 </h3>
               </div>
 
-              <p className="text-muted-foreground text-[15px] sm:text-base leading-relaxed mb-8 sm:mb-10 max-w-[420px] min-h-[100px] sm:min-h-[80px]">
+              <p className="text-muted-foreground text-ui-body leading-relaxed mb-8 sm:mb-10 max-w-[420px] min-h-[100px] sm:min-h-[80px]">
                 Experience world-class education and a vibrant lifestyle in {activeDest.country}. {activeDest.name} offers top universities, diverse culture, and {activeDest.opportunities.toLowerCase()}
               </p>
 
@@ -91,19 +91,19 @@ export default function FeaturedSection() {
                   <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <GraduationCap className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="text-[10px] font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
+                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
                 </div>
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <Users className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="text-[10px] font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
+                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
                 </div>
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <Coffee className="w-5 h-5 text-accent" />
                   </div>
-                  <span className="text-[10px] font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
+                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
                 </div>
               </div>
 
@@ -149,8 +149,8 @@ export default function FeaturedSection() {
                     <MapPin className="w-3.5 h-3.5 text-accent" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold tracking-widest uppercase text-[9px] sm:text-[10px] mb-0.5">{activeDest.name}, {activeDest.country}</h4>
-                    <p className="text-white/80 text-[8px] sm:text-[9px] font-medium tracking-wide">Study. Grow. Succeed.</p>
+                    <h4 className="text-white font-bold tracking-widest uppercase text-ui-small mb-0.5">{activeDest.name}, {activeDest.country}</h4>
+                    <p className="text-white/80 text-ui-small font-medium tracking-wide">Study. Grow. Succeed.</p>
                   </div>
                 </div>
               </motion.div>

@@ -176,6 +176,45 @@ For Ahilya & Amulya — and for all who seek a better future.
   }
 }
 
+/* -------------------------------------------------------------------------
+   Typography Design System (Semantic Scale)
+------------------------------------------------------------------------- */
+@utility text-ui-hero {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-ui-section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+@utility text-ui-card-title {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+@utility text-ui-lead {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  line-height: 1.6;
+}
+
+@utility text-ui-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@utility text-ui-small {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
 /* ─── Premium Button Animation ─── */
 @keyframes moving-gradient {
   0% {

@@ -47,7 +47,7 @@ export default function ServicesSection() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`px-6 py-3 rounded-full text-sm sm:text-base font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full text-ui-body font-semibold transition-all duration-300 ${
                 activeTab === tab.id
                   ? "bg-accent text-primary shadow-lg shadow-accent/20"
                   : "bg-white text-muted-foreground border border-slate-200 hover:bg-slate-100"
@@ -85,12 +85,12 @@ export default function ServicesSection() {
                         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-gold flex items-center justify-center shrink-0 shadow-sm shadow-accent/20 group-hover:scale-110 transition-transform duration-300">
                           <Icon size={24} className="text-primary" strokeWidth={2} />
                         </div>
-                        <h3 className="text-base font-bold text-primary group-hover:text-accent transition-colors duration-300 leading-tight pt-1">
+                        <h3 className="text-ui-card-title text-primary group-hover:text-accent transition-colors duration-300 leading-tight pt-1">
                           {service.title}
                         </h3>
                       </div>
                       
-                      <p className="text-base text-muted-foreground leading-relaxed relative z-10 flex-grow">
+                      <p className="text-ui-body text-muted-foreground leading-relaxed relative z-10 flex-grow">
                         {service.description}
                       </p>
 

@@ -80,19 +80,19 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       {/* Content Box */}
       <div className="relative p-6 sm:p-7 flex flex-col flex-grow bg-white">
         <div className="mb-4">
-           <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-primary text-xs font-bold text-white tracking-wider uppercase mb-3">
+           <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-primary text-ui-small font-bold text-white tracking-wider uppercase mb-3">
              {role}
            </span>
-           <h3 className="text-xl sm:text-2xl font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">
+           <h3 className="text-ui-card-title font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">
              {name}
            </h3>
-           <p className="text-sm font-semibold text-slate-700 mt-2 flex items-center gap-1.5 antialiased">
+           <p className="text-ui-small font-semibold text-slate-700 mt-2 flex items-center gap-1.5 antialiased">
              <Phone className="w-3.5 h-3.5 text-accent" />
              {phone}
            </p>
         </div>
         
-        <p className="text-base leading-relaxed text-slate-700 font-medium flex-grow antialiased">
+        <p className="text-ui-body leading-relaxed text-slate-700 font-medium flex-grow antialiased">
           {description}
         </p>
       </div>

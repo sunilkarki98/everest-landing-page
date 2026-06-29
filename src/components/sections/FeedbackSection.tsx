@@ -23,14 +23,14 @@ function TestimonialCard({ item }: { item: Testimonial }) {
       <div className="flex justify-between items-start mb-6">
         <Quote className="w-8 h-8 text-primary/20 group-hover:text-primary transition-colors" />
         {item.outcome && (
-          <div className="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">
+          <div className="bg-green-100 text-green-700 text-ui-small font-bold px-3 py-1 rounded-full">
             {item.outcome}
           </div>
         )}
       </div>
 
       {/* Feedback */}
-      <p className="text-base sm:text-lg leading-relaxed mb-8 flex-1 text-foreground italic">
+      <p className="text-ui-body leading-relaxed mb-8 flex-1 text-foreground italic">
         &ldquo;{item.feedback}&rdquo;
       </p>
 
@@ -47,13 +47,13 @@ function TestimonialCard({ item }: { item: Testimonial }) {
            {item.image ? (
              <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
            ) : (
-             <span className="text-lg">{item.name.charAt(0)}</span>
+             <span className="text-ui-card-title">{item.name.charAt(0)}</span>
            )}
-           {item.flag && <div className="absolute -bottom-1 -right-1 text-sm bg-white rounded-full leading-none shadow-sm z-10">{item.flag}</div>}
+           {item.flag && <div className="absolute -bottom-1 -right-1 text-ui-small bg-white rounded-full leading-none shadow-sm z-10">{item.flag}</div>}
         </div>
         <div>
-          <p className="font-bold text-primary text-sm sm:text-base">{item.name}</p>
-          {item.course && <p className="text-xs text-muted-foreground mt-0.5 font-medium">{item.course}</p>}
+          <p className="font-bold text-primary text-ui-body">{item.name}</p>
+          {item.course && <p className="text-ui-small text-muted-foreground mt-0.5 font-medium">{item.course}</p>}
         </div>
       </div>
     </Card>
@@ -100,7 +100,7 @@ export default function FeedbackSection({ testimonials }: { testimonials: Testim
             titleColor="text-primary-foreground"
             className="mb-4"
           />
-          <p className="text-white/80 max-w-2xl mx-auto text-base sm:text-lg mb-8">
+          <p className="text-white/80 max-w-2xl mx-auto text-ui-lead mb-8">
             Real experiences from students who achieved their study and migration goals with {siteConfig.shortName}.
           </p>
           <a

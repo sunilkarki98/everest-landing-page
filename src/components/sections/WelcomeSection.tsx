@@ -29,7 +29,7 @@ export default function WelcomeSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-text font-semibold text-sm uppercase tracking-widest mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-text font-semibold text-ui-small uppercase tracking-widest mb-6"
           >
             <CheckCircle2 size={16} /> Why Choose EEVS
           </motion.div>
@@ -39,7 +39,7 @@ export default function WelcomeSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight"
+            className="text-ui-section-title font-bold text-primary mb-6 tracking-tight"
           >
             Everest Since <span className="text-accent-text">2011</span>
           </motion.h2>
@@ -49,7 +49,7 @@ export default function WelcomeSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl text-muted-foreground leading-relaxed"
+            className="text-ui-lead text-muted-foreground leading-relaxed"
           >
             A trusted education and migration consultancy helping students and migrants achieve their academic and career goals in Australia and beyond.
           </motion.p>
@@ -82,13 +82,13 @@ export default function WelcomeSection() {
                     <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent via-amber-400 to-gold flex items-center justify-center shrink-0 shadow-md shadow-accent/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                       <Icon size={24} className="text-primary" strokeWidth={2} />
                     </div>
-                    <h3 className="text-base font-bold text-primary group-hover:text-accent-text transition-colors duration-300 leading-tight">
+                    <h3 className="text-ui-card-title text-primary group-hover:text-accent-text transition-colors duration-300 leading-tight">
                       {highlight.title}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="relative z-10 text-base text-muted-foreground leading-relaxed">
+                  <p className="relative z-10 text-ui-body text-muted-foreground leading-relaxed">
                     {highlight.description}
                   </p>
                 </motion.div>
@@ -117,7 +117,7 @@ export default function WelcomeSection() {
                     <div className="mb-1">
                       <Counter target={item.number} suffix={item.suffix} />
                     </div>
-                    <p className="text-xs sm:text-sm font-bold text-primary opacity-80 uppercase tracking-wider">
+                    <p className="text-ui-small font-bold text-primary opacity-80 uppercase tracking-wider">
                       {item.label}
                     </p>
                   </motion.div>
@@ -134,8 +134,8 @@ export default function WelcomeSection() {
                   <ShieldCheck className="w-6 h-6 text-accent" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-base leading-tight antialiased">Officially Recognized</p>
-                  <p className="text-accent text-xs font-bold tracking-widest uppercase mt-0.5 antialiased">& Fully Accredited</p>
+                  <p className="text-white font-bold text-ui-body leading-tight antialiased">Officially Recognized</p>
+                  <p className="text-accent text-ui-small font-bold tracking-widest uppercase mt-0.5 antialiased">& Fully Accredited</p>
                 </div>
               </div>
 
@@ -163,8 +163,8 @@ export default function WelcomeSection() {
                         />
                       </div>
                       <div>
-                        <p className="text-white font-bold text-xs tracking-wide antialiased leading-tight">{item.name}</p>
-                        <p className="text-white/70 text-[10px] font-medium mt-0.5 leading-snug antialiased truncate">{item.desc}</p>
+                        <p className="text-white font-bold text-ui-small tracking-wide antialiased leading-tight">{item.name}</p>
+                        <p className="text-white/70 text-ui-small font-medium mt-0.5 leading-snug antialiased truncate">{item.desc}</p>
                       </div>
                     </motion.div>
                   );
