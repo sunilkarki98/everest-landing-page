@@ -86,30 +86,30 @@ export default function FeaturedSection() {
                 Experience world-class education and a vibrant lifestyle in {activeDest.country}. {activeDest.name} offers top universities, diverse culture, and {activeDest.opportunities.toLowerCase()}
               </p>
 
-              <div className="flex flex-wrap items-center gap-6 sm:gap-10 mb-8 sm:mb-10">
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
-                    <GraduationCap className="w-5 h-5 text-primary" />
+              <div className="flex items-center justify-between gap-2 sm:gap-6 mb-8 sm:mb-10 w-full max-w-[420px]">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-10 h-10 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
+                    <GraduationCap className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-base font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
                 </div>
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
-                    <Users className="w-5 h-5 text-primary" />
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-10 h-10 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
+                    <Users className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-base font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
                 </div>
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
-                    <Coffee className="w-5 h-5 text-accent" />
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-10 h-10 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
+                    <Coffee className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-base font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
+                  <span className="text-[10px] sm:text-xs font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
                 </div>
               </div>
 
-              <Button className="rounded-full w-fit bg-primary text-primary-foreground hover:bg-primary/90 group pl-6 pr-5 h-12 shadow-md">
+              <Button className="rounded-full w-fit bg-primary text-primary-foreground hover:bg-primary/90 group pl-8 pr-6 h-14 text-lg shadow-md">
                 Explore {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
-                <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1.5 transition-transform duration-300" />
+                <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1.5 transition-transform duration-300" />
               </Button>
             </div>
 

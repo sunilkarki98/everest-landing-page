@@ -49,13 +49,13 @@ export function SectionHeading({
       {eyebrow && (
         <div className={cn("flex items-center gap-3 mb-4", isCenter ? "justify-center" : "justify-start")}>
           <span className="block w-6 sm:w-10 h-px bg-accent" />
-          <p className={cn("text-ui-small font-medium tracking-[0.2em] uppercase", eyebrowColor || "text-accent")}>
+          <p className={cn("text-base sm:text-lg font-bold tracking-[0.2em] uppercase", eyebrowColor || "text-accent")}>
             {eyebrow}
           </p>
           <span className="block w-6 sm:w-10 h-px bg-accent" />
         </div>
       )}
-      <h2 className={cn("text-ui-section-title", titleColor || "text-primary")}>
+      <h2 className={cn("text-3xl md:text-4xl font-bold tracking-tight", titleColor || "text-primary")}>
         {title}
       </h2>
       {isCenter && (

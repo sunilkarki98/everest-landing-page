@@ -125,7 +125,7 @@ export default function GlobalContactSection() {
         {/* 2. BRANCHES SECTION */}
         <div className="max-w-[1100px] mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h4 className="text-ui-section-title font-bold text-primary">Our Global Branches</h4>
+            <h4 className="text-3xl md:text-4xl font-bold text-primary">Our Global Branches</h4>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">

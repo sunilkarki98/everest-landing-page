@@ -32,7 +32,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       variants={fadeUpCard}
     >
       {/* Image Container */}
-      <div className="relative w-full h-[300px] sm:h-[320px] overflow-hidden bg-slate-50">
+      <div className="relative w-full h-[240px] sm:h-[260px] overflow-hidden bg-slate-50">
         <Image
           src={image}
           alt={name}
@@ -78,9 +78,9 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       </div>
 
       {/* Content Box */}
-      <div className="relative p-6 sm:p-7 flex flex-col flex-grow bg-white">
+      <div className="relative p-5 sm:p-6 flex flex-col flex-grow bg-white">
         <div className="mb-4">
-           <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-primary text-ui-small font-bold text-white tracking-wider uppercase mb-3">
+           <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-[10px] sm:text-xs font-bold text-slate-600 tracking-wider uppercase mb-3">
              {role}
            </span>
            <h3 className="text-ui-card-title font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">

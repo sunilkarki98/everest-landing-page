@@ -48,7 +48,7 @@ export default function StudyPathwaysSection() {
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               Your Academic Future
             </div>
-            <h2 className="text-ui-section-title font-extrabold text-primary mb-6 tracking-tight">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold text-primary mb-6 tracking-tight leading-tight">
               Study Pathways &<br />
               <span className="text-accent">Partner Universities</span>
             </h2>
