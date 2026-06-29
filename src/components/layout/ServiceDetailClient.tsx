@@ -24,6 +24,8 @@ export function ServiceDetailClient({
   contactId = "contact"
 }: ServiceDetailClientProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [activeSection, setActiveSection] = useState("overview");
   const activeTabRef = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
   
@@ -59,6 +61,7 @@ export function ServiceDetailClient({
 
   const handleServiceClick = (index: number) => {
     setActiveIndex(index);
+    setActiveStep(0); // Reset step when service changes
     if (typeof window !== "undefined") {
       const serviceId = services[index].id;
       const url = new URL(window.location.href);
@@ -66,6 +69,27 @@ export function ServiceDetailClient({
       window.history.pushState({}, "", url.toString());
     }
   };
+
+  // Intersection Observer for active section in TOC
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -80% 0px" }
+    );
+
+    const sections = document.querySelectorAll("div[id]");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, [activeIndex]);
 
   const activeService = services[activeIndex];
   const ActiveIcon = iconMap[activeService.icon] || ChevronRight;
@@ -115,18 +139,51 @@ export function ServiceDetailClient({
       </div>
 
       <Container className="py-12 lg:py-16">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-start">
+          {/* Sticky Table of Contents Sidebar */}
+          <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-32 hidden lg:block">
+            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <h4 className="font-bold text-primary mb-4 text-ui-card-title border-b border-slate-100 pb-2">On this page</h4>
+              <nav className="flex flex-col gap-3 relative">
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-slate-100" />
+                {[
+                  { id: "overview", label: "Overview" },
+                  { id: "benefits", label: "Benefits & Eligibility" },
+                  { id: "process", label: "Journey Process" },
+                  { id: "faqs", label: "FAQs" }
+                ].map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    className={`relative pl-4 text-ui-body font-medium transition-colors ${
+                      activeSection === item.id 
+                        ? "text-accent font-bold" 
+                        : "text-slate-500 hover:text-primary"
+                    }`}
+                  >
+                    {activeSection === item.id && (
+                      <motion.div layoutId="activeToc" className="absolute left-[-1px] top-0 bottom-0 w-[3px] bg-accent rounded-full" />
+                    )}
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 min-w-0 w-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-sm"
+                className="bg-white rounded-[2.5rem] p-6 sm:p-8 md:p-12 border border-slate-100 shadow-sm"
               >
                 {/* Header Area */}
-                <div className="flex items-center gap-6 mb-8 pb-8 border-b border-slate-100">
+                <div className="flex flex-col md:flex-row md:items-center gap-6 mb-10 pb-10 border-b border-slate-100">
                   <div className="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center shrink-0">
                     <ActiveIcon size={40} className="text-accent" />
                   </div>
@@ -134,14 +191,14 @@ export function ServiceDetailClient({
                     <h2 className="text-ui-section-title font-bold text-primary mb-3 leading-tight tracking-tight">
                       {activeService.title}
                     </h2>
-                    <p className="text-ui-lead text-slate-500 font-medium leading-relaxed">
+                    <p className="text-ui-lead text-slate-500 font-medium leading-relaxed max-w-3xl">
                       {activeService.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Overview */}
-                <div className="mb-12">
+                <div id="overview" className="mb-14 scroll-mt-32">
                   <h3 className="text-ui-card-title font-bold text-primary mb-4">Overview</h3>
                   <p className="text-slate-600 leading-relaxed text-ui-body">
                     {activeService.overview}
@@ -165,7 +222,7 @@ export function ServiceDetailClient({
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div id="benefits" className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14 scroll-mt-32">
                   {/* Key Benefits Grid */}
                   <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 h-full">
                     <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
@@ -205,34 +262,56 @@ export function ServiceDetailClient({
                   )}
                 </div>
 
-                {/* Process Steps */}
-                <div className="mb-12">
-                  <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
+                {/* Process Timeline */}
+                <div id="process" className="mb-14 scroll-mt-32">
+                  <h3 className="text-ui-card-title font-bold text-primary mb-8 flex items-center gap-2">
                     <ListChecks className="text-secondary" size={24} />
-                    Our Process
+                    Interactive Journey
                   </h3>
-                  <div className="space-y-6">
-                    {activeService.processSteps.map((step, i) => (
-                      <div key={i} className="flex gap-6">
-                        <div className="flex flex-col items-center">
-                          <div className="w-10 h-10 rounded-full bg-secondary text-white font-bold flex items-center justify-center shrink-0 z-10 shadow-md">
-                            {i + 1}
-                          </div>
-                          {i !== activeService.processSteps.length - 1 && (
-                            <div className="w-0.5 h-full bg-slate-100 my-2" />
-                          )}
-                        </div>
-                        <div className="pt-2 pb-6">
-                          <h4 className="text-ui-card-title font-bold text-primary mb-2">{step.title}</h4>
-                          <p className="text-slate-600 leading-relaxed text-ui-body">{step.desc}</p>
-                        </div>
-                      </div>
-                    ))}
+                  
+                  <div className="bg-slate-50 rounded-3xl p-6 md:p-10 border border-slate-100">
+                     <div className="flex justify-between relative mb-12">
+                        {/* Progress Line */}
+                        <div className="absolute top-1/2 left-0 w-full h-1.5 bg-slate-200 -translate-y-1/2 z-0 rounded-full" />
+                        <div 
+                          className="absolute top-1/2 left-0 h-1.5 bg-accent -translate-y-1/2 z-0 transition-all duration-500 ease-out rounded-full" 
+                          style={{ width: `${(activeStep / (activeService.processSteps.length - 1)) * 100}%` }} 
+                        />
+                        
+                        {activeService.processSteps.map((step, i) => (
+                           <button 
+                             key={i}
+                             onClick={() => setActiveStep(i)}
+                             className={`relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 focus:outline-none ${
+                               activeStep >= i 
+                                ? 'bg-accent text-primary scale-110 shadow-[0_0_15px_rgba(212,175,55,0.4)] border-2 border-white' 
+                                : 'bg-white text-slate-400 border-2 border-slate-200 hover:border-accent/50 hover:text-accent'
+                             }`}
+                           >
+                             {i + 1}
+                           </button>
+                        ))}
+                     </div>
+                     <AnimatePresence mode="wait">
+                        <motion.div
+                           key={activeStep}
+                           initial={{ opacity: 0, y: 10 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           exit={{ opacity: 0, y: -10 }}
+                           transition={{ duration: 0.2 }}
+                           className="bg-white p-8 rounded-2xl shadow-md border border-slate-100 text-center relative overflow-hidden"
+                        >
+                           <div className="absolute top-0 left-0 w-1 h-full bg-accent" />
+                           <span className="text-accent text-ui-small font-bold uppercase tracking-wider mb-2 block">Step {activeStep + 1}</span>
+                           <h4 className="text-ui-card-title font-bold text-primary mb-3">{activeService.processSteps[activeStep].title}</h4>
+                           <p className="text-slate-600 text-ui-body max-w-2xl mx-auto">{activeService.processSteps[activeStep].desc}</p>
+                        </motion.div>
+                     </AnimatePresence>
                   </div>
                 </div>
 
                 {/* FAQs - Accordion */}
-                <div className="border-t border-slate-100 pt-10">
+                <div id="faqs" className="border-t border-slate-100 pt-14 scroll-mt-32">
                   <h3 className="text-ui-card-title font-bold text-primary mb-6 flex items-center gap-2">
                     <HelpCircle className="text-slate-400" size={24} />
                     Frequently Asked Questions
@@ -273,6 +352,7 @@ export function ServiceDetailClient({
 
               </motion.div>
             </AnimatePresence>
+          </div>
         </div>
       </Container>
       

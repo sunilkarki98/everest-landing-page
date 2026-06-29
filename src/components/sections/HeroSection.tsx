@@ -26,10 +26,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative w-full pt-32 pb-16 lg:pt-40 lg:pb-16 overflow-hidden bg-black">
+    <section className="relative w-full pt-32 pb-16 lg:pt-40 lg:pb-24 bg-black">
 
       {/* Dynamic Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <AnimatePresence mode="popLayout">
           <motion.div
             key={currentIndex}
@@ -153,14 +153,40 @@ export default function HeroSection() {
               href="https://condat.com.au/condat/318/customer?method=website"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 sm:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-accent px-8 text-ui-card-title font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
+              className="inline-flex h-12 sm:h-14 w-full sm:w-auto items-center justify-center rounded-xl bg-accent px-8 text-ui-body font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
             >
               Book Free Consultation
             </a>
 
-            <Button variant="outline" className="h-12 sm:h-14 px-6 text-ui-card-title font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
+            <Button variant="outline" className="h-12 sm:h-14 px-6 text-ui-body font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
               <Link href="#universities">Explore</Link>
             </Button>
+          </motion.div>
+
+          {/* Trust Avatars under CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex items-center gap-4 mt-6"
+          >
+            <div className="flex -space-x-3">
+              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-slate-300 overflow-hidden flex items-center justify-center">
+                <Image src="/images/service-visa.jpg" alt="Student" width={40} height={40} className="object-cover w-full h-full" />
+              </div>
+              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-slate-300 overflow-hidden flex items-center justify-center">
+                <Image src="/images/service-migration.jpg" alt="Student" width={40} height={40} className="object-cover w-full h-full" />
+              </div>
+              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-slate-300 overflow-hidden flex items-center justify-center">
+                <Image src="/images/service-study.jpg" alt="Student" width={40} height={40} className="object-cover w-full h-full" />
+              </div>
+              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-accent text-primary flex items-center justify-center font-bold text-xs z-10 shadow-sm">
+                10k+
+              </div>
+            </div>
+            <div className="text-white/90 text-ui-small font-medium drop-shadow-md">
+               Join over <span className="font-bold text-white">10,000+</span> successful students.
+            </div>
           </motion.div>
 
           {/* SVG Definitions for 3D Gold Gradient */}
@@ -267,6 +293,48 @@ export default function HeroSection() {
           </div>
         </div>
 
+      </div>
+
+      {/* Pathway Finder - Overlapping Bottom Edge (Exactly Half) */}
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 z-40 w-full max-w-3xl px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="bg-white/10 backdrop-blur-md border border-white/20 p-2 sm:p-2.5 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-2 w-full"
+        >
+          <div className="relative w-full sm:w-[35%]">
+            <select className="appearance-none bg-white/95 border border-white/20 text-primary px-4 py-3 rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-accent w-full cursor-pointer hover:bg-white transition-colors text-base shadow-sm">
+              <option value="study">I want to Study</option>
+              <option value="migrate">I want to Migrate</option>
+              <option value="work">I want to Work</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-primary">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </div>
+
+          <div className="relative w-full sm:w-[35%]">
+            <select className="appearance-none bg-white/95 border border-white/20 text-primary px-4 py-3 rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-accent w-full cursor-pointer hover:bg-white transition-colors text-base shadow-sm">
+              <option value="au">in Australia</option>
+              <option value="ca">in Canada</option>
+              <option value="uk">in UK</option>
+              <option value="us">in USA</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-primary">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </div>
+
+          <Button 
+            className="bg-accent text-primary hover:bg-white w-full sm:w-[30%] h-auto py-3 rounded-xl font-extrabold text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" 
+            onClick={() => {
+              window.dispatchEvent(new Event("open-eligibility-modal"));
+            }}
+          >
+            Find My Pathway
+          </Button>
+        </motion.div>
       </div>
 
       {/* QR Code Modal */}

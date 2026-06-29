@@ -3,7 +3,8 @@ import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header"; // Import Header
 import FooterSection from "@/components/sections/FooterSection";
-import WhatsAppWidget from "@/components/ui/WhatsAppWidget";
+import { QuickActionsBar } from "@/components/layout/QuickActionsBar";
+import { EligibilityModal } from "@/components/ui/EligibilityModal";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -95,7 +96,8 @@ export default function RootLayout({
           {/* Page Content */}
           <main id="main-content">{children}</main>
           <FooterSection />
-          <WhatsAppWidget />
+          <QuickActionsBar />
+          <EligibilityModal />
           <Analytics />
         </SmoothScrollProvider>
       </body>

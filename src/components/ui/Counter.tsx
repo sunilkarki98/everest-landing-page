@@ -40,7 +40,7 @@ const Counter: React.FC<CounterProps> = ({ target, suffix = "", className }) => 
   }, [isInView, target]);
 
   return (
-    <div ref={ref} className={cn("text-3xl font-extrabold text-primary tracking-tight", className)}>
+    <div ref={ref} className={cn("text-2xl font-extrabold text-primary tracking-tight", className)}>
       {count.toLocaleString()}{suffix}
     </div>
   );

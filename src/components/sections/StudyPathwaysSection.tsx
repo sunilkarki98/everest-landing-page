@@ -37,11 +37,11 @@ export default function StudyPathwaysSection() {
     <section className="relative bg-slate-50 overflow-hidden border-b border-border/40 py-16 lg:py-24">
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      
+
       <Container>
         {/* TOP SPLIT SECTION: Text + Courses Grid */}
         <div className="flex flex-col xl:flex-row gap-12 lg:gap-16 mb-16 lg:mb-24">
-          
+
           {/* Left Content (Text) */}
           <div className="xl:w-5/12 relative z-10 flex flex-col justify-center">
             <div className="inline-flex items-center self-start gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-ui-small font-bold mb-6 uppercase tracking-wider">
@@ -56,7 +56,7 @@ export default function StudyPathwaysSection() {
               Explore our core study disciplines and discover the world-class Australian institutions where you can launch your career. We provide comprehensive study support across all major academic fields.
             </p>
             <Link href="/courses" className="inline-flex items-center self-start gap-2 font-bold text-primary hover:text-accent transition-colors duration-300 group">
-              View All Courses 
+              View All Courses
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -68,22 +68,33 @@ export default function StudyPathwaysSection() {
                 const Icon = course.icon || CheckCircle2;
                 return (
                   <Link href={`/courses/${course.id}`} key={course.id} className="group block relative">
-                    <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-accent/30 transition-all duration-300 h-full flex flex-col relative overflow-hidden">
-                      <div className="flex items-center gap-4 mb-3">
-                        <div className={`w-12 h-12 rounded-xl ${course.bgLight} ${course.borderLight} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 shadow-sm`}>
-                          <Icon size={24} className={course.iconColor} strokeWidth={2.5} />
+                    <div className="rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 h-[200px] flex flex-col relative overflow-hidden group/card border border-white/10">
+                      {/* Background Image */}
+                      <Image
+                        src={course.image}
+                        alt={course.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110 z-0"
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/30 to-transparent z-0 transition-all duration-300 group-hover:from-primary/60 group-hover:via-primary/20" />                      <div className="relative z-10 flex flex-col h-full">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className={`w-12 h-12 rounded-xl ${course.bgLight} ${course.borderLight} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 shadow-md`}>
+                            <Icon size={24} className={course.iconColor} strokeWidth={2.5} />
+                          </div>
+                          <h4 className="text-ui-card-title font-extrabold text-white/90 transition-all leading-tight antialiased tracking-tight drop-shadow-md">
+                            {course.title}
+                          </h4>
                         </div>
-                        <h4 className={`text-ui-card-title font-extrabold text-primary group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r ${course.color} transition-all leading-tight antialiased tracking-tight`}>
-                          {course.title}
-                        </h4>
-                      </div>
-                      <p className="text-slate-600 font-medium text-ui-body leading-relaxed mb-4 flex-grow antialiased">
-                        {course.tagline || course.description.substring(0, 80) + '...'}
-                      </p>
-                      
-                      {/* Hover Arrow Icon */}
-                      <div className="absolute bottom-5 right-5 w-8 h-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent opacity-0 scale-75 -translate-x-2 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-x-0 transition-all duration-300 shadow-sm">
-                        <ArrowRight size={14} strokeWidth={3} />
+                        <p className="text-white/85 font-medium text-ui-body leading-relaxed mb-4 flex-grow antialiased drop-shadow-md">
+                          {course.tagline || course.description.substring(0, 80) + '...'}
+                        </p>
+
+                        {/* Hover Arrow Icon */}
+                        <div className="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-accent text-primary flex items-center justify-center opacity-0 scale-75 -translate-x-2 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-x-0 transition-all duration-300 shadow-lg">
+                          <ArrowRight size={18} strokeWidth={3} />
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -95,7 +106,7 @@ export default function StudyPathwaysSection() {
 
         {/* BOTTOM SECTION: Universities & CTA */}
         <div className="relative z-20">
-          
+
           {/* Partner Institutions Section */}
           <div className="mb-12">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
@@ -115,7 +126,7 @@ export default function StudyPathwaysSection() {
               </div>
             </div>
 
-            <div 
+            <div
               ref={unisRef}
               className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-6 px-6 md:mx-0 md:px-0"
             >
@@ -145,7 +156,7 @@ export default function StudyPathwaysSection() {
                   </div>
                 </a>
               ))}
-              
+
               {/* "And 300+ More" Card */}
               <Link href="/about" className="snap-start shrink-0 w-[280px] flex items-center gap-4 p-4 rounded-xl border-2 border-dashed border-slate-200 bg-transparent hover:bg-slate-50 hover:border-accent/40 transition-all duration-300 group">
                 <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-slate-400 group-hover:text-accent group-hover:bg-accent/10 transition-colors">
@@ -163,19 +174,19 @@ export default function StudyPathwaysSection() {
           <div className="w-full bg-gradient-to-r from-primary to-navy-dark rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
             <div className="absolute -left-10 -bottom-10 w-32 h-32 bg-accent/20 rounded-full blur-2xl" />
             <div className="absolute right-20 top-0 w-24 h-24 bg-white/5 rounded-full blur-xl" />
-            
+
             <div className="flex items-center gap-4 relative z-10">
               <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 text-accent backdrop-blur-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
               </div>
               <div>
                 <h4 className="text-white font-bold text-ui-card-title mb-1">Not sure where to start?</h4>
                 <p className="text-white/70 text-ui-body">Get personalized guidance from our experienced education consultants.</p>
               </div>
             </div>
-            
-            <a 
-              href="https://condat.com.au/condat/318/customer?method=website" 
+
+            <a
+              href="https://condat.com.au/condat/318/customer?method=website"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full md:w-auto shrink-0 inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold px-8 py-3.5 rounded-xl hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5 transition-all relative z-10"

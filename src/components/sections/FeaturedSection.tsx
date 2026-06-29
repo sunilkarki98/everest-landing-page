@@ -91,19 +91,19 @@ export default function FeaturedSection() {
                   <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <GraduationCap className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
+                  <span className="text-base font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
                 </div>
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <Users className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
+                  <span className="text-base font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
                 </div>
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <Coffee className="w-5 h-5 text-accent" />
                   </div>
-                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
+                  <span className="text-base font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
                 </div>
               </div>
 
