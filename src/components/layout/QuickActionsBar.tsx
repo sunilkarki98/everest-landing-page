@@ -1,16 +1,23 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Calendar, ExternalLink, X, ClipboardCheck } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export function QuickActionsBar() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Show the bar after scrolling down slightly
+  // Show the bar after scrolling down slightly on homepage, or always on other pages
   useEffect(() => {
+    if (pathname !== "/") {
+      setIsVisible(true);
+      return;
+    }
+
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setIsVisible(true);
@@ -20,9 +27,12 @@ export function QuickActionsBar() {
       }
     };
 
+    // Check initial position on mount
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <AnimatePresence>

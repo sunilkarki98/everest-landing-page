@@ -5,6 +5,7 @@ import {
 
 export const heroDestinations = [
   { name: "Australia", image: "/images/destinations/australia.jpg" },
+  { name: "New Zealand", image: "/images/destinations/new_zealand.jpg" },
   { name: "UK", image: "/images/destinations/uk.jpg" },
   { name: "Canada", image: "/images/destinations/canada.jpg" },
   { name: "USA", image: "/images/destinations/usa.jpg" },

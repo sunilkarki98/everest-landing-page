@@ -158,36 +158,20 @@ export default function HeroSection() {
               Book Free Consultation
             </a>
 
-            <Button variant="outline" className="h-12 sm:h-14 px-6 text-ui-body font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" asChild>
-              <Link href="#universities">Explore</Link>
+            <Button 
+              variant="outline" 
+              className="h-12 sm:h-14 px-6 text-ui-body font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary w-full sm:w-auto transition-all shadow-lg rounded-xl" 
+              onClick={() => {
+                const element = document.getElementById('services');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Explore
             </Button>
           </motion.div>
 
-          {/* Trust Avatars under CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex items-center gap-4 mt-6"
-          >
-            <div className="flex -space-x-3">
-              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-slate-300 overflow-hidden flex items-center justify-center">
-                <Image src="/images/service-visa.jpg" alt="Student" width={40} height={40} className="object-cover w-full h-full" />
-              </div>
-              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-slate-300 overflow-hidden flex items-center justify-center">
-                <Image src="/images/service-migration.jpg" alt="Student" width={40} height={40} className="object-cover w-full h-full" />
-              </div>
-              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-slate-300 overflow-hidden flex items-center justify-center">
-                <Image src="/images/service-study.jpg" alt="Student" width={40} height={40} className="object-cover w-full h-full" />
-              </div>
-              <div className="w-10 h-10 rounded-full border-2 border-[#0a192f] bg-accent text-primary flex items-center justify-center font-bold text-xs z-10 shadow-sm">
-                10k+
-              </div>
-            </div>
-            <div className="text-white/90 text-ui-small font-medium drop-shadow-md">
-               Join over <span className="font-bold text-white">10,000+</span> successful students.
-            </div>
-          </motion.div>
 
           {/* SVG Definitions for 3D Gold Gradient */}
           <svg width="0" height="0" className="absolute" aria-hidden="true">
@@ -207,23 +191,23 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap items-center gap-6 sm:gap-10 mt-12 pt-8 border-t border-white/20 w-full max-w-3xl"
+            className="flex flex-col md:flex-row flex-wrap lg:flex-nowrap items-start md:items-center gap-4 md:gap-8 lg:gap-6 xl:gap-8 mt-12 pt-8 border-t border-white/20 w-full lg:min-w-[110%]"
           >
             {trustStats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div key={stat.label} className="flex items-center gap-4">
-                  <div className="relative">
+                <div key={stat.label} className="flex items-center gap-3">
+                  <div className="relative shrink-0">
                     <Icon
-                      size={38}
+                      size={36}
                       style={{ stroke: "url(#gold-3d)", strokeWidth: 2, fill: "none", filter: "drop-shadow(1px 2px 1px rgba(0,0,0,0.8))" }}
                     />
                   </div>
                   <div>
-                    <p className="font-extrabold text-ui-card-title text-white" style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.6), 2px 2px 0 rgba(0,0,0,0.4), 3px 3px 0 rgba(0,0,0,0.2)' }}>
+                    <p className="font-extrabold text-lg sm:text-xl text-white leading-tight" style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.6), 2px 2px 0 rgba(0,0,0,0.4), 3px 3px 0 rgba(0,0,0,0.2)' }}>
                       {stat.value}
                     </p>
-                    <p className="text-ui-small font-bold text-accent uppercase tracking-widest drop-shadow-md">
+                    <p className="text-xs font-bold text-accent uppercase tracking-wider drop-shadow-md mt-0.5">
                       {stat.label}
                     </p>
                   </div>
@@ -245,11 +229,13 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="bg-white/5 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-lg flex flex-col gap-2.5 w-[240px]"
+              className="bg-gradient-to-br from-white/5 to-black/40 backdrop-blur-md border border-white/10 hover:border-white/20 hover:bg-white/5 p-6 rounded-3xl shadow-[0_16px_40px_rgba(0,0,0,0.4)] flex flex-col gap-3 w-[280px] relative overflow-hidden group/card transition-all"
             >
-              <h4 className="flex items-center gap-2 text-ui-small font-bold text-accent uppercase tracking-wider drop-shadow-md border-b border-white/10 pb-2 mb-1">
-                Useful Links
-                <ExternalLink className="w-4 h-4" />
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-30 group-hover/card:opacity-100 transition-opacity duration-500" />
+              
+              <h4 className="flex items-center gap-2 text-xs font-bold text-accent uppercase tracking-[0.2em] border-b border-white/5 pb-3 mb-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                Quick Links
               </h4>
 
               {[
@@ -263,10 +249,12 @@ export default function HeroSection() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between text-ui-body font-medium text-white/90 hover:text-accent transition-colors py-1"
+                  className="group flex items-center justify-between text-sm font-semibold text-white/60 hover:text-white transition-all py-1.5 hover:translate-x-1"
                 >
-                  <span className="group-hover:underline underline-offset-4 decoration-accent/50">{link.label}</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-accent" />
+                  <span className="drop-shadow-sm">{link.label}</span>
+                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/5 group-hover:bg-accent/20 group-hover:border-accent/40 flex items-center justify-center transition-all duration-300">
+                    <ArrowRight className="w-3 h-3 text-white/30 group-hover:text-accent transition-colors" />
+                  </div>
                 </a>
               ))}
             </motion.div>
@@ -276,10 +264,10 @@ export default function HeroSection() {
               onClick={() => setIsQrOpen(true)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-br from-accent/20 to-black/40 backdrop-blur-md py-3 px-5 rounded-2xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] flex items-center gap-3 border border-accent/30 hover:border-accent/60 transition-colors w-[240px]"
+              className="bg-gradient-to-br from-accent/10 to-black/40 backdrop-blur-md py-4 px-6 rounded-3xl shadow-[0_8px_32px_rgba(212,175,55,0.15)] flex items-center gap-4 border border-accent/20 hover:border-accent/40 hover:from-accent/20 transition-colors w-[280px]"
             >
-              <div className="bg-white/90 p-1.5 rounded-lg shrink-0">
-                <QrCode className="w-5 h-5 text-primary" />
+              <div className="bg-white/80 p-2 rounded-xl shrink-0">
+                <QrCode className="w-6 h-6 text-primary" />
               </div>
               <div className="text-left">
                 <p className="font-extrabold text-white text-ui-body tracking-tight drop-shadow-md leading-none mb-1">
@@ -326,8 +314,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <Button 
-            className="bg-accent text-primary hover:bg-white w-full sm:w-[30%] h-auto py-3 rounded-xl font-extrabold text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" 
+          <Button
+            className="bg-accent text-primary hover:bg-white w-full sm:w-[30%] h-auto py-3 rounded-xl font-extrabold text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
             onClick={() => {
               window.dispatchEvent(new Event("open-eligibility-modal"));
             }}
@@ -364,7 +352,7 @@ export default function HeroSection() {
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="text-ui-section-title font-bold text-primary mb-2 mt-2 text-center font-serif">Scan to Connect</h3>
+              <h3 className="text-2xl font-bold text-primary mb-2 mt-2 text-center">Scan to Connect</h3>
               <p className="text-muted-foreground text-ui-body text-center mb-8">
                 Open your camera and scan the QR code to chat with us on WhatsApp instantly.
               </p>

@@ -160,6 +160,11 @@ For Ahilya & Amulya — and for all who seek a better future.
    Global Base Styles
 ------------------------------------------------------------------------- */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+
   * {
     border-color: var(--color-border);
   }

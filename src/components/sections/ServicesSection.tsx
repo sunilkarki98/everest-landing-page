@@ -29,7 +29,7 @@ export default function ServicesSection() {
   ] as const;
 
   return (
-    <section className="pt-16 lg:pt-24 pb-8 lg:pb-12 relative overflow-hidden bg-slate-50">
+    <section id="services" className="pt-16 lg:pt-24 pb-8 lg:pb-12 relative overflow-hidden bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <SectionHeading
