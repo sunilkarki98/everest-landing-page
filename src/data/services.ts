@@ -39,7 +39,7 @@ export const migrationServices: ServiceDetail[] = [
       "Hold adequate Overseas Student Health Cover (OSHC)",
       "Meet English language requirements for your course"
     ],
-    importantNote: "As of 2024, the Genuine Student (GS) test has replaced the former Genuine Temporary Entrant (GTE) requirement. Applicants must now respond to targeted questions about their study intentions rather than submitting a general statement.",
+    importantNote: "Currently, the Genuine Student (GS) test has replaced the former Genuine Temporary Entrant (GTE) requirement. Applicants must now respond to targeted questions about their study intentions rather than submitting a general statement.",
     keyBenefits: [
       "Comprehensive GS statement drafting and review",
       "Assistance with CoE (Confirmation of Enrolment) processing",
@@ -54,7 +54,7 @@ export const migrationServices: ServiceDetail[] = [
     ],
     faqs: [
       { q: "Can I work on a Student Visa in Australia?", a: "Yes. Student visa holders can currently work up to 48 hours per fortnight during the academic semester and unlimited hours during scheduled course breaks. Your employer must verify your work rights." },
-      { q: "What is the Genuine Student (GS) requirement?", a: "The GS requirement replaced the former GTE test in 2024. You must answer specific questions about why you chose Australia, your selected course and provider, your current circumstances, and the value of the course to your future. Our agents help you craft strong, authentic responses." },
+      { q: "What is the Genuine Student (GS) requirement?", a: "The GS requirement recently replaced the former GTE test. You must answer specific questions about why you chose Australia, your selected course and provider, your current circumstances, and the value of the course to your future. Our agents help you craft strong, authentic responses." },
       { q: "How long does a Student Visa application take?", a: "Processing times vary by nationality and risk level. Most applications are processed within 4-6 weeks, but some can take up to 3-4 months. We ensure your application is complete to avoid unnecessary delays." },
       { q: "Can I bring my family on a Student Visa?", a: "Yes, you can include your spouse/partner and dependent children under 18 in your Student Visa application. Your partner will receive full work rights, and your children can attend Australian schools." },
       { q: "What happens if my visa is refused?", a: "If your Student Visa is refused, you may have the right to appeal to the Administrative Review Tribunal (ART) within 21 days. Our team can assess your prospects and represent you through the appeal process." }
@@ -299,7 +299,7 @@ export const migrationServices: ServiceDetail[] = [
       "Salary must meet the Temporary Skilled Migration Income Threshold (TSMIT)",
       "Meet English language, health, and character requirements"
     ],
-    importantNote: "The employer MUST be approved as a Standard Business Sponsor before they can nominate you. The salary offered must meet both the Annual Market Salary Rate (AMSR) for the occupation and the TSMIT (currently $73,150 AUD as of 2024, subject to indexation).",
+    importantNote: "The employer MUST be approved as a Standard Business Sponsor before they can nominate you. The salary offered must meet both the Annual Market Salary Rate (AMSR) for the occupation and the TSMIT (currently $73,150 AUD as of 2026, subject to indexation).",
     keyBenefits: [
       "Clear pathway to Permanent Residency (186 TRT) from all streams",
       "Up to 4 years stay with full work rights for you and your family",
