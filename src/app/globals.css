@@ -215,9 +215,8 @@ For Ahilya & Amulya — and for all who seek a better future.
 }
 
 @utility text-ui-small {
-  font-size: 1rem;
+  font-size: 0.75rem;
   line-height: 1.5;
-  opacity: 0.8;
 }
 
 /* ─── Premium Button Animation ─── */

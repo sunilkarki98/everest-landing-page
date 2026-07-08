@@ -28,7 +28,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-border/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-accent/30"
+      className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-border/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-accent/30 shrink-0 w-[280px] sm:w-auto snap-start"
       variants={fadeUpCard}
     >
       {/* Image Container */}
@@ -126,7 +126,7 @@ const EmployeeSection: React.FC = () => {
 
       {/* Employee Cards */}
       <motion.div
-        className="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10"
+        className="max-w-[1400px] mx-auto px-4 md:px-8 flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-hide pb-4 sm:pb-0 -mx-4 sm:mx-auto px-4 sm:px-4 md:px-8 relative z-10"
         variants={fadeUpContainer}
         initial="hidden"
         whileInView="visible"

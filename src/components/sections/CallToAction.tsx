@@ -44,7 +44,7 @@ const CallToAction = ({
               {eyebrowText}
             </div>
 
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2 leading-tight tracking-tight">
+            <h2 className="text-ui-section-title text-white mb-2 leading-tight tracking-tight">
               {title || (
                 <>
                   Let&apos;s Build Your{" "}
@@ -58,12 +58,12 @@ const CallToAction = ({
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="flex flex-row items-center gap-2 sm:gap-3">
               <a
                 href="https://condat.com.au/condat/318/customer?method=website"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-accent text-primary font-bold text-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
+                className="group relative inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-accent text-primary font-bold text-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex-1 sm:flex-none"
               >
                 <span className="relative z-10">Book Free Consultation</span>
                 <ExternalLink className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -74,7 +74,7 @@ const CallToAction = ({
                 href={secondaryButtonLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white font-bold text-sm rounded-xl border border-white/20 hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-white/10 backdrop-blur-sm text-white font-bold text-sm rounded-xl border border-white/20 hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300 flex-1 sm:flex-none"
               >
                 {showSecondaryIcon && (
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-green-400">
@@ -92,7 +92,7 @@ const CallToAction = ({
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="shrink-0 flex flex-col items-center gap-3"
+            className="shrink-0 hidden sm:flex flex-col items-center gap-3"
           >
             <div className="w-40 h-40 bg-white rounded-2xl overflow-hidden relative shadow-xl">
               <Image

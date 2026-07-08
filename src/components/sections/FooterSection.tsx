@@ -7,9 +7,9 @@ import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 const FooterSection = () => {
   return (
     <footer className="bg-navy-dark text-primary-foreground pt-10 border-t border-white/10 shadow-[0_-4px_30px_rgba(0,0,0,0.15)] relative overflow-hidden">
-      <div className="w-full mx-auto px-4 lg:px-8 xl:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-8 lg:gap-8">
+      <div className="w-full mx-auto px-4 lg:px-8 xl:px-12 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-8 lg:gap-8">
         {/* Logo & About */}
-        <div className="sm:col-span-2 lg:col-span-1 space-y-4">
+        <div className="col-span-2 lg:col-span-1 space-y-4">
           <div className="flex flex-col items-start space-y-4">
             <div className="bg-white/95 backdrop-blur-sm rounded-sm shadow-md border border-white/20 inline-flex items-center justify-center overflow-hidden">
               <Image

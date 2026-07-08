@@ -42,12 +42,12 @@ export default function ServicesSection() {
         />
 
         {/* Custom Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex justify-start sm:justify-center gap-2 mb-12 overflow-x-auto scrollbar-hide pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`px-6 py-3 rounded-full text-ui-body font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-ui-body font-semibold transition-all duration-300 whitespace-nowrap shrink-0 ${
                 activeTab === tab.id
                   ? "bg-accent text-primary shadow-lg shadow-accent/20"
                   : "bg-white text-muted-foreground border border-slate-200 hover:bg-slate-100"

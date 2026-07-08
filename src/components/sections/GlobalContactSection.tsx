@@ -107,7 +107,7 @@ export default function GlobalContactSection() {
             <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
 
             {/* 4. QR Code */}
-            <div className="flex items-center gap-3 p-0 xl:pl-4 xl:pr-5 shrink-0 xl:w-[20%] xl:justify-center">
+            <div className="flex items-center gap-3 p-5 xl:pl-4 xl:pr-5 shrink-0 xl:w-[20%] xl:justify-center">
               <div className="text-right hidden sm:block">
                 <h5 className="font-bold text-ui-card-title text-white leading-tight">Scan to Chat</h5>
                 <p className="text-ui-small text-accent font-bold uppercase tracking-wider">WhatsApp</p>
@@ -125,7 +125,7 @@ export default function GlobalContactSection() {
         {/* 2. BRANCHES SECTION */}
         <div className="max-w-[1100px] mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h4 className="text-3xl md:text-4xl font-bold text-primary">Our Global Branches</h4>
+            <h4 className="text-ui-section-title text-primary">Our Global Branches</h4>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">

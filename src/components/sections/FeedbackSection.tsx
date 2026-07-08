@@ -18,7 +18,7 @@ import { Testimonial } from "@/lib/google-reviews";
 /* ── Testimonial Card ── */
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <Card className="relative group h-full flex flex-col justify-between p-6 sm:p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white border border-border/40">
+    <Card className="relative group h-full flex flex-col justify-between p-5 sm:p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white border border-border/40">
       {/* Top Section with Outcome */}
       <div className="flex justify-between items-start mb-6">
         <Quote className="w-8 h-8 text-primary/20 group-hover:text-primary transition-colors" />

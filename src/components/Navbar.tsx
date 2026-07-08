@@ -282,14 +282,6 @@ export default function Navbar({
             Blog
           </Link>
 
-          <Link
-            href="#contact-us"
-            onClick={closeMobileMenu}
-            className="block py-3 px-4 font-medium text-base rounded-lg transition-colors text-primary hover:bg-muted"
-          >
-            Contact
-          </Link>
-
           {menus.map((menu) => (
             <div key={menu.key} className="space-y-1">
               <button

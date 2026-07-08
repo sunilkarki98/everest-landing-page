@@ -6,27 +6,27 @@ import { siteConfig } from "../config/site";
 export default function TopBar() {
   return (
     <div className="bg-primary text-primary-foreground text-ui-small py-2">
-      <div className="w-full mx-auto flex justify-between items-center px-4 lg:px-8 xl:px-12">
+      <div className="w-full mx-auto flex justify-between items-center px-4 lg:px-8 xl:px-12 overflow-hidden">
         {/* Left side: Phone + Email */}
-        <div className="flex items-center gap-4 md:gap-6">
+        <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
           {/* Australia Phone */}
           <a
             href={`tel:${siteConfig.contact.phones.main.replace(/[^\d+]/g, "")}`}
-            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            className="flex items-center gap-1 sm:gap-1.5 font-medium hover:text-secondary transition-colors"
             title="Call Australia Office"
           >
-            <span className="text-base leading-none drop-shadow-sm" aria-label="Australia Flag">🇦🇺</span>
-            <span className="hidden sm:inline">{siteConfig.contact.phones.main}</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm" aria-label="Australia Flag">🇦🇺</span>
+            <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.main}</span>
           </a>
 
           {/* Nepal Phone */}
           <a
             href={`tel:${siteConfig.contact.phones.secondary.replace(/[^\d+]/g, "")}`}
-            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            className="flex items-center gap-1 sm:gap-1.5 font-medium hover:text-secondary transition-colors"
             title="Call Nepal Office"
           >
-            <span className="text-base leading-none drop-shadow-sm" aria-label="Nepal Flag">🇳🇵</span>
-            <span className="hidden sm:inline">{siteConfig.contact.phones.secondary}</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm" aria-label="Nepal Flag">🇳🇵</span>
+            <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.secondary}</span>
           </a>
 
           {/* Email */}

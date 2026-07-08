@@ -107,7 +107,7 @@ export default function FeaturedSection() {
                 </div>
               </div>
 
-              <Button className="rounded-full w-fit bg-primary text-primary-foreground hover:bg-primary/90 group pl-8 pr-6 h-14 text-lg shadow-md">
+              <Button className="rounded-full w-fit bg-primary text-primary-foreground hover:bg-primary/90 group pl-6 sm:pl-8 pr-4 sm:pr-6 h-11 sm:h-14 text-sm sm:text-lg shadow-md">
                 Explore {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
                 <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1.5 transition-transform duration-300" />
               </Button>

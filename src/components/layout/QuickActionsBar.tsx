@@ -42,7 +42,7 @@ export function QuickActionsBar() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="fixed bottom-6 right-6 z-[90] flex flex-col items-end gap-3"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90] flex flex-col items-end gap-3"
         >
           {/* Expanded Actions */}
           <AnimatePresence>

@@ -48,9 +48,9 @@ export default function StudyPathwaysSection() {
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               Your Academic Future
             </div>
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold text-primary mb-6 tracking-tight leading-tight">
+            <h2 className="text-ui-section-title font-extrabold text-primary mb-6 tracking-tight leading-tight">
               Study Pathways &<br />
-              <span className="text-accent">Partner Universities</span>
+              <span className="text-accent-text">Partner Universities</span>
             </h2>
             <p className="text-ui-lead text-slate-600 leading-relaxed max-w-lg mb-8">
               Explore our core study disciplines and discover the world-class Australian institutions where you can launch your career. We provide comprehensive study support across all major academic fields.
