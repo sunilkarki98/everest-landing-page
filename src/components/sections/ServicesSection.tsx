@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { motion, AnimatePresence } from "framer-motion";
 import { migrationServices, studyServices, otherServices, iconMap } from "@/data/services";
+import { Container } from "@/components/layout/Container";
 import Link from "next/link";
 import { ChevronRight, ArrowRight } from "lucide-react";
 
@@ -29,8 +30,8 @@ export default function ServicesSection() {
   ] as const;
 
   return (
-    <section id="services" className="pt-16 lg:pt-24 pb-8 lg:pb-12 relative overflow-hidden bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="services" className="section-py-md section-py-md-lg relative overflow-hidden bg-surface">
+      <Container className="relative z-10">
         
         <SectionHeading
           eyebrow="Our Services"
@@ -42,15 +43,19 @@ export default function ServicesSection() {
         />
 
         {/* Custom Tabs */}
-        <div className="flex justify-start sm:justify-center gap-2 mb-12 overflow-x-auto scrollbar-hide pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div role="tablist" aria-label="Services tabs" className="flex justify-start sm:justify-center gap-2 mb-12 overflow-x-auto scrollbar-hide pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
           {tabs.map((tab) => (
             <button
               key={tab.id}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              aria-controls={`panel-${tab.id}`}
+              id={`tab-${tab.id}`}
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-ui-body font-semibold transition-all duration-300 whitespace-nowrap shrink-0 ${
                 activeTab === tab.id
                   ? "bg-accent text-primary shadow-lg shadow-accent/20"
-                  : "bg-white text-muted-foreground border border-slate-200 hover:bg-slate-100"
+                  : "bg-white text-muted-foreground border border-surface-border hover:bg-surface-hover"
               }`}
             >
               {tab.label}
@@ -77,7 +82,7 @@ export default function ServicesSection() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.05, duration: 0.3 }}
-                      className="group bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-accent hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left relative overflow-hidden h-full"
+                      className="group bg-white border border-surface-border p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-accent hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col text-left relative overflow-hidden h-full"
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -106,7 +111,7 @@ export default function ServicesSection() {
           </AnimatePresence>
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }

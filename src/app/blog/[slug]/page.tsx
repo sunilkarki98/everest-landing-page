@@ -9,6 +9,13 @@ import CallToAction from "@/components/sections/CallToAction";
 import { Badge } from "@/components/ui/Badge";
 import { blogPosts } from "@/data/blog";
 
+// Generate static paths for build time
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    slug: post.id,
+  }));
+}
+
 // Generate dynamic metadata for each blog post
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -22,13 +29,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${post.title} | Everest Education Blog`,
     description: post.excerpt,
     keywords: post.seoKeywords,
+    authors: [{ name: post.author }],
+    alternates: {
+      canonical: `https://eevsgroup.com/blog/${post.id}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: `https://eevsgroup.com/blog/${post.id}`,
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
       images: [{ url: post.image, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
     },
   };
 }
@@ -137,7 +155,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </h4>
                   <div className="flex gap-4">
                     <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=https://www.everesteducation.com.au/blog/${post.id}`}
+                      href={`https://www.facebook.com/sharer/sharer.php?u=https://eevsgroup.com/blog/${post.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-colors"
@@ -146,7 +164,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?url=https://www.everesteducation.com.au/blog/${post.id}&text=${encodeURIComponent(post.title)}`}
+                      href={`https://twitter.com/intent/tweet?url=https://eevsgroup.com/blog/${post.id}&text=${encodeURIComponent(post.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#1DA1F2]/20 flex items-center justify-center text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white transition-colors"
@@ -155,7 +173,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
                     </a>
                     <a
-                      href={`https://www.linkedin.com/sharing/share-offsite/?url=https://www.everesteducation.com.au/blog/${post.id}`}
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=https://eevsgroup.com/blog/${post.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-slate-50 shadow-sm border border-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors"

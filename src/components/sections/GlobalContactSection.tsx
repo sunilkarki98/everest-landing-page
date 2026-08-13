@@ -18,7 +18,7 @@ export default function GlobalContactSection() {
   };
 
   return (
-    <section id="contact" className="py-14 lg:py-22 bg-slate-50 relative overflow-hidden border-t border-border/40">
+    <section id="contact" className="section-py-md section-py-md-lg bg-surface relative overflow-hidden border-t border-border/40">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
       <div className="pointer-events-none absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] bg-accent/5" />
@@ -135,22 +135,22 @@ export default function GlobalContactSection() {
               return (
                 <div
                   key={branch.id}
-                  className={`bg-white border ${isExpanded ? 'border-accent shadow-md' : 'border-slate-200 shadow-sm'} rounded-2xl overflow-hidden transition-all duration-300 flex flex-col`}
+                  className={`bg-white border ${isExpanded ? 'border-accent shadow-md' : 'border-surface-border shadow-sm'} rounded-2xl overflow-hidden transition-all duration-300 flex flex-col`}
                 >
                   <div className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-colors ${isExpanded ? 'bg-accent text-primary' : 'bg-slate-50 text-accent border border-slate-200 shadow-sm'}`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 transition-colors ${isExpanded ? 'bg-accent text-primary' : 'bg-surface text-accent border border-surface-border shadow-sm'}`}>
                         <MapPin size={22} />
                       </div>
                       <div>
                         <h5 className="text-ui-card-title font-bold text-primary leading-tight">{branch.name}</h5>
                         <p className="text-ui-small font-bold text-accent-text uppercase tracking-widest mt-1">{branch.country}</p>
-                        <p className="text-ui-body font-medium text-slate-600 mt-1 antialiased">{branch.address}</p>
+                        <p className="text-ui-body font-medium text-surface-foreground mt-1 antialiased">{branch.address}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => toggleMap(branch.id)}
-                      className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-ui-small font-semibold transition-colors bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 shrink-0"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-ui-small font-semibold transition-colors bg-surface hover:bg-surface-hover text-surface-foreground border border-surface-border shrink-0"
                     >
                       {isExpanded ? (
                         <>Close Map <X size={16} /></>
@@ -168,7 +168,7 @@ export default function GlobalContactSection() {
                         animate={{ height: 250, opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="w-full border-t border-slate-100 bg-slate-50"
+                        className="w-full border-t border-surface-border bg-surface"
                       >
                         <iframe
                           title={`Google Map for ${branch.name}`}
@@ -190,7 +190,7 @@ export default function GlobalContactSection() {
           </div>
 
           {/* Future Expansion Banner */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="bg-white border border-surface-border rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 max-w-lg text-center lg:text-left">
@@ -198,17 +198,17 @@ export default function GlobalContactSection() {
                 <Globe2 className="text-accent" size={20} />
                 Future Expansion
               </h4>
-              <p className="text-slate-500 text-ui-body leading-relaxed">
+              <p className="text-muted-foreground text-ui-body leading-relaxed">
                 We are constantly growing to better serve our international students. We are excited to announce new EEVS branches opening soon.
               </p>
             </div>
 
             <div className="relative z-10 flex flex-wrap justify-center lg:justify-end gap-3 w-full lg:w-auto">
               {futureBranches.map((branch) => (
-                <div key={branch.id} className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3">
+                <div key={branch.id} className="bg-surface border border-surface-border rounded-xl px-4 py-3 flex items-center gap-3">
                   <div className="flex flex-col items-start">
                     <span className="text-ui-body font-bold text-primary">{branch.name}</span>
-                    <span className="text-ui-small text-slate-500 font-medium">{branch.region}</span>
+                    <span className="text-ui-small text-muted-foreground font-medium">{branch.region}</span>
                   </div>
                   <span className="text-ui-small font-bold uppercase tracking-widest text-accent-text bg-accent/10 border border-accent/20 px-2 py-1 rounded">
                     Soon

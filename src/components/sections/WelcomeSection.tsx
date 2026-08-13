@@ -13,7 +13,7 @@ import { welcomeHighlights as highlights } from "@/data/home";
 
 export default function WelcomeSection() {
   return (
-    <section className="relative overflow-hidden bg-white py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-white section-py-lg section-py-lg-lg">
       {/* Decorative Gradients for Accreditations */}
       <AccreditationGradients />
 
@@ -69,7 +69,7 @@ export default function WelcomeSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  className="group relative bg-white border border-slate-200 rounded-3xl p-6 hover:shadow-xl hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                  className="group relative bg-white border border-surface-border rounded-3xl p-6 hover:shadow-xl hover:shadow-accent/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
                   {/* Background hover sweep */}
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -79,7 +79,7 @@ export default function WelcomeSection() {
 
                   {/* Icon + Title — same line */}
                   <div className="relative z-10 flex items-center gap-4 mb-3">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent via-amber-400 to-gold flex items-center justify-center shrink-0 shadow-md shadow-accent/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent via-[var(--color-gold-light)] to-[var(--color-gold-dark)] flex items-center justify-center shrink-0 shadow-md shadow-accent/20 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                       <Icon size={24} className="text-primary" strokeWidth={2} />
                     </div>
                     <h3 className="text-ui-card-title text-primary group-hover:text-accent-text transition-colors duration-300 leading-tight">
@@ -109,7 +109,7 @@ export default function WelcomeSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    className="bg-white rounded-2xl p-5 flex flex-col items-center text-center shadow-md border border-slate-200 hover:border-accent/50 hover:shadow-lg transition-all duration-300"
+                    className="bg-white rounded-2xl p-5 flex flex-col items-center text-center shadow-md border border-surface-border hover:border-accent/50 hover:shadow-lg transition-all duration-300"
                   >
                     <div className="w-12 h-12 rounded-full flex items-center justify-center bg-accent/15 mb-2 group-hover:bg-accent/25 transition-colors duration-300 shadow-inner">
                       <Icon className="w-6 h-6 text-accent-text drop-shadow-md" strokeWidth={2.5} />
@@ -126,7 +126,7 @@ export default function WelcomeSection() {
             </div>
 
             {/* Bottom Row: Compact Accreditations Card */}
-            <div className="bg-gradient-to-r from-[#2a4f8f] via-[#325ba0] to-[#2a4f8f] rounded-2xl p-6 shadow-lg border border-secondary/40 flex-1 flex flex-col justify-center relative overflow-hidden">
+            <div className="bg-gradient-to-r from-primary via-primary/85 to-primary rounded-2xl p-6 shadow-lg border border-secondary/40 flex-1 flex flex-col justify-center relative overflow-hidden">
 
               <div className="relative z-10 flex items-center gap-4 mb-5 border-b border-white/15 pb-5">
                 <div className="relative w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center shrink-0 shadow-[0_0_15px_hsl(var(--accent)/0.25)]">

@@ -3,9 +3,12 @@ import { blogPosts } from "@/data/blog";
 import BlogPageClient from "./BlogPageClient";
 
 export const metadata: Metadata = {
-  title: "Blog & Insights | Everest Education & Visa Services",
+  title: "Latest News & Migration Updates | Everest Education",
   description:
-    "Stay updated with the latest Australian immigration news, student visa changes, PR pathway tips, and study abroad insights from Everest Education experts.",
+    "Stay informed with the latest updates on Australian student visas, skilled migration, PR pathways, and university scholarships.",
+  alternates: {
+    canonical: "https://eevsgroup.com/blog",
+  },
   keywords: [
     "Australia immigration news",
     "Student visa updates",
@@ -42,7 +45,7 @@ export default function BlogPage() {
         "@type": "Organization",
         name: post.author,
       },
-      url: `https://www.everesteducation.com.au/blog/${post.id}`,
+      url: `https://eevsgroup.com/blog/${post.id}`,
     })),
   };
 

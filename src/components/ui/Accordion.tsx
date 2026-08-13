@@ -41,19 +41,19 @@ export function Accordion({ items, className, allowMultiple = false }: Accordion
           <div
             key={item.id}
             className={cn(
-              "border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 bg-white",
-              isExpanded ? "shadow-md ring-1 ring-accent/30" : "shadow-sm hover:border-slate-300"
+              "border border-surface-border rounded-2xl overflow-hidden transition-all duration-300 bg-white",
+              isExpanded ? "shadow-md ring-1 ring-accent/30" : "shadow-sm hover:border-surface-muted"
             )}
           >
             <button
               onClick={() => toggleItem(item.id)}
-              className="w-full flex items-center justify-between p-5 text-left bg-transparent transition-colors hover:bg-slate-50"
+              className="w-full flex items-center justify-between p-5 text-left bg-transparent transition-colors hover:bg-surface"
             >
-              <span className="font-bold text-slate-800 text-lg pr-8">{item.question}</span>
+              <span className="font-bold text-primary text-lg pr-8">{item.question}</span>
               <div
                 className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300",
-                  isExpanded ? "bg-accent text-primary rotate-180" : "bg-slate-100 text-slate-500"
+                  isExpanded ? "bg-accent text-primary rotate-180" : "bg-surface-hover text-surface-muted"
                 )}
               >
                 <ChevronDown size={18} />
@@ -67,7 +67,7 @@ export function Accordion({ items, className, allowMultiple = false }: Accordion
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-slate-100">
+                  <div className="p-5 pt-0 text-surface-foreground leading-relaxed border-t border-surface-border">
                     {item.answer}
                   </div>
                 </motion.div>

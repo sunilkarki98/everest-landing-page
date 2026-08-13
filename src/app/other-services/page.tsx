@@ -12,6 +12,9 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       title: `${activeService.title} | Support Services | Everest Education`,
       description: activeService.overview || activeService.description,
       keywords: ["OSHC Australia", "international student tax Australia", "skill assessment Australia", "VETASSESS", "business setup Australia", "TFN registration"],
+      alternates: {
+        canonical: `https://eevsgroup.com/other-services?service=${serviceId}`,
+      },
       openGraph: {
         title: `${activeService.title} | Additional Support Services | Everest Education`,
         description: activeService.overview || activeService.description,
@@ -24,6 +27,9 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     title: "Additional Support Services | Health Insurance, Tax, Skill Assessment | Everest Education",
     description: "Comprehensive support services for international students and migrants in Australia. OSHC health insurance, taxation & accounting, professional skill assessments, and business setup advisory.",
     keywords: ["OSHC Australia", "international student tax Australia", "skill assessment Australia", "VETASSESS", "business setup Australia", "TFN registration"],
+    alternates: {
+      canonical: "https://eevsgroup.com/other-services",
+    },
     openGraph: {
       title: "Additional Support Services | Everest Education",
       description: "Comprehensive support beyond education and migration to ensure your life in Australia is smooth and compliant.",
@@ -45,19 +51,42 @@ const jsonLd = {
     "provider": {
       "@type": "Organization",
       "name": "Everest Education & Visa Services",
-      "url": "https://www.everestnepal.com"
+      "url": "https://eevsgroup.com"
     },
     "areaServed": "Australia"
   }))
 };
 
-export default function OtherServicesPage() {
+export default async function OtherServicesPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
+  const resolvedParams = await searchParams;
+  const serviceId = resolvedParams.service;
+  const activeService = otherServices.find(s => s.id === serviceId);
+
+  const faqJsonLd = activeService?.faqs && activeService.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": activeService.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  } : null;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <ServiceDetailClient
         title="Additional Support Services"
         subtitle="Comprehensive support beyond education and migration to ensure your life in Australia is smooth and compliant."

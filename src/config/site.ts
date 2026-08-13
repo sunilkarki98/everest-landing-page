@@ -21,7 +21,7 @@ export const siteConfig = {
   shortName: "Everest Education",
   description: "Trusted education & visa services in Australia. Family-owned, student-first.",
   foundedYear: 2011,
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://everesteducation.com.au",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://eevsgroup.com",
 
   contact: {
     emails: {
@@ -32,7 +32,7 @@ export const siteConfig = {
       main: "+61 406 000 815",
       secondary: "+977 9749453158",
     },
-    address: "Unit 6, 17–23 Oatley Court, Belconnen ACT 2615, Australia",
+    address: "Level 1, Suite 7, 2-10 Oatley Court, Belconnen, ACT 2617",
   },
 
   social: {

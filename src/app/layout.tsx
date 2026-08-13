@@ -82,10 +82,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-AU" suppressHydrationWarning>
       <body
         className={`${jakarta.variable} ${caveat.variable} font-sans antialiased`}
-        style={{ backgroundColor: "#FFFFFF", color: "#1E293B" }}
+
       >
         <SmoothScrollProvider>
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-white focus:text-primary">

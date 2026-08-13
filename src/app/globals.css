@@ -47,7 +47,24 @@ For Ahilya & Amulya — and for all who seek a better future.
     /* Light gray for subtle backgrounds */
     --muted-foreground: 220 15% 40%;
     /* Darker slate-gray for sharp text readability */
-    /* Darker gray for muted text */
+
+    /* Card — standalone raised surfaces */
+    --card: 0 0% 100%;
+    /* White cards */
+    --card-foreground: 228 14% 20%;
+    /* Same as --foreground */
+
+    /* Surface — section backgrounds, subtle fills (replaces raw slate-*) */
+    --surface: 210 40% 98%;
+    /* ~slate-50 — light blue-tinted gray */
+    --surface-foreground: 215 16% 35%;
+    /* ~slate-600 — readable text on surface */
+    --surface-border: 214 32% 91%;
+    /* ~slate-200 — subtle border on surface */
+    --surface-hover: 210 40% 96%;
+    /* ~slate-100 — interactive hover state */
+    --surface-muted: 215 20% 65%;
+    /* ~slate-400 — muted elements on surface */
 
     /* Borders & Inputs */
     --border: 0 0% 75%;
@@ -92,6 +109,15 @@ For Ahilya & Amulya — and for all who seek a better future.
     --muted: 226 30% 15%;
     --muted-foreground: 226 20% 65%;
 
+    --card: 226 40% 13%;
+    --card-foreground: 0 0% 95%;
+
+    --surface: 226 35% 12%;
+    --surface-foreground: 226 20% 75%;
+    --surface-border: 226 30% 20%;
+    --surface-hover: 226 30% 18%;
+    --surface-muted: 226 20% 50%;
+
     --border: 226 30% 25%;
     --input: 226 30% 25%;
     --ring: 199 73% 74%;
@@ -121,6 +147,15 @@ For Ahilya & Amulya — and for all who seek a better future.
 
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-surface: hsl(var(--surface));
+  --color-surface-foreground: hsl(var(--surface-foreground));
+  --color-surface-border: hsl(var(--surface-border));
+  --color-surface-hover: hsl(var(--surface-hover));
+  --color-surface-muted: hsl(var(--surface-muted));
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -217,6 +252,40 @@ For Ahilya & Amulya — and for all who seek a better future.
 @utility text-ui-small {
   font-size: 0.75rem;
   line-height: 1.5;
+}
+
+/* -------------------------------------------------------------------------
+   Section Spacing Utilities (Standardized vertical rhythm)
+------------------------------------------------------------------------- */
+@utility section-py-sm {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+@utility section-py-sm-lg {
+  @media (min-width: 1024px) {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+@utility section-py-md {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+@utility section-py-md-lg {
+  @media (min-width: 1024px) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+@utility section-py-lg {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+@utility section-py-lg-lg {
+  @media (min-width: 1024px) {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
 }
 
 /* ─── Premium Button Animation ─── */

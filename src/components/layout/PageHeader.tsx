@@ -25,8 +25,33 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   breadcrumbs,
   className = "",
 }) => {
+  const breadcrumbJsonLd = breadcrumbs && breadcrumbs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://eevsgroup.com/"
+      },
+      ...breadcrumbs.map((crumb, index) => ({
+        "@type": "ListItem",
+        "position": index + 2,
+        "name": crumb.label,
+        ...(crumb.href ? { item: `https://eevsgroup.com${crumb.href.startsWith('/') ? crumb.href : `/${crumb.href}`}` } : {})
+      }))
+    ]
+  } : null;
+
   return (
     <div className={`relative pt-28 pb-10 lg:pt-32 lg:pb-12 bg-gradient-to-br from-slate-50 via-primary/5 to-primary/10 text-primary overflow-hidden ${className}`}>
+      {breadcrumbJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+      )}
       {/* Decorative Background Elements */}
       <div className="pointer-events-none absolute -top-40 -right-40 w-96 h-96 rounded-full blur-[120px] bg-accent/10" />
       <div className="pointer-events-none absolute -bottom-40 -left-40 w-[30rem] h-[30rem] rounded-full blur-[120px] bg-secondary/5" />

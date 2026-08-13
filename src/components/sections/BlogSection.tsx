@@ -34,13 +34,13 @@ export default function BlogSection() {
   const articles = blogPosts.slice(0, 3);
 
   return (
-    <section className="py-10 lg:py-14 bg-background relative overflow-hidden">
+    <section className="section-py-sm section-py-sm-lg bg-background relative overflow-hidden">
       {/* Subtle grid texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #64748b 1px, transparent 1px), linear-gradient(to bottom, #64748b 1px, transparent 1px)",
+            "linear-gradient(to right, var(--color-muted-foreground) 1px, transparent 1px), linear-gradient(to bottom, var(--color-muted-foreground) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -92,12 +92,12 @@ export default function BlogSection() {
 
                 <div className="flex flex-col flex-1 p-6 sm:p-7">
                   {/* Date + Read Time */}
-                  <div className="flex items-center gap-3 text-ui-small text-slate-700 font-semibold antialiased mb-4">
+                  <div className="flex items-center gap-3 text-ui-small text-foreground font-semibold antialiased mb-4">
                     <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
                       {formatDate(post.date)}
                     </span>
-                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                    <span className="w-1 h-1 rounded-full bg-surface-muted" />
                     <span className="flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
                       {post.readTime}
@@ -115,11 +115,11 @@ export default function BlogSection() {
                   </p>
 
                   {/* Footer */}
-                  <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-ui-small font-bold text-slate-700 uppercase tracking-widest antialiased">
+                  <div className="mt-auto pt-4 border-t border-surface-border flex items-center justify-between">
+                    <span className="text-ui-small font-bold text-foreground uppercase tracking-widest antialiased">
                       {post.author}
                     </span>
-                    <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-primary transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-primary transition-colors">
                       <ChevronRight size={18} />
                     </div>
                   </div>
@@ -133,7 +133,7 @@ export default function BlogSection() {
         <div className="mt-8 text-center sm:hidden">
           <Link
             href="/blog"
-            className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full font-bold bg-slate-100 text-primary w-full"
+            className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full font-bold bg-surface-hover text-primary w-full"
           >
             View All Insights
           </Link>

@@ -5,7 +5,7 @@ import {
 
 export const heroDestinations = [
   { name: "Australia", image: "/images/destinations/australia.jpg" },
-  { name: "New Zealand", image: "/images/destinations/new_zealand.jpg" },
+  { name: "New Zealand", image: "/images/destinations/auckland.jpg" },
   { name: "UK", image: "/images/destinations/uk.jpg" },
   { name: "Canada", image: "/images/destinations/canada.jpg" },
   { name: "USA", image: "/images/destinations/usa.jpg" },
@@ -154,7 +154,7 @@ export const testimonials = [
 export const activeBranches = [
   { id: 1, name: "Kathmandu Office", country: "Nepal", query: "Kathmandu, Nepal", address: "Baneshwor, Kathmandu" },
   { id: 2, name: "Butwal Office", country: "Nepal", query: "Butwal, Nepal", address: "Milanchowk, Butwal" },
-  { id: 3, name: "Canberra Office", country: "Australia", query: "17-23 Oatley Court, Belconnen ACT 2615, Australia", address: "Belconnen, Canberra ACT" },
+  { id: 3, name: "Canberra Office", country: "Australia", query: "Level 1, Suite 7, 2-10 Oatley Court, Belconnen, ACT 2617", address: "Belconnen, Canberra ACT" },
   { id: 4, name: "Perth Office", country: "Australia", query: "Perth, Australia", address: "Perth CBD, Western Australia" },
 ];
 
@@ -175,11 +175,11 @@ export const associatedUniversities = [
 export const latestArticles = [
   {
     id: 1,
-    title: "Student Visa Changes 2026",
+    title: "Understanding the Latest Student Visa Changes in 2026",
     date: "Jun 2026",
     description:
-      "Important updates to student visa requirements, processing times and eligibility criteria across major study destinations.",
-    href: "/blog/student-visa-changes-2026",
+      "Important updates to student visa requirements, including the new Genuine Student (GS) requirements.",
+    href: "/blog/latest-student-visa-changes-2026",
     tag: "Visa Update",
     accent: "from-blue-500 to-indigo-600",
     accentLight: "bg-blue-50 text-blue-700",
@@ -187,24 +187,24 @@ export const latestArticles = [
   },
   {
     id: 2,
-    title: "Scholarships for International Students",
-    date: "May 2026",
+    title: "Top Regional PR Pathways in Australia",
+    date: "Jun 2026",
     description:
-      "Discover the latest fully-funded scholarships available at top-ranked global universities for 2026 intake.",
-    href: "/blog/scholarships-international-students",
-    tag: "Scholarships",
-    accent: "from-amber-400 to-orange-500",
-    accentLight: "bg-amber-50 text-amber-700",
+      "Discover how studying in designated regional areas can boost your migration points and open exclusive PR pathways.",
+    href: "/blog/top-regional-pr-pathways",
+    tag: "Migration",
+    accent: "from-accent to-[var(--color-gold-dark)]",
+    accentLight: "bg-accent/10 text-accent-text",
     featured: false,
   },
   {
     id: 3,
-    title: "Working Rights Abroad",
-    date: "Apr 2026",
+    title: "A Complete Guide to Studying Nursing in Australia",
+    date: "Jun 2026",
     description:
-      "A comprehensive guide to working hours, conditions and legal rights for international students studying worldwide.",
-    href: "/blog/working-rights-abroad",
-    tag: "Work Rights",
+      "Learn about the entry requirements, costs, and the direct path to PR for international nursing students.",
+    href: "/blog/nursing-in-australia",
+    tag: "Study Guide",
     accent: "from-emerald-400 to-teal-600",
     accentLight: "bg-emerald-50 text-emerald-700",
     featured: false,
@@ -213,35 +213,27 @@ export const latestArticles = [
 
 export const teamMembers = [
   {
-    name: "Laura Awasthi",
-    phone: "+977 9801234567",
-    role: "Senior Consultant",
+    name: "Sika Sharma",
+    phone: "+61 406 000 815",
+    role: "Senior Education Counselor",
     description:
-      "Laura has 10+ years of experience in education consultancy and student migration services.",
+      "Sika has 10+ years of experience in international education consultancy and student university placements.",
     image: "/images/employees/sika.jpg",
   },
   {
-    name: "Jane Smith",
-    phone: "+977 9807654321",
-    role: "Visa Expert",
+    name: "Chika Gurung",
+    phone: "+61 406 000 815",
+    role: "Visa & Admissions Expert",
     description:
-      "Jane specializes in student visas and has helped thousands of students achieve their dreams of studying abroad.",
+      "Chika specializes in Australian student visas and has helped thousands of students achieve their dreams of studying abroad.",
     image: "/images/employees/chika.jpg",
   },
   {
-    name: "Emmy Johnson",
-    phone: "+977 9812345678",
-    role: "Migration Agent",
+    name: "Alisha Karki",
+    phone: "+61 406 000 815",
+    role: "PTE/IELTS Trainer",
     description:
-      "Emmy is an expert in migration laws and ensures smooth processes for students and families. She is also expert in IELTS training.",
+      "Alisha is an expert in English language training and ensures students are fully prepared for university entry requirements.",
     image: "/images/employees/gwife.jpg",
-  },
-  {
-    name: "Sophia Williams",
-    phone: "+977 9823456789",
-    role: "Career Advisor",
-    description:
-      "Sophia guides students to make the best choices for their career goals and education abroad.",
-    image: "/images/employees/golendra.jpg",
   },
 ];

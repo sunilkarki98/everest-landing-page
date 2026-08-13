@@ -71,10 +71,10 @@ export function EligibilityModal() {
                   className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all duration-300 ${
                     formData.goal === option.id
                       ? "border-accent bg-accent/10 text-primary shadow-sm"
-                      : "border-slate-200 bg-white hover:border-accent/50 hover:bg-slate-50 text-slate-600"
+                      : "border-surface-border bg-white hover:border-accent/50 hover:bg-surface text-surface-foreground"
                   }`}
                 >
-                  <option.icon size={24} className={`mb-2 ${formData.goal === option.id ? "text-accent" : "text-slate-400"}`} />
+                  <option.icon size={24} className={`mb-2 ${formData.goal === option.id ? "text-accent" : "text-surface-muted"}`} />
                   <span className="font-bold text-base">{option.label}</span>
                 </button>
               ))}
@@ -109,7 +109,7 @@ export function EligibilityModal() {
                   className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all duration-300 ${
                     formData.destination === option.id
                       ? "border-accent bg-accent/10 text-primary shadow-sm"
-                      : "border-slate-200 bg-white hover:border-accent/50 hover:bg-slate-50 text-slate-600"
+                      : "border-surface-border bg-white hover:border-accent/50 hover:bg-surface text-surface-foreground"
                   }`}
                 >
                   <span className="text-2xl">{option.flag}</span>
@@ -142,7 +142,7 @@ export function EligibilityModal() {
                   className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                     formData.level === level
                       ? "border-accent bg-accent/10 text-primary shadow-sm"
-                      : "border-slate-200 bg-white hover:border-accent/50 hover:bg-slate-50 text-slate-600"
+                      : "border-surface-border bg-white hover:border-accent/50 hover:bg-surface text-surface-foreground"
                   }`}
                 >
                   <span className="font-bold text-base">{level}</span>
@@ -175,7 +175,7 @@ export function EligibilityModal() {
                   className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                     formData.english === english
                       ? "border-accent bg-accent/10 text-primary shadow-sm"
-                      : "border-slate-200 bg-white hover:border-accent/50 hover:bg-slate-50 text-slate-600"
+                      : "border-surface-border bg-white hover:border-accent/50 hover:bg-surface text-surface-foreground"
                   }`}
                 >
                   <span className="font-bold text-base">{english}</span>
@@ -208,7 +208,7 @@ export function EligibilityModal() {
                   className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                     formData.timeline === timeline
                       ? "border-accent bg-accent/10 text-primary shadow-sm"
-                      : "border-slate-200 bg-white hover:border-accent/50 hover:bg-slate-50 text-slate-600"
+                      : "border-surface-border bg-white hover:border-accent/50 hover:bg-surface text-surface-foreground"
                   }`}
                 >
                   <span className="font-bold text-base">{timeline}</span>
@@ -230,7 +230,7 @@ export function EligibilityModal() {
               <CheckCircle2 className="text-emerald-500 w-8 h-8" />
             </div>
             <h3 className="text-ui-section-title font-bold text-primary mb-3">You have strong potential!</h3>
-            <p className="text-ui-body text-slate-600 mb-8 max-w-md">
+            <p className="text-ui-body text-surface-foreground mb-8 max-w-md">
               Based on your answers, you have multiple pathways available. 
               Let's connect you with an expert to finalize your strategy.
             </p>
@@ -247,7 +247,7 @@ export function EligibilityModal() {
             
             <button 
               onClick={onClose}
-              className="mt-5 text-sm text-slate-500 hover:text-slate-800 underline underline-offset-4"
+              className="mt-5 text-sm text-surface-foreground hover:text-primary underline underline-offset-4"
             >
               Maybe later
             </button>
@@ -279,20 +279,20 @@ export function EligibilityModal() {
             className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]"
           >
             {/* Header / Progress */}
-            <div className="px-5 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div className="px-5 py-3 border-b border-surface-border flex items-center justify-between bg-surface">
               <div className="flex gap-1.5">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                   <div 
                     key={i} 
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === step ? "w-6 bg-accent" : i < step ? "w-3 bg-accent/40" : "w-3 bg-slate-200"
+                      i === step ? "w-6 bg-accent" : i < step ? "w-3 bg-accent/40" : "w-3 bg-surface-border"
                     }`} 
                   />
                 ))}
               </div>
               <button
                 onClick={onClose}
-                className="p-1.5 text-slate-400 hover:text-primary hover:bg-slate-200 rounded-full transition-colors"
+                className="p-1.5 text-surface-muted hover:text-primary hover:bg-surface-border rounded-full transition-colors"
               >
                 <X size={18} />
               </button>
@@ -307,14 +307,14 @@ export function EligibilityModal() {
 
             {/* Footer Navigation */}
             {step > 1 && step < 6 && (
-              <div className="px-5 sm:px-7 py-3.5 border-t border-slate-100 flex justify-between bg-white items-center">
+              <div className="px-5 sm:px-7 py-3.5 border-t border-surface-border flex justify-between bg-white items-center">
                 <button 
                   onClick={handleBack}
-                  className="text-sm font-medium text-slate-500 hover:text-primary transition-colors"
+                  className="text-sm font-medium text-surface-muted hover:text-primary transition-colors"
                 >
                   Back
                 </button>
-                <span className="text-xs text-slate-400">Step {step} of 5</span>
+                <span className="text-xs text-surface-muted">Step {step} of 5</span>
               </div>
             )}
           </motion.div>

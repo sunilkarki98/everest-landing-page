@@ -32,7 +32,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       variants={fadeUpCard}
     >
       {/* Image Container */}
-      <div className="relative w-full h-[240px] sm:h-[260px] overflow-hidden bg-slate-50">
+      <div className="relative w-full h-[240px] sm:h-[260px] overflow-hidden bg-surface">
         <Image
           src={image}
           alt={name}
@@ -80,19 +80,19 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       {/* Content Box */}
       <div className="relative p-5 sm:p-6 flex flex-col flex-grow bg-white">
         <div className="mb-4">
-           <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-[10px] sm:text-xs font-bold text-slate-600 tracking-wider uppercase mb-3">
+           <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-surface-hover border border-surface-border text-[10px] sm:text-xs font-bold text-surface-foreground tracking-wider uppercase mb-3">
              {role}
            </span>
            <h3 className="text-ui-card-title font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">
              {name}
            </h3>
-           <p className="text-ui-small font-semibold text-slate-700 mt-2 flex items-center gap-1.5 antialiased">
+           <p className="text-ui-small font-semibold text-foreground mt-2 flex items-center gap-1.5 antialiased">
              <Phone className="w-3.5 h-3.5 text-accent" />
              {phone}
            </p>
         </div>
         
-        <p className="text-ui-body leading-relaxed text-slate-700 font-medium flex-grow antialiased">
+        <p className="text-ui-body leading-relaxed text-foreground font-medium flex-grow antialiased">
           {description}
         </p>
       </div>
@@ -103,7 +103,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 
 const EmployeeSection: React.FC = () => {
   return (
-    <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
+    <section className="section-py-md section-py-md-lg bg-surface relative overflow-hidden">
       {/* Subtle Background Elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
       
@@ -118,7 +118,7 @@ const EmployeeSection: React.FC = () => {
         />
         <a 
           href="#team"
-          className="inline-flex items-center gap-2 bg-white text-primary font-semibold py-3 px-8 rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:border-accent/50 hover:text-accent transition-all duration-300"
+          className="inline-flex items-center gap-2 bg-white text-primary font-semibold py-3 px-8 rounded-full border border-surface-border shadow-sm hover:shadow-md hover:border-accent/50 hover:text-accent transition-all duration-300"
         >
           View All Members <ArrowRight className="w-4 h-4" />
         </a>

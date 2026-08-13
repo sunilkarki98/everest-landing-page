@@ -12,6 +12,9 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       title: `${activeService.title} | Visa & Migration Services Australia | Everest Education`,
       description: activeService.overview || activeService.description,
       keywords: ["Australian student visa", "skilled migration Australia", "PR pathway Australia", "partner visa Australia", "migration agent Australia", "485 visa", "ART appeal"],
+      alternates: {
+        canonical: `https://eevsgroup.com/migration?service=${serviceId}`,
+      },
       openGraph: {
         title: `${activeService.title} | Visa & Migration Services | Everest Education`,
         description: activeService.overview || activeService.description,
@@ -24,6 +27,9 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     title: "Visa & Migration Services Australia | Student Visa, PR, Partner Visa | Everest Education",
     description: "Professional Australian visa and migration services by Registered Migration Agents. Expert support for Student Visa (500), Skilled Migration (189/190/491), Partner Visas, 485 Graduate Visa, ART Appeals, and Citizenship applications.",
     keywords: ["Australian student visa", "skilled migration Australia", "PR pathway Australia", "partner visa Australia", "migration agent Australia", "485 visa", "ART appeal"],
+    alternates: {
+      canonical: "https://eevsgroup.com/migration",
+    },
     openGraph: {
       title: "Visa & Migration Services | Everest Education",
       description: "Professional Australian visa and migration services by Registered Migration Agents.",
@@ -46,19 +52,42 @@ const jsonLd = {
     "provider": {
       "@type": "Organization",
       "name": "Everest Education & Visa Services",
-      "url": "https://www.everestnepal.com"
+      "url": "https://eevsgroup.com"
     },
     "areaServed": "Australia"
   }))
 };
 
-export default function MigrationPage() {
+export default async function MigrationPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
+  const resolvedParams = await searchParams;
+  const serviceId = resolvedParams.service;
+  const activeService = migrationServices.find(s => s.id === serviceId);
+
+  const faqJsonLd = activeService?.faqs && activeService.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": activeService.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  } : null;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <ServiceDetailClient
         title="Visa & Migration Services"
         subtitle="Professional migration support tailored to your individual circumstances by Registered Migration Agents."

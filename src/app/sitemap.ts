@@ -4,7 +4,7 @@ import { migrationServices, studyServices, otherServices } from '@/data/services
 import { blogPosts } from '@/data/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.everesteducation.com.au';
+  const baseUrl = 'https://eevsgroup.com';
 
   // Core static pages
   const staticPages = [

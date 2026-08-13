@@ -80,14 +80,14 @@ export default function HeroSection() {
             >
               <div className="flex items-center gap-0.5">
                 {[...Array(4)].map((_, i) => (
-                  <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFB400" className="w-4 h-4 group-hover:scale-110 transition-transform">
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--color-accent)" className="w-4 h-4 group-hover:scale-110 transition-transform">
                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                   </svg>
                 ))}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 group-hover:scale-110 transition-transform">
                   <defs>
                     <linearGradient id="halfStar" x1="0" x2="100%" y1="0" y2="0">
-                      <stop offset="50%" stopColor="#FFB400" />
+                      <stop offset="50%" stopColor="var(--color-accent)" />
                       <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.3" />
                     </linearGradient>
                   </defs>
@@ -149,18 +149,23 @@ export default function HeroSection() {
             className="flex flex-row gap-2 sm:gap-4 w-full sm:w-auto items-center"
           >
             {/* Primary CTA */}
-            <a
-              href="https://condat.com.au/condat/318/customer?method=website"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 sm:h-14 flex-1 sm:flex-none items-center justify-center rounded-xl bg-accent px-4 sm:px-8 text-sm sm:text-ui-body font-bold text-primary shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 whitespace-nowrap"
+            <Button
+              variant="accent"
+              className="h-11 sm:h-14 flex-1 sm:flex-none px-4 sm:px-8 text-sm sm:text-ui-body font-bold shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 rounded-xl"
+              asChild
             >
-              Book Free Consultation
-            </a>
+              <a
+                href="https://condat.com.au/condat/318/customer?method=website"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book Free Consultation
+              </a>
+            </Button>
 
-            <Button 
-              variant="outline" 
-              className="h-11 sm:h-14 px-4 sm:px-6 text-sm sm:text-ui-body font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary flex-1 sm:flex-none transition-all shadow-lg rounded-xl" 
+            <Button
+              variant="outline"
+              className="h-11 sm:h-14 px-4 sm:px-6 text-sm sm:text-ui-body font-bold bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white hover:text-primary flex-1 sm:flex-none transition-all shadow-lg rounded-xl"
               onClick={() => {
                 const element = document.getElementById('services');
                 if (element) {
@@ -230,14 +235,14 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="bg-gradient-to-br from-white/5 to-black/40 backdrop-blur-md border border-white/10 hover:border-white/20 hover:bg-white/5 p-6 rounded-3xl shadow-[0_16px_40px_rgba(0,0,0,0.4)] flex flex-col gap-3 w-[280px] relative overflow-hidden group/card transition-all"
+              className="flex flex-col gap-2.5 w-[280px] relative transition-all"
             >
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-30 group-hover/card:opacity-100 transition-opacity duration-500" />
-              
-              <h4 className="flex items-center gap-2 text-xs font-bold text-accent uppercase tracking-[0.2em] border-b border-white/5 pb-3 mb-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                Quick Links
-              </h4>
+              {/* Heading styled as a mini-capsule to match */}
+
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 w-fit mb-1 shadow-[0_4px_12px_rgba(0,0,0,0.2)] ml-2">
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--color-accent)]" />
+                <span className="text-[11px] font-bold text-white/90 uppercase tracking-[0.2em] leading-none mt-px">Quick Links</span>
+              </div>
 
               {[
                 { label: "VEVO Visa Check", href: "https://online.immi.gov.au/evo/firstParty?actionType=query" },
@@ -250,11 +255,11 @@ export default function HeroSection() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between text-sm font-semibold text-white/60 hover:text-white transition-all py-1.5 hover:translate-x-1"
+                  className="group flex items-center justify-between text-sm font-semibold text-white/90 bg-black/40 backdrop-blur-md border border-white/10 hover:border-accent/40 hover:bg-black/60 rounded-full px-5 py-3 transition-all duration-300 hover:-translate-y-1 shadow-[0_8px_20px_rgba(0,0,0,0.3)]"
                 >
                   <span className="drop-shadow-sm">{link.label}</span>
-                  <div className="w-6 h-6 rounded-full bg-white/5 border border-white/5 group-hover:bg-accent/20 group-hover:border-accent/40 flex items-center justify-center transition-all duration-300">
-                    <ArrowRight className="w-3 h-3 text-white/30 group-hover:text-accent transition-colors" />
+                  <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center transition-all duration-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0">
+                    <ArrowRight className="w-3 h-3 text-accent" />
                   </div>
                 </a>
               ))}
@@ -293,7 +298,8 @@ export default function HeroSection() {
           className="bg-white/10 backdrop-blur-md border border-white/20 p-1.5 sm:p-2.5 rounded-2xl shadow-2xl flex flex-row items-center gap-1.5 sm:gap-2 w-full"
         >
           <div className="relative flex-1 min-w-0">
-            <select className="appearance-none bg-white/95 border border-white/20 text-primary px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-accent w-full cursor-pointer hover:bg-white transition-colors text-xs sm:text-base shadow-sm">
+            <label htmlFor="pathway-type" className="sr-only">Select your pathway type</label>
+            <select id="pathway-type" className="appearance-none bg-white/95 border border-white/20 text-primary px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-accent w-full cursor-pointer hover:bg-white transition-colors text-xs sm:text-base shadow-sm">
               <option value="study">Study</option>
               <option value="migrate">Migrate</option>
               <option value="work">Work</option>
@@ -304,7 +310,8 @@ export default function HeroSection() {
           </div>
 
           <div className="relative flex-1 min-w-0">
-            <select className="appearance-none bg-white/95 border border-white/20 text-primary px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-accent w-full cursor-pointer hover:bg-white transition-colors text-xs sm:text-base shadow-sm">
+            <label htmlFor="pathway-country" className="sr-only">Select your destination country</label>
+            <select id="pathway-country" className="appearance-none bg-white/95 border border-white/20 text-primary px-2.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold focus:outline-none focus:ring-2 focus:ring-accent w-full cursor-pointer hover:bg-white transition-colors text-xs sm:text-base shadow-sm">
               <option value="au">Australia</option>
               <option value="ca">Canada</option>
               <option value="uk">UK</option>

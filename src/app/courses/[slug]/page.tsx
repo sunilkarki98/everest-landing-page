@@ -22,8 +22,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `Study ${course.title} Abroad | Programs, Fees & PR Pathways | Everest Education`,
     description: `Explore top ${course.title} programs for international students including ${programNames}. Compare tuition fees, entry requirements, career outcomes, and migration pathways.`,
     keywords: course.seoKeywords,
+    alternates: {
+      canonical: `https://eevsgroup.com/courses/${course.id}`,
+    },
     openGraph: {
       title: `Study ${course.title} Abroad | Everest Education`,
+      url: `https://eevsgroup.com/courses/${course.id}`,
       description: course.description,
       images: [{ url: course.image, width: 1200, height: 630 }],
       type: "website",
@@ -49,7 +53,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
       "provider": {
         "@type": "Organization",
         "name": "Everest Education & Visa Services",
-        "url": "https://www.everestnepal.com"
+        "url": "https://eevsgroup.com"
       },
       "timeRequired": program.duration,
       "offers": {

@@ -90,7 +90,7 @@ export default function FeedbackSection({ testimonials }: { testimonials: Testim
   );
 
   return (
-    <section className="py-10 lg:py-14 bg-primary overflow-hidden">
+    <section className="section-py-sm section-py-sm-lg bg-primary overflow-hidden">
       <Container>
         {/* Heading */}
         <div className="text-center mb-12">
@@ -107,7 +107,7 @@ export default function FeedbackSection({ testimonials }: { testimonials: Testim
             href="https://share.google/Bp8LPnaFi9wzvzr3a"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-primary hover:bg-slate-100 hover:-translate-y-0.5 px-7 py-3 rounded-full font-bold shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-300 group"
+            className="inline-flex items-center gap-2 bg-white text-primary hover:bg-surface-hover hover:-translate-y-0.5 px-7 py-3 rounded-full font-bold shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-300 group"
           >
             <Star className="w-5 h-5 text-accent fill-accent group-hover:scale-110 transition-transform" /> Leave a Review on Google
           </a>

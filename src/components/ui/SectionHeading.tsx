@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { headingVariants } from "@/lib/animations";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -14,21 +15,13 @@ interface SectionHeadingProps {
   titleColor?: string;
 }
 
-const defaultHeadingVariants: Variants = {
-  hidden: { opacity: 0, y: -40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, ease: "easeOut" },
-  },
-};
 
 export function SectionHeading({
   eyebrow,
   title,
   align = "center",
   className,
-  animationVariants = defaultHeadingVariants,
+  animationVariants = headingVariants,
   eyebrowColor,
   titleColor,
 }: SectionHeadingProps) {

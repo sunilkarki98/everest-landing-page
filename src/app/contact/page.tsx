@@ -4,8 +4,11 @@ import GlobalContactSection from "@/components/sections/GlobalContactSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Everest Education",
-  description: "Get in touch with Everest Education & Visa Services. View our office locations in Australia and Nepal.",
+  title: "Contact Us | Everest Education & Visa Services",
+  description: "Get in touch with Everest Education & Visa Services. We are here to help you with your study and migration needs.",
+  alternates: {
+    canonical: "https://eevsgroup.com/contact",
+  }
 };
 
 export default function ContactPage() {
