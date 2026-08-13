@@ -6,6 +6,7 @@ import { MapPin, GraduationCap, ArrowRight, Users, Coffee } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 import { featuredDestinations as destinations } from "@/data/home";
 
@@ -56,23 +57,16 @@ export default function FeaturedSection() {
           {/* Left Column */}
           <div className="w-full lg:w-[40%] flex flex-col justify-center items-start relative z-10 py-4 lg:py-8">
             {/* Header Content */}
-            <div className="mb-6 w-full">
-              <p className="text-ui-small font-bold uppercase tracking-[0.2em] text-accent mb-4 sm:mb-6">
-                Popular Destinations
-              </p>
-
-              <h2 className="text-ui-section-title font-medium text-primary mb-2 tracking-tight font-serif">
-                Study Abroad,
-              </h2>
-              <h2 className="text-ui-section-title font-medium text-accent italic mb-6 sm:mb-8 tracking-tight font-serif">
-                Explore the World
-              </h2>
+              <SectionHeading
+                eyebrow="Popular Destinations"
+                title="Study Abroad, Explore the World"
+                align="left"
+                className="mb-6"
+              />
 
               <p className="text-muted-foreground max-w-md text-ui-body leading-relaxed mb-2">
                 Discover top cities around the world and begin a life-changing academic journey & career.
               </p>
-
-            </div>
 
             {/* Changing Content */}
             <div className="relative min-h-[360px] w-full flex flex-col">

@@ -7,6 +7,7 @@ import { Container } from "../layout/Container";
 import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { detailedCourses } from "@/data/courses";
 import { universities } from "@/data/universities";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 
 const getFlagEmoji = (country: string) => {
@@ -44,14 +45,22 @@ export default function StudyPathwaysSection() {
 
           {/* Left Content (Text) */}
           <div className="xl:w-5/12 relative z-10 flex flex-col justify-center">
-            <div className="inline-flex items-center self-start gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-ui-small font-bold mb-6 uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              Your Academic Future
-            </div>
-            <h2 className="text-ui-section-title font-extrabold text-primary mb-6 tracking-tight leading-tight">
-              Study Pathways &<br />
-              <span className="text-accent-text">Partner Universities</span>
-            </h2>
+            <SectionHeading
+              eyebrow={
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                  Your Academic Future
+                </span>
+              }
+              title={
+                <>
+                  Study Pathways &<br />
+                  <span className="text-accent-text">Partner Universities</span>
+                </>
+              }
+              align="left"
+              className="mb-6"
+            />
             <p className="text-ui-lead text-slate-600 leading-relaxed max-w-lg mb-8">
               Explore our core study disciplines and discover the world-class Australian institutions where you can launch your career. We provide comprehensive study support across all major academic fields.
             </p>

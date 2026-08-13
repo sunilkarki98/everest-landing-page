@@ -108,20 +108,23 @@ const EmployeeSection: React.FC = () => {
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
       
       {/* Heading */}
-      <div className="text-center mb-16 px-4 relative z-10 flex flex-col items-center">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-12 relative z-10 flex flex-col items-center justify-center">
         <SectionHeading 
           eyebrow="Our Team" 
           title="Meet The Experts At EEVS" 
+          align="center"
           eyebrowColor="text-accent" 
           titleColor="text-primary"
-          className="mb-8"
+          className="mb-0"
         />
-        <a 
-          href="#team"
-          className="inline-flex items-center gap-2 bg-white text-primary font-semibold py-3 px-8 rounded-full border border-surface-border shadow-sm hover:shadow-md hover:border-accent/50 hover:text-accent transition-all duration-300"
-        >
-          View All Members <ArrowRight className="w-4 h-4" />
-        </a>
+        <div className="mt-6 md:mt-0 md:absolute md:right-8 md:bottom-2">
+          <a 
+            href="#team"
+            className="inline-flex items-center gap-2 bg-white text-primary font-semibold py-3 px-8 rounded-full border border-surface-border shadow-sm hover:shadow-md hover:border-accent/50 hover:text-accent transition-all duration-300"
+          >
+            View All Members <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
       </div>
 
       {/* Employee Cards */}

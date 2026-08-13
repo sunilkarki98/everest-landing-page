@@ -7,6 +7,7 @@ import { Container } from "@/components/layout/Container";
 import { Counter } from "@/components/ui/Counter";
 import { trustItems, accreditations } from "@/config/trust-data";
 import { AccreditationGradients } from "@/components/ui/AccreditationGradients";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { welcomeHighlights as highlights } from "@/data/home";
 
 
@@ -24,25 +25,15 @@ export default function WelcomeSection() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-text font-semibold text-ui-small uppercase tracking-widest mb-6"
-          >
-            <CheckCircle2 size={16} /> Why Choose EEVS
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-ui-section-title font-bold text-primary mb-6 tracking-tight"
-          >
-            Everest Since <span className="text-accent-text">2011</span>
-          </motion.h2>
+          <SectionHeading
+            eyebrow="Why Choose EEVS"
+            title={
+              <>
+                Everest Since <span className="text-accent-text">2011</span>
+              </>
+            }
+            className="mb-6"
+          />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
