@@ -91,22 +91,7 @@ export default function GlobalContactSection() {
 
             <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
 
-            {/* 3. CTA Button */}
-            <div className="shrink-0 flex items-center justify-center p-3 xl:px-3 xl:w-[17%]">
-              <a
-                href="https://condat.com.au/condat/318/customer?method=website"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-primary font-bold text-ui-card-title rounded-xl shadow-lg hover:shadow-xl hover:bg-accent/90 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
-              >
-                Enquire Now
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
-
-            <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
-
-            {/* 4. QR Code */}
+            {/* 3. QR Code */}
             <div className="flex items-center gap-3 p-5 xl:pl-4 xl:pr-5 shrink-0 xl:w-[20%] xl:justify-center">
               <div className="text-right hidden sm:block">
                 <h5 className="font-bold text-ui-card-title text-white leading-tight">Scan to Chat</h5>
@@ -117,6 +102,21 @@ export default function GlobalContactSection() {
                   <Image src="/contacusQR.jpeg" alt="WhatsApp QR Code" fill sizes="96px" className="object-contain" />
                 </div>
               </div>
+            </div>
+
+            <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
+
+            {/* 4. CTA Button */}
+            <div className="shrink-0 flex items-center justify-center p-5 xl:px-4 xl:w-[17%]">
+              <a
+                href="https://condat.com.au/condat/318/customer?method=website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-primary font-bold text-ui-card-title rounded-xl shadow-lg hover:shadow-xl hover:bg-accent/90 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap w-full"
+              >
+                Enquire Now
+                <ExternalLink className="w-4 h-4" />
+              </a>
             </div>
 
           </div>
