@@ -213,20 +213,28 @@ export const latestArticles = [
 
 export const teamMembers = [
   {
+    name: "Ashok Basnet",
+    phone: "+61 406 000 815",
+    role: "Founder & Director",
+    description:
+      "Ashok is the visionary founder of Everest Education & Visa Services, dedicated to empowering students and migrants to achieve their dreams in Australia.",
+    image: "/images/team/AshokBasnet.jpeg",
+  },
+  {
     name: "Sika Sharma",
     phone: "+61 406 000 815",
     role: "Senior Education Counselor",
     description:
       "Sika has 10+ years of experience in international education consultancy and student university placements.",
-    image: "/images/employees/sika.jpg",
+    image: "/images/team/sika.jpg",
   },
   {
-    name: "Chika Gurung",
+    name: "Shikshya Gurung",
     phone: "+61 406 000 815",
     role: "Visa & Admissions Expert",
     description:
-      "Chika specializes in Australian student visas and has helped thousands of students achieve their dreams of studying abroad.",
-    image: "/images/employees/chika.jpg",
+      "Shikshya specializes in Australian student visas and has helped thousands of students achieve their dreams of studying abroad.",
+    image: "/images/team/chika.jpg",
   },
   {
     name: "Alisha Karki",
@@ -234,6 +242,6 @@ export const teamMembers = [
     role: "PTE/IELTS Trainer",
     description:
       "Alisha is an expert in English language training and ensures students are fully prepared for university entry requirements.",
-    image: "/images/employees/gwife.jpg",
+    image: "/images/team/gwife.jpg",
   },
 ];

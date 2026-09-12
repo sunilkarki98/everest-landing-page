@@ -1,14 +1,52 @@
 import { Metadata } from "next";
-import AboutContent from "./AboutContent";
+import AboutContent from "@/components/page-clients/AboutContent";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About Us | Everest Education & Visa Services",
   description: "Learn about our journey, our team of expert counselors, and our mission to provide the best education and migration services.",
   alternates: {
-    canonical: "https://eevsgroup.com/about",
-  }
+    canonical: getCanonicalUrl("/about"),
+  },
+  openGraph: createOgMetadata({
+    title: "About Us | Everest Education & Visa Services",
+    description: "Learn about our journey, our team of expert counselors, and our mission to provide the best education and migration services.",
+    path: "/about",
+  }),
+  twitter: createTwitterMetadata({
+    title: "About Us | Everest Education & Visa Services",
+    description: "Learn about our journey, our team of expert counselors, and our mission to provide the best education and migration services.",
+  }),
 };
 
 export default function AboutPage() {
-  return <AboutContent />;
+  const baseUrl = getBaseUrl();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Everest Education & Visa Services",
+    "description": "Learn about our journey, our team of expert counselors, and our mission to provide the best education and migration services.",
+    "url": `${baseUrl}/about`,
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Everest Education & Visa Services",
+      "url": baseUrl,
+      "foundingDate": "2011",
+      "description": "Trusted education & visa services in Australia. Family-owned, student-first.",
+      "areaServed": "Australia",
+      "serviceType": ["Education Consultancy", "Visa Services", "Migration Services"],
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <AboutContent />
+    </>
+  );
 }
+

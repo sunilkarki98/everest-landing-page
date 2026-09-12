@@ -1,32 +1,44 @@
-"use client";
-
-import { Mail } from "lucide-react";
-import { siteConfig } from "../config/site";
+import { Mail, Smartphone, Phone } from "lucide-react";
+import { siteConfig } from "@/config/site";
+import { Container } from "@/components/layout/Container";
 
 export default function TopBar() {
   return (
     <div className="bg-primary text-primary-foreground text-ui-small py-2">
-      <div className="w-full mx-auto flex justify-between items-center px-4 lg:px-8 xl:px-12 overflow-hidden">
+      <Container className="flex justify-between items-center overflow-hidden">
         {/* Left side: Phone + Email */}
-        <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
-          {/* Australia Phone */}
+        <div className="flex items-center gap-4 md:gap-6">
+          {/* Australia Mobile Phone */}
           <a
-            href={`tel:${siteConfig.contact.phones.main.replace(/[^\d+]/g, "")}`}
-            className="flex items-center gap-1 sm:gap-1.5 font-medium hover:text-secondary transition-colors"
-            title="Call Australia Office"
+            href={`tel:+61${siteConfig.contact.phones.main.replace(/[^\d]/g, "").replace(/^0/, "")}`}
+            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
+            title="Call Australia Mobile"
           >
-            <span className="text-sm sm:text-base leading-none drop-shadow-sm" aria-label="Australia Flag">🇦🇺</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm mr-0.5" aria-label="Australia Flag">🇦🇺</span>
+            <Smartphone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
             <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.main}</span>
+          </a>
+
+          {/* Australia Landline */}
+          <a
+            href={`tel:+61${siteConfig.contact.phones.landline.replace(/[^\d]/g, "").replace(/^0/, "")}`}
+            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors hidden sm:flex"
+            title="Call Australia Landline"
+          >
+            <Phone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
+            <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.landline}</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm mr-0.5" aria-label="Australia Flag">🇦🇺</span>
           </a>
 
           {/* Nepal Phone */}
           <a
-            href={`tel:${siteConfig.contact.phones.secondary.replace(/[^\d+]/g, "")}`}
-            className="flex items-center gap-1 sm:gap-1.5 font-medium hover:text-secondary transition-colors"
+            href={`tel:${siteConfig.contact.phones.nepal.replace(/[^\d+]/g, "")}`}
+            className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
             title="Call Nepal Office"
           >
-            <span className="text-sm sm:text-base leading-none drop-shadow-sm" aria-label="Nepal Flag">🇳🇵</span>
-            <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.secondary}</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm mr-0.5" aria-label="Nepal Flag">🇳🇵</span>
+            <Phone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
+            <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.nepal}</span>
           </a>
 
           {/* Email */}
@@ -62,7 +74,7 @@ export default function TopBar() {
             </a>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

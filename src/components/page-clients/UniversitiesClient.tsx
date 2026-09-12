@@ -214,7 +214,7 @@ export function UniversitiesClient() {
             </div>
             <div className="relative z-10 md:w-1/3 flex justify-end w-full">
               <Link
-                href="https://condat.com.au/condat/318/customer?method=website"
+                href="https://calendly.com/samir-dreamtrip"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-primary font-bold px-8 py-4 rounded-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all"

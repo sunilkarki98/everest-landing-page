@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ServiceDetailClient } from "@/components/layout/ServiceDetailClient";
+import { ServiceDetailClient } from "@/components/page-clients/ServiceDetailClient";
 import { studyServices } from "@/data/services";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ service?: string }> }): Promise<Metadata> {

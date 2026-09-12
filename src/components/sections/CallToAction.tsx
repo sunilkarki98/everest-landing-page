@@ -53,14 +53,14 @@ const CallToAction = ({
               )}
             </h2>
 
-            <p className="text-white/70 text-base leading-relaxed max-w-lg mb-6">
+            <p className="text-white/70 text-ui-lead leading-relaxed max-w-lg mb-6">
               {description}
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-row items-center gap-2 sm:gap-3">
               <a
-                href="https://condat.com.au/condat/318/customer?method=website"
+                href="https://calendly.com/samir-dreamtrip"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-accent text-primary font-bold text-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex-1 sm:flex-none"

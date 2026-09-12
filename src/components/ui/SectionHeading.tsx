@@ -40,15 +40,13 @@ export function SectionHeading({
       viewport={{ once: true, amount: 0.2 }}
     >
       {eyebrow && (
-        <div className={cn("flex items-center gap-3 mb-4", isCenter ? "justify-center" : "justify-start")}>
-          <span className="block w-6 sm:w-10 h-px bg-accent" />
-          <div className={cn("text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase", eyebrowColor || "text-accent")}>
+        <div className={cn("flex items-center gap-3 mb-5", isCenter ? "justify-center" : "justify-start")}>
+          <div className={cn("px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-sm font-extrabold tracking-[0.15em] uppercase shadow-sm", eyebrowColor || "text-accent")}>
             {eyebrow}
           </div>
-          <span className="block w-6 sm:w-10 h-px bg-accent" />
         </div>
       )}
-      <h2 className={cn("text-ui-section-title tracking-tight", titleColor || "text-primary")}>
+      <h2 className={cn("text-ui-section-title drop-shadow-sm", titleColor || "text-primary")}>
         {title}
       </h2>
       {isCenter && (

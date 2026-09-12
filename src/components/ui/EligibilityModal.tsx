@@ -17,7 +17,12 @@ export function EligibilityModal() {
   });
 
   useEffect(() => {
-    const handleOpen = () => setIsOpen(true);
+    const handleOpen = (e: Event) => {
+      if (e instanceof CustomEvent && e.detail?.country) {
+        setFormData(prev => ({ ...prev, destination: e.detail.country }));
+      }
+      setIsOpen(true);
+    };
     window.addEventListener("open-eligibility-modal", handleOpen);
     return () => window.removeEventListener("open-eligibility-modal", handleOpen);
   }, []);
@@ -52,7 +57,7 @@ export function EligibilityModal() {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-ui-section-title font-bold text-primary mb-2">What is your primary goal?</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">What is your primary goal?</h3>
             <p className="text-ui-body text-slate-500 mb-6">Select the option that best describes your objective.</p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -90,7 +95,7 @@ export function EligibilityModal() {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-ui-section-title font-bold text-primary mb-2">Preferred Destination?</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">Preferred Destination?</h3>
             <p className="text-ui-body text-slate-500 mb-6">Where are you planning to go?</p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -128,7 +133,7 @@ export function EligibilityModal() {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-ui-section-title font-bold text-primary mb-2">Highest Education Level?</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">Highest Education Level?</h3>
             <p className="text-ui-body text-slate-500 mb-6">This helps us evaluate your points or eligibility.</p>
             
             <div className="flex flex-col gap-2.5">
@@ -161,7 +166,7 @@ export function EligibilityModal() {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-ui-section-title font-bold text-primary mb-2">English Proficiency</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">English Proficiency</h3>
             <p className="text-ui-body text-slate-500 mb-6">Have you taken a test like IELTS or PTE?</p>
             
             <div className="flex flex-col gap-2.5">
@@ -194,7 +199,7 @@ export function EligibilityModal() {
             exit={{ opacity: 0, x: -20 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-ui-section-title font-bold text-primary mb-2">Expected Timeline</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">Expected Timeline</h3>
             <p className="text-ui-body text-slate-500 mb-6">When do you want to start this journey?</p>
             
             <div className="flex flex-col gap-2.5">
@@ -229,14 +234,14 @@ export function EligibilityModal() {
             <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-5 shadow-inner">
               <CheckCircle2 className="text-emerald-500 w-8 h-8" />
             </div>
-            <h3 className="text-ui-section-title font-bold text-primary mb-3">You have strong potential!</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3">You have strong potential!</h3>
             <p className="text-ui-body text-surface-foreground mb-8 max-w-md">
               Based on your answers, you have multiple pathways available. 
               Let's connect you with an expert to finalize your strategy.
             </p>
             
             <a 
-              href="https://condat.com.au/condat/318/customer?method=website"
+              href={`https://calendly.com/samir-dreamtrip?a1=${encodeURIComponent(`Goal: ${formData.goal}, Dest: ${formData.destination}, Level: ${formData.level}, English: ${formData.english}, Timeline: ${formData.timeline}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={onClose}

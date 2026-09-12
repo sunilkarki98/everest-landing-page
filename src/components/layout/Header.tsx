@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import TopBar from "./TopBar";
-import Navbar from "./Navbar";
+import TopBar from "@/components/layout/TopBar";
+import Navbar from "@/components/layout/Navbar";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);

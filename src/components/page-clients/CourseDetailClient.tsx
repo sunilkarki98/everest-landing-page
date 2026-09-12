@@ -137,7 +137,7 @@ export function CourseDetailClient({ slug }: { slug: string }) {
                   <p className="text-sm text-white/80 mb-5 leading-relaxed">
                     Unsure if {activeProgram.title} is right for you? Talk to our counselors.
                   </p>
-                  <a href="#contact" className="inline-flex items-center justify-center w-full bg-accent text-primary font-bold py-3 rounded-xl hover:bg-white transition-colors duration-300">
+                  <a href="https://calendly.com/samir-dreamtrip" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full bg-accent text-primary font-bold py-3 rounded-xl hover:bg-white transition-colors duration-300">
                     Book Consultation
                   </a>
                 </div>
@@ -305,7 +305,7 @@ export function CourseDetailClient({ slug }: { slug: string }) {
               {/* Content Disclaimer */}
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Information on this page is indicative and subject to change. Tuition fees, entry requirements, and intake dates may vary by institution and are updated periodically. <a href="https://condat.com.au/condat/318/customer?method=website" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent font-semibold underline">Contact our counsellors</a> for the latest confirmed details.
+                  Information on this page is indicative and subject to change. Tuition fees, entry requirements, and intake dates may vary by institution and are updated periodically. <a href="https://calendly.com/samir-dreamtrip" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent font-semibold underline">Contact our counsellors</a> for the latest confirmed details.
                 </p>
               </div>
 

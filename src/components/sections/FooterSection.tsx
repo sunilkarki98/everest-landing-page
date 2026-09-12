@@ -1,7 +1,6 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { siteConfig } from "../../config/site";
+import { siteConfig } from "@/config/site";
 import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 
@@ -15,7 +14,7 @@ const FooterSection = () => {
             <div className="flex flex-col items-start space-y-4">
               <div className="bg-white/95 backdrop-blur-sm rounded-sm shadow-md border border-white/20 inline-flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/logos/everestlogo.png"
+                  src="/logos/everestlogo.jpeg"
                   alt="Everest Education Logo"
                   width={140}
                   height={48}
@@ -91,7 +90,7 @@ const FooterSection = () => {
             Support
           </h3>
           <ul className="mt-2 space-y-2 opacity-70">
-            <li><a href="https://condat.com.au/condat/318/customer?method=website" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-secondary">Book Consultation</a></li>
+            <li><a href="https://calendly.com/samir-dreamtrip" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-secondary">Book Consultation</a></li>
             <li><Link href="/contact" className="transition-colors hover:text-secondary">Contact Us</Link></li>
           </ul>
         </div>
@@ -107,7 +106,7 @@ const FooterSection = () => {
                 <Phone className="w-5 h-5 shrink-0 mt-0.5 text-accent" />
                 <div className="flex flex-col">
                   <span>{siteConfig.contact.phones.main}</span>
-                  <span>{siteConfig.contact.phones.secondary}</span>
+                  <span>{siteConfig.contact.phones.landline}</span>
                 </div>
               </a>
             </li>

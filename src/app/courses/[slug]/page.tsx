@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { detailedCourses } from "@/data/courses";
-import { CourseDetailClient } from "./CourseDetailClient";
+import { CourseDetailClient } from "@/components/page-clients/CourseDetailClient";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return detailedCourses.map((course) => ({
@@ -23,20 +24,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: `Explore top ${course.title} programs for international students including ${programNames}. Compare tuition fees, entry requirements, career outcomes, and migration pathways.`,
     keywords: course.seoKeywords,
     alternates: {
-      canonical: `https://eevsgroup.com/courses/${course.id}`,
+      canonical: getCanonicalUrl(`/courses/${course.id}`),
     },
-    openGraph: {
+    openGraph: createOgMetadata({
       title: `Study ${course.title} Abroad | Everest Education`,
-      url: `https://eevsgroup.com/courses/${course.id}`,
       description: course.description,
-      images: [{ url: course.image, width: 1200, height: 630 }],
-      type: "website",
-    },
+      path: `/courses/${course.id}`,
+      image: { url: course.image, width: 1200, height: 630 },
+    }),
+    twitter: createTwitterMetadata({
+      title: `Study ${course.title} Abroad | Everest Education`,
+      description: course.description,
+      image: course.image,
+    }),
   };
 }
 
 export default async function CourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  const baseUrl = getBaseUrl();
 
   // JSON-LD Structured Data
   const course = detailedCourses.find((c) => c.id === slug);
@@ -53,7 +60,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
       "provider": {
         "@type": "Organization",
         "name": "Everest Education & Visa Services",
-        "url": "https://eevsgroup.com"
+        "url": baseUrl
       },
       "timeRequired": program.duration,
       "offers": {

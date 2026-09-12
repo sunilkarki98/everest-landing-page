@@ -44,12 +44,12 @@ function TestimonialCard({ item }: { item: Testimonial }) {
       {/* Footer */}
       <div className="pt-5 border-t border-border flex items-center gap-4">
         <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center font-bold text-primary relative overflow-hidden shrink-0 border-[3px] border-white shadow-sm">
-           {item.image ? (
-             <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
-           ) : (
-             <span className="text-ui-card-title">{item.name.charAt(0)}</span>
-           )}
-           {item.flag && <div className="absolute -bottom-1 -right-1 text-ui-small bg-white rounded-full leading-none shadow-sm z-10">{item.flag}</div>}
+          {item.image ? (
+            <Image src={item.image} alt={item.name} fill className="object-cover object-top" sizes="64px" />
+          ) : (
+            <span className="text-ui-card-title">{item.name.charAt(0)}</span>
+          )}
+          {item.flag && <div className="absolute -bottom-1 -right-1 text-ui-small bg-white rounded-full leading-none shadow-sm z-10">{item.flag}</div>}
         </div>
         <div>
           <p className="font-bold text-primary text-ui-body">{item.name}</p>
@@ -153,20 +153,19 @@ export default function FeedbackSection({ testimonials }: { testimonials: Testim
                   key={index}
                   onClick={() => scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}
-                  className={`rounded-full transition-all duration-300 ${
-                    index === selectedIndex
+                  className={`rounded-full transition-all duration-300 ${index === selectedIndex
                       ? "w-8 h-2.5 bg-accent"
                       : "w-2.5 h-2.5 bg-white/30 hover:bg-white/50"
-                  }`}
+                    }`}
                 />
               ))}
             </div>
           )}
           {/* View All Button */}
           <div className="mt-10 flex justify-center">
-            <Button 
-              variant="outline" 
-              className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white group transition-all duration-300" 
+            <Button
+              variant="outline"
+              className="border-white/20 bg-white/5 text-white text-sm font-extrabold hover:bg-white/10 hover:text-white group transition-all duration-300"
               asChild
             >
               <Link href="/success-stories">

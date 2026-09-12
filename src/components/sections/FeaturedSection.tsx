@@ -55,7 +55,7 @@ export default function FeaturedSection() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
 
           {/* Left Column */}
-          <div className="w-full lg:w-[40%] flex flex-col justify-center items-start relative z-10 py-4 lg:py-8">
+          <div className="w-full lg:w-[50%] flex flex-col justify-center items-start relative z-10 py-4 lg:py-8 lg:pr-6">
             {/* Header Content */}
               <SectionHeading
                 eyebrow="Popular Destinations"
@@ -64,40 +64,40 @@ export default function FeaturedSection() {
                 className="mb-6"
               />
 
-              <p className="text-muted-foreground max-w-md text-ui-body leading-relaxed mb-2">
+              <p className="text-muted-foreground max-w-lg text-ui-lead leading-relaxed mb-4">
                 Discover top cities around the world and begin a life-changing academic journey & career.
               </p>
 
             {/* Changing Content */}
             <div className="relative min-h-[360px] w-full flex flex-col">
               <div className="mb-6">
-                <h3 className="text-ui-section-title font-medium text-primary tracking-tight font-serif">
+                <h3 className="text-3xl sm:text-4xl font-medium font-serif text-primary tracking-tight">
                   {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
                 </h3>
               </div>
 
-              <p className="text-muted-foreground text-ui-body leading-relaxed mb-8 sm:mb-10 max-w-[420px] min-h-[100px] sm:min-h-[80px]">
+              <p className="text-muted-foreground text-ui-lead leading-relaxed mb-8 sm:mb-10 max-w-[480px] min-h-[100px] sm:min-h-[80px]">
                 Experience world-class education and a vibrant lifestyle in {activeDest.country}. {activeDest.name} offers top universities, diverse culture, and {activeDest.opportunities.toLowerCase()}
               </p>
 
-              <div className="flex items-center justify-between gap-2 sm:gap-6 mb-8 sm:mb-10 w-full max-w-[420px]">
+              <div className="flex items-center justify-between gap-2 sm:gap-6 mb-8 sm:mb-10 w-full max-w-[460px]">
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-10 h-10 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <GraduationCap className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-[10px] sm:text-xs font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
+                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Top Universities</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-10 h-10 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <Users className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-[10px] sm:text-xs font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
+                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Diverse Culture</span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-10 h-10 rounded-full border border-border/80 bg-background flex items-center justify-center shadow-sm">
                     <Coffee className="w-4 h-4 text-accent" />
                   </div>
-                  <span className="text-[10px] sm:text-xs font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
+                  <span className="text-ui-small font-semibold text-center uppercase tracking-wider text-muted-foreground">Great Lifestyle</span>
                 </div>
               </div>
 
@@ -110,7 +110,7 @@ export default function FeaturedSection() {
           </div>
 
           {/* Right Column - Image Carousel */}
-          <div className="w-full lg:w-[60%] min-h-[350px] sm:min-h-[450px] lg:min-h-[550px] relative rounded-3xl sm:rounded-[40px] overflow-hidden shadow-2xl flex-grow">
+          <div className="w-full lg:w-[50%] min-h-[350px] sm:min-h-[400px] lg:min-h-[500px] relative rounded-3xl sm:rounded-[40px] overflow-hidden shadow-2xl flex-grow">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={activeIndex}

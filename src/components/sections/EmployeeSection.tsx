@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { fadeUpContainer, fadeUpCard } from "@/lib/animations";
+import { fadeUpCard } from "@/lib/animations";
 import { siteConfig } from "@/config/site";
 import { teamMembers as team } from "@/data/home";
 
@@ -28,19 +30,26 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 }) => {
   return (
     <motion.div
-      className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-border/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-accent/30 shrink-0 w-[280px] sm:w-auto snap-start"
+      className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-border/40 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-accent/30 w-full"
       variants={fadeUpCard}
     >
       {/* Image Container */}
-      <div className="relative w-full h-[240px] sm:h-[260px] overflow-hidden bg-surface">
+      <div className="relative w-full h-[240px] sm:h-[280px] lg:h-[300px] overflow-hidden bg-surface">
         <Image
           src={image}
           alt={name}
           fill
           priority={priority}
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
+        
+        {/* Designation Badge */}
+        <div className="absolute top-4 right-4 z-10">
+          <span className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-white/30 backdrop-blur-md border border-white/40 text-[10px] sm:text-xs font-bold text-primary shadow-[0_4px_30px_rgba(0,0,0,0.1)] tracking-wider uppercase">
+            {role}
+          </span>
+        </div>
         
         {/* Soft gradient overlay for social icons */}
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -80,9 +89,6 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
       {/* Content Box */}
       <div className="relative p-5 sm:p-6 flex flex-col flex-grow bg-white">
         <div className="mb-4">
-           <span className="inline-flex items-center justify-center px-2.5 py-1 rounded-md bg-surface-hover border border-surface-border text-[10px] sm:text-xs font-bold text-surface-foreground tracking-wider uppercase mb-3">
-             {role}
-           </span>
            <h3 className="text-ui-card-title font-bold text-primary leading-tight group-hover:text-accent transition-colors duration-300">
              {name}
            </h3>
@@ -100,15 +106,39 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
   );
 };
 
+export default function EmployeeSection() {
+  const autoplayRef = React.useRef(Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: false }));
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", slidesToScroll: 1 },
+    [autoplayRef.current]
+  );
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
-const EmployeeSection: React.FC = () => {
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
+
+  const scrollTo = useCallback(
+    (index: number) => emblaApi?.scrollTo(index),
+    [emblaApi]
+  );
+
   return (
-    <section className="section-py-md section-py-md-lg bg-surface relative overflow-hidden">
+    <section className="section-py-md section-py-md-lg bg-surface relative overflow-hidden" id="team">
       {/* Subtle Background Elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
       
       {/* Heading */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-12 relative z-10 flex flex-col items-center justify-center">
+      <div className="max-w-[var(--container-max-w)] mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10 flex flex-col items-center justify-center">
         <SectionHeading 
           eyebrow="Our Team" 
           title="Meet The Experts At EEVS" 
@@ -117,30 +147,49 @@ const EmployeeSection: React.FC = () => {
           titleColor="text-primary"
           className="mb-0"
         />
-        <div className="mt-6 md:mt-0 md:absolute md:right-8 md:bottom-2">
-          <a 
-            href="#team"
-            className="inline-flex items-center gap-2 bg-white text-primary font-semibold py-3 px-8 rounded-full border border-surface-border shadow-sm hover:shadow-md hover:border-accent/50 hover:text-accent transition-all duration-300"
-          >
-            View All Members <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
       </div>
 
-      {/* Employee Cards */}
-      <motion.div
-        className="max-w-[1400px] mx-auto px-4 md:px-8 flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-hide pb-4 sm:pb-0 -mx-4 sm:mx-auto px-4 sm:px-4 md:px-8 relative z-10"
-        variants={fadeUpContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {team.map((member, index) => (
-          <EmployeeCard key={member.name} {...member} priority={index < 2} />
-        ))}
-      </motion.div>
+      {/* Embla Carousel */}
+      <div className="max-w-[var(--container-max-w)] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="overflow-hidden -mx-4 px-4 pb-8" ref={emblaRef}>
+          <div className="flex">
+            {team.map((member, index) => (
+              <div 
+                key={member.name}
+                className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_360px] lg:flex-[0_0_400px] px-3 lg:px-4"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="h-full pb-2"
+                >
+                  <EmployeeCard {...member} priority={index < 2} />
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dot Indicators */}
+        {scrollSnaps.length > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-2">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  index === selectedIndex
+                    ? "w-8 h-2.5 bg-accent"
+                    : "w-2.5 h-2.5 bg-primary/20 hover:bg-primary/40"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
-};
-
-export default EmployeeSection;
+}

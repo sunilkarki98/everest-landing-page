@@ -39,7 +39,7 @@ For Ahilya & Amulya — and for all who seek a better future.
     /* #D4AF37 */
     --accent-foreground: 226 57% 23%;
     /* #1A2A5E */
-    
+
     --accent-text: 43 74% 27%;
     /* Darker gold for text contrast */
 
@@ -181,8 +181,8 @@ For Ahilya & Amulya — and for all who seek a better future.
   --spacing-section-lg: 8rem;
 
   /* Container overrides */
-  --container-max-w: 80rem;
-  /* 1280px */
+  --container-max-w: 90rem;
+  /* 1440px */
 
   /* Radius Mapping */
   --radius-sm: calc(var(--radius) - 4px);
@@ -227,10 +227,10 @@ For Ahilya & Amulya — and for all who seek a better future.
 }
 
 @utility text-ui-section-title {
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 @utility text-ui-card-title {
@@ -261,26 +261,31 @@ For Ahilya & Amulya — and for all who seek a better future.
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
+
 @utility section-py-sm-lg {
   @media (min-width: 1024px) {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
   }
 }
+
 @utility section-py-md {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
 @utility section-py-md-lg {
   @media (min-width: 1024px) {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
 }
+
 @utility section-py-lg {
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
+
 @utility section-py-lg-lg {
   @media (min-width: 1024px) {
     padding-top: 7rem;
@@ -349,6 +354,7 @@ For Ahilya & Amulya — and for all who seek a better future.
 .everest-div-icon img {
   display: block;
 }
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

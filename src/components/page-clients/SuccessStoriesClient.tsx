@@ -118,7 +118,7 @@ export function SuccessStoriesClient() {
                     alt={story.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 40vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
                   

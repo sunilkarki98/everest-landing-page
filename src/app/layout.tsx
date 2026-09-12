@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { getBaseUrl, defaultOgImage } from "@/lib/seo";
 import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header"; // Import Header
+import Header from "@/components/layout/Header";
 import FooterSection from "@/components/sections/FooterSection";
 import { QuickActionsBar } from "@/components/layout/QuickActionsBar";
 import { EligibilityModal } from "@/components/ui/EligibilityModal";
@@ -21,7 +22,7 @@ const caveat = Caveat({
   variable: "--font-caveat",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://eevsgroup.com";
+const SITE_URL = getBaseUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -44,14 +45,7 @@ export const metadata: Metadata = {
     description: "Trusted education & visa services in Australia. Family-owned, student-first. Study, work & migrate with confidence.",
     url: SITE_URL,
     siteName: "Everest Education & Visa Services",
-    images: [
-      {
-        url: "/logos/everestlogo.png",
-        width: 1200,
-        height: 630,
-        alt: "Everest Education & Visa Services",
-      },
-    ],
+    images: [defaultOgImage],
     locale: "en_AU",
     type: "website",
   },
@@ -59,11 +53,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Everest Education & Visa Services | Study, Work & Migrate to Australia",
     description: "Trusted education & visa services in Australia. Family-owned, student-first.",
-    images: ["/logos/everestlogo.png"],
+    images: [defaultOgImage.url],
   },
   icons: {
-    icon: "/logos/everestlogo.png",
-    apple: "/logos/everestlogo.png",
+    icon: "/logos/everestlogo.jpeg",
+    apple: "/logos/everestlogo.jpeg",
   },
 };
 
@@ -82,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-AU" suppressHydrationWarning>
+    <html lang="en-AU" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${jakarta.variable} ${caveat.variable} font-sans antialiased`}
 

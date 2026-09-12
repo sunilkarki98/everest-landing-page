@@ -6,6 +6,7 @@ import { ArrowRight, X, QrCode, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/layout/Container";
 import { heroDestinations as destinations, trustStats } from "@/data/home";
 
 export default function HeroSection() {
@@ -45,7 +46,7 @@ export default function HeroSection() {
               fill
               sizes="100vw"
               className="object-cover brightness-105 contrast-105"
-              priority={currentIndex === 0}
+              priority
             />
           </motion.div>
         </AnimatePresence>
@@ -55,7 +56,7 @@ export default function HeroSection() {
         <div className="absolute inset-y-0 left-0 w-full lg:w-[65%] bg-navy/30 lg:bg-transparent lg:bg-gradient-to-r lg:from-primary/80 lg:via-primary/50 lg:to-transparent z-10 pointer-events-none" />
       </div>
 
-      <div className="w-full px-4 sm:px-6 lg:px-12 xl:px-16 mx-auto relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 h-full">
+      <Container className="relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 h-full">
 
         {/* LEFT SIDE - Content */}
         <div className="w-full lg:w-3/5 flex flex-col items-start text-left">
@@ -103,7 +104,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="text-ui-section-title font-[family-name:var(--font-caveat)] text-accent tracking-wide mb-2 drop-shadow-md"
+            className="text-3xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-caveat)] font-medium text-accent tracking-wide mb-2 drop-shadow-md"
           >
             Your Journey Starts Here
           </motion.div>
@@ -155,7 +156,7 @@ export default function HeroSection() {
               asChild
             >
               <a
-                href="https://condat.com.au/condat/318/customer?method=website"
+                href="https://calendly.com/samir-dreamtrip"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -286,9 +287,7 @@ export default function HeroSection() {
             </motion.button>
           </div>
         </div>
-
-      </div>
-
+      </Container>
       {/* Pathway Finder - Half in hero, half below on ALL screens */}
       <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 z-40 w-full max-w-3xl px-4">
         <motion.div
@@ -323,9 +322,10 @@ export default function HeroSection() {
           </div>
 
           <Button
-            className="bg-accent text-primary hover:bg-white flex-1 min-w-0 sm:w-[30%] h-auto py-2 sm:py-3 rounded-lg sm:rounded-xl font-extrabold text-xs sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
+            className="bg-accent text-primary hover:bg-white flex-1 min-w-0 sm:w-[30%] h-auto py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
             onClick={() => {
-              window.dispatchEvent(new Event("open-eligibility-modal"));
+              const country = (document.getElementById("pathway-country") as HTMLSelectElement)?.value;
+              window.dispatchEvent(new CustomEvent("open-eligibility-modal", { detail: { country } }));
             }}
           >
             Find Pathway
@@ -360,7 +360,7 @@ export default function HeroSection() {
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="text-2xl font-bold text-primary mb-2 mt-2 text-center">Scan to Connect</h3>
+              <h3 className="text-ui-card-title text-primary mb-2 mt-2 text-center">Scan to Connect</h3>
               <p className="text-muted-foreground text-ui-body text-center mb-8">
                 Open your camera and scan the QR code to chat with us on WhatsApp instantly.
               </p>

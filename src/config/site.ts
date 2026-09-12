@@ -25,12 +25,13 @@ export const siteConfig = {
 
   contact: {
     emails: {
-      main: "info@eevsgroup.com",
-      secondary: "everesteduaustralia@gmail.com",
+      main: "everesteduaustralia@gmail.com",
+      secondary: "info@eevsgroup.com",
     },
     phones: {
-      main: "+61 406 000 815",
-      secondary: "+977 9749453158",
+      main: "0466 117 512",
+      landline: "02 6179 6307",
+      nepal: "+977 9749453158",
     },
     address: "Level 1, Suite 7, 2-10 Oatley Court, Belconnen, ACT 2617",
   },
@@ -40,6 +41,10 @@ export const siteConfig = {
     twitter: "https://twitter.com/EverestEduGroup",
     instagram: "https://www.instagram.com/EverestEduGroup",
     linkedin: "https://www.linkedin.com/company/EverestEduGroup",
+  },
+
+  links: {
+    bookConsultation: "https://calendly.com/samir-dreamtrip",
   },
 
   stats: {

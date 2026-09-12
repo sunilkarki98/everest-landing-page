@@ -209,10 +209,10 @@ export const detailedCourses: CourseData[] = [
       { name: "University of Melbourne", logo: "", location: "🇦🇺 Melbourne, Australia" },
       { name: "University of Sydney", logo: "", location: "🇦🇺 Sydney, Australia" }
     ],
-    color: "from-accent to-[var(--color-gold-dark)]",
-    bgLight: "bg-accent/10",
-    borderLight: "border-accent/20",
-    iconColor: "text-accent-text",
+    color: "from-amber-400 to-amber-600",
+    bgLight: "bg-amber-50",
+    borderLight: "border-amber-100",
+    iconColor: "text-amber-600",
   },
   {
     id: "business",

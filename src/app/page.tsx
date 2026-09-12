@@ -12,25 +12,28 @@ const GlobalContactSection = dynamic(() => import("@/components/sections/GlobalC
 const EmployeeSection = dynamic(() => import("@/components/sections/EmployeeSection"));
 
 import { Metadata } from "next";
+import { getBaseUrl, getCanonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "https://eevsgroup.com",
+    canonical: getCanonicalUrl(),
   },
 };
 
 export default async function Page() {
   const testimonials = await getGoogleReviews();
 
+  const baseUrl = getBaseUrl();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://eevsgroup.com/#organization",
+        "@id": `${baseUrl}/#organization`,
         "name": "Everest Education & Visa Services",
-        "url": "https://eevsgroup.com",
-        "logo": "https://eevsgroup.com/logos/everestlogo.png",
+        "url": baseUrl,
+        "logo": `${baseUrl}/logos/everestlogo.jpeg`,
         "sameAs": [
           "https://www.facebook.com/EEVSAustralia/",
           "https://twitter.com/EverestEduGroup",
@@ -40,9 +43,9 @@ export default async function Page() {
       },
       {
         "@type": "LocalBusiness",
-        "@id": "https://eevsgroup.com/#localbusiness",
+        "@id": `${baseUrl}/#localbusiness`,
         "name": "Everest Education & Visa Services",
-        "url": "https://eevsgroup.com",
+        "url": baseUrl,
         "telephone": "+61 406 000 815",
         "address": {
           "@type": "PostalAddress",
@@ -55,8 +58,8 @@ export default async function Page() {
       },
       {
         "@type": "WebSite",
-        "@id": "https://eevsgroup.com/#website",
-        "url": "https://eevsgroup.com",
+        "@id": `${baseUrl}/#website`,
+        "url": baseUrl,
         "name": "Everest Education & Visa Services"
       }
     ]

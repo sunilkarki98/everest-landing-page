@@ -236,7 +236,7 @@ export default function AboutContent() {
                 We are always looking to build successful international partnerships. Collaborate with EEVS to create new educational opportunities and expand global reach together.
               </p>
               <a 
-                href="https://condat.com.au/condat/318/customer?method=website" 
+                href="https://calendly.com/samir-dreamtrip" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 justify-center h-14 px-8 rounded-full font-bold text-base bg-accent text-primary hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_hsl(var(--accent)/0.5)] group"

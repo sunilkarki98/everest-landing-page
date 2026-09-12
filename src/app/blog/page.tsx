@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { blogPosts } from "@/data/blog";
-import BlogPageClient from "./BlogPageClient";
+import BlogPageClient from "@/components/page-clients/BlogPageClient";
 
 export const metadata: Metadata = {
   title: "Latest News & Migration Updates | Everest Education",

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Globe2, Map, X, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, Globe2, Map, X, ExternalLink, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/layout/Container";
@@ -46,44 +46,50 @@ export default function GlobalContactSection() {
           <div className="flex flex-col xl:flex-row items-center xl:items-stretch relative z-10">
 
             {/* 1. Logo & Address */}
-            <div className="flex items-center gap-4 p-5 xl:py-6 xl:pl-6 xl:pr-4 xl:w-[28%] shrink-0">
+            <div className="flex flex-col items-start gap-3 p-5 xl:py-5 xl:pl-6 xl:pr-0 xl:w-[21%] shrink-0">
               <div className="w-[72px] h-[72px] relative shrink-0 rounded-xl overflow-hidden bg-white shadow-lg">
-                <Image src="/logos/everestlogo.png" alt="Everest Education Logo" fill sizes="72px" className="object-contain" />
+                <Image src="/logos/everestlogo.jpeg" alt="Everest Education Logo" fill sizes="72px" className="object-contain p-1" />
               </div>
               <div>
                 <h3 className="text-ui-card-title font-bold text-white tracking-tight leading-tight">Main Office</h3>
-                <p className="text-white/70 text-ui-small font-medium leading-snug mt-0.5">{siteConfig.contact.address}</p>
+                <p className="text-white/70 text-sm font-medium leading-snug mt-1">{siteConfig.contact.address}</p>
               </div>
             </div>
 
             <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
 
             {/* 2. Contact Details (Phones & Emails) */}
-            <div className="flex gap-8 p-5 xl:px-5 xl:py-5 xl:w-[33%] min-w-0">
+            <div className="flex flex-col sm:flex-row gap-5 xl:gap-10 p-5 xl:px-5 xl:py-5 flex-1 min-w-0 justify-between">
               {/* Phones */}
-              <div className="flex flex-col gap-1 min-w-0">
+              <div className="flex flex-col gap-1 shrink-0 w-auto">
                 <div className="flex items-center gap-1.5 text-accent mb-1">
                   <Phone className="w-3.5 h-3.5 shrink-0" />
-                  <span className="text-ui-small uppercase tracking-widest font-bold">Phone</span>
+                  <span className="text-sm uppercase tracking-widest font-bold">Phone</span>
                 </div>
-                <a href={`tel:${siteConfig.contact.phones.main.replace(/[^\d+]/g, "")}`} className="font-semibold text-ui-small text-white hover:text-accent transition-colors whitespace-nowrap">
+                <a href={`tel:+61${siteConfig.contact.phones.main.replace(/[^\d]/g, "").replace(/^0/, "")}`} className="font-semibold text-base text-white hover:text-accent transition-colors whitespace-nowrap">
                   {siteConfig.contact.phones.main}
                 </a>
-                <a href={`tel:${siteConfig.contact.phones.secondary.replace(/[^\d+]/g, "")}`} className="font-semibold text-ui-small text-white hover:text-accent transition-colors whitespace-nowrap">
-                  {siteConfig.contact.phones.secondary}
+                <a href={`tel:+61${siteConfig.contact.phones.landline.replace(/[^\d]/g, "").replace(/^0/, "")}`} className="font-semibold text-base text-white hover:text-accent transition-colors whitespace-nowrap">
+                  {siteConfig.contact.phones.landline}
+                </a>
+                <a href={`tel:${siteConfig.contact.phones.nepal.replace(/[^\d+]/g, "")}`} className="font-semibold text-base text-white hover:text-accent transition-colors whitespace-nowrap">
+                  {siteConfig.contact.phones.nepal}
                 </a>
               </div>
 
+              {/* Divider between Phone and Email */}
+              <div className="hidden sm:block w-px self-stretch my-2 bg-white/10" />
+
               {/* Emails */}
-              <div className="flex flex-col gap-1 min-w-0">
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
                 <div className="flex items-center gap-1.5 text-accent mb-1">
                   <Mail className="w-3.5 h-3.5 shrink-0" />
-                  <span className="text-ui-small uppercase tracking-widest font-bold">Email</span>
+                  <span className="text-sm uppercase tracking-widest font-bold">Email</span>
                 </div>
-                <a href={`mailto:${siteConfig.contact.emails.main}`} className="font-semibold text-ui-small text-white hover:text-accent transition-colors truncate">
+                <a href={`mailto:${siteConfig.contact.emails.main}`} className="font-semibold text-base text-white hover:text-accent transition-colors truncate">
                   {siteConfig.contact.emails.main}
                 </a>
-                <a href={`mailto:${siteConfig.contact.emails.secondary}`} className="font-semibold text-ui-small text-white hover:text-accent transition-colors truncate">
+                <a href={`mailto:${siteConfig.contact.emails.secondary}`} className="font-semibold text-base text-white hover:text-accent transition-colors truncate">
                   {siteConfig.contact.emails.secondary}
                 </a>
               </div>
@@ -91,31 +97,50 @@ export default function GlobalContactSection() {
 
             <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
 
-            {/* 3. QR Code */}
-            <div className="flex items-center gap-3 p-5 xl:pl-4 xl:pr-5 shrink-0 xl:w-[20%] xl:justify-center">
-              <div className="text-right hidden sm:block">
-                <h5 className="font-bold text-ui-card-title text-white leading-tight">Scan to Chat</h5>
-                <p className="text-ui-small text-accent font-bold uppercase tracking-wider">WhatsApp</p>
-              </div>
-              <div className="w-24 h-24 bg-white rounded-lg overflow-hidden shrink-0 shadow-lg">
-                <div className="relative w-full h-full">
-                  <Image src="/contacusQR.jpeg" alt="WhatsApp QR Code" fill sizes="96px" className="object-contain" />
+            {/* 3. WhatsApp (QR + Button) */}
+            <div className="flex flex-col items-center gap-3 p-5 xl:px-4 xl:py-5 shrink-0 xl:w-auto xl:justify-start">
+              <div className="hidden sm:flex flex-col items-center gap-2">
+                <span className="text-sm text-accent font-bold uppercase tracking-widest text-center">WhatsApp</span>
+                <div className="w-28 h-28 bg-white rounded-xl overflow-hidden shrink-0 shadow-lg p-2.5">
+                  <div className="relative w-full h-full">
+                    <Image src="/contacusQR.jpeg" alt="WhatsApp QR Code" fill sizes="100px" className="object-contain rounded-md" />
+                  </div>
                 </div>
               </div>
+              <a
+                href={`https://wa.me/${siteConfig.contact.phones.main.replace(/[^\d]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex sm:hidden items-center justify-center gap-2 px-5 py-2.5 bg-[#25D366] text-white font-bold text-sm rounded-xl shadow-md hover:bg-[#128C7E] hover:shadow-lg transition-all hover:-translate-y-0.5 whitespace-nowrap w-full"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" className="w-5 h-5">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+                </svg>
+                Chat Now
+              </a>
             </div>
 
             <div className="hidden xl:block w-px self-stretch my-4 bg-white/10" />
 
-            {/* 4. CTA Button */}
-            <div className="shrink-0 flex items-center justify-center p-5 xl:px-4 xl:w-[17%]">
+            {/* 4. CTA Buttons */}
+            <div className="shrink-0 flex flex-col justify-center gap-3 p-5 xl:px-5 xl:w-auto xl:min-w-[200px]">
               <a
                 href="https://condat.com.au/condat/318/customer?method=website"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-primary font-bold text-ui-card-title rounded-xl shadow-lg hover:shadow-xl hover:bg-accent/90 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap w-full"
+                className="group inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-accent text-primary font-bold text-sm sm:text-base rounded-xl shadow-md hover:shadow-lg hover:bg-accent/90 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap w-full"
               >
                 Enquire Now
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-5 h-5 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+              </a>
+              <a
+                href={siteConfig.links.bookConsultation}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/10 text-white border border-white/20 font-bold text-sm sm:text-base rounded-xl shadow-md hover:shadow-lg hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap w-full"
+              >
+                Book Now
+                <ExternalLink className="w-5 h-5 shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </a>
             </div>
 
@@ -125,7 +150,7 @@ export default function GlobalContactSection() {
         {/* 2. BRANCHES SECTION */}
         <div className="max-w-[1100px] mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h4 className="text-ui-section-title text-primary">Our Global Branches</h4>
+            <h3 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">Our Global Branches</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
