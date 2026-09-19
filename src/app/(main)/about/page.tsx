@@ -5,6 +5,7 @@ import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } 
 export const metadata: Metadata = {
   title: "About Us | Everest Education & Visa Services",
   description: "Learn about our journey, our team of expert counselors, and our mission to provide the best education and migration services.",
+  keywords: ["about Everest Education", "education consultants Australia", "visa agents Australia", "study abroad consultants"],
   alternates: {
     canonical: getCanonicalUrl("/about"),
   },

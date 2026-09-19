@@ -1,19 +1,47 @@
 import { Metadata } from "next";
 import TaxForm from "./TaxForm";
 import { Container } from "@/components/layout/Container";
-import { getCanonicalUrl } from "@/lib/seo";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Tax Return Form | Everest Education & Visa Services",
   description: "Complete your Tax Return securely online with Everest Education & Visa Services.",
+  keywords: ["online tax return Australia", "tax agent Belconnen", "student tax return", "Everest tax services"],
   alternates: {
     canonical: getCanonicalUrl("/tax-return"),
   },
+  openGraph: createOgMetadata({
+    title: "Tax Return Form | Everest Education & Visa Services",
+    description: "Complete your Tax Return securely online with Everest Education & Visa Services.",
+    path: "/tax-return",
+  }),
+  twitter: createTwitterMetadata({
+    title: "Tax Return Form | Everest Education & Visa Services",
+    description: "Complete your Tax Return securely online with Everest Education & Visa Services.",
+  }),
 };
 
 export default function TaxReturnPage() {
+  const baseUrl = getBaseUrl();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Tax Return Form - Everest Education",
+    "url": `${baseUrl}/tax-return`,
+    "description": "Secure online tax return form for Everest Education clients.",
+    "provider": {
+      "@type": "AccountingService",
+      "name": "Everest.Tax",
+      "url": baseUrl
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50/50 py-8 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Container>
         <div className="max-w-4xl mx-auto">
           

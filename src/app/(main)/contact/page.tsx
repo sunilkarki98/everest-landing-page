@@ -7,6 +7,7 @@ import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } 
 export const metadata: Metadata = {
   title: "Contact Us | Everest Education & Visa Services",
   description: "Get in touch with Everest Education & Visa Services. We are here to help you with your study and migration needs.",
+  keywords: ["contact Everest Education", "education consultancy near me", "migration agent Belconnen", "study in Australia contact"],
   alternates: {
     canonical: getCanonicalUrl("/contact"),
   },
@@ -42,6 +43,11 @@ export default function ContactPage() {
         "addressRegion": "ACT",
         "postalCode": "2617",
         "addressCountry": "AU",
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-35.2407",
+        "longitude": "149.0664"
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",

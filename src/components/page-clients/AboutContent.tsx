@@ -10,6 +10,8 @@ import EmployeeSection from "@/components/sections/EmployeeSection";
 import CallToAction from "@/components/sections/CallToAction";
 import { Target, Eye, Flag, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
 
+
+
 export default function AboutContent() {
   return (
     <main>
@@ -29,11 +31,19 @@ export default function AboutContent() {
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
             >
-              <SectionHeading 
-                eyebrow="Everest Since 2006" 
-                title="Your Trusted Partner in Global Education" 
-                className="mb-8"
-              />
+              <div className="mb-6 text-left">
+                <div className="flex items-center gap-3 mb-4 justify-start">
+                  <div className="px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-sm font-extrabold tracking-[0.15em] uppercase shadow-sm text-accent">
+                    Everest Since 2011
+                  </div>
+                </div>
+                <p className="text-xl sm:text-2xl font-[family-name:var(--font-caveat)] font-semibold text-accent-text tracking-wide mb-6 leading-relaxed">
+                  🌸 For Ahilya & Amulya and for all who seek a better future. 🌸
+                </p>
+                <h2 className="text-ui-section-title drop-shadow-sm text-primary">
+                  Your Trusted Partner in Global Education
+                </h2>
+              </div>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 Everest Education & Visa Services (EEVS) is a premier education and migration consultancy. We specialize in transforming international aspirations into tangible realities through expert, ethical, and personalized guidance.
               </p>
@@ -260,6 +270,8 @@ export default function AboutContent() {
           </div>
         </Container>
       </section>
+
+
 
       <CallToAction />
     </main>

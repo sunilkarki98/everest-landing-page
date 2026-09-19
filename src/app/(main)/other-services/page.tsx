@@ -21,6 +21,11 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
         description: activeService.overview || activeService.description,
         type: "website",
       },
+      twitter: {
+        card: "summary_large_image",
+        title: `${activeService.title} | Additional Support Services | Everest Education`,
+        description: activeService.overview || activeService.description,
+      },
     };
   }
 
@@ -35,6 +40,11 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       title: "Additional Support Services | Everest Education",
       description: "Comprehensive support beyond education and migration to ensure your life in Australia is smooth and compliant.",
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Additional Support Services | Everest Education",
+      description: "Comprehensive support beyond education and migration to ensure your life in Australia is smooth and compliant.",
     },
   };
 }

@@ -21,6 +21,11 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
         description: activeService.overview || activeService.description,
         type: "website",
       },
+      twitter: {
+        card: "summary_large_image",
+        title: `${activeService.title} | Abroad Study Services | Everest Education`,
+        description: activeService.overview || activeService.description,
+      },
     };
   }
 
@@ -35,6 +40,11 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       title: "Abroad Study Services | Everest Education",
       description: "Comprehensive education counseling and university admission services for international students.",
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Abroad Study Services | Everest Education",
+      description: "Comprehensive education counseling and university admission services for international students.",
     },
   };
 }

@@ -14,9 +14,9 @@ export default function TopBar() {
             className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
             title="Call Australia Mobile"
           >
-            <span className="text-sm sm:text-base leading-none drop-shadow-sm mr-0.5" aria-label="Australia Flag">🇦🇺</span>
             <Smartphone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
             <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.main}</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm ml-0.5" aria-label="Australia Flag">🇦🇺</span>
           </a>
 
           {/* Australia Landline */}
@@ -27,7 +27,7 @@ export default function TopBar() {
           >
             <Phone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
             <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.landline}</span>
-            <span className="text-sm sm:text-base leading-none drop-shadow-sm mr-0.5" aria-label="Australia Flag">🇦🇺</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm ml-0.5" aria-label="Australia Flag">🇦🇺</span>
           </a>
 
           {/* Nepal Phone */}
@@ -36,9 +36,9 @@ export default function TopBar() {
             className="flex items-center gap-1.5 font-medium hover:text-secondary transition-colors"
             title="Call Nepal Office"
           >
-            <span className="text-sm sm:text-base leading-none drop-shadow-sm mr-0.5" aria-label="Nepal Flag">🇳🇵</span>
             <Phone className="w-3.5 h-3.5 text-secondary flex-shrink-0" />
             <span className="text-[11px] sm:text-sm">{siteConfig.contact.phones.nepal}</span>
+            <span className="text-sm sm:text-base leading-none drop-shadow-sm ml-0.5" aria-label="Nepal Flag">🇳🇵</span>
           </a>
 
           {/* Email */}

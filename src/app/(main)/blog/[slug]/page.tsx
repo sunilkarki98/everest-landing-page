@@ -77,6 +77,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": getCanonicalUrl(`/blog/${post.id}`)
+    },
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,

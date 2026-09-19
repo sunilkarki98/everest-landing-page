@@ -334,13 +334,6 @@ export default function TaxForm() {
     // Submit to backend
     setIsSubmitting(true);
     try {
-      // We must generate the PDF first to attach it
-      const doc = generatePDF();
-      let pdfBase64 = "";
-      if (doc) {
-        pdfBase64 = doc.output('datauristring');
-      }
-
       // Gather form data
       const formData = new FormData(form);
       const data: Record<string, string> = {};
@@ -353,11 +346,6 @@ export default function TaxForm() {
       });
       data.medicareExempt = medicareExempt;
       data.contactMethod = contactMethod;
-      
-      // Attach PDF for Google Apps Script
-      if (pdfBase64) {
-        data.pdfBase64 = pdfBase64;
-      }
 
       const res = await fetch("/api/tax-submit", {
         method: "POST",
@@ -365,15 +353,18 @@ export default function TaxForm() {
         body: JSON.stringify(data),
       });
       
-      if (!res.ok) {
-        console.error("Failed to submit to backend");
-        // Could show an error state here, but we will show success to allow download
+      if (res.ok) {
+        setShowSuccess(true);
+      } else {
+        const errorData = await res.json().catch(() => null);
+        const errorMsg = errorData?.error || "Submission failed. Please try again.";
+        alert(errorMsg);
       }
     } catch (e) {
       console.error("Error submitting form", e);
+      alert("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
-      setShowSuccess(true);
     }
   };
 
@@ -384,14 +375,7 @@ export default function TaxForm() {
     }
   };
 
-  const emailSummary = () => {
-    downloadSummary();
-    const subject = encodeURIComponent("Tax Return Summary - " + getVal("name"));
-    const body = encodeURIComponent("Please find my completed tax return summary attached (from the downloaded PDF).");
-    const targetEmail = process.env.NEXT_PUBLIC_TAX_EMAIL || "tax.everest@yahoo.com";
-    const adminEmail = "admin@eevsgroup.com";
-    window.location.href = `mailto:${targetEmail},${adminEmail}?subject=${subject}&body=${body}`;
-  };
+
 
   return (
     <>

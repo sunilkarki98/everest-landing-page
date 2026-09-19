@@ -32,8 +32,11 @@ export default function WelcomeSection() {
                 Everest Since <span className="text-accent-text">2011</span>
               </>
             }
-            className="mb-6"
+            className="!mb-2"
           />
+          <p className="mt-4 text-xl sm:text-2xl font-[family-name:var(--font-caveat)] font-semibold text-accent-text tracking-wide mb-6 relative z-10">
+            🌸 For Ahilya & Amulya and for all who seek a better future. 🌸
+          </p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -164,6 +167,8 @@ export default function WelcomeSection() {
             </div>
           </div>
         </div>
+
+
 
       </Container>
     </section>

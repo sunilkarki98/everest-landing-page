@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import { getGoogleReviews } from "@/lib/google-reviews";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
+import { Metadata } from "next";
 
 const WelcomeSection = dynamic(() => import("@/components/sections/WelcomeSection"));
 const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection"));
@@ -10,13 +12,23 @@ const FeedbackSection = dynamic(() => import("@/components/sections/FeedbackSect
 const BlogSection = dynamic(() => import("@/components/sections/BlogSection"));
 const EmployeeSection = dynamic(() => import("@/components/sections/EmployeeSection"));
 
-import { Metadata } from "next";
-import { getBaseUrl, getCanonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
+  title: "Everest Education & Visa Services | Study, Work & Migrate to Australia",
+  description: "Everest Education & Visa Services is a trusted education and migration consultancy based in Australia. We help students achieve their study abroad dreams and assist with all visa and migration needs.",
+  keywords: ["education consultancy Australia", "student visa Australia", "migration agent Australia", "study abroad", "PR pathway Australia", "Everest Education"],
   alternates: {
     canonical: getCanonicalUrl(),
   },
+  openGraph: createOgMetadata({
+    title: "Everest Education & Visa Services | Study, Work & Migrate",
+    description: "Your trusted partner for education and migration services in Australia. We guide you through student visas, skilled migration, and more.",
+    path: "/",
+  }),
+  twitter: createTwitterMetadata({
+    title: "Everest Education & Visa Services | Study, Work & Migrate",
+    description: "Your trusted partner for education and migration services in Australia.",
+  }),
 };
 
 export default async function Page() {
@@ -38,7 +50,12 @@ export default async function Page() {
           "https://twitter.com/EverestEduGroup",
           "https://www.instagram.com/EverestEduGroup",
           "https://www.linkedin.com/company/EverestEduGroup"
-        ]
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "120"
+        }
       },
       {
         "@type": "LocalBusiness",
