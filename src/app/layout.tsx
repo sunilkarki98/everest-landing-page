@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import { getBaseUrl, defaultOgImage } from "@/lib/seo";
 import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import FooterSection from "@/components/sections/FooterSection";
-import { QuickActionsBar } from "@/components/layout/QuickActionsBar";
-import { EligibilityModal } from "@/components/ui/EligibilityModal";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -85,13 +81,7 @@ export default function RootLayout({
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-white focus:text-primary">
             Skip to main content
           </a>
-          {/* Header on every page */}
-          <Header />
-          {/* Page Content */}
           <main id="main-content">{children}</main>
-          <FooterSection />
-          <QuickActionsBar />
-          <EligibilityModal />
           <Analytics />
         </SmoothScrollProvider>
       </body>

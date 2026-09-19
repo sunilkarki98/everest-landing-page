@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ServiceDetailClient } from "@/components/page-clients/ServiceDetailClient";
 import { studyServices } from "@/data/services";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ service?: string }> }): Promise<Metadata> {
   const resolvedParams = await searchParams;
@@ -13,7 +14,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       description: activeService.overview || activeService.description,
       keywords: ["study abroad Australia", "university admissions Australia", "scholarship Australia international students", "PTE preparation", "IELTS coaching", "professional year program Australia"],
       alternates: {
-        canonical: `https://eevsgroup.com/abroad-study?service=${serviceId}`,
+        canonical: getCanonicalUrl("/abroad-study"),
       },
       openGraph: {
         title: `${activeService.title} | Abroad Study Services | Everest Education`,
@@ -28,7 +29,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     description: "Comprehensive study abroad services for international students. Free university admissions, scholarship assistance, career counselling, PTE & IELTS preparation, and Professional Year programs in Australia.",
     keywords: ["study abroad Australia", "university admissions Australia", "scholarship Australia international students", "PTE preparation", "IELTS coaching", "professional year program Australia"],
     alternates: {
-      canonical: "https://eevsgroup.com/abroad-study",
+      canonical: getCanonicalUrl("/abroad-study"),
     },
     openGraph: {
       title: "Abroad Study Services | Everest Education",

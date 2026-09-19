@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ServiceDetailClient } from "@/components/page-clients/ServiceDetailClient";
 import { migrationServices } from "@/data/services";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ service?: string }> }): Promise<Metadata> {
   const resolvedParams = await searchParams;
@@ -13,7 +14,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       description: activeService.overview || activeService.description,
       keywords: ["Australian student visa", "skilled migration Australia", "PR pathway Australia", "partner visa Australia", "migration agent Australia", "485 visa", "ART appeal"],
       alternates: {
-        canonical: `https://eevsgroup.com/migration?service=${serviceId}`,
+        canonical: getCanonicalUrl("/migration"),
       },
       openGraph: {
         title: `${activeService.title} | Visa & Migration Services | Everest Education`,
@@ -28,7 +29,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     description: "Professional Australian visa and migration services by Registered Migration Agents. Expert support for Student Visa (500), Skilled Migration (189/190/491), Partner Visas, 485 Graduate Visa, ART Appeals, and Citizenship applications.",
     keywords: ["Australian student visa", "skilled migration Australia", "PR pathway Australia", "partner visa Australia", "migration agent Australia", "485 visa", "ART appeal"],
     alternates: {
-      canonical: "https://eevsgroup.com/migration",
+      canonical: getCanonicalUrl("/migration"),
     },
     openGraph: {
       title: "Visa & Migration Services | Everest Education",

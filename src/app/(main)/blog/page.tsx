@@ -1,13 +1,14 @@
 import { Metadata } from "next";
 import { blogPosts } from "@/data/blog";
 import BlogPageClient from "@/components/page-clients/BlogPageClient";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Latest News & Migration Updates | Everest Education",
   description:
     "Stay informed with the latest updates on Australian student visas, skilled migration, PR pathways, and university scholarships.",
   alternates: {
-    canonical: "https://eevsgroup.com/blog",
+    canonical: getCanonicalUrl("/blog"),
   },
   keywords: [
     "Australia immigration news",

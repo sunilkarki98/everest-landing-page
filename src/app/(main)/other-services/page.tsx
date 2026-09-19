@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ServiceDetailClient } from "@/components/page-clients/ServiceDetailClient";
 import { otherServices } from "@/data/services";
+import { getCanonicalUrl } from "@/lib/seo";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ service?: string }> }): Promise<Metadata> {
   const resolvedParams = await searchParams;
@@ -13,7 +14,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
       description: activeService.overview || activeService.description,
       keywords: ["OSHC Australia", "international student tax Australia", "skill assessment Australia", "VETASSESS", "business setup Australia", "TFN registration"],
       alternates: {
-        canonical: `https://eevsgroup.com/other-services?service=${serviceId}`,
+        canonical: getCanonicalUrl("/other-services"),
       },
       openGraph: {
         title: `${activeService.title} | Additional Support Services | Everest Education`,
@@ -28,7 +29,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
     description: "Comprehensive support services for international students and migrants in Australia. OSHC health insurance, taxation & accounting, professional skill assessments, and business setup advisory.",
     keywords: ["OSHC Australia", "international student tax Australia", "skill assessment Australia", "VETASSESS", "business setup Australia", "TFN registration"],
     alternates: {
-      canonical: "https://eevsgroup.com/other-services",
+      canonical: getCanonicalUrl("/other-services"),
     },
     openGraph: {
       title: "Additional Support Services | Everest Education",

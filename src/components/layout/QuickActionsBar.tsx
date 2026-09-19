@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Calendar, ExternalLink, X, ClipboardCheck } from "lucide-react";
+import { MessageCircle, Calendar, ExternalLink, X, ClipboardCheck, FileText } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 export function QuickActionsBar() {
@@ -64,6 +64,18 @@ export function QuickActionsBar() {
                   <span className="font-bold text-sm text-slate-700 group-hover:text-primary transition-colors">Client Portal</span>
                   <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 group-hover:bg-primary group-hover:text-white transition-colors">
                     <ExternalLink size={16} />
+                  </div>
+                </a>
+
+                {/* Tax Return */}
+                <a
+                  href="/tax-return"
+                  className="flex items-center gap-3 bg-white px-4 py-3 rounded-2xl shadow-xl border border-blue-100 hover:border-blue-300 hover:shadow-2xl transition-all group"
+                  title="Start Tax Return"
+                >
+                  <span className="font-bold text-sm text-slate-700 group-hover:text-blue-600 transition-colors">Tax Return</span>
+                  <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <FileText size={16} />
                   </div>
                 </a>
 

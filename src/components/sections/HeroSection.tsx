@@ -250,6 +250,7 @@ export default function HeroSection() {
                 { label: "Create USI (Student ID)", href: "https://www.usi.gov.au/students/get-a-usi" },
                 { label: "Apply for TFN (Tax)", href: "https://www.ato.gov.au/Individuals/Tax-file-number/Apply-for-a-TFN/" },
                 { label: "Book PTE Academic", href: "https://www.pearsonpte.com/" },
+                { label: "Tax Return Form", href: "/tax-return" },
               ].map((link) => (
                 <a
                   key={link.label}

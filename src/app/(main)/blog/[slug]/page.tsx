@@ -8,6 +8,7 @@ import { Container } from "@/components/layout/Container";
 import CallToAction from "@/components/sections/CallToAction";
 import { Badge } from "@/components/ui/Badge";
 import { blogPosts } from "@/data/blog";
+import { getCanonicalUrl } from "@/lib/seo";
 
 // Generate static paths for build time
 export function generateStaticParams() {
@@ -31,12 +32,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords: post.seoKeywords,
     authors: [{ name: post.author }],
     alternates: {
-      canonical: `https://eevsgroup.com/blog/${post.id}`,
+      canonical: getCanonicalUrl(`/blog/${post.id}`),
     },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://eevsgroup.com/blog/${post.id}`,
+      url: getCanonicalUrl(`/blog/${post.id}`),
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
