@@ -37,7 +37,9 @@ export default function TaxReturnPage() {
               <div className="text-sm text-slate-600 sm:text-right space-y-1">
                 <p>7/2–10 Oatley Court, Belconnen, ACT 2617</p>
                 <p>Mob: 0466 117 512 / 0406 000 815</p>
-                <a href="mailto:tax.everest@yahoo.com" className="hover:text-accent transition-colors underline underline-offset-2">tax.everest@yahoo.com</a>
+                <a href={`mailto:${process.env.NEXT_PUBLIC_TAX_EMAIL || 'tax.everest@yahoo.com'}`} className="hover:text-accent transition-colors underline underline-offset-2">
+                  {process.env.NEXT_PUBLIC_TAX_EMAIL || 'tax.everest@yahoo.com'}
+                </a>
               </div>
             </div>
 

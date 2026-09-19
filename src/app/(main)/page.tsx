@@ -8,7 +8,6 @@ const FeaturedSection = dynamic(() => import("@/components/sections/FeaturedSect
 const StudyPathwaysSection = dynamic(() => import("@/components/sections/StudyPathwaysSection"));
 const FeedbackSection = dynamic(() => import("@/components/sections/FeedbackSection"));
 const BlogSection = dynamic(() => import("@/components/sections/BlogSection"));
-const GlobalContactSection = dynamic(() => import("@/components/sections/GlobalContactSection"));
 const EmployeeSection = dynamic(() => import("@/components/sections/EmployeeSection"));
 
 import { Metadata } from "next";
@@ -98,9 +97,6 @@ export default async function Page() {
       {/* 8. Latest Visa Updates & News */}
       <BlogSection />
 
-
-      {/* 9. Global Contact Hub */}
-      <GlobalContactSection />
     </>
   );
 }

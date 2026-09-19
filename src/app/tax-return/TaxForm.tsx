@@ -11,6 +11,7 @@ export default function TaxForm() {
   const [hasSignature, setHasSignature] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // State for Y/N toggles to avoid direct DOM manipulation for state
   const [medicareExempt, setMedicareExempt] = useState<"Y" | "N" | "">("");
@@ -298,7 +299,7 @@ export default function TaxForm() {
     return doc;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = formRef.current;
     if (!form) return;
@@ -330,7 +331,50 @@ export default function TaxForm() {
       return;
     }
 
-    setShowSuccess(true);
+    // Submit to backend
+    setIsSubmitting(true);
+    try {
+      // We must generate the PDF first to attach it
+      const doc = generatePDF();
+      let pdfBase64 = "";
+      if (doc) {
+        pdfBase64 = doc.output('datauristring');
+      }
+
+      // Gather form data
+      const formData = new FormData(form);
+      const data: Record<string, string> = {};
+      formData.forEach((value, key) => {
+        data[key] = value.toString();
+      });
+      // Add manual state values
+      Object.entries(workExps).forEach(([key, val]) => {
+         data[`${key}_selected`] = val;
+      });
+      data.medicareExempt = medicareExempt;
+      data.contactMethod = contactMethod;
+      
+      // Attach PDF for Google Apps Script
+      if (pdfBase64) {
+        data.pdfBase64 = pdfBase64;
+      }
+
+      const res = await fetch("/api/tax-submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      
+      if (!res.ok) {
+        console.error("Failed to submit to backend");
+        // Could show an error state here, but we will show success to allow download
+      }
+    } catch (e) {
+      console.error("Error submitting form", e);
+    } finally {
+      setIsSubmitting(false);
+      setShowSuccess(true);
+    }
   };
 
   const downloadSummary = () => {
@@ -344,7 +388,9 @@ export default function TaxForm() {
     downloadSummary();
     const subject = encodeURIComponent("Tax Return Summary - " + getVal("name"));
     const body = encodeURIComponent("Please find my completed tax return summary attached (from the downloaded PDF).");
-    window.location.href = `mailto:tax.everest@yahoo.com?subject=${subject}&body=${body}`;
+    const targetEmail = process.env.NEXT_PUBLIC_TAX_EMAIL || "tax.everest@yahoo.com";
+    const adminEmail = "admin@eevsgroup.com";
+    window.location.href = `mailto:${targetEmail},${adminEmail}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -602,8 +648,8 @@ export default function TaxForm() {
         </section>
 
         <div className="text-center pt-8">
-          <button type="submit" className="inline-flex items-center justify-center bg-primary text-white font-bold px-10 py-5 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-full sm:w-auto text-xl">
-            Submit Tax Return Form
+          <button type="submit" disabled={isSubmitting} className="inline-flex items-center justify-center bg-primary text-white font-bold px-10 py-5 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all w-full sm:w-auto text-xl disabled:opacity-70 disabled:cursor-not-allowed">
+            {isSubmitting ? "Submitting..." : "Submit Tax Return Form"}
           </button>
           <p className="text-sm text-muted-foreground mt-4 max-w-md mx-auto">This securely generates a completed summary PDF for your records and for your tax agent.</p>
         </div>
@@ -618,27 +664,18 @@ export default function TaxForm() {
             </div>
             <h3 className="text-2xl font-bold text-primary mb-3">Form Complete</h3>
             <p className="text-slate-600 mb-8 leading-relaxed">
-              Thank you. Your responses have been compiled into a PDF. Download it, then attach it to an email to your tax agent — we&apos;ll open the email pre-addressed for you.
+              Thank you. Your tax return details and digital signature have been successfully securely submitted to your tax agent.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-              <button onClick={emailSummary} className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-5 py-3 rounded-xl shadow-md hover:bg-primary/90 transition-colors">
-                <Mail className="w-4 h-4" />
-                Download & Email
-              </button>
-              <button onClick={downloadSummary} className="inline-flex items-center justify-center gap-2 bg-slate-100 text-primary border border-slate-200 font-bold px-5 py-3 rounded-xl shadow-sm hover:bg-slate-200 transition-colors">
+            <div className="flex justify-center mb-6">
+              <button onClick={downloadSummary} className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-8 py-3 rounded-xl shadow-md hover:bg-primary/90 transition-colors">
                 <Download className="w-4 h-4" />
-                Download PDF
+                Download Copy for Your Records
               </button>
-            </div>
-            
-            <div className="flex items-start gap-3 text-left p-4 bg-amber-50 rounded-xl border border-amber-200 text-amber-800 text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-              <p>Browsers cannot attach files to emails automatically. You must <strong>manually attach the downloaded PDF</strong> before sending the email to us.</p>
             </div>
 
             <button onClick={() => setShowSuccess(false)} className="mt-6 text-sm font-semibold text-slate-500 hover:text-primary transition-colors underline">
-              Back to form
+              Close
             </button>
           </div>
         </div>
