@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { fadeUpCard } from "@/lib/animations";
 import { siteConfig } from "@/config/site";
 import { teamMembers as team } from "@/data/home";
+import { Section } from "@/components/layout/Section";
 
 type EmployeeCardProps = {
   name: string;
@@ -133,7 +134,7 @@ export default function EmployeeSection() {
   );
 
   return (
-    <section className="section-py-md section-py-md-lg bg-surface relative overflow-hidden" id="team">
+    <Section padding="md" className="bg-surface relative overflow-hidden" id="team">
       {/* Subtle Background Elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
       
@@ -190,6 +191,6 @@ export default function EmployeeSection() {
           </div>
         )}
       </div>
-    </section>
+    </Section>
   );
 }

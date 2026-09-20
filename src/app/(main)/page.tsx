@@ -1,8 +1,10 @@
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import { getGoogleReviews } from "@/lib/google-reviews";
-import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata, createFaqJsonLd } from "@/lib/seo";
 import { Metadata } from "next";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { homeFaqs } from "@/data/faqs";
 
 const WelcomeSection = dynamic(() => import("@/components/sections/WelcomeSection"));
 const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection"));
@@ -11,7 +13,6 @@ const StudyPathwaysSection = dynamic(() => import("@/components/sections/StudyPa
 const FeedbackSection = dynamic(() => import("@/components/sections/FeedbackSection"));
 const BlogSection = dynamic(() => import("@/components/sections/BlogSection"));
 const EmployeeSection = dynamic(() => import("@/components/sections/EmployeeSection"));
-
 
 export const metadata: Metadata = {
   title: "Everest Education & Visa Services | Study, Work & Migrate to Australia",
@@ -81,11 +82,17 @@ export default async function Page() {
     ]
   };
 
+  const faqJsonLd = createFaqJsonLd(homeFaqs);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       {/* 1. Hero — Study • Work • Migrate — Australia */}
@@ -93,8 +100,6 @@ export default async function Page() {
 
       {/* 2. Family Message */}
       <WelcomeSection />
-
-
 
       {/* 4. Our Services — 6 premium cards */}
       <ServicesSection />
@@ -113,7 +118,6 @@ export default async function Page() {
 
       {/* 8. Latest Visa Updates & News */}
       <BlogSection />
-
     </>
   );
 }

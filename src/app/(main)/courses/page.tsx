@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { CoursesClient } from "@/components/page-clients/CoursesClient";
 import { detailedCourses } from "@/data/courses";
-import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata, createFaqJsonLd } from "@/lib/seo";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { coursesFaqs } from "@/data/faqs";
 
 export const metadata: Metadata = {
   title: "Premium Study Pathways | Everest Education",
@@ -38,14 +40,19 @@ export default function CoursesPage() {
     })),
   };
 
+  const faqJsonLd = createFaqJsonLd(coursesFaqs);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <CoursesClient />
     </>
   );
 }
-

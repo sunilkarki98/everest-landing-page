@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import TaxForm from "./TaxForm";
 import { Container } from "@/components/layout/Container";
-import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata, createFaqJsonLd } from "@/lib/seo";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { taxReturnFaqs } from "@/data/faqs";
 
 export const metadata: Metadata = {
   title: "Tax Return Form | Everest Education & Visa Services",
@@ -36,11 +38,17 @@ export default function TaxReturnPage() {
     }
   };
 
+  const faqJsonLd = createFaqJsonLd(taxReturnFaqs);
+
   return (
     <div className="min-h-screen bg-slate-50/50 py-8 sm:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Container>
         <div className="max-w-4xl mx-auto">

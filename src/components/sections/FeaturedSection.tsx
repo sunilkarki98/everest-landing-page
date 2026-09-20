@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Section } from "@/components/layout/Section";
 
 import { featuredDestinations as destinations } from "@/data/home";
 
@@ -50,7 +51,7 @@ export default function FeaturedSection() {
   }, [activeIndex]);
 
   return (
-    <section id="popular-destinations" className="py-10 lg:py-16 bg-background overflow-hidden">
+    <Section id="popular-destinations" padding="md" className="bg-background overflow-hidden">
       <Container>
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
 
@@ -60,18 +61,14 @@ export default function FeaturedSection() {
               <SectionHeading
                 eyebrow="Popular Destinations"
                 title="Study Abroad, Explore the World"
+                description="Discover top cities around the world and begin a life-changing academic journey & career."
                 align="left"
-                className="mb-6"
               />
 
-              <p className="text-muted-foreground max-w-lg text-ui-lead leading-relaxed mb-4">
-                Discover top cities around the world and begin a life-changing academic journey & career.
-              </p>
-
             {/* Changing Content */}
-            <div className="relative min-h-[360px] w-full flex flex-col">
-              <div className="mb-6">
-                <h3 className="text-3xl sm:text-4xl font-medium font-serif text-primary tracking-tight">
+            <div className="relative min-h-[360px] w-full flex flex-col mt-2">
+              <div className="mb-2">
+                <h3 className="text-3xl sm:text-4xl font-medium font-serif text-primary tracking-tight leading-none">
                   {activeDest.country !== 'Europe' ? activeDest.country : activeDest.name}
                 </h3>
               </div>
@@ -153,6 +150,6 @@ export default function FeaturedSection() {
 
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

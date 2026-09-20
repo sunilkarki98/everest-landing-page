@@ -75,3 +75,22 @@ export function createTwitterMetadata({
     images: [image || defaultOgImage.url],
   };
 }
+
+/**
+ * Generates FAQPage JSON-LD structured data.
+ * Must be paired with a visible FAQ section on the page.
+ */
+export function createFaqJsonLd(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+}

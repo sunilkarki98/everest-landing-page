@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink, MessageCircle } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
 
 interface CallToActionProps {
   eyebrowText?: string;
@@ -23,7 +24,7 @@ const CallToAction = ({
   showSecondaryIcon = true,
 }: CallToActionProps = {}) => {
   return (
-    <section className="py-8 lg:py-10 bg-primary relative overflow-hidden">
+    <Section padding="md" className="bg-primary relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px] pointer-events-none" />
@@ -112,7 +113,7 @@ const CallToAction = ({
           </motion.div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 

@@ -9,12 +9,13 @@ import { trustItems, accreditations } from "@/config/trust-data";
 import { AccreditationGradients } from "@/components/ui/AccreditationGradients";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { welcomeHighlights as highlights } from "@/data/home";
+import { Section } from "@/components/layout/Section";
 
 
 
 export default function WelcomeSection() {
   return (
-    <section className="relative overflow-hidden bg-white section-py-lg section-py-lg-lg">
+    <Section padding="md" className="relative overflow-hidden bg-white">
       {/* Decorative Gradients for Accreditations */}
       <AccreditationGradients />
 
@@ -171,6 +172,6 @@ export default function WelcomeSection() {
 
 
       </Container>
-    </section>
+    </Section>
   );
 }

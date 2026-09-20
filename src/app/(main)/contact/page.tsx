@@ -2,7 +2,9 @@ import React from "react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import GlobalContactSection from "@/components/sections/GlobalContactSection";
 import { Metadata } from "next";
-import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata, createFaqJsonLd } from "@/lib/seo";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { contactFaqs } from "@/data/faqs";
 
 export const metadata: Metadata = {
   title: "Contact Us | Everest Education & Visa Services",
@@ -58,11 +60,17 @@ export default function ContactPage() {
     },
   };
 
+  const faqJsonLd = createFaqJsonLd(contactFaqs);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <main>
         <PageHeader 
@@ -79,4 +87,3 @@ export default function ContactPage() {
     </>
   );
 }
-

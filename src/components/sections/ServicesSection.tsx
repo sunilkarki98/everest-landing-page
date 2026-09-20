@@ -7,6 +7,7 @@ import { migrationServices, studyServices, otherServices, iconMap } from "@/data
 import { Container } from "@/components/layout/Container";
 import Link from "next/link";
 import { ChevronRight, ArrowRight } from "lucide-react";
+import { Section } from "@/components/layout/Section";
 
 const getHref = (tab: "education" | "migration" | "other", id: string) => {
   if (tab === "education") return `/abroad-study?service=${id}`;
@@ -30,16 +31,12 @@ export default function ServicesSection() {
   ] as const;
 
   return (
-    <section id="services" className="section-py-md section-py-md-lg relative overflow-hidden bg-surface">
+    <Section id="services" padding="md" className="relative overflow-hidden bg-surface">
       <Container className="relative z-10">
         
         <SectionHeading
           eyebrow="Our Services"
-          title={
-            <>
-              Comprehensive Solutions <br /> for Your Future
-            </>
-          }
+          title="Comprehensive Solutions for Your Future"
         />
 
         {/* Custom Tabs */}
@@ -112,6 +109,6 @@ export default function ServicesSection() {
         </div>
 
       </Container>
-    </section>
+    </Section>
   );
 }

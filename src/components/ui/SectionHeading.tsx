@@ -8,22 +8,28 @@ import { headingVariants } from "@/lib/animations";
 interface SectionHeadingProps {
   eyebrow?: React.ReactNode;
   title: React.ReactNode;
+  description?: React.ReactNode;
   align?: "left" | "center";
   className?: string;
   animationVariants?: Variants;
   eyebrowColor?: string;
   titleColor?: string;
+  descriptionColor?: string;
+  descriptionClassName?: string;
 }
 
 
 export function SectionHeading({
   eyebrow,
   title,
+  description,
   align = "center",
   className,
   animationVariants = headingVariants,
   eyebrowColor,
   titleColor,
+  descriptionColor,
+  descriptionClassName,
 }: SectionHeadingProps) {
   const isCenter = align === "center";
   
@@ -49,7 +55,19 @@ export function SectionHeading({
       <h2 className={cn("text-ui-section-title drop-shadow-sm", titleColor || "text-primary")}>
         {title}
       </h2>
-      {isCenter && (
+      
+      {description && (
+        <p className={cn(
+          "mt-4 text-ui-lead leading-relaxed", 
+          isCenter ? "mx-auto max-w-2xl" : "max-w-xl",
+          descriptionColor || "text-muted-foreground",
+          descriptionClassName
+        )}>
+          {description}
+        </p>
+      )}
+
+      {isCenter && !description && (
         <div className="w-16 h-0.5 mx-auto mt-4 bg-accent" />
       )}
     </motion.div>

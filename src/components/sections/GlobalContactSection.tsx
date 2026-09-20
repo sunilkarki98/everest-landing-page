@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/layout/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { activeBranches, futureBranches } from "@/data/home";
+import { Section } from "@/components/layout/Section";
 
 export default function GlobalContactSection() {
   const [expandedMapId, setExpandedMapId] = useState<number | null>(null);
@@ -18,7 +19,7 @@ export default function GlobalContactSection() {
   };
 
   return (
-    <section id="contact" className="section-py-md section-py-md-lg bg-surface relative overflow-hidden border-t border-border/40">
+    <Section id="contact" padding="md" className="bg-surface relative overflow-hidden border-t border-border/40">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
       <div className="pointer-events-none absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] bg-accent/5" />
@@ -30,11 +31,9 @@ export default function GlobalContactSection() {
           <SectionHeading
             eyebrow="Global Network"
             title="Get in Touch & Visit Our Offices"
-            className="mb-4"
+            description="Speak with our experienced consultants or visit one of our dedicated branches for personalized guidance."
+            className="mb-0"
           />
-          <p className="text-muted-foreground max-w-2xl mx-auto text-ui-lead">
-            Speak with our experienced consultants or visit one of our dedicated branches for personalized guidance.
-          </p>
         </div>
 
         {/* 1. MAIN CONTACT CARD (Head Office & Inquiries) */}
@@ -101,7 +100,7 @@ export default function GlobalContactSection() {
             <div className="flex flex-col items-center gap-3 p-5 xl:px-4 xl:py-5 shrink-0 xl:w-auto xl:justify-start">
               <div className="hidden sm:flex flex-col items-center gap-2">
                 <span className="text-sm text-accent font-bold uppercase tracking-widest text-center">WhatsApp</span>
-                <div className="w-28 h-28 bg-white rounded-xl overflow-hidden shrink-0 shadow-lg p-2.5">
+                <div className="w-28 h-28 bg-white rounded-xl overflow-hidden shrink-0 shadow-lg p-1">
                   <div className="relative w-full h-full">
                     <Image src="/contacusQR.jpeg" alt="WhatsApp QR Code" fill sizes="100px" className="object-contain rounded-md" />
                   </div>
@@ -245,6 +244,6 @@ export default function GlobalContactSection() {
 
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

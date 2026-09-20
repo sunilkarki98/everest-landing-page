@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Container } from "../layout/Container";
 import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { detailedCourses } from "@/data/courses";
+import { Section } from "@/components/layout/Section";
 import { universities } from "@/data/universities";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -34,7 +35,7 @@ export default function StudyPathwaysSection() {
   };
 
   return (
-    <section className="relative bg-slate-50 border-b border-border/40 py-16 lg:py-24">
+    <Section padding="md" className="relative bg-slate-50 border-b border-border/40">
       {/* Background decorative elements - Safely clipped to prevent horizontal scroll */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
@@ -59,12 +60,9 @@ export default function StudyPathwaysSection() {
                   <span className="text-accent-text">Partner Universities</span>
                 </>
               }
+              description="Explore our core study disciplines and discover the world-class Australian institutions where you can launch your career. We provide comprehensive study support across all major academic fields."
               align="left"
-              className="mb-6"
             />
-            <p className="text-ui-lead text-muted-foreground leading-relaxed max-w-lg mb-8">
-              Explore our core study disciplines and discover the world-class Australian institutions where you can launch your career. We provide comprehensive study support across all major academic fields.
-            </p>
             <Link href="/courses" className="inline-flex items-center self-start gap-2 font-bold text-primary hover:text-accent transition-colors duration-300 group">
               View All Courses
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -208,6 +206,6 @@ export default function StudyPathwaysSection() {
 
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

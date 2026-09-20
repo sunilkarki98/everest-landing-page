@@ -12,6 +12,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
+import { Section } from "@/components/layout/Section";
 
 import { Testimonial } from "@/lib/google-reviews";
 
@@ -90,33 +91,34 @@ export default function FeedbackSection({ testimonials }: { testimonials: Testim
   );
 
   return (
-    <section className="section-py-sm section-py-sm-lg bg-primary overflow-hidden">
+    <Section padding="md" className="bg-primary overflow-hidden">
       <Container>
         {/* Heading */}
-        <div className="relative mb-12 flex flex-col items-center justify-center">
+        <div className="mb-12 lg:mb-16">
           <SectionHeading
             eyebrow="Student Success Stories"
             title="Hear From Our Successful Students"
             titleColor="text-primary-foreground"
+            align="left"
             className="mb-4"
           />
-          <p className="text-white/80 max-w-2xl mx-auto text-ui-lead mb-0 text-center">
-            Real experiences from students who achieved their study and migration goals with {siteConfig.shortName}.
-          </p>
-          <div className="mt-6 lg:mt-0 lg:absolute lg:right-0 lg:bottom-0 lg:translate-y-2">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+            <p className="text-white/80 text-ui-lead leading-relaxed max-w-2xl">
+              Real experiences from students who achieved their study and migration goals with {siteConfig.shortName}.
+            </p>
             <a
               href="https://share.google/Bp8LPnaFi9wzvzr3a"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-primary hover:bg-surface-hover hover:-translate-y-0.5 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full font-bold shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-300 group whitespace-nowrap"
+              className="inline-flex items-center gap-2 bg-white text-primary hover:bg-surface-hover hover:-translate-y-0.5 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full font-bold shadow-[0_4px_14px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-300 group whitespace-nowrap shrink-0"
             >
               <Star className="w-5 h-5 text-accent fill-accent group-hover:scale-110 transition-transform shrink-0" /> Leave a Review
             </a>
           </div>
         </div>
 
-        {/* Embla Carousel */}
-        <div className="mt-8 lg:mt-12">
+      {/* Embla Carousel */}
+      <div className="mt-8 lg:mt-12">
           {/* Viewport — negative mx to allow cards to bleed into the outer padding */}
           <div className="overflow-hidden -mx-2" ref={emblaRef}>
             <div className="flex">
@@ -176,6 +178,6 @@ export default function FeedbackSection({ testimonials }: { testimonials: Testim
           </div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

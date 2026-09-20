@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import AboutContent from "@/components/page-clients/AboutContent";
-import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata } from "@/lib/seo";
+import { getCanonicalUrl, getBaseUrl, createOgMetadata, createTwitterMetadata, createFaqJsonLd } from "@/lib/seo";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { aboutFaqs } from "@/data/faqs";
 
 export const metadata: Metadata = {
   title: "About Us | Everest Education & Visa Services",
@@ -40,14 +42,19 @@ export default function AboutPage() {
     },
   };
 
+  const faqJsonLd = createFaqJsonLd(aboutFaqs);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <AboutContent />
     </>
   );
 }
-

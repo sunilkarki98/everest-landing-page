@@ -6,10 +6,10 @@ import { MapPin, Phone, Mail, Clock, ArrowRight, Globe2 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import Image from "next/image";
 import Link from "next/link";
-
+import { Section } from "@/components/layout/Section";
 export default function PreFooterContact() {
   return (
-    <section className="bg-white py-12 md:py-16 border-t border-slate-100">
+    <Section padding="md" className="bg-white border-t border-slate-100">
       <Container>
         {/* Header */}
         <div className="relative flex items-center justify-center mb-6 md:mb-10">
@@ -162,19 +162,7 @@ export default function PreFooterContact() {
                   Let our experts help you plan your future in Australia.
                 </p>
                 
-                <div className="w-full mt-4">
-                  <a 
-                    href="https://calendly.com/samir-dreamtrip" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-full bg-[#d4af37] hover:bg-[#c19b2e] text-navy-dark font-bold py-3.5 px-4 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
-                  >
-                    Book Now 
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </a>
-                </div>
-
-                <div className="mt-8 border-t border-black/5 pt-5 w-full">
+                <div className="w-full flex flex-col items-center mb-2">
                   <p className="text-xs font-medium text-slate-600 mb-3 leading-relaxed">
                     Trusted by 10,000+ students and families worldwide.
                   </p>
@@ -194,12 +182,24 @@ export default function PreFooterContact() {
                     </div>
                   </div>
                 </div>
+
+                <div className="mt-8 border-t border-black/5 pt-5 w-full">
+                  <a 
+                    href="https://calendly.com/samir-dreamtrip" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full bg-[#d4af37] hover:bg-[#c19b2e] text-navy-dark font-bold py-3.5 px-4 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group"
+                  >
+                    Book Now 
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

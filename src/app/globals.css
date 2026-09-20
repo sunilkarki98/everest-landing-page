@@ -16,6 +16,16 @@ For Ahilya & Amulya — and for all who seek a better future.
 ------------------------------------------------------------------------- */
 @layer base {
   :root {
+    /* Centralized Section Spacing Variables */
+    --section-spacing-mobile-sm: 2.5rem;
+    --section-spacing-desktop-sm: 3.5rem;
+    
+    --section-spacing-mobile-md: 4rem;
+    --section-spacing-desktop-md: 6rem;
+    
+    --section-spacing-mobile-lg: 5rem;
+    --section-spacing-desktop-lg: 7rem;
+
     /* Base Colors */
     --background: 0 0% 100%;
     /* #FFFFFF */
@@ -258,38 +268,38 @@ For Ahilya & Amulya — and for all who seek a better future.
    Section Spacing Utilities (Standardized vertical rhythm)
 ------------------------------------------------------------------------- */
 @utility section-py-sm {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: var(--section-spacing-mobile-sm);
+  padding-bottom: var(--section-spacing-mobile-sm);
 }
 
 @utility section-py-sm-lg {
   @media (min-width: 1024px) {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    padding-top: var(--section-spacing-desktop-sm);
+    padding-bottom: var(--section-spacing-desktop-sm);
   }
 }
 
 @utility section-py-md {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: var(--section-spacing-mobile-md);
+  padding-bottom: var(--section-spacing-mobile-md);
 }
 
 @utility section-py-md-lg {
   @media (min-width: 1024px) {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: var(--section-spacing-desktop-md);
+    padding-bottom: var(--section-spacing-desktop-md);
   }
 }
 
 @utility section-py-lg {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: var(--section-spacing-mobile-lg);
+  padding-bottom: var(--section-spacing-mobile-lg);
 }
 
 @utility section-py-lg-lg {
   @media (min-width: 1024px) {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: var(--section-spacing-desktop-lg);
+    padding-bottom: var(--section-spacing-desktop-lg);
   }
 }
 
