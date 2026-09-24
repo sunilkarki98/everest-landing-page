@@ -152,7 +152,10 @@ export async function POST(request: NextRequest) {
       const headers = headerRes.data.values?.[0] || [];
       const rowData = headers.map(header => {
         if (header === "Date") return new Date().toISOString();
-        if (header === "RawData") return JSON.stringify(body);
+        if (header === "RawData") {
+          const { pdfBase64, ...cleanData } = body; // Exclude huge PDF string
+          return JSON.stringify(cleanData);
+        }
 
         const value = body[header];
         if (typeof value === "boolean") return value ? "Yes" : "No";
