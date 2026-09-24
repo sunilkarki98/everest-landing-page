@@ -347,6 +347,12 @@ export default function TaxForm() {
       data.medicareExempt = medicareExempt;
       data.contactMethod = contactMethod;
 
+      // Generate PDF and attach to payload
+      const doc = generatePDF();
+      if (doc) {
+        data.pdfBase64 = doc.output('datauristring').split(',')[1];
+      }
+
       const res = await fetch("/api/tax-submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

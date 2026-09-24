@@ -43,3 +43,6 @@ next-env.d.ts
 # Trunk (Code Quality)
 /.trunk/
 
+# Google Cloud Service Account Keys
+everest-tax-backend-*.json
+everest-backend-*.json

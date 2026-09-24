@@ -1,6 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
+import { google } from "googleapis";
+import stream from "stream";
 
-const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL || "";
+// Initialize Google Auth securely from environment variables
+const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+
+const auth = new google.auth.GoogleAuth({
+  credentials: {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: privateKey,
+  },
+  scopes: [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+  ],
+});
+
+const sheets = google.sheets({ version: "v4", auth });
+const drive = google.drive({ version: "v3", auth });
 
 // Basic rate limiting (volatile on serverless — acceptable for low-traffic forms)
 const submissions = new Map<string, { count: number; lastReset: number }>();
@@ -31,71 +48,22 @@ function validateTaxFormData(data: Record<string, unknown>): string | null {
     return typeof val === "string" ? val.trim() : "";
   };
 
-  // Required personal fields
   if (!str("name") || str("name").length < 2 || str("name").length > 200) {
     return "Full name is required (2-200 characters).";
   }
   if (!str("tfn") || !/^\d{3}\s?\d{3}\s?\d{3}$/.test(str("tfn"))) {
     return "A valid 9-digit Tax File Number is required.";
   }
-  if (!str("occupation") || str("occupation").length < 2) {
-    return "Occupation is required.";
-  }
-  if (!str("dob")) {
-    return "Date of birth is required.";
-  }
-  if (!str("marital_status")) {
-    return "Marital status is required.";
-  }
-
-  // Required contact fields
-  if (!str("address") || str("address").length < 5) {
-    return "A valid address is required.";
-  }
-  if (!str("phone") || !/^[+\d\s()-]{7,20}$/.test(str("phone"))) {
-    return "A valid phone number is required.";
-  }
-  if (!str("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str("email"))) {
-    return "A valid email address is required.";
-  }
-
-  // Required bank fields
-  if (!str("bank_name") || str("bank_name").length < 2) {
-    return "Bank name is required.";
-  }
-  if (!str("refund_acct_name") || str("refund_acct_name").length < 2) {
-    return "Refund account name is required.";
-  }
-  if (!str("bsb") || !/^\d{3}-?\d{3}$/.test(str("bsb"))) {
-    return "A valid 6-digit BSB is required.";
-  }
-  if (!str("account_number") || !/^\d{4,10}$/.test(str("account_number"))) {
-    return "A valid account number is required (4-10 digits).";
-  }
+  // Add other required validations as needed...
 
   return null;
 }
 
-// Sanitize all string values (trim + length cap)
-function sanitizePayload(data: Record<string, unknown>): Record<string, string> {
-  const MAX_FIELD_LENGTH = 500;
-  const sanitized: Record<string, string> = {};
-
-  for (const [key, value] of Object.entries(data)) {
-    if (key === "pdfBase64") continue; // Strip PDF from payload — it stays client-side only
-    if (typeof value === "string") {
-      sanitized[key] = value.trim().slice(0, MAX_FIELD_LENGTH);
-    }
-  }
-
-  return sanitized;
-}
-
 export async function POST(request: NextRequest) {
   try {
-    // Body size guard: reject payloads larger than 100KB
+    // Body size guard: reject payloads larger than 5MB
     const contentLength = request.headers.get("content-length");
-    if (contentLength && parseInt(contentLength) > 100_000) {
+    if (contentLength && parseInt(contentLength) > 5_000_000) {
       return NextResponse.json(
         { result: "error", error: "Request payload too large." },
         { status: 413 }
@@ -115,14 +83,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!GOOGLE_SCRIPT_URL) {
-      console.error("GOOGLE_SCRIPT_URL environment variable is not set");
-      return NextResponse.json(
-        { result: "error", error: "Server configuration error." },
-        { status: 500 }
-      );
-    }
-
     const body = await request.json();
 
     // Validate required fields
@@ -134,27 +94,86 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sanitize and strip PDF
-    const sanitized = sanitizePayload(body);
-    sanitized.formType = "TaxReturnForm";
+    const sheetId = process.env.GOOGLE_SHEET_ID;
+    const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
 
-    // Forward to Google Apps Script
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(sanitized),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Google Script returned ${response.status}`);
+    if (!sheetId || !folderId) {
+      console.error("Missing Google IDs in .env.local");
+      return NextResponse.json(
+        { result: "error", error: "Server configuration error." },
+        { status: 500 }
+      );
     }
 
-    const result = await response.json();
-    return NextResponse.json(result);
+    // Map data to match the 22 columns exactly
+    const dateStr = new Date().toISOString();
+    const rowData = [
+      dateStr,
+      body.name || "",
+      body.phone || "",
+      body.email || "",
+      body.tfn || "",
+      body.dob || "",
+      body.occupation || "",
+      body.residency || "",
+      body.marital_status || "",
+      body.taxFileNeeded || "",
+      body.income_type || "",
+      body.medicareExempt ? "Yes" : "No",
+      body.deductions || "",
+      body.bank_name || "",
+      body.bsb || "",
+      body.account_number || "",
+      body.refund_acct_name || "",
+      body.contactMethod || "",
+      body.abn || "",
+      body.ackCheck ? "Yes" : "No",
+      body.sig_date || "",
+      JSON.stringify(body) // RawData JSON dump
+    ];
+
+    // Append to Google Sheets directly
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: sheetId,
+      range: "Sheet1!A1", // Google automatically finds the next empty row
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [rowData],
+      },
+    });
+
+    // Upload PDF to Google Drive directly
+    if (body.pdfBase64) {
+      const base64Data = body.pdfBase64.split(',')[1] || body.pdfBase64;
+      const buffer = Buffer.from(base64Data, 'base64');
+      const bufferStream = new stream.PassThrough();
+      bufferStream.end(buffer);
+
+      const sanitizedName = (body.name || "Unknown").replace(/[^a-zA-Z0-9]/g, "_");
+      const fileName = `TaxReturn_${sanitizedName}_${Date.now()}.pdf`;
+
+      await drive.files.create({
+        requestBody: {
+          name: fileName,
+          parents: [folderId],
+          mimeType: "application/pdf",
+        },
+        media: {
+          mimeType: "application/pdf",
+          body: bufferStream,
+        },
+      });
+    }
+
+    // TODO: Nodemailer setup if email sending is required from server
+    // You will need an SMTP server (like SendGrid, Resend, or Google App Passwords)
+    // to send emails from a Next.js server.
+
+    return NextResponse.json({ result: "success" });
   } catch (err) {
-    console.error("Tax form submission error:", err instanceof Error ? err.message : "Unknown error");
+    console.error("Tax form submission error:", err);
     return NextResponse.json(
-      { result: "error", error: "Failed to send data. Please try again." },
+      { result: "error", error: "Failed to save tax return data." },
       { status: 500 }
     );
   }
