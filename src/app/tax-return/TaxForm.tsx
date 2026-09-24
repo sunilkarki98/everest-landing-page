@@ -621,6 +621,7 @@ export default function TaxForm() {
             <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
               <div id="signature-section" className="space-y-2">
                 <label className="text-sm font-semibold text-slate-700">Signature <span className="text-red-500">*</span> <span className="font-normal text-muted-foreground">(draw with mouse or finger)</span></label>
+                <p className="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded border border-amber-100 mb-1 inline-block">💡 Tip: Please sign after completing the form, as resizing the window clears the canvas.</p>
                 <div className={`relative border-2 rounded-lg overflow-hidden transition-colors ${hasSignature ? "border-emerald-500/50 bg-emerald-50/10" : errors.signature ? "border-red-400 bg-red-50" : "border-border bg-slate-50"}`}>
                   <canvas ref={canvasRef} className="w-full h-[90px] touch-none cursor-crosshair block" />
                   <button type="button" onClick={clearSignature} className="absolute top-2 right-2 text-[10px] uppercase tracking-wider font-bold bg-white border border-border rounded px-2 py-1 text-slate-500 hover:bg-slate-100 hover:text-red-600 transition-colors">Clear</button>

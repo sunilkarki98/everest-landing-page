@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 import stream from "stream";
+import nodemailer from "nodemailer";
 
 // Initialize Google Auth securely from environment variables
 const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
@@ -105,44 +106,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Map data to match the 22 columns exactly
-    const dateStr = new Date().toISOString();
-    const rowData = [
-      dateStr,
-      body.name || "",
-      body.phone || "",
-      body.email || "",
-      body.tfn || "",
-      body.dob || "",
-      body.occupation || "",
-      body.residency || "",
-      body.marital_status || "",
-      body.taxFileNeeded || "",
-      body.income_type || "",
-      body.medicareExempt ? "Yes" : "No",
-      body.deductions || "",
-      body.bank_name || "",
-      body.bsb || "",
-      body.account_number || "",
-      body.refund_acct_name || "",
-      body.contactMethod || "",
-      body.abn || "",
-      body.ackCheck ? "Yes" : "No",
-      body.sig_date || "",
-      JSON.stringify(body) // RawData JSON dump
-    ];
-
-    // Append to Google Sheets directly
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: sheetId,
-      range: "Sheet1!A1", // Google automatically finds the next empty row
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [rowData],
-      },
-    });
-
-    // Upload PDF to Google Drive directly
+    // 1. Upload PDF to Google Drive directly (to get the link)
+    let pdfLink = "";
+    let driveFileId = ""; // Track for potential rollback
     if (body.pdfBase64) {
       const base64Data = body.pdfBase64.split(',')[1] || body.pdfBase64;
       const buffer = Buffer.from(base64Data, 'base64');
@@ -152,7 +118,7 @@ export async function POST(request: NextRequest) {
       const sanitizedName = (body.name || "Unknown").replace(/[^a-zA-Z0-9]/g, "_");
       const fileName = `TaxReturn_${sanitizedName}_${Date.now()}.pdf`;
 
-      await drive.files.create({
+      const fileRes = await drive.files.create({
         requestBody: {
           name: fileName,
           parents: [folderId],
@@ -162,12 +128,92 @@ export async function POST(request: NextRequest) {
           mimeType: "application/pdf",
           body: bufferStream,
         },
+        supportsAllDrives: true,
+        fields: "id, webViewLink", // Request the viewable link
       });
+      pdfLink = fileRes.data.webViewLink || "";
+      driveFileId = fileRes.data.id || "";
+      body.PDF_Link = pdfLink; // Attach to body so it maps to the sheet
     }
 
-    // TODO: Nodemailer setup if email sending is required from server
-    // You will need an SMTP server (like SendGrid, Resend, or Google App Passwords)
-    // to send emails from a Next.js server.
+    // 2. Dynamically map data to sheet headers
+    const headerRes = await sheets.spreadsheets.values.get({
+      spreadsheetId: sheetId,
+      range: "Sheet1!1:1", // Get the first row (headers)
+    });
+    
+    const headers = headerRes.data.values?.[0] || [];
+    const rowData = headers.map(header => {
+      if (header === "Date") return new Date().toISOString();
+      if (header === "RawData") return JSON.stringify(body);
+      
+      // Match the header name to the body key
+      const value = body[header];
+      
+      // Handle boolean conversions for checkboxes
+      if (typeof value === "boolean") return value ? "Yes" : "No";
+      
+      return value !== undefined ? value : "";
+    });
+
+    // 3. Append to Google Sheets directly
+    try {
+      await sheets.spreadsheets.values.append({
+        spreadsheetId: sheetId,
+        range: "Sheet1!A1", // Google automatically finds the next empty row
+        valueInputOption: "USER_ENTERED",
+        requestBody: {
+          values: [rowData],
+        },
+      });
+    } catch (sheetErr) {
+      // ROLLBACK: If Sheets fails, delete the orphaned PDF from Drive
+      if (driveFileId) {
+        console.warn(`Sheets append failed. Rolling back Drive upload: ${driveFileId}`);
+        await drive.files.delete({ fileId: driveFileId, supportsAllDrives: true }).catch(err => 
+          console.error("Failed to rollback Drive file:", err)
+        );
+      }
+      throw sheetErr; // Rethrow to return 500
+    }
+
+    // 4. Send Email via Nodemailer
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: "gmail", // Use gmail or whatever service you have
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
+
+        const adminEmail = process.env.ADMIN_EMAIL || "admin@eevsgroup.com";
+        const taxEmail = process.env.NEXT_PUBLIC_TAX_EMAIL || "tax.everest@yahoo.com";
+
+        const mailOptions = {
+          from: `"Everest Tax System" <${process.env.EMAIL_USER}>`,
+          to: `${taxEmail}, ${adminEmail}`, // Sends to both addresses
+          subject: `New Tax Return Submitted: ${body.name || "Client"}`,
+          text: `A new tax return has been submitted by ${body.name}.\n\nPhone: ${body.phone}\nEmail: ${body.email}\n\nYou can view the uploaded PDF in Google Drive here:\n${pdfLink}\n\nA copy of the PDF is also attached to this email.`,
+          attachments: body.pdfBase64 ? [
+            {
+              filename: `TaxReturn_${(body.name || "Unknown").replace(/[^a-zA-Z0-9]/g, "_")}.pdf`,
+              content: body.pdfBase64.split(',')[1] || body.pdfBase64,
+              encoding: 'base64'
+            }
+          ] : [],
+        };
+
+        // Send asynchronously (don't await) to make UI response instant
+        transporter.sendMail(mailOptions)
+          .then(() => console.log("Email sent successfully!"))
+          .catch((emailErr) => console.error("Failed to send email:", emailErr));
+
+      } catch (emailErr) {
+        console.error("Failed to initialize email transporter:", emailErr);
+      }
+    }
 
     return NextResponse.json({ result: "success" });
   } catch (err) {
