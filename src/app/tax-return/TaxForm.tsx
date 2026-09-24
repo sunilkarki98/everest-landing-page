@@ -212,8 +212,8 @@ export default function TaxForm() {
     lines.push(`Visa subclass: ${getVal("visa_subclass")}`);
     lines.push(`Marital status: ${getVal("marital_status")}`);
     lines.push(`No. of dependents: ${getVal("dependents")}`);
-    lines.push(`Medicare levy exempt: ${medicareExempt || "—"}`);
-    lines.push(`ABN: ${getVal("abn")}`);
+    lines.push(`Medicare levy exempt: ${medicareExempt || "N/A"}`);
+    lines.push(`ABN: ${getVal("abn") || "N/A"}`);
 
     lines.push("\n02. CONTACT DETAILS");
     lines.push("-".repeat(40));
