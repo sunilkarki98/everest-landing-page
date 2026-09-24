@@ -106,82 +106,75 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 1. Upload PDF to Google Drive directly (to get the link)
+    // ── Independent Steps: failure of one must NEVER affect the others ──
+    const results = { drive: false, sheets: false, email: false };
+
+    // STEP 1: Upload PDF to Google Drive
     let pdfLink = "";
-    let driveFileId = ""; // Track for potential rollback
     if (body.pdfBase64) {
-      const base64Data = body.pdfBase64.split(',')[1] || body.pdfBase64;
-      const buffer = Buffer.from(base64Data, 'base64');
-      const bufferStream = new stream.PassThrough();
-      bufferStream.end(buffer);
+      try {
+        const base64Data = body.pdfBase64.split(',')[1] || body.pdfBase64;
+        const buffer = Buffer.from(base64Data, 'base64');
+        const bufferStream = new stream.PassThrough();
+        bufferStream.end(buffer);
 
-      const sanitizedName = (body.name || "Unknown").replace(/[^a-zA-Z0-9]/g, "_");
-      const fileName = `TaxReturn_${sanitizedName}_${Date.now()}.pdf`;
+        const sanitizedName = (body.name || "Unknown").replace(/[^a-zA-Z0-9]/g, "_");
+        const fileName = `TaxReturn_${sanitizedName}_${Date.now()}.pdf`;
 
-      const fileRes = await drive.files.create({
-        requestBody: {
-          name: fileName,
-          parents: [folderId],
-          mimeType: "application/pdf",
-        },
-        media: {
-          mimeType: "application/pdf",
-          body: bufferStream,
-        },
-        supportsAllDrives: true,
-        fields: "id, webViewLink", // Request the viewable link
-      });
-      pdfLink = fileRes.data.webViewLink || "";
-      driveFileId = fileRes.data.id || "";
-      body.PDF_Link = pdfLink; // Attach to body so it maps to the sheet
+        const fileRes = await drive.files.create({
+          requestBody: {
+            name: fileName,
+            parents: [folderId],
+            mimeType: "application/pdf",
+          },
+          media: {
+            mimeType: "application/pdf",
+            body: bufferStream,
+          },
+          supportsAllDrives: true,
+          fields: "id, webViewLink",
+        });
+        pdfLink = fileRes.data.webViewLink || "";
+        body.PDF_Link = pdfLink;
+        results.drive = true;
+      } catch (driveErr) {
+        console.error("STEP 1 FAILED — Google Drive upload:", driveErr);
+      }
     }
 
-    // 2. Dynamically map data to sheet headers
-    const headerRes = await sheets.spreadsheets.values.get({
-      spreadsheetId: sheetId,
-      range: "Sheet1!1:1", // Get the first row (headers)
-    });
-    
-    const headers = headerRes.data.values?.[0] || [];
-    const rowData = headers.map(header => {
-      if (header === "Date") return new Date().toISOString();
-      if (header === "RawData") return JSON.stringify(body);
-      
-      // Match the header name to the body key
-      const value = body[header];
-      
-      // Handle boolean conversions for checkboxes
-      if (typeof value === "boolean") return value ? "Yes" : "No";
-      
-      return value !== undefined ? value : "";
-    });
-
-    // 3. Append to Google Sheets directly
+    // STEP 2: Append row to Google Sheets
     try {
+      const headerRes = await sheets.spreadsheets.values.get({
+        spreadsheetId: sheetId,
+        range: "Sheet1!1:1",
+      });
+
+      const headers = headerRes.data.values?.[0] || [];
+      const rowData = headers.map(header => {
+        if (header === "Date") return new Date().toISOString();
+        if (header === "RawData") return JSON.stringify(body);
+
+        const value = body[header];
+        if (typeof value === "boolean") return value ? "Yes" : "No";
+        return value !== undefined ? value : "";
+      });
+
       await sheets.spreadsheets.values.append({
         spreadsheetId: sheetId,
-        range: "Sheet1!A1", // Google automatically finds the next empty row
+        range: "Sheet1!A1",
         valueInputOption: "USER_ENTERED",
-        requestBody: {
-          values: [rowData],
-        },
+        requestBody: { values: [rowData] },
       });
+      results.sheets = true;
     } catch (sheetErr) {
-      // ROLLBACK: If Sheets fails, delete the orphaned PDF from Drive
-      if (driveFileId) {
-        console.warn(`Sheets append failed. Rolling back Drive upload: ${driveFileId}`);
-        await drive.files.delete({ fileId: driveFileId, supportsAllDrives: true }).catch(err => 
-          console.error("Failed to rollback Drive file:", err)
-        );
-      }
-      throw sheetErr; // Rethrow to return 500
+      console.error("STEP 2 FAILED — Google Sheets append:", sheetErr);
     }
 
-    // 4. Send Email via Nodemailer
+    // STEP 3: Send Email via Nodemailer (fire-and-forget for instant UI)
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       try {
         const transporter = nodemailer.createTransport({
-          service: "gmail", // Use gmail or whatever service you have
+          service: "gmail",
           auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
@@ -193,9 +186,9 @@ export async function POST(request: NextRequest) {
 
         const mailOptions = {
           from: `"Everest Tax System" <${process.env.EMAIL_USER}>`,
-          to: `${taxEmail}, ${adminEmail}`, // Sends to both addresses
+          to: `${taxEmail}, ${adminEmail}`,
           subject: `New Tax Return Submitted: ${body.name || "Client"}`,
-          text: `A new tax return has been submitted by ${body.name}.\n\nPhone: ${body.phone}\nEmail: ${body.email}\n\nYou can view the uploaded PDF in Google Drive here:\n${pdfLink}\n\nA copy of the PDF is also attached to this email.`,
+          text: `A new tax return has been submitted by ${body.name}.\n\nPhone: ${body.phone}\nEmail: ${body.email}\n\nYou can view the uploaded PDF in Google Drive here:\n${pdfLink || "(Drive upload failed — see email attachment)"}\n\nA copy of the PDF is also attached to this email.`,
           attachments: body.pdfBase64 ? [
             {
               filename: `TaxReturn_${(body.name || "Unknown").replace(/[^a-zA-Z0-9]/g, "_")}.pdf`,
@@ -205,16 +198,17 @@ export async function POST(request: NextRequest) {
           ] : [],
         };
 
-        // Send asynchronously (don't await) to make UI response instant
+        // Fire-and-forget: don't await so the user gets instant response
         transporter.sendMail(mailOptions)
-          .then(() => console.log("Email sent successfully!"))
-          .catch((emailErr) => console.error("Failed to send email:", emailErr));
+          .then(() => { results.email = true; console.log("Email sent successfully!"); })
+          .catch((emailErr) => console.error("STEP 3 FAILED — Email send:", emailErr));
 
       } catch (emailErr) {
-        console.error("Failed to initialize email transporter:", emailErr);
+        console.error("STEP 3 FAILED — Email transporter init:", emailErr);
       }
     }
 
+    console.log("Submission results:", results);
     return NextResponse.json({ result: "success" });
   } catch (err) {
     console.error("Tax form submission error:", err);
