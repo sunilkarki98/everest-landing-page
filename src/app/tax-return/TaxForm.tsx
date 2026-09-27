@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, ChangeEvent } from "react";
 import Script from "next/script";
 import { Check, Mail, Download, AlertCircle, Lock } from "lucide-react";
+import { workExpItems, generateTaxPDF } from "./utils/pdfGenerator";
 
 export default function TaxForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -25,20 +26,7 @@ export default function TaxForm() {
   const [tfnValue, setTfnValue] = useState("");
   const [bsbValue, setBsbValue] = useState("");
 
-  // Work Expenses List
-  const workExpItems = [
-    { label: "Car expense (If you have multiple jobs)", key: "exp_car" },
-    { label: "Travel Expenses", key: "exp_travel" },
-    { label: "Uniform for work", key: "exp_uniform" },
-    { label: "Laundry", key: "exp_laundry" },
-    { label: "Union fee", key: "exp_union" },
-    { label: "Ahpra fee (Only for RN & EN)", key: "exp_ahpra" },
-    { label: "Self Education Costs", key: "exp_education" },
-    { label: "Tools Expenses", key: "exp_tools" },
-    { label: "Donation", key: "other_donations" },
-    { label: "Tax Agent fees (Last Year)", key: "other_tax_agent_fees" },
-    { label: "Home office Expenses (70c/hour)", key: "exp_home_office" },
-  ];
+  // Work Expenses List imported from pdfGenerator
 
   // Signature Pad Logic
   useEffect(() => {
@@ -196,107 +184,21 @@ export default function TaxForm() {
     return el ? el.value.trim() : "";
   };
 
-  const buildSummary = () => {
-    const lines = [];
-    lines.push("EVEREST.TAX");
-    lines.push("TAX RETURN FORM — CLIENT SUMMARY");
-    lines.push("Generated: " + new Date().toLocaleString());
-    lines.push("=".repeat(60));
-
-    lines.push("\n01. PERSONAL INFORMATION");
-    lines.push("-".repeat(40));
-    lines.push(`Name: ${getVal("name")}`);
-    lines.push(`TFN: ${getVal("tfn")}`);
-    lines.push(`Occupation: ${getVal("occupation")}`);
-    lines.push(`DOB: ${getVal("dob")}`);
-    lines.push(`Visa subclass: ${getVal("visa_subclass")}`);
-    lines.push(`Marital status: ${getVal("marital_status")}`);
-    lines.push(`No. of dependents: ${getVal("dependents")}`);
-    lines.push(`Medicare levy exempt: ${medicareExempt || "N/A"}`);
-    lines.push(`ABN: ${getVal("abn") || "N/A"}`);
-
-    lines.push("\n02. CONTACT DETAILS");
-    lines.push("-".repeat(40));
-    lines.push(`Address: ${getVal("address")}`);
-    lines.push(`Phone: ${getVal("phone")}`);
-    lines.push(`Email: ${getVal("email")}`);
-    lines.push(`Preferred contact: ${contactMethod}`);
-
-    lines.push("\n03. BANK DETAILS (FOR REFUND)");
-    lines.push("-".repeat(40));
-    lines.push(`Bank name: ${getVal("bank_name")}`);
-    lines.push(`Refund account name: ${getVal("refund_acct_name")}`);
-    lines.push(`BSB: ${getVal("bsb")}`);
-    lines.push(`Account Number: ${getVal("account_number")}`);
-
-    lines.push("\n04. EXPENSES (WORK RELATED)");
-    lines.push("-".repeat(40));
-    let anyExp = false;
-    workExpItems.forEach(({ label, key }) => {
-      const yn = workExps[key];
-      // Only include expenses that are marked "Y"
-      if (yn === "Y") {
-        const details = getVal(`${key}_details`);
-        const amount = getVal(`${key}_amount`);
-        if (details || amount) {
-          anyExp = true;
-          lines.push(`${label}: Y  | Details: ${details}  | $${amount}`);
-        }
-      }
+  const getFormData = () => {
+    const form = formRef.current;
+    if (!form) return {};
+    const formData = new FormData(form);
+    const data: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      data[key] = value.toString();
     });
-    if (!anyExp) lines.push("(none indicated)");
-
-    lines.push("\n05. DECLARATION & SIGNATURE");
-    lines.push("-".repeat(40));
-    lines.push("Client confirms authorisation of Everest.Tax and the registered tax agent as tax agent.");
-    lines.push("Client confirms information provided is true and correct.");
-    lines.push("Client acknowledges 5-year record-keeping obligation.");
-    const ack = (formRef.current?.elements.namedItem("ackCheck") as HTMLInputElement)?.checked;
-    lines.push(`Acknowledged: ${ack ? "Yes" : "No"}`);
-    lines.push(`Date signed: ${getVal("sig_date")}`);
-    lines.push(`Signature captured: ${hasSignature ? "Yes" : "No"}`);
-
-    return lines.join("\n");
-  };
-
-  const generatePDF = () => {
-    // @ts-ignore
-    const { jsPDF } = window.jspdf;
-    if (!jsPDF) {
-      alert("PDF library is still loading. Please try again in a moment.");
-      return;
-    }
-    
-    const doc = new jsPDF({ unit: "pt", format: "a4" });
-    const summaryText = buildSummary();
-    const lines = doc.splitTextToSize(summaryText, 500);
-    
-    // Add text to PDF
-    doc.setFont("courier", "normal");
-    doc.setFontSize(10);
-    
-    let cursorY = 40;
-    lines.forEach((line: string) => {
-      if (cursorY > 800) {
-        doc.addPage();
-        cursorY = 40;
-      }
-      doc.text(line, 40, cursorY);
-      cursorY += 14;
+    // Add manual state values
+    Object.entries(workExps).forEach(([key, val]) => {
+       data[`${key}_selected`] = val;
     });
-
-    // Add signature image if available
-    if (hasSignature && canvasRef.current) {
-      if (cursorY > 700) {
-         doc.addPage();
-         cursorY = 40;
-      }
-      doc.text("Signature:", 40, cursorY + 20);
-      const imgData = canvasRef.current.toDataURL("image/png");
-      doc.addImage(imgData, "PNG", 40, cursorY + 30, 150, 75);
-    }
-
-    return doc;
+    data.medicareExempt = medicareExempt;
+    data.contactMethod = contactMethod;
+    return data;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -335,20 +237,11 @@ export default function TaxForm() {
     setIsSubmitting(true);
     try {
       // Gather form data
-      const formData = new FormData(form);
-      const data: Record<string, string> = {};
-      formData.forEach((value, key) => {
-        data[key] = value.toString();
-      });
-      // Add manual state values
-      Object.entries(workExps).forEach(([key, val]) => {
-         data[`${key}_selected`] = val;
-      });
-      data.medicareExempt = medicareExempt;
-      data.contactMethod = contactMethod;
+      const data = getFormData();
 
       // Generate PDF and attach to payload
-      const doc = generatePDF();
+      const signatureDataUrl = canvasRef.current ? canvasRef.current.toDataURL("image/png") : undefined;
+      const doc = generateTaxPDF(data, hasSignature, signatureDataUrl);
       if (doc) {
         data.pdfBase64 = doc.output('datauristring').split(',')[1];
       }
@@ -375,7 +268,9 @@ export default function TaxForm() {
   };
 
   const downloadSummary = () => {
-    const doc = generatePDF();
+    const data = getFormData();
+    const signatureDataUrl = canvasRef.current ? canvasRef.current.toDataURL("image/png") : undefined;
+    const doc = generateTaxPDF(data, hasSignature, signatureDataUrl);
     if (doc) {
       doc.save("Tax_Return_Summary.pdf");
     }

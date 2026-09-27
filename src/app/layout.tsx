@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Load Plus Jakarta Sans font
 const jakarta = Plus_Jakarta_Sans({
@@ -83,6 +84,7 @@ export default function RootLayout({
           </a>
           <main id="main-content">{children}</main>
           <Analytics />
+          <SpeedInsights />
         </SmoothScrollProvider>
       </body>
     </html>
